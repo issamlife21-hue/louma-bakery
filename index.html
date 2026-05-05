@@ -674,10 +674,18 @@
     font-size: 0.85rem;
   }
   .newsletter-success {
-    color: var(--red);
-    font-weight: 600;
-    margin-top: 16px;
     display: none;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    background: var(--cream-card);
+    border: 1px solid var(--cream-line);
+    border-radius: 999px;
+    color: var(--red);
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-align: center;
   }
   .newsletter-success.show { display: block; }
 
@@ -1203,12 +1211,14 @@
         <div class="eyebrow">Opening updates</div>
         <h2>Be the first to know when we open.</h2>
         <p>Get menu previews, opening dates, and seasonal box drops — straight to your inbox.</p>
-        <form class="newsletter-form" id="newsletterForm" novalidate>
-          <input type="email" name="email" placeholder="you@example.com" required aria-label="Email address" />
+        <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Welcome to the Louma community 🥐" />
+          <input type="hidden" name="_replyto" id="newsletterReplyTo" value="" />
+          <input type="email" name="email" id="newsletterEmail" placeholder="you@example.com" required aria-label="Email address" />
           <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
-        <div class="newsletter-success" id="newsletterSuccess">Thank you — you're on the list.</div>
-        <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
+        <div class="newsletter-success" id="newsletterSuccess">You're on the list. See you in July.</div>
+        <p class="newsletter-note" id="newsletterNote">No spam. Unsubscribe anytime.</p>
       </div>
     </div>
   </section>
@@ -2170,7 +2180,41 @@
       form.reset();
     });
   }
-  bindFormSuccess('newsletterForm', 'newsletterSuccess');
+  // Newsletter — submits to Formspree via AJAX and swaps the form for the thank-you message.
+  (function bindNewsletter(){
+    const form = document.getElementById('newsletterForm');
+    const success = document.getElementById('newsletterSuccess');
+    const note = document.getElementById('newsletterNote');
+    const emailInput = document.getElementById('newsletterEmail');
+    const replyTo = document.getElementById('newsletterReplyTo');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      if (replyTo && emailInput) replyTo.value = emailInput.value;
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) throw new Error('Submission failed');
+        form.style.display = 'none';
+        if (note) note.style.display = 'none';
+        if (success) success.classList.add('show');
+      } catch (err) {
+        if (submitBtn) submitBtn.disabled = false;
+        alert('Sorry — something went wrong. Please try again.');
+      }
+    });
+  })();
+
   bindFormSuccess('cateringForm', 'cateringSuccess');
   bindFormSuccess('careersForm', 'careersSuccess');
   bindFormSuccess('contactForm', 'contactSuccess');
