@@ -10,17 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --red: #ED2739;
+    --red: #D4202E;
+    --red-pop: #D4202E;
     --red-heading: #C41E2E;
     --red-deep: #A10017;
     --burgundy: #A10017;
-    --butter: #FBF5D4;
-    --cream-warm: #EDE8DC;
-    --peach: #FF676C;
+    --butter: #F5EDD6;
+    --cream-warm: #E2D9C6;
+    --peach: #E8574A;
     --tangerine: #FF8926;
-    --fairy: #DDEAC3;
-    --cream: #FBF5D4;
-    --cream-card: #FFFFFF;
+    --fairy: #CDE0B8;
+    --cream: #F5EDD6;
+    --cream-card: #FDFAF3;
     --cream-line: rgba(196, 30, 46, 0.18);
     --ink: #A10017;
     --muted: rgba(161, 0, 23, 0.6);
@@ -85,7 +86,7 @@
   }
   .intro-video { object-fit: cover; }
   .intro-placeholder {
-    background-color: #FBF5D4;
+    background-color: #F5EDD6;
     animation: louma-warm-breathe 6s ease-in-out infinite alternate;
   }
   .intro-placeholder::after {
@@ -99,9 +100,9 @@
     animation: louma-warm-shimmer 9s ease-in-out infinite alternate;
   }
   @keyframes louma-warm-breathe {
-    0%   { background-color: #FBF5D4; }
-    50%  { background-color: #F5E6C4; }
-    100% { background-color: #EDD9A3; }
+    0%   { background-color: #F5EDD6; }
+    50%  { background-color: #EDE0BE; }
+    100% { background-color: #E3D4A8; }
   }
   @keyframes louma-warm-shimmer {
     0%   { transform: translate(0, 0) scale(1); opacity: 0.85; }
@@ -262,7 +263,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--red);
+    background: var(--red-pop);
     color: var(--butter);
     padding: 12px 22px;
     border-radius: 999px;
@@ -309,9 +310,9 @@
     font-family: inherit;
   }
   .btn-primary {
-    background: var(--red);
+    background: var(--red-pop);
     color: var(--butter);
-    border-color: var(--red);
+    border-color: var(--red-pop);
   }
   .btn-primary:hover { background: var(--burgundy); border-color: var(--burgundy); transform: translateY(-1px); }
   .btn-ghost {
@@ -480,7 +481,7 @@
 
   /* ---------- MISSION BAND (floating block, soft cream w/ red accent) ---------- */
   .mission-band {
-    background: var(--cream-warm);
+    background: #E8E0CE;
     color: var(--burgundy);
     padding: 88px 64px;
     text-align: left;
@@ -533,6 +534,7 @@
     color: var(--red);
   }
   .doodle-divider path { stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .doodle-animated { cursor: pointer; }
   .doodle-animated path {
     stroke-dasharray: var(--len, 600);
     stroke-dashoffset: var(--len, 600);
@@ -638,6 +640,33 @@
     text-transform: uppercase;
     text-align: center;
   }
+  .about-paypal {
+    text-align: center;
+    margin: 36px 0 0;
+    max-width: 600px;
+  }
+  .about-paypal p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #A10017;
+    opacity: 0.7;
+    margin: 0 0 12px;
+  }
+  .paypal-outline-pill {
+    background: transparent;
+    color: var(--red);
+    border: 1.5px solid var(--red);
+    border-radius: 999px;
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .paypal-outline-pill:hover { background: var(--red); color: var(--butter); }
 
   .values-grid {
     display: grid;
@@ -730,9 +759,9 @@
   }
   .tab:hover { color: var(--red); border-color: var(--red); }
   .tab.active {
-    background: var(--red);
+    background: var(--red-pop);
     color: var(--butter);
-    border-color: var(--red);
+    border-color: var(--red-pop);
   }
 
   .menu-section { padding: 96px 0 120px; }
@@ -777,7 +806,7 @@
   .badge-signature {
     display: inline-flex;
     align-items: center;
-    background: var(--red);
+    background: var(--red-pop);
     color: var(--butter);
     font-size: 10px;
     font-weight: 700;
@@ -1308,7 +1337,7 @@
     line-height: 1;
     transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
   }
-  .faq-item.open .faq-toggle { background: var(--red); color: var(--butter); transform: rotate(180deg); }
+  .faq-item.open .faq-toggle { background: var(--red-pop); color: var(--butter); transform: rotate(180deg); }
   .faq-a {
     max-height: 0;
     overflow: hidden;
@@ -1379,20 +1408,20 @@
   <defs>
     <!-- Logo -->
     <symbol id="louma-logo" viewBox="0 0 200 200">
-      <rect x="3" y="3" width="194" height="194" rx="28" fill="#FBF5D4" stroke="#ED2739" stroke-width="3"/>
+      <rect x="3" y="3" width="194" height="194" rx="28" fill="#F5EDD6" stroke="#D4202E" stroke-width="3"/>
       <text x="100" y="112"
             text-anchor="middle"
             dominant-baseline="alphabetic"
             font-family="Fraunces, Georgia, serif"
             font-size="58" font-weight="900"
-            fill="#ED2739"
+            fill="#D4202E"
             letter-spacing="-1">Louma</text>
       <text x="100" y="138"
             text-anchor="middle"
             dominant-baseline="alphabetic"
             font-family="DM Sans, sans-serif"
             font-size="13" font-weight="800"
-            fill="#ED2739"
+            fill="#D4202E"
             letter-spacing="5">BAKERY</text>
     </symbol>
 
@@ -1580,7 +1609,7 @@
 
   <!-- Doodle divider -->
   <div class="container" style="padding: 24px 24px 56px;">
-    <svg class="doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true">
+    <svg id="bread-svg" class="doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true">
         <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z" style="--len:520"/>
         <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
         <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
@@ -1591,7 +1620,7 @@
   <!-- Mission band (floating block — soft cream w/ red accent) -->
   <section class="mission-band">
     <h2>More than a bakery.</h2>
-    <p>Being around Louma is like pulling fresh cookies from the oven. That warmth is what this place is built on — comfort, connection, and community. All profits go directly to The Louma Initiative, a 501(c)(3) nonprofit fostering opportunities for people with intellectual and developmental differences.</p>
+    <p>Being around Louma is like pulling fresh cookies from the oven. That warmth is baked into everything we do — comfort, connection, and community. All profits go directly to The Louma Initiative, a 501(c)(3) nonprofit.</p>
     <div class="mission-band-actions">
       <button class="btn btn-primary" data-page="page-mission">Read Our Mission</button>
     </div>
@@ -1652,24 +1681,33 @@
     <div class="about-left">
       <div class="eyebrow">Our story</div>
       <h1>A bakery built around people.</h1>
-      <p>Louma Bakery is a West LA neighborhood bakery rooted in European baking traditions with a Levantine twist. Named after Milla's sister, it was built to feel like what she feels like — warm, generous, and completely herself.</p>
+      <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist. Fresh breads, classic pastries, and seasonal offerings made with care — and a mission that goes beyond the bread.</p>
     </div>
     <div class="about-right">
       <div class="about-block">
         <h3>A tribute.</h3>
-        <p>Louma Bakery is named after Milla's sister — a tribute to the warmth of her presence. A friend once said, "Being around Louma is like pulling fresh cookies from the oven." She teaches us to savor the little moments. Her spirit embodies everything a great neighborhood bakery should be: comfort, connection, and community.</p>
+        <p>Louma Bakery is named after my sister and a tribute to the warmth of her presence. A friend once said, "Being around Louma is like pulling fresh cookies from the oven." She teaches us to savor the little moments — comfort, connection, and community.</p>
       </div>
       <div class="about-block">
         <h3>The kitchen.</h3>
-        <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist. Fresh breads, classic pastries, and seasonal offerings — think organic seeded sourdough meets our house-made fattoush salad.</p>
+        <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist. We serve fresh breads, classic pastries, and seasonal offerings — think organic seeded sourdough meets our house-made fattoush salad.</p>
       </div>
       <div class="about-block">
         <h3>The purpose.</h3>
-        <p>Our mission is to create supportive training and employment opportunities for individuals with learning and developmental differences in a professional bakery setting. Grounded in Louma's own experience, we believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion.</p>
+        <p>Our mission is to create supportive training and employment opportunities for individuals with learning and developmental differences. We believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion. All profits go directly to The Louma Initiative, a 501(c)(3) public charity.</p>
       </div>
       <div class="about-pullquote">
-        <blockquote>"Dedicated to my sister and her sweet tooth — Louma Bakery is a space to meet each other where we are and share in good food. She's so excited to have you."</blockquote>
-        <cite>— Milla, Founder</cite>
+        <blockquote>"Dedicated to my sister and her sweet tooth, Louma Bakery is a space to meet each other where we are and share in good food. She's so excited to have you."</blockquote>
+        <cite>— Milla</cite>
+      </div>
+      <div class="about-paypal">
+        <p>Moved by the story? Help us grow.</p>
+        <form action="https://www.paypal.com/donate" method="post" target="_blank">
+          <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="item_name" value="Support The Louma Initiative" />
+          <button type="submit" class="paypal-outline-pill">Support via PayPal →</button>
+        </form>
       </div>
     </div>
   </div>
@@ -2066,7 +2104,7 @@
     <div class="container">
       <div class="eyebrow">Our mission</div>
       <h1>Bread, pastry, and opportunity.</h1>
-      <p>Grounded in Louma's own experience, we believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion.</p>
+      <p>Our mission is to create supportive training and employment opportunities for individuals with learning and developmental differences in a professional bakery setting. Grounded in Louma's own experience, we believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion.</p>
     </div>
   </div>
 
@@ -2075,7 +2113,7 @@
       <div class="mission-blocks">
         <div class="mission-block">
           <h3>Who we are</h3>
-          <p>Louma Bakery is owned by The Louma Initiative, a 501(c)(3) public charity. All profits from the bakery go directly to the nonprofit — funding training, wages, and meaningful employment for people with intellectual and developmental differences.</p>
+          <p>All profits from the bakery go directly to The Louma Initiative, a 501(c)(3) public charity that fosters meaningful opportunities for people with intellectual and developmental differences.</p>
         </div>
         <div class="mission-block">
           <h3>What we believe</h3>
@@ -2114,9 +2152,9 @@
     </div>
   </section>
 
-  <section style="background: #FBF5D4; border-top: 3px solid #ED2739; padding: 70px 40px; text-align: center;">
+  <section style="background: #F5EDD6; border-top: 3px solid #D4202E; padding: 70px 40px; text-align: center;">
     <div style="max-width: 680px; margin: 0 auto;">
-      <h2 style="font-family: 'Fraunces', Georgia, serif; color: #ED2739; font-size: 38px;">Every croissant tells a story.</h2>
+      <h2 style="font-family: 'Fraunces', Georgia, serif; color: #C41E2E; font-size: 38px;">Every croissant tells a story.</h2>
       <p style="color: #A10017; font-size: 17px; line-height: 1.85; margin-top: 20px;">Louma Bakery is named after a person who makes every room feel warmer. Behind every pastry is a team member building something real — a skill, a routine, a future. When you donate, you are not just supporting a bakery. You are helping someone wake up with purpose.</p>
       <p style="color: #9C7B6A; font-size: 14px; margin-top: 16px;">Every dollar funds training, fair wages, and the kind of daily dignity that comes from doing work you are proud of.</p>
       <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block; margin-top: 32px;">
@@ -2125,7 +2163,7 @@
         <input type="hidden" name="item_name" value="Support The Louma Initiative" />
         <button type="submit" style="
           background: #ED2739;
-          color: #FBF5D4;
+          color: #F5EDD6;
           border: none;
           border-radius: 999px;
           padding: 16px 36px;
@@ -2267,6 +2305,13 @@
 
       <div class="careers-intro">
         <p>We are building a team as thoughtful as our bread. At Louma, we especially welcome individuals with learning and developmental differences — our workplace is designed for you, grounded in patience, respect, and genuine care for everyone who walks through our doors.</p>
+        <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:#A10017; font-style:italic; margin-top:24px;">Want to support our team before you even visit?</p>
+        <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block; margin-top:8px;">
+          <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="item_name" value="Support The Louma Initiative" />
+          <button type="submit" class="paypal-outline-pill">Donate via PayPal →</button>
+        </form>
       </div>
 
       <div class="pill-tags">
@@ -2731,10 +2776,22 @@
     });
   })();
 
-  // ----- Animated bread doodles (draws on scroll-in) -----
+  // ----- Animated bread doodles -----
+  // Plays once on scroll-in, then replays from the start on every hover.
   (function bindDoodleAnimations(){
     const doodles = document.querySelectorAll('.doodle-animated');
     if (!doodles.length) return;
+
+    function replay(el) {
+      el.classList.remove('in-view');
+      void el.offsetWidth; // force reflow so the animation restarts
+      el.classList.add('in-view');
+    }
+
+    doodles.forEach(d => {
+      d.addEventListener('mouseenter', function(){ replay(this); });
+    });
+
     if (!('IntersectionObserver' in window)) {
       doodles.forEach(d => d.classList.add('in-view'));
       return;
