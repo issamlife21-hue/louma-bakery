@@ -75,7 +75,7 @@
     gap: 24px;
   }
   .logo-link { display: inline-flex; align-items: center; }
-  .logo-svg { display: block; height: 44px; width: auto; }
+  .logo-svg { display: block; height: 44px; width: 44px; }
 
   .nav-links {
     display: flex;
@@ -230,8 +230,9 @@
     margin: 0 auto 20px;
     box-shadow: var(--shadow-md);
     border: 1px solid var(--cream-line);
+    overflow: hidden;
   }
-  .hero-mark svg { width: 75%; height: auto; }
+  .hero-mark svg { width: 100%; height: 100%; display: block; }
   .hero-card-tag {
     color: var(--muted);
     font-size: 0.92rem;
@@ -589,14 +590,17 @@
     gap: 48px;
     padding-bottom: 40px;
     border-bottom: 1px solid rgba(245,240,232,0.1);
+    align-items: start;
   }
-  .footer-logo svg { height: 56px; }
+  .footer-logo { display: inline-flex; }
+  .footer-logo svg { display: block; width: 56px; height: 56px; }
   .footer-tagline {
     color: rgba(245,240,232,0.65);
-    margin-top: 16px;
+    margin: 16px 0 0;
     font-size: 0.95rem;
     max-width: 320px;
   }
+  .footer-col { padding-top: 14px; }
   .footer-col h4 {
     color: var(--cream);
     font-family: 'DM Sans', sans-serif;
@@ -604,7 +608,7 @@
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin: 0 0 16px;
   }
   .footer-col ul { list-style: none; padding: 0; margin: 0; }
   .footer-col li { margin-bottom: 10px; }
@@ -1012,6 +1016,7 @@
     .about-left, .about-right { padding: 48px 24px; }
     .menu-item { flex-direction: row; gap: 16px; }
     .footer-grid { grid-template-columns: 1fr; }
+    .footer-col { padding-top: 0; }
     .form-grid { grid-template-columns: 1fr; }
     .form-card { padding: 28px; }
     .offer-grid, .roles-grid { grid-template-columns: 1fr; }
@@ -1025,18 +1030,22 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="louma-logo" viewBox="0 0 200 200">
-      <rect x="0" y="0" width="200" height="200" rx="20" fill="#F5F0E8"/>
-      <text x="100" y="118" text-anchor="middle"
+      <rect x="0" y="0" width="200" height="200" rx="22" fill="#F5F0E8"/>
+      <text x="100" y="108"
+            text-anchor="middle"
+            dominant-baseline="alphabetic"
             font-family="Fraunces, Georgia, serif"
-            font-size="74" font-weight="700"
+            font-size="58" font-weight="700"
             font-style="italic"
             fill="#D42B2B"
-            letter-spacing="-2">Louma</text>
-      <text x="100" y="152" text-anchor="middle"
+            letter-spacing="-1">Louma</text>
+      <text x="100" y="142"
+            text-anchor="middle"
+            dominant-baseline="alphabetic"
             font-family="DM Sans, sans-serif"
-            font-size="16" font-weight="700"
+            font-size="13" font-weight="700"
             fill="#D42B2B"
-            letter-spacing="6">BAKERY</text>
+            letter-spacing="5">BAKERY</text>
     </symbol>
   </defs>
 </svg>
@@ -1045,7 +1054,7 @@
 <header class="nav">
   <div class="container nav-inner">
     <a href="#home" class="logo-link" data-page="home" aria-label="Louma Bakery home">
-      <svg class="logo-svg" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg class="logo-svg" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
     </a>
 
     <nav class="nav-links" id="navLinks">
@@ -1089,7 +1098,7 @@
       <div class="hero-card">
         <div class="hero-card-inner">
           <div class="hero-mark">
-            <svg aria-hidden="true"><use href="#louma-logo"/></svg>
+            <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
           </div>
           <div class="hero-card-tag">— baked with purpose —</div>
         </div>
@@ -2011,7 +2020,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo">
-          <svg aria-hidden="true"><use href="#louma-logo"/></svg>
+          <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
         </div>
         <p class="footer-tagline">Mediterranean-inspired bakery &amp; coffee bar in Santa Monica. Baked with purpose. Served with heart.</p>
       </div>
