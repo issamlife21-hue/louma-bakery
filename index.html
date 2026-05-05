@@ -74,7 +74,6 @@
     overflow: hidden;
     isolation: isolate;
   }
-  .intro-hero.is-dismissed { display: none !important; }
   .intro-video,
   .intro-placeholder {
     position: absolute;
@@ -2565,6 +2564,12 @@
   const navLinks = document.querySelectorAll('.nav-link');
   const navLinksWrap = document.getElementById('navLinks');
 
+  function scrollPastIntro(behavior) {
+    const intro = document.getElementById('intro-section');
+    const top = intro ? intro.offsetHeight : 0;
+    window.scrollTo({ top, left: 0, behavior: behavior || 'auto' });
+  }
+
   function showPage(pageId) {
     const target = document.getElementById(pageId);
     if (!target) return;
@@ -2578,7 +2583,9 @@
     if (history.replaceState) {
       history.replaceState(null, '', '#' + pageId);
     }
-    window.scrollTo(0, 0);
+    // Land just past the intro so the nav sits at the top of the viewport
+    // — but don't fight the user if they're already looking at content.
+    scrollPastIntro('auto');
     if (navLinksWrap) navLinksWrap.classList.remove('open');
   }
   // Expose for inline / external use
@@ -2714,33 +2721,14 @@
     });
   });
 
-  // ----- Intro hero — dismissed permanently on Enter click or scroll-past -----
+  // ----- Intro hero — Enter button just smooth-scrolls past the intro.
+  // The intro stays in the document so scrolling back up always reveals it.
   (function bindIntro(){
-    const intro = document.getElementById('intro-section');
     const btn = document.getElementById('enter-btn');
-    const nav = document.getElementById('site-nav');
-    if (!intro) return;
-
-    let dismissed = false;
-    function dismissIntro() {
-      if (dismissed) return;
-      dismissed = true;
-      intro.classList.add('is-dismissed');
-      intro.style.display = 'none';
-      if (nav) nav.style.position = 'sticky';
-      showPage('page-home');
-    }
-
-    if (btn) btn.addEventListener('click', dismissIntro);
-
-    function onScroll(){
-      if (dismissed) return;
-      if (window.scrollY > window.innerHeight * 0.85) {
-        window.removeEventListener('scroll', onScroll);
-        dismissIntro();
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      scrollPastIntro('smooth');
+    });
   })();
 
   // ----- Animated bread doodles (draws on scroll-in) -----
