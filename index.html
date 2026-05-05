@@ -450,6 +450,45 @@
   .about-right p { color: var(--burgundy); font-size: 1.08rem; max-width: 560px; line-height: 1.85; }
   .about-right p + p { margin-top: 22px; }
   .about-right strong { color: var(--red); font-weight: 700; }
+  .about-right h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--red);
+    margin: 0 0 10px;
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+  .about-right h3 + p { margin-top: 0; }
+  .about-right .about-block + .about-block { margin-top: 36px; }
+  .about-pullquote {
+    margin: 56px 0 0;
+    padding: 36px 0 0;
+    border-top: 2px solid var(--red);
+    max-width: 600px;
+  }
+  .about-pullquote blockquote {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--red-heading);
+    margin: 0;
+    text-align: center;
+  }
+  .about-pullquote cite {
+    display: block;
+    margin-top: 18px;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--burgundy);
+    text-transform: uppercase;
+    text-align: center;
+  }
 
   .values-grid {
     display: grid;
@@ -1292,7 +1331,7 @@
       <div class="hero-text">
         <span class="pill"><span class="pill-dot"></span> Opening Soon · Santa Monica</span>
         <h1>Flour-dusted <span class="accent">dreams</span>, baked fresh daily.</h1>
-        <p class="hero-sub">Mediterranean-inspired pastries, slow-fermented breads, and specialty coffee — baked fresh every morning, served with heart.</p>
+        <p class="hero-sub">Named after a person who makes every room feel like home. A West LA bakery rooted in European baking traditions with a Levantine twist — and a mission that goes beyond the bread.</p>
         <div class="hero-actions">
           <button class="btn btn-primary" data-page="menu">View Menu</button>
           <button class="btn btn-ghost" data-page="about">Our Story</button>
@@ -1383,8 +1422,8 @@
 
   <!-- Mission band (floating block — soft cream w/ red accent) -->
   <section class="mission-band">
-    <h2>"Baking with purpose. Serving with heart."</h2>
-    <p>A nonprofit bakery committed to inclusive employment and meaningful work. Every croissant helps fund opportunity in our community.</p>
+    <h2>More than a bakery.</h2>
+    <p>Being around Louma is like pulling fresh cookies from the oven. That warmth is what this place is built on — comfort, connection, and community. All profits go directly to The Louma Initiative, a 501(c)(3) nonprofit fostering opportunities for people with intellectual and developmental differences.</p>
     <div class="mission-band-actions">
       <button class="btn btn-primary" data-page="mission">Read Our Mission</button>
     </div>
@@ -1421,7 +1460,7 @@
       <div class="newsletter-inner">
         <div class="eyebrow">Opening updates</div>
         <h2>Be the first to know when we open.</h2>
-        <p>Get menu previews, opening dates, and seasonal box drops — straight to your inbox.</p>
+        <p>She's so excited to have you. Be the first to know when we open in July.</p>
         <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
           <input type="hidden" name="_subject" value="Welcome to the Louma community 🥐" />
           <input type="hidden" name="_replyto" id="newsletterReplyTo" value="" />
@@ -1445,12 +1484,25 @@
     <div class="about-left">
       <div class="eyebrow">Our story</div>
       <h1>A bakery built around people.</h1>
-      <p>Louma is a Mediterranean-inspired bakery and coffee bar in the heart of Los Angeles — a small, bright space designed for slow mornings, quick stops, and good conversation.</p>
+      <p>Louma Bakery is a West LA neighborhood bakery rooted in European baking traditions with a Levantine twist. Named after Milla's sister, it was built to feel like what she feels like — warm, generous, and completely herself.</p>
     </div>
     <div class="about-right">
-      <p>Louma began with a simple idea: that the food we love most often comes from the places we know best. Our menu draws from <strong>Mediterranean and Levantine</strong> traditions — za'atar, labneh, pistachio, rose, orange blossom, tahini — woven into the French pastry techniques we trained in.</p>
-      <p>We bake every morning from scratch. Doughs are slow-fermented, fillings are made in-house, and our coffee is pulled with the same care we put into a croissant. The goal isn't to be fancy. It's to be <em>genuinely good</em>, every day.</p>
-      <p>Louma is part of <strong>The Louma Initiative</strong>, a nonprofit committed to inclusive employment — creating dignified work for people who are too often left out of the workforce. When you buy a pastry here, you're helping fund training, mentorship, and real careers for our team.</p>
+      <div class="about-block">
+        <h3>A tribute.</h3>
+        <p>Louma Bakery is named after Milla's sister — a tribute to the warmth of her presence. A friend once said, "Being around Louma is like pulling fresh cookies from the oven." She teaches us to savor the little moments. Her spirit embodies everything a great neighborhood bakery should be: comfort, connection, and community.</p>
+      </div>
+      <div class="about-block">
+        <h3>The kitchen.</h3>
+        <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist. Fresh breads, classic pastries, and seasonal offerings — think organic seeded sourdough meets our house-made fattoush salad.</p>
+      </div>
+      <div class="about-block">
+        <h3>The purpose.</h3>
+        <p>Our mission is to create supportive training and employment opportunities for individuals with learning and developmental differences in a professional bakery setting. Grounded in Louma's own experience, we believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion.</p>
+      </div>
+      <div class="about-pullquote">
+        <blockquote>"Dedicated to my sister and her sweet tooth — Louma Bakery is a space to meet each other where we are and share in good food. She's so excited to have you."</blockquote>
+        <cite>— Milla, Founder</cite>
+      </div>
     </div>
   </div>
 
@@ -1844,9 +1896,9 @@
 
   <div class="mission-hero">
     <div class="container">
-      <div class="eyebrow" style="color: rgba(245,240,232,0.7);">Our mission</div>
+      <div class="eyebrow">Our mission</div>
       <h1>Bread, pastry, and opportunity.</h1>
-      <p>Every person deserves meaningful work. At Louma, we believe a bakery can be both a great place to eat and a place that genuinely changes lives.</p>
+      <p>Grounded in Louma's own experience, we believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion.</p>
     </div>
   </div>
 
@@ -1854,20 +1906,20 @@
     <div class="container">
       <div class="mission-blocks">
         <div class="mission-block">
-          <h3>What We Believe</h3>
-          <p>Every purchase at Louma supports real employment, real training, and real careers for people with learning and developmental differences.</p>
+          <h3>Who we are</h3>
+          <p>Louma Bakery is owned by The Louma Initiative, a 501(c)(3) public charity. All profits from the bakery go directly to the nonprofit — funding training, wages, and meaningful employment for people with intellectual and developmental differences.</p>
         </div>
         <div class="mission-block">
-          <h3>Who We Support</h3>
-          <p>Louma is structured to create professional opportunities for individuals with learning and developmental differences. This is not charity. This is employment.</p>
+          <h3>What we believe</h3>
+          <p>Everyone deserves an opportunity to grow, contribute, and cultivate their passion. This is not charity. This is real work, real craft, and real careers — in a professional bakery setting built on patience and respect.</p>
         </div>
         <div class="mission-block">
-          <h3>How It Works</h3>
-          <p>Every team member receives hands-on training, mentorship, and a supportive environment built on patience, respect, and collaboration. We are building careers alongside beautiful bread.</p>
+          <h3>How it works</h3>
+          <p>Every team member receives hands-on training and mentorship in our West LA kitchen. We are building careers alongside beautiful bread — one croissant, one sourdough, one morning at a time.</p>
         </div>
         <div class="mission-block">
-          <h3>How You Help</h3>
-          <p>When you buy a croissant, a loaf, or a pastry box, you are contributing to something larger than breakfast. Every visit matters.</p>
+          <h3>How you help</h3>
+          <p>When you buy a pastry, a loaf, or a box — you are directly funding The Louma Initiative. Every visit matters. Every order contributes.</p>
         </div>
       </div>
 
@@ -1897,7 +1949,7 @@
   <section style="background: #FBF5D4; border-top: 3px solid #ED2739; padding: 70px 40px; text-align: center;">
     <div style="max-width: 680px; margin: 0 auto;">
       <h2 style="font-family: 'Fraunces', Georgia, serif; color: #ED2739; font-size: 38px;">Every croissant tells a story.</h2>
-      <p style="color: #A10017; font-size: 17px; line-height: 1.85; margin-top: 20px;">Behind every pastry at Louma is a person building something real. A skill. A routine. A career. Louma Bakery is owned by The Louma Initiative, a nonprofit built on a simple belief — that meaningful work changes lives. Our team includes individuals with learning and developmental differences who show up every morning, learn their craft, and create something beautiful for their community. When you donate, you are not just supporting a bakery. You are helping someone wake up with purpose.</p>
+      <p style="color: #A10017; font-size: 17px; line-height: 1.85; margin-top: 20px;">Louma Bakery is named after a person who makes every room feel warmer. Behind every pastry is a team member building something real — a skill, a routine, a future. When you donate, you are not just supporting a bakery. You are helping someone wake up with purpose.</p>
       <p style="color: #9C7B6A; font-size: 14px; margin-top: 16px;">Every dollar funds training, fair wages, and the kind of daily dignity that comes from doing work you are proud of.</p>
       <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block; margin-top: 32px;">
         <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
@@ -2046,7 +2098,7 @@
     <div class="container">
 
       <div class="careers-intro">
-        <p>At Louma, we are looking for people who care about quality, teamwork, and creating an environment where everyone can contribute and improve. We especially welcome applicants with learning and developmental differences — our workplace is built for you.</p>
+        <p>We are building a team as thoughtful as our bread. At Louma, we especially welcome individuals with learning and developmental differences — our workplace is designed for you, grounded in patience, respect, and genuine care for everyone who walks through our doors.</p>
       </div>
 
       <div class="pill-tags">
@@ -2299,7 +2351,7 @@
         <div class="footer-logo">
           <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
         </div>
-        <p class="footer-tagline">Mediterranean-inspired bakery &amp; coffee bar in Los Angeles. Baked with purpose. Served with heart.</p>
+        <p class="footer-tagline">Named after someone who makes every room feel like home.</p>
         <p class="footer-motto">Live Laugh Louma.</p>
       </div>
       <div class="footer-col">
