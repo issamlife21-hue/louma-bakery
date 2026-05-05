@@ -75,6 +75,7 @@
     overflow: hidden;
     isolation: isolate;
   }
+  .intro-hero.is-dismissed { display: none !important; }
   .intro-video,
   .intro-placeholder {
     position: absolute;
@@ -288,6 +289,7 @@
     transition: opacity 0.3s ease;
   }
   .page.active {
+    display: block;
     opacity: 1;
   }
 
@@ -2567,13 +2569,7 @@
   function showPage(pageId) {
     const target = document.getElementById(pageId);
     if (!target) return;
-    document.querySelectorAll('.page').forEach(p => {
-      p.classList.remove('active');
-      p.style.display = 'none';
-    });
-    target.style.display = 'block';
-    // Trigger reflow so the opacity transition runs from 0 → 1
-    void target.offsetWidth;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     target.classList.add('active');
 
     navLinks.forEach(l => {
@@ -2583,10 +2579,10 @@
     if (history.replaceState) {
       history.replaceState(null, '', '#' + pageId);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
     if (navLinksWrap) navLinksWrap.classList.remove('open');
   }
-  // Expose for inline-style usage / tests
+  // Expose for inline / external use
   window.showPage = showPage;
 
   // Bind any element with data-page
@@ -2600,13 +2596,9 @@
   // Initial route from hash (default page-home)
   const initialHash = (window.location.hash || '#page-home').slice(1);
   const initialId = document.getElementById(initialHash) ? initialHash : 'page-home';
-  document.querySelectorAll('.page').forEach(p => {
-    p.style.display = 'none';
-    p.classList.remove('active');
-  });
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const initialEl = document.getElementById(initialId);
   if (initialEl) {
-    initialEl.style.display = 'block';
     initialEl.classList.add('active');
     navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initialId));
   }
@@ -2734,8 +2726,8 @@
     function dismissIntro() {
       if (dismissed) return;
       dismissed = true;
+      intro.classList.add('is-dismissed');
       intro.style.display = 'none';
-      document.body.classList.remove('intro-active');
       if (nav) nav.style.position = 'sticky';
       showPage('page-home');
     }
