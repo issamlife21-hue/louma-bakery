@@ -66,6 +66,148 @@
     padding: 0 24px;
   }
 
+  /* ---------- INTRO HERO (fullscreen video / placeholder) ---------- */
+  .intro-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 540px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .intro-video,
+  .intro-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .intro-video { object-fit: cover; }
+  .intro-placeholder {
+    background-color: #FBF5D4;
+    animation: louma-warm-breathe 6s ease-in-out infinite alternate;
+  }
+  .intro-placeholder::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 35%, rgba(245,230,196,0.7), transparent 55%),
+      radial-gradient(ellipse at 70% 75%, rgba(237,217,163,0.55), transparent 55%);
+    mix-blend-mode: multiply;
+    animation: louma-warm-shimmer 9s ease-in-out infinite alternate;
+  }
+  @keyframes louma-warm-breathe {
+    0%   { background-color: #FBF5D4; }
+    50%  { background-color: #F5E6C4; }
+    100% { background-color: #EDD9A3; }
+  }
+  @keyframes louma-warm-shimmer {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0.85; }
+    100% { transform: translate(-3%, -2%) scale(1.05); opacity: 1; }
+  }
+
+  .intro-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+  }
+
+  .intro-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 24px 96px;
+    text-align: center;
+    color: var(--butter);
+  }
+  .intro-logo { display: block; width: 80px; height: 80px; margin-bottom: 32px; }
+  .intro-headline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--butter);
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    max-width: 700px;
+    margin: 0 0 28px;
+  }
+  .intro-meta {
+    color: var(--butter);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 36px;
+  }
+  .intro-enter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--butter);
+    color: var(--red);
+    border: none;
+    border-radius: 999px;
+    padding: 14px 36px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+  }
+  .intro-enter:hover {
+    background: var(--red);
+    color: var(--butter);
+    transform: translateY(-2px);
+  }
+
+  .intro-scroll {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 36px;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 40px;
+    background: rgba(251, 245, 212, 0.5);
+    pointer-events: none;
+  }
+  .intro-scroll::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--butter);
+    transform: translate(-50%, 0);
+    animation: intro-scroll-dot 1.5s ease-in-out infinite;
+  }
+  @keyframes intro-scroll-dot {
+    0%   { transform: translate(-50%, 0);   opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translate(-50%, 36px); opacity: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .intro-logo { width: 56px; height: 56px; margin-bottom: 24px; }
+    .intro-headline { font-size: clamp(24px, 6vw, 36px); }
+    .intro-meta { display: none; }
+  }
+
   /* ---------- NAV ---------- */
   .nav {
     position: sticky;
@@ -1291,6 +1433,26 @@
     </symbol>
   </defs>
 </svg>
+
+<!-- ===== INTRO HERO (fullscreen video / placeholder) ===== -->
+<section class="intro-hero" id="introHero">
+  <!-- Replace this placeholder div with the <video> tag below when the real footage is ready:
+       <video autoplay muted loop playsinline id="louma-hero-video" class="intro-video">
+         <source src="louma-intro.mp4" type="video/mp4">
+       </video> -->
+  <div class="intro-placeholder" aria-hidden="true"></div>
+
+  <div class="intro-overlay" aria-hidden="true"></div>
+
+  <div class="intro-content">
+    <svg class="intro-logo" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
+    <h1 class="intro-headline">"Named after someone who makes every room feel like home."</h1>
+    <p class="intro-meta">Opening July 2025 · West LA</p>
+    <button class="intro-enter" id="introEnter" type="button">Enter</button>
+  </div>
+
+  <div class="intro-scroll" aria-hidden="true"></div>
+</section>
 
 <!-- ===== NAV ===== -->
 <header class="nav">
@@ -2561,6 +2723,18 @@
       }
     });
   });
+
+  // ----- Intro hero "Enter" button — smooth scroll past the fullscreen section -----
+  (function bindIntroEnter(){
+    const btn = document.getElementById('introEnter');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      const nav = document.querySelector('.nav');
+      const target = nav || document.body;
+      const top = target.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  })();
 
   // ----- Animated bread doodles (draws on scroll-in) -----
   (function bindDoodleAnimations(){
