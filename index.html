@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Louma Bakery — Your favorite neighborhood bakery</title>
+<meta name="description" content="Louma Bakery — a Mediterranean-inspired neighborhood bakery in Santa Monica. Croissants, breads, specialty coffee, and pastry boxes baked with purpose." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --red: #D42B2B;
+    --red-deep: #B22020;
+    --cream: #F5F0E8;
+    --cream-card: #EDE8DC;
+    --cream-line: #E2DBCB;
+    --ink: #1A0A00;
+    --muted: #9C7B6A;
+    --dark: #1F1410;
+    --shadow-sm: 0 1px 2px rgba(26,10,0,0.04), 0 1px 1px rgba(26,10,0,0.03);
+    --shadow-md: 0 6px 24px -8px rgba(26,10,0,0.12), 0 2px 6px rgba(26,10,0,0.04);
+    --radius: 14px;
+    --radius-lg: 22px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.55;
+    font-size: 16px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  h1 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); line-height: 1.05; letter-spacing: -0.025em; }
+  h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.1; letter-spacing: -0.02em; }
+  h3 { font-size: 1.25rem; line-height: 1.25; }
+  p { margin: 0 0 1em; }
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--red);
+    color: var(--cream);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: 24px;
+  }
+  .logo-link { display: inline-flex; align-items: center; }
+  .logo-svg { display: block; height: 44px; width: auto; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--cream);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background .25s var(--ease), color .25s var(--ease);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    letter-spacing: 0.01em;
+  }
+  .nav-link:hover { background: rgba(255,255,255,0.12); }
+  .nav-link.active { background: rgba(255,255,255,0.18); }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cream);
+    color: var(--red);
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    border: none;
+    cursor: pointer;
+    transition: transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+    font-family: inherit;
+  }
+  .nav-cta:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+
+  .nav-toggle { display: none; background: transparent; border: none; color: var(--cream); cursor: pointer; padding: 8px; }
+  .nav-toggle svg { display: block; width: 26px; height: 26px; }
+
+  /* ---------- PAGE TRANSITIONS ---------- */
+  .page {
+    display: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .45s var(--ease), transform .45s var(--ease);
+  }
+  .page.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.97rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+    font-family: inherit;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: var(--cream);
+  }
+  .btn-primary:hover { background: var(--red-deep); transform: translateY(-1px); box-shadow: 0 8px 22px -8px rgba(212,43,43,0.5); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); transform: translateY(-1px); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 88px 0 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212,43,43,0.08);
+    color: var(--red);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    border: 1px solid rgba(212,43,43,0.18);
+  }
+  .pill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); display: inline-block; box-shadow: 0 0 0 3px rgba(212,43,43,0.18); }
+
+  .hero h1 .accent { color: var(--red); font-style: italic; font-weight: 500; }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 24px 0 36px;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero-card {
+    aspect-ratio: 1 / 1.05;
+    background: var(--cream-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--cream-line);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 30%, rgba(212,43,43,0.08), transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(156,123,106,0.18), transparent 60%);
+  }
+  .hero-card-inner {
+    position: relative;
+    text-align: center;
+    padding: 32px;
+  }
+  .hero-mark {
+    width: 180px; height: 180px;
+    background: var(--cream);
+    border-radius: 28px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--cream-line);
+  }
+  .hero-mark svg { width: 75%; height: auto; }
+  .hero-card-tag {
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section { padding: 88px 0; }
+  .section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 44px;
+    flex-wrap: wrap;
+  }
+  .eyebrow {
+    color: var(--red);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-sub { color: var(--muted); max-width: 460px; font-size: 1.02rem; }
+
+  /* ---------- SIGNATURE GRID ---------- */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .card {
+    background: var(--cream-card);
+    border: 1px solid var(--cream-line);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 180px;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(212,43,43,0.25);
+  }
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--cream);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--red);
+    border: 1px solid var(--cream-line);
+  }
+  .card-icon svg { width: 22px; height: 22px; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+  /* ---------- MISSION BAND ---------- */
+  .mission-band {
+    background: var(--red);
+    color: var(--cream);
+    padding: 80px 0;
+    text-align: center;
+  }
+  .mission-band h2 {
+    color: var(--cream);
+    font-style: italic;
+    font-weight: 500;
+    max-width: 820px;
+    margin: 0 auto 24px;
+  }
+  .mission-band p {
+    max-width: 640px;
+    margin: 0 auto;
+    color: rgba(245,240,232,0.85);
+    font-size: 1.04rem;
+  }
+
+  /* ---------- LOCATION BAR ---------- */
+  .loc-bar {
+    background: var(--cream-card);
+    border-top: 1px solid var(--cream-line);
+    border-bottom: 1px solid var(--cream-line);
+    padding: 44px 0;
+  }
+  .loc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .loc-item .label {
+    color: var(--red);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .loc-item .value { font-family: 'Fraunces', serif; font-size: 1.08rem; color: var(--ink); }
+  .loc-item .value small { display: block; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.92rem; margin-top: 4px; }
+
+  /* ---------- ABOUT ---------- */
+  .about-split {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    min-height: 520px;
+  }
+  .about-left {
+    background: var(--red);
+    color: var(--cream);
+    padding: 88px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .about-left .eyebrow { color: rgba(245,240,232,0.7); }
+  .about-left h1 { color: var(--cream); }
+  .about-left p { color: rgba(245,240,232,0.88); font-size: 1.08rem; max-width: 440px; }
+  .about-right {
+    background: var(--cream);
+    padding: 88px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .about-right p { color: var(--ink); font-size: 1.02rem; max-width: 560px; }
+  .about-right p + p { margin-top: 18px; }
+  .about-right strong { color: var(--red); font-weight: 600; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 0;
+  }
+  .value-box {
+    background: var(--cream-card);
+    border: 1px solid var(--cream-line);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .value-box:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .value-box .card-icon { margin-bottom: 16px; }
+  .value-box h3 { margin-bottom: 8px; }
+  .value-box p { color: var(--muted); font-size: 0.96rem; margin: 0; }
+
+  .quote-bar {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    padding: 64px 24px;
+  }
+  .quote-bar blockquote {
+    margin: 0 auto;
+    max-width: 760px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    line-height: 1.35;
+    color: var(--cream);
+  }
+  .quote-bar cite {
+    display: block;
+    margin-top: 16px;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    color: rgba(245,240,232,0.6);
+    text-transform: uppercase;
+  }
+
+  .opening-note {
+    text-align: center;
+    padding: 56px 24px;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  .opening-note a { color: var(--red); font-weight: 600; }
+  .opening-note a:hover { text-decoration: underline; }
+
+  /* ---------- MENU ---------- */
+  .page-header {
+    background: var(--red);
+    color: var(--cream);
+    padding: 80px 0 64px;
+  }
+  .page-header h1 { color: var(--cream); }
+  .page-header p { color: rgba(245,240,232,0.85); margin-top: 16px; max-width: 540px; font-size: 1.05rem; }
+  .page-header .eyebrow { color: rgba(245,240,232,0.75); }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.1);
+    color: var(--cream);
+    border: 1px solid rgba(255,255,255,0.18);
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+    font-family: inherit;
+  }
+  .tab:hover { background: rgba(255,255,255,0.18); }
+  .tab.active {
+    background: var(--cream);
+    color: var(--red);
+    border-color: var(--cream);
+    font-weight: 600;
+  }
+
+  .menu-section { padding: 64px 0 96px; }
+  .menu-list {
+    display: none;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .menu-list.active { display: block; }
+  .menu-item {
+    display: flex;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--cream-line);
+    align-items: baseline;
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .menu-item-main { flex: 1; min-width: 0; }
+  .menu-item-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .menu-item-desc {
+    color: var(--muted);
+    font-size: 0.96rem;
+    margin-top: 4px;
+  }
+  .menu-item-price {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--red);
+    white-space: nowrap;
+  }
+  .badge-signature {
+    display: inline-flex;
+    align-items: center;
+    background: var(--red);
+    color: var(--cream);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 220px;
+    gap: 18px;
+  }
+  .gallery-cell {
+    background: var(--cream-card);
+    border: 1px solid var(--cream-line);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-cell:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); background: var(--cream); }
+  .gallery-cell .ghost-icon {
+    width: 36px; height: 36px;
+    color: var(--red);
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+  .gallery-cell h3 { font-size: 1.08rem; color: var(--ink); margin-bottom: 4px; }
+  .gallery-cell .small { font-size: 0.82rem; color: var(--muted); }
+  .gallery-cell.span-2 { grid-column: span 2; }
+  .gallery-cell.row-2 { grid-row: span 2; }
+
+  .gallery-note {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 36px;
+    font-size: 0.95rem;
+  }
+  .insta-cta {
+    background: var(--red);
+    color: var(--cream);
+    text-align: center;
+    padding: 64px 24px;
+    margin-top: 64px;
+    border-radius: var(--radius-lg);
+  }
+  .insta-cta h2 { color: var(--cream); margin-bottom: 12px; }
+  .insta-cta p { color: rgba(245,240,232,0.85); margin-bottom: 24px; }
+  .insta-cta .btn-cream {
+    background: var(--cream);
+    color: var(--red);
+  }
+  .insta-cta .btn-cream:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.18); }
+
+  .storefront-band {
+    background: var(--cream-card);
+    border: 1px solid var(--cream-line);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .storefront-band h3 { font-size: 1.5rem; margin-bottom: 8px; }
+  .storefront-band p { color: var(--muted); margin: 0; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 64px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+  .footer-logo svg { height: 56px; }
+  .footer-tagline {
+    color: rgba(245,240,232,0.65);
+    margin-top: 16px;
+    font-size: 0.95rem;
+    max-width: 320px;
+  }
+  .footer-col h4 {
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a, .footer-col button {
+    color: rgba(245,240,232,0.7);
+    font-size: 0.95rem;
+    transition: color .25s var(--ease);
+    background: none; border: none; padding: 0; font-family: inherit; cursor: pointer;
+  }
+  .footer-col a:hover, .footer-col button:hover { color: var(--cream); }
+  .footer-col p { color: rgba(245,240,232,0.7); font-size: 0.95rem; margin: 0 0 8px; }
+  .footer-bottom {
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(245,240,232,0.45);
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .grid-3, .values-grid, .loc-grid { grid-template-columns: 1fr 1fr; }
+    .about-split { grid-template-columns: 1fr; }
+    .about-left, .about-right { padding: 64px 36px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+    .gallery-cell.span-2 { grid-column: span 1; }
+    .gallery-cell.row-2 { grid-row: span 1; }
+    .storefront-band { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .nav-toggle { display: inline-flex; }
+    .nav-links {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--red);
+      flex-direction: column;
+      align-items: stretch;
+      padding: 12px 16px 20px;
+      gap: 4px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-link { padding: 12px 14px; text-align: left; border-radius: 10px; }
+    .nav-cta { padding: 9px 16px; font-size: 0.86rem; }
+    .grid-3, .values-grid, .loc-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .section { padding: 64px 0; }
+    .hero { padding: 56px 0 64px; }
+    .about-left, .about-right { padding: 48px 24px; }
+    .menu-item { flex-direction: row; gap: 16px; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Reusable SVG logo (defined once, referenced via <use>) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="louma-logo" viewBox="0 0 200 200">
+      <rect x="0" y="0" width="200" height="200" rx="20" fill="#F5F0E8"/>
+      <text x="100" y="118" text-anchor="middle"
+            font-family="Fraunces, Georgia, serif"
+            font-size="74" font-weight="700"
+            font-style="italic"
+            fill="#D42B2B"
+            letter-spacing="-2">Louma</text>
+      <text x="100" y="152" text-anchor="middle"
+            font-family="DM Sans, sans-serif"
+            font-size="16" font-weight="700"
+            fill="#D42B2B"
+            letter-spacing="6">BAKERY</text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo-link" data-page="home" aria-label="Louma Bakery home">
+      <svg class="logo-svg" aria-hidden="true"><use href="#louma-logo"/></svg>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <button class="nav-link active" data-page="home">Home</button>
+      <button class="nav-link" data-page="about">About</button>
+      <button class="nav-link" data-page="menu">Menu</button>
+      <button class="nav-link" data-page="gallery">Gallery</button>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="nav-cta" data-page="menu">View Menu</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     HOME
+============================================================ -->
+<section class="page active" id="home">
+
+  <div class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="pill"><span class="pill-dot"></span> Opening soon · Santa Monica</span>
+        <h1>Your favorite <span class="accent">neighborhood</span> bakery.</h1>
+        <p class="hero-sub">Mediterranean-inspired pastries, slow-fermented breads, and specialty coffee — baked fresh every morning, served with heart.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-page="menu">View Menu</button>
+          <button class="btn btn-ghost" data-page="about">Our Story</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="hero-mark">
+            <svg aria-hidden="true"><use href="#louma-logo"/></svg>
+          </div>
+          <div class="hero-card-tag">— baked with purpose —</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Signature menu</div>
+          <h2>What we're known for.</h2>
+        </div>
+        <p class="section-sub">A short list of things we make exceptionally well — the heart of the Louma menu.</p>
+      </div>
+
+      <div class="grid-3">
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14c2-2 5-2 7 0s5 2 7 0 4-2 4 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/><path d="M7 11c0-3 2-5 5-5s5 2 5 5"/></svg>
+          </div>
+          <h3>Butter Croissant</h3>
+          <p>Laminated 81 layers. Crackly outside, custard-soft inside. The classic, done right.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c0-4 3-7 8-7s8 3 8 7-3 7-8 7-8-3-8-7z"/><path d="M9 11h6M9 14h4"/></svg>
+          </div>
+          <h3>Zaatar Labneh Croissant</h3>
+          <p>Tangy whipped labneh, wild za'atar, a finish of olive oil and sea salt.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 4c2 2 2 4 0 6M12 14c2 2 2 4 0 6M4 12c2-2 4-2 6 0M14 12c2-2 4-2 6 0"/></svg>
+          </div>
+          <h3>Pistachio Rose Croissant</h3>
+          <p>House pistachio cream, a whisper of rose, candied petals on top.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="6"/><path d="M6 11c2-2 4-2 6 0s4 2 6 0"/></svg>
+          </div>
+          <h3>Sourdough Loaf</h3>
+          <p>72-hour cold ferment. Open crumb, deep crust, naturally leavened.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><path d="M8 4v2M11 3v3M14 4v2"/></svg>
+          </div>
+          <h3>Specialty Coffee</h3>
+          <p>Single-origin espresso. Local roasters, careful extraction, oat available.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M4 12h16M12 8v12M9 5l3-2 3 2"/></svg>
+          </div>
+          <h3>Pastry Gift Boxes</h3>
+          <p>Curated selections for guests, hosts, and offices. Made to share.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission band -->
+  <section class="mission-band">
+    <div class="container">
+      <h2>"Baking with purpose. Serving with heart."</h2>
+      <p>Louma Bakery is part of a nonprofit mission committed to inclusive employment and meaningful work. Every croissant, loaf, and cup of coffee helps fund opportunity in our community.</p>
+    </div>
+  </section>
+
+  <!-- Location bar -->
+  <section class="loc-bar">
+    <div class="container loc-grid">
+      <div class="loc-item">
+        <div class="label">Visit</div>
+        <div class="value">3223 Wilshire Blvd<small>Santa Monica, CA 90403</small></div>
+      </div>
+      <div class="loc-item">
+        <div class="label">Hours</div>
+        <div class="value">Mon–Fri · 7a–6p<small>Sat–Sun · 8a–4p</small></div>
+      </div>
+      <div class="loc-item">
+        <div class="label">Follow</div>
+        <div class="value">@loumabakery<small>For opening date &amp; daily bakes</small></div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section class="page" id="about">
+
+  <div class="about-split">
+    <div class="about-left">
+      <div class="eyebrow">Our story</div>
+      <h1>A bakery built around people.</h1>
+      <p>Louma is a Mediterranean-inspired bakery and coffee bar in the heart of Santa Monica — a small, bright space designed for slow mornings, quick stops, and good conversation.</p>
+    </div>
+    <div class="about-right">
+      <p>Louma began with a simple idea: that the food we love most often comes from the places we know best. Our menu draws from <strong>Mediterranean and Levantine</strong> traditions — za'atar, labneh, pistachio, rose, orange blossom, tahini — woven into the French pastry techniques we trained in.</p>
+      <p>We bake every morning from scratch. Doughs are slow-fermented, fillings are made in-house, and our coffee is pulled with the same care we put into a croissant. The goal isn't to be fancy. It's to be <em>genuinely good</em>, every day.</p>
+      <p>Louma is part of <strong>The Louma Initiative</strong>, a nonprofit committed to inclusive employment — creating dignified work for people who are too often left out of the workforce. When you buy a pastry here, you're helping fund training, mentorship, and real careers for our team.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" style="justify-content:flex-start;">
+        <div>
+          <div class="eyebrow">What we stand for</div>
+          <h2>Three things that guide us.</h2>
+        </div>
+      </div>
+      <div class="values-grid">
+        <div class="value-box">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3 1.5-5L5 8.5 10 8z"/></svg>
+          </div>
+          <h3>Artisan Craft</h3>
+          <p>Slow ferments, classical lamination, careful sourcing. The basics, done with patience.</p>
+        </div>
+        <div class="value-box">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>
+          </div>
+          <h3>Social Impact</h3>
+          <p>A nonprofit at our core. Inclusive employment, fair wages, and pathways to growth.</p>
+        </div>
+        <div class="value-box">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="11" r="2.5"/><path d="M3 20c.5-3 3-5 6-5s5.5 2 6 5"/><path d="M14 19c.5-2 2-3.5 4-3.5s3 1 3.5 2.5"/></svg>
+          </div>
+          <h3>Community First</h3>
+          <p>A neighborhood bakery before anything else. Familiar faces, regular orders, real welcome.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote-bar">
+    <blockquote>
+      "We believe a great bakery is more than the sum of its pastries — it's a place that gives back the warmth it takes in."
+      <cite>— The Louma Team</cite>
+    </blockquote>
+  </div>
+
+  <div class="opening-note container">
+    <p>We're opening soon in Santa Monica. Follow <a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a> for the official opening date and a first look at the bakes.</p>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     MENU
+============================================================ -->
+<section class="page" id="menu">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow">The menu</div>
+      <h1>Made fresh, every morning.</h1>
+      <p>A short, focused menu that changes with the seasons. Signature items are marked. Prices are subject to change.</p>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="pastries">Pastries</button>
+        <button class="tab" data-tab="breads">Breads</button>
+        <button class="tab" data-tab="coffee">Coffee &amp; Drinks</button>
+        <button class="tab" data-tab="food">Light Food</button>
+        <button class="tab" data-tab="boxes">Boxes &amp; Catering</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <div class="container">
+
+      <!-- Pastries -->
+      <div class="menu-list active" id="tab-pastries">
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Butter Croissant <span class="badge-signature">Signature</span></div>
+            <div class="menu-item-desc">Laminated 81 layers, baked dark. Crackly, buttery, classic.</div>
+          </div>
+          <div class="menu-item-price">$5</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Almond Croissant</div>
+            <div class="menu-item-desc">Twice-baked with frangipane and toasted almonds.</div>
+          </div>
+          <div class="menu-item-price">$6</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Zaatar Labneh Croissant <span class="badge-signature">Signature</span></div>
+            <div class="menu-item-desc">Whipped labneh, wild za'atar, olive oil, flaky sea salt.</div>
+          </div>
+          <div class="menu-item-price">$7</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Pistachio Rose Croissant <span class="badge-signature">Signature</span></div>
+            <div class="menu-item-desc">House pistachio cream, rose water, candied petals.</div>
+          </div>
+          <div class="menu-item-price">$7</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Chocolate Tahini Cookie</div>
+            <div class="menu-item-desc">Dark chocolate, sesame, a finish of flaky salt.</div>
+          </div>
+          <div class="menu-item-price">$4</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Orange Blossom Cake</div>
+            <div class="menu-item-desc">Olive oil cake, citrus syrup, soft and floral.</div>
+          </div>
+          <div class="menu-item-price">$7</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Seasonal Danish</div>
+            <div class="menu-item-desc">Whatever fruit is at the farmers market this week.</div>
+          </div>
+          <div class="menu-item-price">$6</div>
+        </div>
+      </div>
+
+      <!-- Breads -->
+      <div class="menu-list" id="tab-breads">
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Sourdough <span class="badge-signature">Signature</span></div>
+            <div class="menu-item-desc">72-hour cold ferment. Open crumb, deep mahogany crust.</div>
+          </div>
+          <div class="menu-item-price">$14</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Baguette</div>
+            <div class="menu-item-desc">Crisp shell, tender crumb. Best the day it's baked.</div>
+          </div>
+          <div class="menu-item-price">$5</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Rye</div>
+            <div class="menu-item-desc">Caraway, whole rye, long ferment. Dense and aromatic.</div>
+          </div>
+          <div class="menu-item-price">$12</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Specialty Loaf</div>
+            <div class="menu-item-desc">Rotating: olive &amp; herb, walnut-fig, seeded grain.</div>
+          </div>
+          <div class="menu-item-price">$15</div>
+        </div>
+      </div>
+
+      <!-- Coffee -->
+      <div class="menu-list" id="tab-coffee">
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Espresso</div>
+            <div class="menu-item-desc">Single or double. Local roaster, single origin.</div>
+          </div>
+          <div class="menu-item-price">$4</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Cappuccino</div>
+            <div class="menu-item-desc">Equal parts espresso, steamed milk, microfoam.</div>
+          </div>
+          <div class="menu-item-price">$6</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Latte</div>
+            <div class="menu-item-desc">Whole, oat, or almond. Free pour, light foam.</div>
+          </div>
+          <div class="menu-item-price">$6.50</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Louma Latte <span class="badge-signature">Signature</span></div>
+            <div class="menu-item-desc">Espresso, cardamom, orange blossom, steamed milk.</div>
+          </div>
+          <div class="menu-item-price">$7.50</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Iced Coffee</div>
+            <div class="menu-item-desc">Slow-steeped overnight. Smooth and low-acid.</div>
+          </div>
+          <div class="menu-item-price">$6</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Matcha</div>
+            <div class="menu-item-desc">Ceremonial-grade, hand-whisked, hot or iced.</div>
+          </div>
+          <div class="menu-item-price">$6.50</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Seasonal Tea</div>
+            <div class="menu-item-desc">Loose-leaf, rotating selection.</div>
+          </div>
+          <div class="menu-item-price">$5</div>
+        </div>
+      </div>
+
+      <!-- Food -->
+      <div class="menu-list" id="tab-food">
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Breakfast Sandwich</div>
+            <div class="menu-item-desc">Soft scramble, gruyère, herbs, on a butter croissant.</div>
+          </div>
+          <div class="menu-item-price">$11</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Avocado Toast</div>
+            <div class="menu-item-desc">Sourdough, smashed avocado, lemon, urfa chili, herbs.</div>
+          </div>
+          <div class="menu-item-price">$13</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Labneh Toast <span class="badge-signature">Signature</span></div>
+            <div class="menu-item-desc">Whipped labneh, za'atar, olive oil, cucumber, mint.</div>
+          </div>
+          <div class="menu-item-price">$12</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Seasonal Salad</div>
+            <div class="menu-item-desc">Market greens, citrus, nuts, house vinaigrette.</div>
+          </div>
+          <div class="menu-item-price">$14</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Tabbouleh</div>
+            <div class="menu-item-desc">Bulgur, parsley, mint, tomato, lemon, olive oil.</div>
+          </div>
+          <div class="menu-item-price">$9</div>
+        </div>
+      </div>
+
+      <!-- Boxes -->
+      <div class="menu-list" id="tab-boxes">
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Pastry Box <span class="badge-signature">Signature</span></div>
+            <div class="menu-item-desc">A curated selection of our morning bakes. Serves 4–6.</div>
+          </div>
+          <div class="menu-item-price">from $28</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Breakfast Tray</div>
+            <div class="menu-item-desc">Pastries, mini sandwiches, fruit, coffee carafe option.</div>
+          </div>
+          <div class="menu-item-price">from $65</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Dessert Box</div>
+            <div class="menu-item-desc">Cookies, cake slices, seasonal sweets. Serves 6–8.</div>
+          </div>
+          <div class="menu-item-price">from $40</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Office Catering</div>
+            <div class="menu-item-desc">Built around your team and schedule. Recurring orders welcome.</div>
+          </div>
+          <div class="menu-item-price">custom</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-main">
+            <div class="menu-item-name">Event Order</div>
+            <div class="menu-item-desc">Weddings, showers, dinners. Two weeks notice preferred.</div>
+          </div>
+          <div class="menu-item-price">custom</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     GALLERY
+============================================================ -->
+<section class="page" id="gallery">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow">A first look</div>
+      <h1>The bakery, in pictures.</h1>
+      <p>Photography is coming soon. For now, a glimpse of what to expect when our doors open.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="gallery-grid">
+        <div class="gallery-cell span-2 row-2">
+          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14c2-2 5-2 7 0s5 2 7 0 4-2 4 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/><path d="M7 11c0-3 2-5 5-5s5 2 5 5"/></svg>
+          <h3>Pastries</h3>
+          <span class="small">Daily croissants &amp; viennoiserie</span>
+        </div>
+        <div class="gallery-cell">
+          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/></svg>
+          <h3>Coffee Bar</h3>
+          <span class="small">Espresso &amp; pour-over</span>
+        </div>
+        <div class="gallery-cell">
+          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="6"/><path d="M6 11c2-2 4-2 6 0s4 2 6 0"/></svg>
+          <h3>Artisan Breads</h3>
+          <span class="small">Naturally leavened</span>
+        </div>
+        <div class="gallery-cell">
+          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6 6 .5-4.5 4.5L18 21l-6-3-6 3 1.5-7L3 9.5 9 9z"/></svg>
+          <h3>Mediterranean Flavors</h3>
+          <span class="small">Za'atar, rose, pistachio</span>
+        </div>
+        <div class="gallery-cell">
+          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M4 12h16M12 8v12M9 5l3-2 3 2"/></svg>
+          <h3>Gift Boxes</h3>
+          <span class="small">Curated for sharing</span>
+        </div>
+        <div class="gallery-cell span-2">
+          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-6 9 6v11"/><path d="M9 21v-7h6v7"/></svg>
+          <h3>Storefront</h3>
+          <span class="small">3223 Wilshire Blvd, Santa Monica</span>
+        </div>
+        <div class="gallery-cell">
+          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v4M12 16v4M4 12h4M16 12h4M6.3 6.3l2.8 2.8M14.9 14.9l2.8 2.8M6.3 17.7l2.8-2.8M14.9 9.1l2.8-2.8"/></svg>
+          <h3>Seasonal Sweets</h3>
+          <span class="small">What's bright right now</span>
+        </div>
+      </div>
+
+      <p class="gallery-note">Real photography is on the way — we're saving the camera roll for opening week.</p>
+
+      <div class="insta-cta">
+        <h2>Follow along.</h2>
+        <p>The kitchen, the bakes, the build-out, the opening date — all on Instagram first.</p>
+        <a class="btn btn-cream" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          @loumabakery
+        </a>
+      </div>
+
+      <div class="storefront-band">
+        <div>
+          <div class="eyebrow">The Storefront</div>
+          <h3>3223 Wilshire Blvd</h3>
+          <p>Santa Monica, CA 90403 — opening soon.</p>
+        </div>
+        <div>
+          <p style="color: var(--ink); margin-bottom: 6px; font-weight: 600;">Hours (when we open)</p>
+          <p>Mon–Fri · 7am – 6pm</p>
+          <p>Sat &amp; Sun · 8am – 4pm</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <svg aria-hidden="true"><use href="#louma-logo"/></svg>
+        </div>
+        <p class="footer-tagline">Mediterranean-inspired bakery &amp; coffee bar in Santa Monica. Baked with purpose. Served with heart.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li><button data-page="home">Home</button></li>
+          <li><button data-page="about">About</button></li>
+          <li><button data-page="menu">Menu</button></li>
+          <li><button data-page="gallery">Gallery</button></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Find us</h4>
+        <p>3223 Wilshire Blvd</p>
+        <p>Santa Monica, CA 90403</p>
+        <p style="margin-top:12px;"><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Louma Bakery. A project of The Louma Initiative.</span>
+      <span>Baking with purpose.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ----- Page navigation -----
+  const pages = document.querySelectorAll('.page');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinksWrap = document.getElementById('navLinks');
+
+  function goTo(pageId) {
+    const target = document.getElementById(pageId);
+    if (!target) return;
+
+    // Fade out current
+    pages.forEach(p => {
+      if (p.classList.contains('active') && p.id !== pageId) {
+        p.style.opacity = '0';
+        p.style.transform = 'translateY(8px)';
+      }
+    });
+
+    setTimeout(() => {
+      pages.forEach(p => p.classList.remove('active'));
+      target.classList.add('active');
+      // Trigger transition restart
+      requestAnimationFrame(() => {
+        target.style.opacity = '';
+        target.style.transform = '';
+      });
+
+      // Update nav active state
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.dataset.page === pageId);
+      });
+
+      // Update URL hash without jumping
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + pageId);
+      }
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Close mobile nav
+      navLinksWrap.classList.remove('open');
+    }, 180);
+  }
+
+  // Bind any element with data-page
+  document.addEventListener('click', function(e){
+    const el = e.target.closest('[data-page]');
+    if (!el) return;
+    e.preventDefault();
+    goTo(el.dataset.page);
+  });
+
+  // Initial route from hash
+  const initial = (window.location.hash || '#home').slice(1);
+  if (document.getElementById(initial)) {
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById(initial).classList.add('active');
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initial));
+  }
+
+  window.addEventListener('hashchange', function(){
+    const id = (window.location.hash || '#home').slice(1);
+    if (document.getElementById(id)) goTo(id);
+  });
+
+  // ----- Mobile nav toggle -----
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', function(){
+    navLinksWrap.classList.toggle('open');
+  });
+
+  // ----- Menu tabs -----
+  const tabs = document.querySelectorAll('.tab');
+  const menuLists = document.querySelectorAll('.menu-list');
+  tabs.forEach(t => {
+    t.addEventListener('click', function(){
+      tabs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      const target = 'tab-' + t.dataset.tab;
+      menuLists.forEach(ml => {
+        ml.classList.toggle('active', ml.id === target);
+      });
+    });
+  });
+
+  // ----- Year in footer -----
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
