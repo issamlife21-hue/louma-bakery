@@ -247,7 +247,17 @@
     text-transform: uppercase;
   }
   .nav-link:hover { color: var(--red); }
-  .nav-link.active { color: var(--red); }
+  .nav-link.active { color: var(--red); position: relative; }
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 2px;
+    height: 2px;
+    background: var(--red);
+    border-radius: 1px;
+  }
 
   .nav-cta {
     display: inline-flex;
@@ -275,13 +285,10 @@
   .page {
     display: none;
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity .45s var(--ease), transform .45s var(--ease);
+    transition: opacity 0.3s ease;
   }
   .page.active {
-    display: block;
     opacity: 1;
-    transform: translateY(0);
   }
 
   /* ---------- BUTTONS ---------- */
@@ -1435,7 +1442,7 @@
 </svg>
 
 <!-- ===== INTRO HERO (fullscreen video / placeholder) ===== -->
-<section class="intro-hero" id="introHero">
+<section class="intro-hero" id="intro-section">
   <!-- Replace this placeholder div with the <video> tag below when the real footage is ready:
        <video autoplay muted loop playsinline id="louma-hero-video" class="intro-video">
          <source src="louma-intro.mp4" type="video/mp4">
@@ -1448,28 +1455,27 @@
     <svg class="intro-logo" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
     <h1 class="intro-headline">"Named after someone who makes every room feel like home."</h1>
     <p class="intro-meta">Opening July 2025 · West LA</p>
-    <button class="intro-enter" id="introEnter" type="button">Enter</button>
+    <button class="intro-enter" id="enter-btn" type="button">Enter</button>
   </div>
 
   <div class="intro-scroll" aria-hidden="true"></div>
 </section>
 
 <!-- ===== NAV ===== -->
-<header class="nav">
+<header class="nav" id="site-nav">
   <div class="container nav-inner">
-    <a href="#home" class="logo-link" data-page="home" aria-label="Louma Bakery home">
+    <a href="#page-home" class="logo-link" data-page="page-home" aria-label="Louma Bakery home">
       <svg class="logo-svg" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
     </a>
 
     <nav class="nav-links" id="navLinks">
-      <button class="nav-link active" data-page="home">Home</button>
-      <button class="nav-link" data-page="about">About</button>
-      <button class="nav-link" data-page="menu">Menu</button>
-      <button class="nav-link" data-page="gallery">Gallery</button>
-      <button class="nav-link" data-page="mission">Mission</button>
-      <button class="nav-link" data-page="catering">Catering</button>
-      <button class="nav-link" data-page="careers">Careers</button>
-      <button class="nav-link" data-page="visit">Visit Us</button>
+      <button class="nav-link active" data-page="page-home">Home</button>
+      <button class="nav-link" data-page="page-menu">Menu</button>
+      <button class="nav-link" data-page="page-story">Our Story</button>
+      <button class="nav-link" data-page="page-mission">Mission</button>
+      <button class="nav-link" data-page="page-catering">Catering</button>
+      <button class="nav-link" data-page="page-careers">Careers</button>
+      <button class="nav-link" data-page="page-visit">Visit Us</button>
     </nav>
 
     <div style="display:flex;align-items:center;gap:8px;">
@@ -1486,7 +1492,7 @@
 <!-- ============================================================
      HOME
 ============================================================ -->
-<section class="page active" id="home">
+<section class="page active" id="page-home">
 
   <div class="hero">
     <div class="container hero-grid">
@@ -1495,8 +1501,8 @@
         <h1>Flour-dusted <span class="accent">dreams</span>, baked fresh daily.</h1>
         <p class="hero-sub">Named after a person who makes every room feel like home. A West LA bakery rooted in European baking traditions with a Levantine twist — and a mission that goes beyond the bread.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary" data-page="menu">View Menu</button>
-          <button class="btn btn-ghost" data-page="about">Our Story</button>
+          <button class="btn btn-primary" data-page="page-menu">View Menu</button>
+          <button class="btn btn-ghost" data-page="page-story">Our Story</button>
         </div>
       </div>
       <div class="hero-card">
@@ -1587,7 +1593,7 @@
     <h2>More than a bakery.</h2>
     <p>Being around Louma is like pulling fresh cookies from the oven. That warmth is what this place is built on — comfort, connection, and community. All profits go directly to The Louma Initiative, a 501(c)(3) nonprofit fostering opportunities for people with intellectual and developmental differences.</p>
     <div class="mission-band-actions">
-      <button class="btn btn-primary" data-page="mission">Read Our Mission</button>
+      <button class="btn btn-primary" data-page="page-mission">Read Our Mission</button>
     </div>
     <p class="mission-band-italic">Believe in what we are building? Help us grow.</p>
     <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block;">
@@ -1640,7 +1646,7 @@
 <!-- ============================================================
      ABOUT
 ============================================================ -->
-<section class="page" id="about">
+<section class="page" id="page-story">
 
   <div class="about-split">
     <div class="about-left">
@@ -1718,7 +1724,7 @@
 <!-- ============================================================
      MENU
 ============================================================ -->
-<section class="page" id="menu">
+<section class="page" id="page-menu">
 
   <div class="page-header">
     <div class="container">
@@ -1963,7 +1969,7 @@
 <!-- ============================================================
      GALLERY
 ============================================================ -->
-<section class="page" id="gallery">
+<section class="page" id="page-gallery">
 
   <div class="page-header">
     <div class="container">
@@ -2054,7 +2060,7 @@
 <!-- ============================================================
      MISSION
 ============================================================ -->
-<section class="page" id="mission">
+<section class="page" id="page-mission">
 
   <div class="mission-hero">
     <div class="container">
@@ -2086,7 +2092,7 @@
       </div>
 
       <div class="mission-cta">
-        <button class="btn btn-primary" data-page="visit">Support Our Mission</button>
+        <button class="btn btn-primary" data-page="page-visit">Support Our Mission</button>
       </div>
     </div>
   </section>
@@ -2144,7 +2150,7 @@
 <!-- ============================================================
      CATERING
 ============================================================ -->
-<section class="page" id="catering">
+<section class="page" id="page-catering">
 
   <div class="page-header">
     <div class="container">
@@ -2247,7 +2253,7 @@
 <!-- ============================================================
      CAREERS
 ============================================================ -->
-<section class="page" id="careers">
+<section class="page" id="page-careers">
 
   <div class="page-header">
     <div class="container">
@@ -2351,7 +2357,7 @@
 <!-- ============================================================
      VISIT US
 ============================================================ -->
-<section class="page" id="visit">
+<section class="page" id="page-visit">
 
   <div class="container visit-hero">
     <div class="eyebrow">Visit us</div>
@@ -2519,14 +2525,13 @@
       <div class="footer-col">
         <h4>Explore</h4>
         <ul>
-          <li><button data-page="home">Home</button></li>
-          <li><button data-page="about">About</button></li>
-          <li><button data-page="menu">Menu</button></li>
-          <li><button data-page="gallery">Gallery</button></li>
-          <li><button data-page="mission">Mission</button></li>
-          <li><button data-page="catering">Catering</button></li>
-          <li><button data-page="careers">Careers</button></li>
-          <li><button data-page="visit">Visit Us</button></li>
+          <li><button data-page="page-home">Home</button></li>
+          <li><button data-page="page-menu">Menu</button></li>
+          <li><button data-page="page-story">Our Story</button></li>
+          <li><button data-page="page-mission">Mission</button></li>
+          <li><button data-page="page-catering">Catering</button></li>
+          <li><button data-page="page-careers">Careers</button></li>
+          <li><button data-page="page-visit">Visit Us</button></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2552,68 +2557,59 @@
 <script>
 (function(){
   // ----- Page navigation -----
-  const pages = document.querySelectorAll('.page');
   const navLinks = document.querySelectorAll('.nav-link');
   const navLinksWrap = document.getElementById('navLinks');
 
-  function goTo(pageId) {
+  function showPage(pageId) {
     const target = document.getElementById(pageId);
     if (!target) return;
+    document.querySelectorAll('.page').forEach(p => {
+      p.classList.remove('active');
+      p.style.display = 'none';
+    });
+    target.style.display = 'block';
+    // Trigger reflow so the opacity transition runs from 0 → 1
+    void target.offsetWidth;
+    target.classList.add('active');
 
-    // Fade out current
-    pages.forEach(p => {
-      if (p.classList.contains('active') && p.id !== pageId) {
-        p.style.opacity = '0';
-        p.style.transform = 'translateY(8px)';
-      }
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.dataset.page === pageId);
     });
 
-    setTimeout(() => {
-      pages.forEach(p => p.classList.remove('active'));
-      target.classList.add('active');
-      // Trigger transition restart
-      requestAnimationFrame(() => {
-        target.style.opacity = '';
-        target.style.transform = '';
-      });
-
-      // Update nav active state
-      navLinks.forEach(l => {
-        l.classList.toggle('active', l.dataset.page === pageId);
-      });
-
-      // Update URL hash without jumping
-      if (history.replaceState) {
-        history.replaceState(null, '', '#' + pageId);
-      }
-
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Close mobile nav
-      navLinksWrap.classList.remove('open');
-    }, 180);
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + pageId);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (navLinksWrap) navLinksWrap.classList.remove('open');
   }
+  // Expose for inline-style usage / tests
+  window.showPage = showPage;
 
   // Bind any element with data-page
   document.addEventListener('click', function(e){
     const el = e.target.closest('[data-page]');
     if (!el) return;
     e.preventDefault();
-    goTo(el.dataset.page);
+    showPage(el.dataset.page);
   });
 
-  // Initial route from hash
-  const initial = (window.location.hash || '#home').slice(1);
-  if (document.getElementById(initial)) {
-    pages.forEach(p => p.classList.remove('active'));
-    document.getElementById(initial).classList.add('active');
-    navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initial));
+  // Initial route from hash (default page-home)
+  const initialHash = (window.location.hash || '#page-home').slice(1);
+  const initialId = document.getElementById(initialHash) ? initialHash : 'page-home';
+  document.querySelectorAll('.page').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
+  const initialEl = document.getElementById(initialId);
+  if (initialEl) {
+    initialEl.style.display = 'block';
+    initialEl.classList.add('active');
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initialId));
   }
 
   window.addEventListener('hashchange', function(){
-    const id = (window.location.hash || '#home').slice(1);
-    if (document.getElementById(id)) goTo(id);
+    const id = (window.location.hash || '#page-home').slice(1);
+    if (document.getElementById(id)) showPage(id);
   });
 
   // ----- Mobile nav toggle -----
@@ -2640,8 +2636,7 @@
   const openingBtn = document.getElementById('openingUpdatesBtn');
   if (openingBtn) {
     openingBtn.addEventListener('click', function(){
-      goTo('home');
-      // Wait for the page transition, then smooth-scroll to the newsletter
+      showPage('page-home');
       setTimeout(() => {
         const target = document.getElementById('newsletter');
         if (target) {
@@ -2724,16 +2719,33 @@
     });
   });
 
-  // ----- Intro hero "Enter" button — smooth scroll past the fullscreen section -----
-  (function bindIntroEnter(){
-    const btn = document.getElementById('introEnter');
-    if (!btn) return;
-    btn.addEventListener('click', function(){
-      const nav = document.querySelector('.nav');
-      const target = nav || document.body;
-      const top = target.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
+  // ----- Intro hero — dismissed permanently on Enter click or scroll-past -----
+  (function bindIntro(){
+    const intro = document.getElementById('intro-section');
+    const btn = document.getElementById('enter-btn');
+    const nav = document.getElementById('site-nav');
+    if (!intro) return;
+
+    let dismissed = false;
+    function dismissIntro() {
+      if (dismissed) return;
+      dismissed = true;
+      intro.style.display = 'none';
+      document.body.classList.remove('intro-active');
+      if (nav) nav.style.position = 'sticky';
+      showPage('page-home');
+    }
+
+    if (btn) btn.addEventListener('click', dismissIntro);
+
+    function onScroll(){
+      if (dismissed) return;
+      if (window.scrollY > window.innerHeight * 0.85) {
+        window.removeEventListener('scroll', onScroll);
+        dismissIntro();
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
   })();
 
   // ----- Animated bread doodles (draws on scroll-in) -----
