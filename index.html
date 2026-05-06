@@ -10,44 +10,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --red: #D42B2B;
-    --red-deep: #B22020;
-    --cream: #F5F0E8;
-    --cream-card: #EDE8DC;
-    --cream-line: #E2DBCB;
-    --ink: #1A0A00;
-    --muted: #9C7B6A;
-    --dark: #1F1410;
-    --shadow-sm: 0 1px 2px rgba(26,10,0,0.04), 0 1px 1px rgba(26,10,0,0.03);
-    --shadow-md: 0 6px 24px -8px rgba(26,10,0,0.12), 0 2px 6px rgba(26,10,0,0.04);
-    --radius: 14px;
-    --radius-lg: 22px;
+    --red: #D4202E;
+    --red-pop: #D4202E;
+    --red-heading: #C41E2E;
+    --red-deep: #A10017;
+    --burgundy: #A10017;
+    --butter: #F5EDD6;
+    --cream-warm: #E2D9C6;
+    --peach: #E8574A;
+    --tangerine: #FF8926;
+    --fairy: #CDE0B8;
+    --cream: #F5EDD6;
+    --cream-card: #FDFAF3;
+    --cream-line: rgba(196, 30, 46, 0.18);
+    --ink: #A10017;
+    --muted: rgba(161, 0, 23, 0.6);
+    --dark: #A10017;
+    --shadow-sm: 0 1px 2px rgba(161,0,23,0.05);
+    --shadow-md: 0 12px 30px -14px rgba(161,0,23,0.16);
+    --radius: 28px;
+    --radius-lg: 36px;
     --ease: cubic-bezier(.2,.7,.2,1);
   }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
   body {
     font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
     background: var(--cream);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.55;
+    line-height: 1.9;
     font-size: 16px;
   }
 
   h1, h2, h3, h4 {
     font-family: 'Fraunces', Georgia, serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.015em;
     margin: 0;
-    color: var(--ink);
+    color: var(--red-heading);
+    line-height: 1.15;
   }
-  h1 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); line-height: 1.05; letter-spacing: -0.025em; }
-  h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.1; letter-spacing: -0.02em; }
-  h3 { font-size: 1.25rem; line-height: 1.25; }
+  h1 { font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.04; letter-spacing: -0.025em; font-weight: 800; }
+  h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; }
+  h3 { font-size: 1.3rem; line-height: 1.25; font-weight: 700; }
   p { margin: 0 0 1em; }
   a { color: inherit; text-decoration: none; }
 
@@ -58,24 +66,166 @@
     padding: 0 24px;
   }
 
+  /* ---------- INTRO HERO (fullscreen video / placeholder) ---------- */
+  .intro-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 540px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .intro-video,
+  .intro-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .intro-video { object-fit: cover; }
+  .intro-placeholder {
+    background-color: #F5EDD6;
+    animation: louma-warm-breathe 6s ease-in-out infinite alternate;
+  }
+  .intro-placeholder::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 35%, rgba(245,230,196,0.7), transparent 55%),
+      radial-gradient(ellipse at 70% 75%, rgba(237,217,163,0.55), transparent 55%);
+    mix-blend-mode: multiply;
+    animation: louma-warm-shimmer 9s ease-in-out infinite alternate;
+  }
+  @keyframes louma-warm-breathe {
+    0%   { background-color: #F5EDD6; }
+    50%  { background-color: #EDE0BE; }
+    100% { background-color: #E3D4A8; }
+  }
+  @keyframes louma-warm-shimmer {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0.85; }
+    100% { transform: translate(-3%, -2%) scale(1.05); opacity: 1; }
+  }
+
+  .intro-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+  }
+
+  .intro-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 24px 96px;
+    text-align: center;
+    color: var(--butter);
+  }
+  .intro-logo { display: block; width: 80px; height: 80px; margin-bottom: 32px; }
+  .intro-headline {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--butter);
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    max-width: 700px;
+    margin: 0 0 28px;
+  }
+  .intro-meta {
+    color: var(--butter);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 36px;
+  }
+  .intro-enter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--butter);
+    color: var(--red);
+    border: none;
+    border-radius: 999px;
+    padding: 14px 36px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+  }
+  .intro-enter:hover {
+    background: var(--red);
+    color: var(--butter);
+    transform: translateY(-2px);
+  }
+
+  .intro-scroll {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 36px;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 40px;
+    background: rgba(251, 245, 212, 0.5);
+    pointer-events: none;
+  }
+  .intro-scroll::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--butter);
+    transform: translate(-50%, 0);
+    animation: intro-scroll-dot 1.5s ease-in-out infinite;
+  }
+  @keyframes intro-scroll-dot {
+    0%   { transform: translate(-50%, 0);   opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translate(-50%, 36px); opacity: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .intro-logo { width: 56px; height: 56px; margin-bottom: 24px; }
+    .intro-headline { font-size: clamp(24px, 6vw, 36px); }
+    .intro-meta { display: none; }
+  }
+
   /* ---------- NAV ---------- */
   .nav {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--red);
-    color: var(--cream);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: var(--butter);
+    color: var(--burgundy);
+    border-bottom: 1.5px solid var(--red);
   }
   .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    height: 88px;
     gap: 24px;
   }
   .logo-link { display: inline-flex; align-items: center; }
-  .logo-svg { display: block; height: 44px; width: auto; }
+  .logo-svg { display: block; height: 56px; width: 56px; }
 
   .nav-links {
     display: flex;
@@ -83,52 +233,63 @@
     gap: 6px;
   }
   .nav-link {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--cream);
-    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--burgundy);
+    padding: 10px 12px;
     border-radius: 999px;
-    transition: background .25s var(--ease), color .25s var(--ease);
+    transition: color .25s var(--ease);
     cursor: pointer;
     background: transparent;
     border: none;
     font-family: inherit;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
-  .nav-link:hover { background: rgba(255,255,255,0.12); }
-  .nav-link.active { background: rgba(255,255,255,0.18); }
+  .nav-link:hover { color: var(--red); }
+  .nav-link.active { color: var(--red); position: relative; }
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 2px;
+    height: 2px;
+    background: var(--red);
+    border-radius: 1px;
+  }
 
   .nav-cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--cream);
-    color: var(--red);
-    padding: 10px 20px;
+    background: var(--red-pop);
+    color: var(--butter);
+    padding: 12px 22px;
     border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.92rem;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     border: none;
     cursor: pointer;
-    transition: transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+    transition: transform .25s var(--ease), background .25s var(--ease);
     font-family: inherit;
   }
-  .nav-cta:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+  .nav-cta:hover { background: var(--burgundy); transform: translateY(-1px); }
 
-  .nav-toggle { display: none; background: transparent; border: none; color: var(--cream); cursor: pointer; padding: 8px; }
+  .nav-toggle { display: none; background: transparent; border: none; color: var(--burgundy); cursor: pointer; padding: 8px; }
   .nav-toggle svg { display: block; width: 26px; height: 26px; }
 
   /* ---------- PAGE TRANSITIONS ---------- */
   .page {
     display: none;
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity .45s var(--ease), transform .45s var(--ease);
+    transition: opacity 0.3s ease;
   }
   .page.active {
     display: block;
     opacity: 1;
-    transform: translateY(0);
   }
 
   /* ---------- BUTTONS ---------- */
@@ -137,206 +298,280 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 14px 26px;
+    padding: 14px 30px;
     border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.97rem;
-    border: 1px solid transparent;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1.5px solid transparent;
     cursor: pointer;
-    transition: transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+    transition: transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
     font-family: inherit;
-    letter-spacing: 0.01em;
   }
   .btn-primary {
-    background: var(--red);
-    color: var(--cream);
+    background: var(--red-pop);
+    color: var(--butter);
+    border-color: var(--red-pop);
   }
-  .btn-primary:hover { background: var(--red-deep); transform: translateY(-1px); box-shadow: 0 8px 22px -8px rgba(212,43,43,0.5); }
+  .btn-primary:hover { background: var(--burgundy); border-color: var(--burgundy); transform: translateY(-1px); }
   .btn-ghost {
     background: transparent;
-    color: var(--ink);
-    border-color: var(--ink);
+    color: var(--red);
+    border-color: var(--red);
   }
-  .btn-ghost:hover { background: var(--ink); color: var(--cream); transform: translateY(-1px); }
+  .btn-ghost:hover { background: var(--red); color: var(--butter); transform: translateY(-1px); }
+  .btn-butter {
+    background: var(--butter);
+    color: var(--red);
+    border-color: var(--butter);
+  }
+  .btn-butter:hover { background: transparent; color: var(--butter); border-color: var(--butter); transform: translateY(-1px); }
 
   /* ---------- HERO ---------- */
   .hero {
-    padding: 88px 0 96px;
+    padding: 120px 0;
     position: relative;
     overflow: hidden;
   }
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 64px;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
     align-items: center;
   }
   .pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(212,43,43,0.08);
+    background: transparent;
     color: var(--red);
-    padding: 6px 14px;
+    padding: 6px 16px;
     border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 22px;
-    border: 1px solid rgba(212,43,43,0.18);
+    margin-bottom: 32px;
+    border: 1.5px solid var(--red);
   }
-  .pill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); display: inline-block; box-shadow: 0 0 0 3px rgba(212,43,43,0.18); }
+  .pill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); display: inline-block; }
 
-  .hero h1 .accent { color: var(--red); font-style: italic; font-weight: 500; }
+  .hero h1 .accent { color: var(--red); font-style: italic; font-weight: 700; }
   .hero-sub {
-    font-size: 1.1rem;
-    color: var(--muted);
+    font-size: 1.18rem;
+    color: var(--burgundy);
     max-width: 480px;
-    margin: 24px 0 36px;
+    margin: 32px 0 44px;
+    line-height: 1.7;
   }
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
   .hero-card {
     aspect-ratio: 1 / 1.05;
-    background: var(--cream-card);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--cream-line);
-    box-shadow: var(--shadow-md);
+    background: var(--cream-warm);
+    border-radius: 32px;
+    border: 1.5px solid var(--red);
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .hero-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 30%, rgba(212,43,43,0.08), transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(156,123,106,0.18), transparent 60%);
-  }
   .hero-card-inner {
     position: relative;
     text-align: center;
-    padding: 32px;
+    padding: 40px;
   }
-  .hero-mark {
-    width: 180px; height: 180px;
-    background: var(--cream);
-    border-radius: 28px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--cream-line);
+  .hero-emoji {
+    font-size: clamp(4rem, 10vw, 7rem);
+    line-height: 1;
+    margin-bottom: 24px;
+    display: block;
   }
-  .hero-mark svg { width: 75%; height: auto; }
   .hero-card-tag {
-    color: var(--muted);
-    font-size: 0.92rem;
-    font-style: italic;
-    font-family: 'Fraunces', serif;
+    color: var(--burgundy);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
   }
+  .hero-doodle {
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    width: 220px;
+    opacity: 0.18;
+    pointer-events: none;
+    color: var(--red);
+  }
+  .doodle-float {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.15;
+    color: var(--red);
+  }
+  .doodle-float.heart-1 { top: 60px; left: 40px; width: 56px; height: 56px; }
+  .doodle-float.flower-1 { bottom: 40px; left: 32px; width: 64px; height: 64px; }
+  .doodle-float.star-1 { top: 24px; right: 32px; width: 48px; height: 48px; opacity: 0.22; }
+  .doodle-float.croissant-1 { bottom: 24px; right: 36px; width: 64px; height: 64px; opacity: 0.22; }
+  .mission-band .doodle-float { color: var(--butter); opacity: 0.2; }
 
   /* ---------- SECTIONS ---------- */
-  .section { padding: 88px 0; }
+  .section { padding: 120px 0; position: relative; }
   .section-head {
     display: flex;
     align-items: end;
     justify-content: space-between;
-    gap: 24px;
-    margin-bottom: 44px;
+    gap: 32px;
+    margin-bottom: 64px;
     flex-wrap: wrap;
   }
   .eyebrow {
     color: var(--red);
-    font-size: 0.78rem;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
   }
-  .section-sub { color: var(--muted); max-width: 460px; font-size: 1.02rem; }
+  .section-sub { color: var(--burgundy); max-width: 480px; font-size: 1.05rem; line-height: 1.8; }
+
+  .doodle-bg {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.15;
+    color: var(--red);
+  }
 
   /* ---------- SIGNATURE GRID ---------- */
   .grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 28px;
   }
   .card {
-    background: var(--cream-card);
+    background: var(--cream-warm);
     border: 1px solid var(--cream-line);
-    border-radius: var(--radius);
-    padding: 28px;
-    transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    border-radius: 28px;
+    padding: 40px 36px;
+    transition: transform .35s var(--ease), border-color .35s var(--ease);
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    min-height: 180px;
+    gap: 16px;
+    min-height: 220px;
   }
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(212,43,43,0.25);
+    transform: translateY(-3px);
+    border-color: var(--red);
   }
   .card-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: var(--cream);
+    width: 48px; height: 48px;
+    border-radius: 999px;
+    background: var(--butter);
     display: inline-flex; align-items: center; justify-content: center;
     color: var(--red);
-    border: 1px solid var(--cream-line);
+    border: 1.5px solid var(--red);
   }
   .card-icon svg { width: 22px; height: 22px; }
-  .card h3 { font-size: 1.15rem; }
-  .card p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+  .card h3 { font-size: 1.3rem; color: var(--red-heading); }
+  .card p { color: var(--burgundy); font-size: 1rem; margin: 0; line-height: 1.75; }
 
-  /* ---------- MISSION BAND ---------- */
+  /* ---------- MISSION BAND (floating block, soft cream w/ red accent) ---------- */
   .mission-band {
-    background: var(--red);
-    color: var(--cream);
-    padding: 80px 0;
-    text-align: center;
+    background: #E8E0CE;
+    color: var(--burgundy);
+    padding: 88px 64px;
+    text-align: left;
+    border-radius: 28px;
+    border-left: 4px solid var(--red);
+    margin: 60px auto;
+    width: min(100% - 32px, 1100px);
+    position: relative;
+    overflow: hidden;
   }
   .mission-band h2 {
-    color: var(--cream);
+    color: var(--red-heading);
     font-style: italic;
-    font-weight: 500;
-    max-width: 820px;
-    margin: 0 auto 24px;
+    font-weight: 700;
+    max-width: 760px;
+    margin: 0 0 20px;
   }
   .mission-band p {
     max-width: 640px;
+    margin: 0 0 28px;
+    color: var(--burgundy);
+    font-size: 1.1rem;
+    line-height: 1.85;
+  }
+  .mission-band .btn { margin-top: 4px; }
+  .mission-band-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+  .mission-band-italic { font-size: 14px; font-style: italic; color: var(--burgundy); margin: 24px 0 12px; opacity: 0.85; }
+  .mission-paypal-btn {
+    background: transparent;
+    color: var(--red);
+    border: 1.5px solid var(--red);
+    border-radius: 999px;
+    padding: 10px 24px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background 0.25s var(--ease), color 0.25s var(--ease);
+    font-family: inherit;
+  }
+  .mission-paypal-btn:hover { background: var(--red); color: var(--butter); }
+
+  /* ---------- ANIMATED DOODLE (bread, draws on enter) ---------- */
+  .doodle-divider {
+    display: block;
     margin: 0 auto;
-    color: rgba(245,240,232,0.85);
-    font-size: 1.04rem;
+    width: 200px;
+    height: 80px;
+    color: var(--red);
+  }
+  .doodle-divider path { stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .doodle-animated { cursor: pointer; }
+  .doodle-animated path {
+    stroke-dasharray: var(--len, 600);
+    stroke-dashoffset: var(--len, 600);
+  }
+  .doodle-animated.in-view path {
+    animation: doodle-draw 1s ease-in-out forwards;
+  }
+  .doodle-animated.in-view path:nth-child(1) { animation-duration: 1.5s; animation-delay: 0s; }
+  .doodle-animated.in-view path:nth-child(2) { animation-duration: 0.45s; animation-delay: 1.2s; }
+  .doodle-animated.in-view path:nth-child(3) { animation-duration: 0.45s; animation-delay: 1.65s; }
+  .doodle-animated.in-view path:nth-child(4) { animation-duration: 0.45s; animation-delay: 2.05s; }
+  @keyframes doodle-draw {
+    to { stroke-dashoffset: 0; }
   }
 
   /* ---------- LOCATION BAR ---------- */
   .loc-bar {
-    background: var(--cream-card);
+    background: var(--cream-warm);
     border-top: 1px solid var(--cream-line);
     border-bottom: 1px solid var(--cream-line);
-    padding: 44px 0;
+    padding: 64px 0;
   }
   .loc-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    gap: 40px;
   }
   .loc-item .label {
     color: var(--red);
-    font-size: 0.74rem;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
-  .loc-item .value { font-family: 'Fraunces', serif; font-size: 1.08rem; color: var(--ink); }
-  .loc-item .value small { display: block; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.92rem; margin-top: 4px; }
+  .loc-item .value { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 600; color: var(--red-heading); line-height: 1.4; }
+  .loc-item .value small { display: block; color: var(--burgundy); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; margin-top: 6px; opacity: 0.85; }
 
   /* ---------- ABOUT ---------- */
   .about-split {
@@ -345,127 +580,201 @@
     min-height: 520px;
   }
   .about-left {
-    background: var(--red);
-    color: var(--cream);
-    padding: 88px 56px;
+    background: var(--cream-warm);
+    color: var(--burgundy);
+    padding: 120px 64px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-left: 4px solid var(--red);
   }
-  .about-left .eyebrow { color: rgba(245,240,232,0.7); }
-  .about-left h1 { color: var(--cream); }
-  .about-left p { color: rgba(245,240,232,0.88); font-size: 1.08rem; max-width: 440px; }
+  .about-left .eyebrow { color: var(--red); }
+  .about-left h1 { color: var(--red-heading); }
+  .about-left p { color: var(--burgundy); font-size: 1.15rem; max-width: 460px; line-height: 1.85; }
   .about-right {
-    background: var(--cream);
-    padding: 88px 56px;
+    background: var(--butter);
+    padding: 120px 64px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .about-right p { color: var(--ink); font-size: 1.02rem; max-width: 560px; }
-  .about-right p + p { margin-top: 18px; }
-  .about-right strong { color: var(--red); font-weight: 600; }
+  .about-right p { color: var(--burgundy); font-size: 1.08rem; max-width: 560px; line-height: 1.85; }
+  .about-right p + p { margin-top: 22px; }
+  .about-right strong { color: var(--red); font-weight: 700; }
+  .about-right h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--red);
+    margin: 0 0 10px;
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+  .about-right h3 + p { margin-top: 0; }
+  .about-right .about-block + .about-block { margin-top: 36px; }
+  .about-pullquote {
+    margin: 56px 0 0;
+    padding: 36px 0 0;
+    border-top: 2px solid var(--red);
+    max-width: 600px;
+  }
+  .about-pullquote blockquote {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--red-heading);
+    margin: 0;
+    text-align: center;
+  }
+  .about-pullquote cite {
+    display: block;
+    margin-top: 18px;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--burgundy);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .about-paypal {
+    text-align: center;
+    margin: 36px 0 0;
+    max-width: 600px;
+  }
+  .about-paypal p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #A10017;
+    opacity: 0.7;
+    margin: 0 0 12px;
+  }
+  .paypal-outline-pill {
+    background: transparent;
+    color: var(--red);
+    border: 1.5px solid var(--red);
+    border-radius: 999px;
+    padding: 10px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .paypal-outline-pill:hover { background: var(--red); color: var(--butter); }
 
   .values-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 28px;
     margin-top: 0;
   }
   .value-box {
-    background: var(--cream-card);
+    background: var(--cream-warm);
     border: 1px solid var(--cream-line);
-    border-radius: var(--radius);
-    padding: 32px;
-    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+    border-radius: 28px;
+    padding: 40px 36px;
+    transition: transform .35s var(--ease), border-color .35s var(--ease);
   }
-  .value-box:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .value-box .card-icon { margin-bottom: 16px; }
-  .value-box h3 { margin-bottom: 8px; }
-  .value-box p { color: var(--muted); font-size: 0.96rem; margin: 0; }
+  .value-box:hover { transform: translateY(-3px); border-color: var(--red); }
+  .value-box .card-icon { margin-bottom: 24px; }
+  .value-box h3 { margin-bottom: 12px; color: var(--red-heading); }
+  .value-box p { color: var(--burgundy); font-size: 1rem; margin: 0; line-height: 1.8; }
 
   .quote-bar {
-    background: var(--ink);
-    color: var(--cream);
+    background: var(--cream-warm);
+    color: var(--burgundy);
     text-align: center;
-    padding: 64px 24px;
+    padding: 120px 24px;
+    border-top: 1px solid var(--cream-line);
+    border-bottom: 1px solid var(--cream-line);
   }
   .quote-bar blockquote {
     margin: 0 auto;
-    max-width: 760px;
+    max-width: 820px;
     font-family: 'Fraunces', serif;
     font-style: italic;
-    font-size: clamp(1.4rem, 2.4vw, 2rem);
-    line-height: 1.35;
-    color: var(--cream);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+    line-height: 1.4;
+    color: var(--red-heading);
   }
   .quote-bar cite {
     display: block;
-    margin-top: 16px;
+    margin-top: 22px;
     font-style: normal;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.18em;
-    color: rgba(245,240,232,0.6);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--burgundy);
+    opacity: 0.7;
     text-transform: uppercase;
   }
 
   .opening-note {
     text-align: center;
-    padding: 56px 24px;
-    color: var(--muted);
-    font-size: 1rem;
+    padding: 80px 24px;
+    color: var(--burgundy);
+    font-size: 1.05rem;
   }
-  .opening-note a { color: var(--red); font-weight: 600; }
+  .opening-note a { color: var(--red); font-weight: 700; }
   .opening-note a:hover { text-decoration: underline; }
 
-  /* ---------- MENU ---------- */
+  /* ---------- PAGE HEADER ---------- */
   .page-header {
-    background: var(--red);
-    color: var(--cream);
-    padding: 80px 0 64px;
+    background: var(--butter);
+    color: var(--burgundy);
+    padding: 120px 0 72px;
+    border-bottom: 1px solid var(--cream-line);
   }
-  .page-header h1 { color: var(--cream); }
-  .page-header p { color: rgba(245,240,232,0.85); margin-top: 16px; max-width: 540px; font-size: 1.05rem; }
-  .page-header .eyebrow { color: rgba(245,240,232,0.75); }
+  .page-header h1 { color: var(--red-heading); max-width: 820px; }
+  .page-header p { color: var(--burgundy); margin-top: 24px; max-width: 580px; font-size: 1.12rem; line-height: 1.85; }
+  .page-header .eyebrow { color: var(--red); }
 
   .tabs {
     display: flex;
-    gap: 8px;
-    margin-top: 36px;
+    gap: 10px;
+    margin-top: 48px;
     flex-wrap: wrap;
   }
   .tab {
-    padding: 10px 18px;
+    padding: 12px 22px;
     border-radius: 999px;
-    background: rgba(255,255,255,0.1);
-    color: var(--cream);
-    border: 1px solid rgba(255,255,255,0.18);
-    font-size: 0.92rem;
-    font-weight: 500;
+    background: transparent;
+    color: var(--burgundy);
+    border: 1.5px solid var(--cream-line);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     cursor: pointer;
     transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
     font-family: inherit;
   }
-  .tab:hover { background: rgba(255,255,255,0.18); }
+  .tab:hover { color: var(--red); border-color: var(--red); }
   .tab.active {
-    background: var(--cream);
-    color: var(--red);
-    border-color: var(--cream);
-    font-weight: 600;
+    background: var(--red-pop);
+    color: var(--butter);
+    border-color: var(--red-pop);
   }
 
-  .menu-section { padding: 64px 0 96px; }
+  .menu-section { padding: 96px 0 120px; }
   .menu-list {
     display: none;
-    max-width: 800px;
+    max-width: 820px;
     margin: 0 auto;
   }
   .menu-list.active { display: block; }
   .menu-item {
     display: flex;
-    gap: 24px;
-    padding: 24px 0;
+    gap: 28px;
+    padding: 28px 0;
     border-bottom: 1px solid var(--cream-line);
     align-items: baseline;
   }
@@ -473,22 +782,23 @@
   .menu-item-main { flex: 1; min-width: 0; }
   .menu-item-name {
     font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    color: var(--ink);
+    color: var(--red-heading);
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
   }
   .menu-item-desc {
-    color: var(--muted);
-    font-size: 0.96rem;
-    margin-top: 4px;
+    color: var(--burgundy);
+    font-size: 1rem;
+    margin-top: 8px;
+    line-height: 1.7;
   }
   .menu-item-price {
     font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--red);
     white-space: nowrap;
@@ -496,13 +806,13 @@
   .badge-signature {
     display: inline-flex;
     align-items: center;
-    background: var(--red);
-    color: var(--cream);
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    background: var(--red-pop);
+    color: var(--butter);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: 999px;
     font-family: 'DM Sans', sans-serif;
   }
@@ -511,159 +821,583 @@
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 220px;
-    gap: 18px;
+    grid-auto-rows: 240px;
+    gap: 24px;
   }
   .gallery-cell {
-    background: var(--cream-card);
+    background: var(--cream-warm);
     border: 1px solid var(--cream-line);
-    border-radius: var(--radius);
+    border-radius: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 24px;
+    padding: 32px;
     text-align: center;
-    color: var(--muted);
-    transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+    color: var(--burgundy);
+    transition: transform .35s var(--ease), border-color .35s var(--ease);
     overflow: hidden;
     position: relative;
   }
-  .gallery-cell:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); background: var(--cream); }
+  .gallery-cell:hover { transform: translateY(-3px); border-color: var(--red); }
   .gallery-cell .ghost-icon {
-    width: 36px; height: 36px;
+    width: 44px; height: 44px;
     color: var(--red);
-    opacity: 0.6;
-    margin-bottom: 12px;
+    opacity: 0.7;
+    margin-bottom: 16px;
   }
-  .gallery-cell h3 { font-size: 1.08rem; color: var(--ink); margin-bottom: 4px; }
-  .gallery-cell .small { font-size: 0.82rem; color: var(--muted); }
+  .gallery-cell h3 { font-size: 1.18rem; color: var(--red-heading); margin-bottom: 8px; }
+  .gallery-cell .small { font-size: 0.9rem; color: var(--burgundy); font-weight: 500; }
   .gallery-cell.span-2 { grid-column: span 2; }
   .gallery-cell.row-2 { grid-row: span 2; }
 
   .gallery-note {
     text-align: center;
-    color: var(--muted);
-    margin-top: 36px;
-    font-size: 0.95rem;
+    color: var(--burgundy);
+    margin-top: 56px;
+    font-size: 1rem;
+    font-style: italic;
   }
   .insta-cta {
-    background: var(--red);
-    color: var(--cream);
+    background: var(--cream-warm);
+    color: var(--burgundy);
     text-align: center;
-    padding: 64px 24px;
-    margin-top: 64px;
-    border-radius: var(--radius-lg);
+    padding: 96px 24px;
+    margin-top: 96px;
+    border-radius: 28px;
+    border: 1px solid var(--cream-line);
   }
-  .insta-cta h2 { color: var(--cream); margin-bottom: 12px; }
-  .insta-cta p { color: rgba(245,240,232,0.85); margin-bottom: 24px; }
-  .insta-cta .btn-cream {
-    background: var(--cream);
-    color: var(--red);
-  }
-  .insta-cta .btn-cream:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.18); }
+  .insta-cta h2 { color: var(--red-heading); margin-bottom: 16px; }
+  .insta-cta p { color: var(--burgundy); margin-bottom: 32px; font-size: 1.08rem; line-height: 1.8; }
 
   .storefront-band {
-    background: var(--cream-card);
+    background: var(--butter);
     border: 1px solid var(--cream-line);
-    border-radius: var(--radius-lg);
-    padding: 40px;
-    margin-top: 36px;
+    border-radius: 28px;
+    padding: 56px 48px;
+    margin-top: 56px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 36px;
+    gap: 40px;
     align-items: center;
   }
-  .storefront-band h3 { font-size: 1.5rem; margin-bottom: 8px; }
-  .storefront-band p { color: var(--muted); margin: 0; }
+  .storefront-band h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--red-heading); }
+  .storefront-band p { color: var(--burgundy); margin: 0; font-size: 1rem; }
 
   /* ---------- FOOTER ---------- */
   footer {
-    background: var(--dark);
-    color: var(--cream);
-    padding: 64px 0 32px;
+    background: var(--burgundy);
+    color: var(--butter);
+    padding: 80px 0 40px;
   }
   .footer-grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(245,240,232,0.1);
+    gap: 56px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(251,245,212,0.15);
+    align-items: start;
   }
-  .footer-logo svg { height: 56px; }
+  .footer-logo { display: inline-flex; }
+  .footer-logo svg { display: block; width: 64px; height: 64px; }
   .footer-tagline {
-    color: rgba(245,240,232,0.65);
-    margin-top: 16px;
-    font-size: 0.95rem;
-    max-width: 320px;
+    color: var(--butter);
+    opacity: 0.85;
+    margin: 18px 0 0;
+    font-size: 1rem;
+    max-width: 340px;
   }
-  .footer-col h4 {
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
+  .footer-motto {
+    color: var(--butter);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
     font-weight: 700;
+    font-size: 1.4rem;
+    margin: 14px 0 0;
+    letter-spacing: -0.01em;
+  }
+  .footer-col { padding-top: 14px; }
+  .footer-col h4 {
+    color: var(--butter);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin: 0 0 18px;
   }
   .footer-col ul { list-style: none; padding: 0; margin: 0; }
   .footer-col li { margin-bottom: 10px; }
   .footer-col a, .footer-col button {
-    color: rgba(245,240,232,0.7);
-    font-size: 0.95rem;
-    transition: color .25s var(--ease);
+    color: var(--butter);
+    opacity: 0.85;
+    font-size: 0.98rem;
+    transition: color .25s var(--ease), opacity .25s var(--ease);
     background: none; border: none; padding: 0; font-family: inherit; cursor: pointer;
   }
-  .footer-col a:hover, .footer-col button:hover { color: var(--cream); }
-  .footer-col p { color: rgba(245,240,232,0.7); font-size: 0.95rem; margin: 0 0 8px; }
+  .footer-col a:hover, .footer-col button:hover { color: var(--peach); opacity: 1; }
+  .footer-col p { color: var(--butter); opacity: 0.85; font-size: 0.98rem; margin: 0 0 8px; }
+  .footer-doodle {
+    display: block;
+    margin: 32px auto 16px;
+    width: 200px;
+    height: 80px;
+    color: var(--butter);
+  }
   .footer-bottom {
-    padding-top: 24px;
+    padding-top: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: rgba(245,240,232,0.45);
-    font-size: 0.85rem;
+    color: var(--butter);
+    opacity: 0.7;
+    font-size: 0.88rem;
     flex-wrap: wrap;
     gap: 12px;
   }
 
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter {
+    background: var(--butter);
+    padding: 120px 0;
+    border-top: 1px solid var(--cream-line);
+  }
+  .newsletter-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .newsletter h2 { margin-bottom: 16px; }
+  .newsletter-inner > p:not(.newsletter-note) { color: var(--burgundy); font-size: 1.1rem; max-width: 560px; margin: 0 auto 32px; }
+  .newsletter-form {
+    display: flex;
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .newsletter-form input[type="email"] {
+    flex: 1;
+    min-width: 220px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    border: 1.5px solid var(--cream-line);
+    background: var(--cream-card);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--burgundy);
+    transition: border-color .25s var(--ease);
+  }
+  .newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+  .newsletter-note {
+    max-width: 480px;
+    margin: 8px auto 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .newsletter-success {
+    display: none;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    background: var(--cream-warm);
+    border: 1.5px solid var(--red);
+    border-radius: 999px;
+    color: var(--red);
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .newsletter-success.show { display: block; }
+
+  /* ---------- FORMS ---------- */
+  .form-card {
+    background: var(--cream-warm);
+    border: 1px solid var(--cream-line);
+    border-radius: 28px;
+    padding: 56px 48px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .form-row { display: flex; flex-direction: column; gap: 8px; }
+  .form-row.full { grid-column: 1 / -1; }
+  .form-row label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--cream-line);
+    background: var(--butter);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--burgundy);
+    transition: border-color .25s var(--ease);
+  }
+  .form-row textarea { min-height: 130px; resize: vertical; line-height: 1.7; }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+  .form-actions { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .form-note { color: var(--burgundy); opacity: 0.85; font-size: 0.92rem; max-width: 480px; line-height: 1.7; }
+  .form-success {
+    margin-top: 28px;
+    padding: 16px 22px;
+    border-radius: 999px;
+    background: var(--butter);
+    color: var(--red);
+    font-weight: 600;
+    text-align: center;
+    border: 1.5px solid var(--red);
+    display: none;
+  }
+  .form-success.show { display: block; }
+
+  /* ---------- MISSION PAGE ---------- */
+  .mission-hero {
+    background: var(--butter);
+    color: var(--burgundy);
+    padding: 140px 0 80px;
+    border-bottom: 1px solid var(--cream-line);
+  }
+  .mission-hero h1 { color: var(--red-heading); max-width: 820px; }
+  .mission-hero p { color: var(--burgundy); max-width: 660px; font-size: 1.18rem; margin-top: 28px; line-height: 1.85; }
+  .mission-hero .eyebrow { color: var(--red); }
+
+  .mission-blocks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 0;
+  }
+  .mission-block {
+    background: var(--cream-warm);
+    border: 1px solid var(--cream-line);
+    border-radius: 28px;
+    padding: 44px 40px;
+    transition: border-color .25s var(--ease);
+  }
+  .mission-block:hover { border-color: var(--red); }
+  .mission-block h3 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: var(--red-heading);
+  }
+  .mission-block p { color: var(--burgundy); margin: 0; font-size: 1.05rem; line-height: 1.85; }
+
+  .mission-cta {
+    text-align: center;
+    margin-top: 80px;
+  }
+
+  /* ---------- IMPACT STATS (Mission page) ---------- */
+  .impact-stats {
+    background: var(--cream-warm);
+    padding: 120px 24px;
+    border-top: 1px solid var(--cream-line);
+    border-bottom: 1px solid var(--cream-line);
+  }
+  .impact-stats-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    text-align: center;
+  }
+  .impact-stat-num {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    color: var(--red-heading);
+    font-size: clamp(3.2rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .impact-stat-label {
+    color: var(--burgundy);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+  .impact-stat-num.symbol { font-style: italic; }
+
+  /* ---------- CATERING ---------- */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 96px;
+  }
+  .offer-card {
+    background: var(--cream-warm);
+    border: 1px solid var(--cream-line);
+    border-radius: 28px;
+    padding: 40px 32px;
+    text-align: left;
+    transition: transform .35s var(--ease), border-color .35s var(--ease);
+  }
+  .offer-card:hover { transform: translateY(-3px); border-color: var(--red); }
+  .offer-emoji { font-size: 2.2rem; margin-bottom: 16px; display: block; }
+  .offer-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--red-heading); }
+  .offer-card p { color: var(--burgundy); font-size: 1rem; margin: 0; line-height: 1.75; }
+
+  /* ---------- CAREERS ---------- */
+  .pill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 48px 0 80px;
+  }
+  .pill-tag {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1.5px solid var(--red);
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+  .role-card {
+    background: var(--cream-warm);
+    border: 1px solid var(--cream-line);
+    border-radius: 28px;
+    padding: 40px 32px;
+    transition: transform .35s var(--ease), border-color .35s var(--ease);
+  }
+  .role-card:hover { transform: translateY(-3px); border-color: var(--red); }
+  .role-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--red-heading); }
+  .role-card p { color: var(--burgundy); font-size: 1rem; margin: 0; line-height: 1.75; }
+
+  .careers-intro {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .careers-intro p { color: var(--burgundy); font-size: 1.15rem; margin-top: 24px; line-height: 1.85; }
+
+  /* ---------- VISIT US ---------- */
+  .visit-hero {
+    text-align: center;
+    padding: 120px 0 32px;
+  }
+  .visit-address {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 24px;
+    color: var(--red-heading);
+  }
+  .visit-address small { display: block; color: var(--burgundy); font-family: 'DM Sans', sans-serif; font-size: 1.05rem; font-weight: 500; margin-top: 8px; }
+  .visit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    background: transparent;
+    color: var(--red);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--red);
+  }
+
+  .map-wrap {
+    margin: 72px 0;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid var(--cream-line);
+    aspect-ratio: 16 / 7;
+    background: var(--cream-warm);
+  }
+  .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  .contact-quick {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 96px;
+  }
+  .contact-quick-item {
+    background: var(--cream-warm);
+    border: 1px solid var(--cream-line);
+    border-radius: 28px;
+    padding: 32px 36px;
+    transition: border-color .25s var(--ease);
+  }
+  .contact-quick-item:hover { border-color: var(--red); }
+  .contact-quick-item .label {
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .contact-quick-item .value { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; color: var(--red-heading); }
+  .contact-quick-item a { color: var(--red-heading); transition: color .2s var(--ease); }
+  .contact-quick-item a:hover { color: var(--red); }
+
+  /* ---------- PRESS ---------- */
+  .press-section { padding: 120px 0; background: var(--butter); border-top: 1px solid var(--cream-line); border-bottom: 1px solid var(--cream-line); }
+  .press-list { max-width: 840px; margin: 48px auto 0; }
+  .press-item {
+    display: flex;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--cream-line);
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .press-item:last-child { border-bottom: none; }
+  .press-meta {
+    flex: 0 0 220px;
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.7;
+  }
+  .press-quote {
+    flex: 1;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--burgundy);
+    line-height: 1.5;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: 840px; margin: 0 auto; }
+  .faq-item {
+    border-bottom: 1px solid var(--cream-line);
+  }
+  .faq-q {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 28px 0;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: var(--red-heading);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color .2s var(--ease);
+  }
+  .faq-q:hover { color: var(--red); }
+  .faq-toggle {
+    flex: 0 0 32px;
+    width: 32px; height: 32px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1.5px solid var(--red);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--red);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1;
+    transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+  }
+  .faq-item.open .faq-toggle { background: var(--red-pop); color: var(--butter); transform: rotate(180deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s var(--ease);
+  }
+  .faq-a-inner {
+    padding: 0 0 28px;
+    color: var(--burgundy);
+    font-size: 1.02rem;
+    line-height: 1.85;
+    max-width: 720px;
+  }
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 960px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .grid-3, .values-grid, .loc-grid { grid-template-columns: 1fr 1fr; }
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
     .about-split { grid-template-columns: 1fr; }
-    .about-left, .about-right { padding: 64px 36px; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
-    .gallery-cell.span-2 { grid-column: span 1; }
-    .gallery-cell.row-2 { grid-row: span 1; }
-    .storefront-band { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .about-left, .about-right { padding: 80px 40px; }
+    .about-left { border-left: none; border-top: 4px solid var(--red); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .impact-stats-grid { gap: 32px; }
   }
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .nav-toggle { display: inline-flex; }
     .nav-links {
       position: absolute;
-      top: 72px;
+      top: 88px;
       left: 0;
       right: 0;
-      background: var(--red);
+      background: var(--butter);
       flex-direction: column;
       align-items: stretch;
-      padding: 12px 16px 20px;
+      padding: 16px;
       gap: 4px;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1.5px solid var(--red);
       display: none;
     }
     .nav-links.open { display: flex; }
-    .nav-link { padding: 12px 14px; text-align: left; border-radius: 10px; }
-    .nav-cta { padding: 9px 16px; font-size: 0.86rem; }
+    .nav-link { padding: 14px 16px; text-align: left; border-radius: 12px; }
+    .nav-cta { padding: 10px 18px; font-size: 11px; }
     .grid-3, .values-grid, .loc-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr; }
-    .section { padding: 64px 0; }
-    .hero { padding: 56px 0 64px; }
-    .about-left, .about-right { padding: 48px 24px; }
+    .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+    .gallery-cell.span-2 { grid-column: span 1; }
+    .gallery-cell.row-2 { grid-row: span 1; }
+    .storefront-band { grid-template-columns: 1fr; padding: 32px; }
+    .section { padding: 80px 0; }
+    .hero { padding: 80px 0; }
+    .about-left, .about-right { padding: 64px 28px; }
     .menu-item { flex-direction: row; gap: 16px; }
-    .footer-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-col { padding-top: 0; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-card { padding: 36px 28px; }
+    .offer-grid, .roles-grid { grid-template-columns: 1fr; }
+    .mission-blocks { grid-template-columns: 1fr; }
+    .contact-quick { grid-template-columns: 1fr; }
+    .press-meta { flex: 0 0 100%; }
+    .mission-band { padding: 56px 32px; border-radius: 24px; margin: 40px 16px; width: auto; }
+    .impact-stats { padding: 80px 24px; }
+    .impact-stats-grid { grid-template-columns: 1fr; gap: 56px; }
   }
 </style>
 </head>
@@ -672,39 +1406,109 @@
 <!-- ===== Reusable SVG logo (defined once, referenced via <use>) ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
+    <!-- Logo -->
     <symbol id="louma-logo" viewBox="0 0 200 200">
-      <rect x="0" y="0" width="200" height="200" rx="20" fill="#F5F0E8"/>
-      <text x="100" y="118" text-anchor="middle"
+      <rect x="3" y="3" width="194" height="194" rx="28" fill="#F5EDD6" stroke="#D4202E" stroke-width="3"/>
+      <text x="100" y="112"
+            text-anchor="middle"
+            dominant-baseline="alphabetic"
             font-family="Fraunces, Georgia, serif"
-            font-size="74" font-weight="700"
-            font-style="italic"
-            fill="#D42B2B"
-            letter-spacing="-2">Louma</text>
-      <text x="100" y="152" text-anchor="middle"
+            font-size="58" font-weight="900"
+            fill="#D4202E"
+            letter-spacing="-1">Louma</text>
+      <text x="100" y="138"
+            text-anchor="middle"
+            dominant-baseline="alphabetic"
             font-family="DM Sans, sans-serif"
-            font-size="16" font-weight="700"
-            fill="#D42B2B"
-            letter-spacing="6">BAKERY</text>
+            font-size="13" font-weight="800"
+            fill="#D4202E"
+            letter-spacing="5">BAKERY</text>
+    </symbol>
+
+    <!-- Bread loaf doodle for section dividers -->
+    <symbol id="doodle-bread" viewBox="0 0 200 80">
+      <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z"/>
+        <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z"/>
+        <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z"/>
+        <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z"/>
+      </g>
+    </symbol>
+
+    <!-- Croissant curve -->
+    <symbol id="doodle-croissant" viewBox="0 0 60 60">
+      <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 38 Q14 14 38 12 Q52 14 50 28 Q44 36 30 36 Q22 36 18 32"/>
+        <path d="M22 28 Q28 22 36 22"/>
+        <path d="M28 36 Q32 30 38 28"/>
+      </g>
+    </symbol>
+
+    <!-- Heart -->
+    <symbol id="doodle-heart" viewBox="0 0 60 60">
+      <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+            d="M30 50 C8 36 8 18 18 14 C26 11 30 18 30 22 C30 18 34 11 42 14 C52 18 52 36 30 50 Z"/>
+    </symbol>
+
+    <!-- Five-petal flower -->
+    <symbol id="doodle-flower" viewBox="0 0 60 60">
+      <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="30" cy="30" r="6"/>
+        <ellipse cx="30" cy="12" rx="7" ry="9"/>
+        <ellipse cx="47" cy="24" rx="9" ry="7" transform="rotate(36 47 24)"/>
+        <ellipse cx="40" cy="46" rx="7" ry="9" transform="rotate(72 40 46)"/>
+        <ellipse cx="20" cy="46" rx="7" ry="9" transform="rotate(-72 20 46)"/>
+        <ellipse cx="13" cy="24" rx="9" ry="7" transform="rotate(-36 13 24)"/>
+      </g>
+    </symbol>
+
+    <!-- Star -->
+    <symbol id="doodle-star" viewBox="0 0 60 60">
+      <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+            d="M30 6 L36 24 L54 24 L40 35 L46 52 L30 41 L14 52 L20 35 L6 24 L24 24 Z"/>
     </symbol>
   </defs>
 </svg>
 
+<!-- ===== INTRO HERO (fullscreen video / placeholder) ===== -->
+<section class="intro-hero" id="intro-section">
+  <!-- Replace this placeholder div with the <video> tag below when the real footage is ready:
+       <video autoplay muted loop playsinline id="louma-hero-video" class="intro-video">
+         <source src="louma-intro.mp4" type="video/mp4">
+       </video> -->
+  <div class="intro-placeholder" aria-hidden="true"></div>
+
+  <div class="intro-overlay" aria-hidden="true"></div>
+
+  <div class="intro-content">
+    <svg class="intro-logo" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
+    <h1 class="intro-headline">"Named after someone who makes every room feel like home."</h1>
+    <p class="intro-meta">Opening July 2025 · West LA</p>
+    <button class="intro-enter" id="enter-btn" type="button">Enter</button>
+  </div>
+
+  <div class="intro-scroll" aria-hidden="true"></div>
+</section>
+
 <!-- ===== NAV ===== -->
-<header class="nav">
+<header class="nav" id="site-nav">
   <div class="container nav-inner">
-    <a href="#home" class="logo-link" data-page="home" aria-label="Louma Bakery home">
-      <svg class="logo-svg" aria-hidden="true"><use href="#louma-logo"/></svg>
+    <a href="#page-home" class="logo-link" data-page="page-home" aria-label="Louma Bakery home">
+      <svg class="logo-svg" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
     </a>
 
     <nav class="nav-links" id="navLinks">
-      <button class="nav-link active" data-page="home">Home</button>
-      <button class="nav-link" data-page="about">About</button>
-      <button class="nav-link" data-page="menu">Menu</button>
-      <button class="nav-link" data-page="gallery">Gallery</button>
+      <button class="nav-link active" data-page="page-home">Home</button>
+      <button class="nav-link" data-page="page-menu">Menu</button>
+      <button class="nav-link" data-page="page-story">Our Story</button>
+      <button class="nav-link" data-page="page-mission">Mission</button>
+      <button class="nav-link" data-page="page-catering">Catering</button>
+      <button class="nav-link" data-page="page-careers">Careers</button>
+      <button class="nav-link" data-page="page-visit">Visit Us</button>
     </nav>
 
     <div style="display:flex;align-items:center;gap:8px;">
-      <button class="nav-cta" data-page="menu">View Menu</button>
+      <button class="nav-cta" id="openingUpdatesBtn">Opening Updates</button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -717,28 +1521,27 @@
 <!-- ============================================================
      HOME
 ============================================================ -->
-<section class="page active" id="home">
+<section class="page active" id="page-home">
 
   <div class="hero">
     <div class="container hero-grid">
       <div class="hero-text">
-        <span class="pill"><span class="pill-dot"></span> Opening soon · Santa Monica</span>
-        <h1>Your favorite <span class="accent">neighborhood</span> bakery.</h1>
-        <p class="hero-sub">Mediterranean-inspired pastries, slow-fermented breads, and specialty coffee — baked fresh every morning, served with heart.</p>
+        <span class="pill"><span class="pill-dot"></span> Opening Soon · Santa Monica</span>
+        <h1>Flour-dusted <span class="accent">dreams</span>, baked fresh daily.</h1>
+        <p class="hero-sub">Named after a person who makes every room feel like home. A West LA bakery rooted in European baking traditions with a Levantine twist — and a mission that goes beyond the bread.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary" data-page="menu">View Menu</button>
-          <button class="btn btn-ghost" data-page="about">Our Story</button>
+          <button class="btn btn-primary" data-page="page-menu">View Menu</button>
+          <button class="btn btn-ghost" data-page="page-story">Our Story</button>
         </div>
       </div>
       <div class="hero-card">
         <div class="hero-card-inner">
-          <div class="hero-mark">
-            <svg aria-hidden="true"><use href="#louma-logo"/></svg>
-          </div>
-          <div class="hero-card-tag">— baked with purpose —</div>
+          <span class="hero-emoji" aria-hidden="true">🥐</span>
+          <div class="hero-card-tag">Photos coming soon · @loumabakery</div>
         </div>
       </div>
     </div>
+    <svg class="hero-doodle" viewBox="0 0 200 80" aria-hidden="true"><use href="#doodle-bread"/></svg>
   </div>
 
   <section class="section" style="padding-top: 0;">
@@ -748,7 +1551,6 @@
           <div class="eyebrow">Signature menu</div>
           <h2>What we're known for.</h2>
         </div>
-        <p class="section-sub">A short list of things we make exceptionally well — the heart of the Louma menu.</p>
       </div>
 
       <div class="grid-3">
@@ -758,7 +1560,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14c2-2 5-2 7 0s5 2 7 0 4-2 4 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/><path d="M7 11c0-3 2-5 5-5s5 2 5 5"/></svg>
           </div>
           <h3>Butter Croissant</h3>
-          <p>Laminated 81 layers. Crackly outside, custard-soft inside. The classic, done right.</p>
+          <p>Laminated 81 layers. The classic, done right.</p>
         </article>
 
         <article class="card">
@@ -805,12 +1607,30 @@
     </div>
   </section>
 
-  <!-- Mission band -->
+  <!-- Doodle divider -->
+  <div class="container" style="padding: 24px 24px 56px;">
+    <svg id="bread-svg" class="doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true">
+        <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z" style="--len:520"/>
+        <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+        <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+        <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+      </svg>
+  </div>
+
+  <!-- Mission band (floating block — soft cream w/ red accent) -->
   <section class="mission-band">
-    <div class="container">
-      <h2>"Baking with purpose. Serving with heart."</h2>
-      <p>Louma Bakery is part of a nonprofit mission committed to inclusive employment and meaningful work. Every croissant, loaf, and cup of coffee helps fund opportunity in our community.</p>
+    <h2>More than a bakery.</h2>
+    <p>Being around Louma is like pulling fresh cookies from the oven. That warmth is baked into everything we do — comfort, connection, and community. All profits go directly to The Louma Initiative, a 501(c)(3) nonprofit.</p>
+    <div class="mission-band-actions">
+      <button class="btn btn-primary" data-page="page-mission">Read Our Mission</button>
     </div>
+    <p class="mission-band-italic">Believe in what we are building? Help us grow.</p>
+    <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block;">
+      <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
+      <input type="hidden" name="currency_code" value="USD" />
+      <input type="hidden" name="item_name" value="Support The Louma Initiative" />
+      <button type="submit" class="mission-paypal-btn">Support via PayPal →</button>
+    </form>
   </section>
 
   <!-- Location bar -->
@@ -831,23 +1651,64 @@
     </div>
   </section>
 
+  <!-- Newsletter -->
+  <section class="newsletter" id="newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="eyebrow">Opening updates</div>
+        <h2>Be the first to know when we open.</h2>
+        <p>She's so excited to have you. Be the first to know when we open in July.</p>
+        <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Welcome to the Louma community 🥐" />
+          <input type="hidden" name="_replyto" id="newsletterReplyTo" value="" />
+          <input type="email" name="email" id="newsletterEmail" placeholder="you@example.com" required aria-label="Email address" />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <div class="newsletter-success" id="newsletterSuccess">You're on the list. See you in July.</div>
+        <p class="newsletter-note" id="newsletterNote">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
 </section>
 
 <!-- ============================================================
      ABOUT
 ============================================================ -->
-<section class="page" id="about">
+<section class="page" id="page-story">
 
   <div class="about-split">
     <div class="about-left">
       <div class="eyebrow">Our story</div>
       <h1>A bakery built around people.</h1>
-      <p>Louma is a Mediterranean-inspired bakery and coffee bar in the heart of Santa Monica — a small, bright space designed for slow mornings, quick stops, and good conversation.</p>
+      <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist. Fresh breads, classic pastries, and seasonal offerings made with care — and a mission that goes beyond the bread.</p>
     </div>
     <div class="about-right">
-      <p>Louma began with a simple idea: that the food we love most often comes from the places we know best. Our menu draws from <strong>Mediterranean and Levantine</strong> traditions — za'atar, labneh, pistachio, rose, orange blossom, tahini — woven into the French pastry techniques we trained in.</p>
-      <p>We bake every morning from scratch. Doughs are slow-fermented, fillings are made in-house, and our coffee is pulled with the same care we put into a croissant. The goal isn't to be fancy. It's to be <em>genuinely good</em>, every day.</p>
-      <p>Louma is part of <strong>The Louma Initiative</strong>, a nonprofit committed to inclusive employment — creating dignified work for people who are too often left out of the workforce. When you buy a pastry here, you're helping fund training, mentorship, and real careers for our team.</p>
+      <div class="about-block">
+        <h3>A tribute.</h3>
+        <p>Louma Bakery is named after my sister and a tribute to the warmth of her presence. A friend once said, "Being around Louma is like pulling fresh cookies from the oven." She teaches us to savor the little moments — comfort, connection, and community.</p>
+      </div>
+      <div class="about-block">
+        <h3>The kitchen.</h3>
+        <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist. We serve fresh breads, classic pastries, and seasonal offerings — think organic seeded sourdough meets our house-made fattoush salad.</p>
+      </div>
+      <div class="about-block">
+        <h3>The purpose.</h3>
+        <p>Our mission is to create supportive training and employment opportunities for individuals with learning and developmental differences. We believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion. All profits go directly to The Louma Initiative, a 501(c)(3) public charity.</p>
+      </div>
+      <div class="about-pullquote">
+        <blockquote>"Dedicated to my sister and her sweet tooth, Louma Bakery is a space to meet each other where we are and share in good food. She's so excited to have you."</blockquote>
+        <cite>— Milla</cite>
+      </div>
+      <div class="about-paypal">
+        <p>Moved by the story? Help us grow.</p>
+        <form action="https://www.paypal.com/donate" method="post" target="_blank">
+          <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="item_name" value="Support The Louma Initiative" />
+          <button type="submit" class="paypal-outline-pill">Support via PayPal →</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -901,12 +1762,12 @@
 <!-- ============================================================
      MENU
 ============================================================ -->
-<section class="page" id="menu">
+<section class="page" id="page-menu">
 
   <div class="page-header">
     <div class="container">
       <div class="eyebrow">The menu</div>
-      <h1>Made fresh, every morning.</h1>
+      <h1>Everything here looks soooo yummy!</h1>
       <p>A short, focused menu that changes with the seasons. Signature items are marked. Prices are subject to change.</p>
 
       <div class="tabs" role="tablist">
@@ -1146,7 +2007,7 @@
 <!-- ============================================================
      GALLERY
 ============================================================ -->
-<section class="page" id="gallery">
+<section class="page" id="page-gallery">
 
   <div class="page-header">
     <div class="container">
@@ -1188,7 +2049,7 @@
         <div class="gallery-cell span-2">
           <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-6 9 6v11"/><path d="M9 21v-7h6v7"/></svg>
           <h3>Storefront</h3>
-          <span class="small">3223 Wilshire Blvd, Santa Monica</span>
+          <span class="small">3223 Wilshire Blvd, Santa Monica, CA 90403</span>
         </div>
         <div class="gallery-cell">
           <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v4M12 16v4M4 12h4M16 12h4M6.3 6.3l2.8 2.8M14.9 14.9l2.8 2.8M6.3 17.7l2.8-2.8M14.9 9.1l2.8-2.8"/></svg>
@@ -1199,10 +2060,18 @@
 
       <p class="gallery-note">Real photography is on the way — we're saving the camera roll for opening week.</p>
 
+      <h2 style="text-align:center; margin: 56px 0 8px; font-style: italic;">Live Laugh Louma</h2>
+      <svg class="doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true" style="margin-bottom: 16px;">
+        <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z" style="--len:520"/>
+        <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+        <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+        <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+      </svg>
+
       <div class="insta-cta">
         <h2>Follow along.</h2>
         <p>The kitchen, the bakes, the build-out, the opening date — all on Instagram first.</p>
-        <a class="btn btn-cream" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">
+        <a class="btn btn-butter" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
           @loumabakery
         </a>
@@ -1226,6 +2095,469 @@
 
 </section>
 
+<!-- ============================================================
+     MISSION
+============================================================ -->
+<section class="page" id="page-mission">
+
+  <div class="mission-hero">
+    <div class="container">
+      <div class="eyebrow">Our mission</div>
+      <h1>Bread, pastry, and opportunity.</h1>
+      <p>Our mission is to create supportive training and employment opportunities for individuals with learning and developmental differences in a professional bakery setting. Grounded in Louma's own experience, we believe that everyone deserves an opportunity to grow, contribute, and cultivate their passion.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="mission-blocks">
+        <div class="mission-block">
+          <h3>Who we are</h3>
+          <p>All profits from the bakery go directly to The Louma Initiative, a 501(c)(3) public charity that fosters meaningful opportunities for people with intellectual and developmental differences.</p>
+        </div>
+        <div class="mission-block">
+          <h3>What we believe</h3>
+          <p>Everyone deserves an opportunity to grow, contribute, and cultivate their passion. This is not charity. This is real work, real craft, and real careers — in a professional bakery setting built on patience and respect.</p>
+        </div>
+        <div class="mission-block">
+          <h3>How it works</h3>
+          <p>Every team member receives hands-on training and mentorship in our West LA kitchen. We are building careers alongside beautiful bread — one croissant, one sourdough, one morning at a time.</p>
+        </div>
+        <div class="mission-block">
+          <h3>How you help</h3>
+          <p>When you buy a pastry, a loaf, or a box — you are directly funding The Louma Initiative. Every visit matters. Every order contributes.</p>
+        </div>
+      </div>
+
+      <div class="mission-cta">
+        <button class="btn btn-primary" data-page="page-visit">Support Our Mission</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="impact-stats">
+    <div class="impact-stats-grid">
+      <div class="impact-stat">
+        <span class="impact-stat-num">100%</span>
+        <p class="impact-stat-label">of our team trained in-house</p>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-stat-num">July 2025</span>
+        <p class="impact-stat-label">opening in Santa Monica</p>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-stat-num symbol">∞</span>
+        <p class="impact-stat-label">croissants to be made with purpose</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #F5EDD6; border-top: 3px solid #D4202E; padding: 70px 40px; text-align: center;">
+    <div style="max-width: 680px; margin: 0 auto;">
+      <h2 style="font-family: 'Fraunces', Georgia, serif; color: #C41E2E; font-size: 38px;">Every croissant tells a story.</h2>
+      <p style="color: #A10017; font-size: 17px; line-height: 1.85; margin-top: 20px;">Louma Bakery is named after a person who makes every room feel warmer. Behind every pastry is a team member building something real — a skill, a routine, a future. When you donate, you are not just supporting a bakery. You are helping someone wake up with purpose.</p>
+      <p style="color: #9C7B6A; font-size: 14px; margin-top: 16px;">Every dollar funds training, fair wages, and the kind of daily dignity that comes from doing work you are proud of.</p>
+      <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block; margin-top: 32px;">
+        <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="item_name" value="Support The Louma Initiative" />
+        <button type="submit" style="
+          background: #ED2739;
+          color: #F5EDD6;
+          border: none;
+          border-radius: 999px;
+          padding: 16px 36px;
+          font-size: 15px;
+          font-weight: 700;
+          cursor: pointer;
+          letter-spacing: 0.03em;
+          transition: background 0.2s, transform 0.2s;
+        "
+        onmouseover="this.style.background='#A10017'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.background='#ED2739'; this.style.transform='translateY(0)'"
+        >
+          Support the team behind the bread →
+        </button>
+      </form>
+      <p style="color: #9C7B6A; font-size: 12px; margin-top: 14px;">You will be redirected to PayPal. Louma Bakery is owned by The Louma Initiative, a registered nonprofit.</p>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     CATERING
+============================================================ -->
+<section class="page" id="page-catering">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow">Catering &amp; orders</div>
+      <h1>Bring Louma to your table.</h1>
+      <p>Pastry boxes, breakfast trays, and bakery orders for offices, events, gifting, and everyday hosting.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="offer-grid">
+        <div class="offer-card">
+          <span class="offer-emoji" aria-hidden="true">🥐</span>
+          <h3>Pastry Boxes</h3>
+          <p>A curated mix of our morning bakes — perfect for hosting, gifting, or a Tuesday treat.</p>
+        </div>
+        <div class="offer-card">
+          <span class="offer-emoji" aria-hidden="true">🍳</span>
+          <h3>Breakfast Trays</h3>
+          <p>Pastries, mini sandwiches, fresh fruit, and optional coffee carafes for your morning meeting.</p>
+        </div>
+        <div class="offer-card">
+          <span class="offer-emoji" aria-hidden="true">🍰</span>
+          <h3>Dessert Boxes</h3>
+          <p>Cookies, cake slices, and seasonal sweets for dinners, showers, and afternoon spreads.</p>
+        </div>
+        <div class="offer-card">
+          <span class="offer-emoji" aria-hidden="true">🎉</span>
+          <h3>Office &amp; Event Catering</h3>
+          <p>Recurring office orders, weddings, and large events — built around your team and schedule.</p>
+        </div>
+      </div>
+
+      <form class="form-card" id="cateringForm" novalidate>
+        <h2 style="margin-bottom: 8px;">Catering inquiry</h2>
+        <p style="color: var(--muted); margin-bottom: 28px;">Tell us a little about your order and we'll be in touch within one business day.</p>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="cat-name">Name</label>
+            <input id="cat-name" name="name" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="cat-email">Email</label>
+            <input id="cat-email" name="email" type="email" required />
+          </div>
+          <div class="form-row">
+            <label for="cat-phone">Phone</label>
+            <input id="cat-phone" name="phone" type="tel" />
+          </div>
+          <div class="form-row">
+            <label for="cat-date">Event date</label>
+            <input id="cat-date" name="event_date" type="date" />
+          </div>
+          <div class="form-row">
+            <label for="cat-fulfillment">Pickup or delivery</label>
+            <select id="cat-fulfillment" name="fulfillment">
+              <option value="">Select…</option>
+              <option>Pickup</option>
+              <option>Delivery</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="cat-people">Number of people</label>
+            <input id="cat-people" name="people" type="number" min="1" />
+          </div>
+          <div class="form-row full">
+            <label for="cat-type">Type of order</label>
+            <select id="cat-type" name="order_type">
+              <option value="">Select…</option>
+              <option>Pastry Box</option>
+              <option>Breakfast Tray</option>
+              <option>Dessert Box</option>
+              <option>Office Catering</option>
+              <option>Event Order</option>
+              <option>Custom</option>
+            </select>
+          </div>
+          <div class="form-row full">
+            <label for="cat-message">Message</label>
+            <textarea id="cat-message" name="message" placeholder="Tell us about your event, dietary needs, or any specifics."></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <p class="form-note">Orders require 48 hours minimum notice. For large events and recurring office orders, please reach out directly.</p>
+          <button type="submit" class="btn btn-primary">Send Inquiry</button>
+        </div>
+
+        <div class="form-success" id="cateringSuccess">Thank you — your inquiry has been received. We'll reply within one business day.</div>
+      </form>
+
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     CAREERS
+============================================================ -->
+<section class="page" id="page-careers">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow">Careers at Louma</div>
+      <h1>Work built around craft, kindness, and growth.</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="careers-intro">
+        <p>We are building a team as thoughtful as our bread. At Louma, we especially welcome individuals with learning and developmental differences — our workplace is designed for you, grounded in patience, respect, and genuine care for everyone who walks through our doors.</p>
+        <p style="font-family:'DM Sans',sans-serif; font-size:14px; color:#A10017; font-style:italic; margin-top:24px;">Want to support our team before you even visit?</p>
+        <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block; margin-top:8px;">
+          <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="item_name" value="Support The Louma Initiative" />
+          <button type="submit" class="paypal-outline-pill">Donate via PayPal →</button>
+        </form>
+      </div>
+
+      <div class="pill-tags">
+        <span class="pill-tag">Patience</span>
+        <span class="pill-tag">Respect</span>
+        <span class="pill-tag">Kindness</span>
+        <span class="pill-tag">Consistency</span>
+        <span class="pill-tag">Teamwork</span>
+        <span class="pill-tag">Craftsmanship</span>
+        <span class="pill-tag">Reliability</span>
+      </div>
+
+      <div class="roles-grid">
+        <div class="role-card">
+          <h3>Head Baker</h3>
+          <p>Lead the bread program — sourdough, viennoiserie, daily production and team mentorship.</p>
+        </div>
+        <div class="role-card">
+          <h3>Baker</h3>
+          <p>Mix, shape, and bake alongside the head baker. Mornings start early; the pace is steady.</p>
+        </div>
+        <div class="role-card">
+          <h3>Head Chef</h3>
+          <p>Run the kitchen and savory menu — toasts, sandwiches, salads, and seasonal specials.</p>
+        </div>
+        <div class="role-card">
+          <h3>Barista</h3>
+          <p>Pull beautiful espresso, steam thoughtful milk, and welcome regulars by name.</p>
+        </div>
+        <div class="role-card">
+          <h3>General Manager</h3>
+          <p>Oversee operations, scheduling, and team development across the full bakery.</p>
+        </div>
+        <div class="role-card">
+          <h3>Front of House / Cashier</h3>
+          <p>The face of Louma — warm welcomes, fast service, and genuine care for every guest.</p>
+        </div>
+      </div>
+
+      <form class="form-card" id="careersForm" novalidate>
+        <h2 style="margin-bottom: 8px;">Apply to join us</h2>
+        <p style="color: var(--muted); margin-bottom: 28px;">Tell us a little about yourself. We read every application.</p>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="car-name">Name</label>
+            <input id="car-name" name="name" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="car-email">Email</label>
+            <input id="car-email" name="email" type="email" required />
+          </div>
+          <div class="form-row">
+            <label for="car-phone">Phone</label>
+            <input id="car-phone" name="phone" type="tel" />
+          </div>
+          <div class="form-row">
+            <label for="car-role">Role applying for</label>
+            <select id="car-role" name="role">
+              <option value="">Select a role…</option>
+              <option>Head Baker</option>
+              <option>Baker</option>
+              <option>Head Chef</option>
+              <option>Barista</option>
+              <option>General Manager</option>
+              <option>Front of House / Cashier</option>
+            </select>
+          </div>
+          <div class="form-row full">
+            <label for="car-about">Tell us about yourself</label>
+            <textarea id="car-about" name="about" placeholder="Your experience, what draws you to Louma, anything you'd like us to know."></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <p class="form-note">We're an equal opportunity employer. Applicants with learning and developmental differences are strongly encouraged.</p>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+
+        <div class="form-success" id="careersSuccess">Thank you for applying — we'll be in touch soon.</div>
+      </form>
+
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================================================
+     VISIT US
+============================================================ -->
+<section class="page" id="page-visit">
+
+  <div class="container visit-hero">
+    <div class="eyebrow">Visit us</div>
+    <h1>Find us on Wilshire.</h1>
+    <div class="visit-address">
+      3223 Wilshire Blvd
+      <small>Santa Monica, CA 90403</small>
+    </div>
+    <span class="visit-badge"><span class="pill-dot"></span> Opening soon</span>
+    <p style="color: var(--muted); margin-top: 24px;">Hours to be confirmed — check <a href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="color: var(--red); font-weight: 600;">@loumabakery</a> for the latest.</p>
+  </div>
+
+  <section class="section" style="padding-top: 32px; padding-bottom: 24px;">
+    <div class="container">
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Santa+Monica,+CA+90403&z=16&output=embed"
+          width="100%"
+          height="400"
+          style="border:0; border-radius:12px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Map of 3223 Wilshire Blvd, Santa Monica, CA 90403"></iframe>
+      </div>
+
+      <div class="contact-quick">
+        <div class="contact-quick-item">
+          <div class="label">Instagram</div>
+          <div class="value"><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></div>
+        </div>
+        <div class="contact-quick-item">
+          <div class="label">Web</div>
+          <div class="value"><a href="https://loumabakery.com" target="_blank" rel="noopener">loumabakery.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="press-section" style="background: var(--cream-card); border-top: 1px solid var(--cream-line); border-bottom: 1px solid var(--cream-line);">
+    <div class="container">
+      <div class="section-head" style="justify-content: center; text-align: center; flex-direction: column; align-items: center; margin-bottom: 12px;">
+        <div>
+          <div class="eyebrow">Press</div>
+          <h2>In the News</h2>
+        </div>
+      </div>
+      <div class="press-list">
+        <div class="press-item">
+          <div class="press-meta">Santa Monica Mirror<br/>February 2026</div>
+          <div class="press-quote">"Louma Bakery to open in Santa Monica with artisan breads and an inclusive employment mission."</div>
+        </div>
+        <div class="press-item">
+          <div class="press-meta">Hoodline<br/>February 2026</div>
+          <div class="press-quote">"Santa Monica's new bakery bets big on sourdough and second chances."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" style="justify-content: center; text-align: center; flex-direction: column; align-items: center;">
+        <div>
+          <div class="eyebrow">Frequently asked</div>
+          <h2>Good questions, short answers.</h2>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>When are you opening?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">We're aiming for spring 2026 in Santa Monica. The official date will be announced first on @loumabakery and to our newsletter subscribers.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>Where are you located?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">3223 Wilshire Blvd, Santa Monica, CA 90403 — on the corner with easy street access and nearby parking.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>Do you offer catering?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes — pastry boxes, breakfast trays, dessert boxes, and full office and event catering. Visit the Catering page to send an inquiry.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>Do you take custom orders?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Absolutely. Use the catering form and choose "Custom" — we'll work with you on flavors, sizes, and presentation. 48 hours notice minimum.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>Are you hiring?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Bakers, baristas, front of house, and management roles are open. See the Careers page to apply.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>What is Louma's mission?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Louma exists to create real employment for people with learning and developmental differences — alongside making genuinely excellent bread, pastry, and coffee.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>How can I support Louma?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">The most direct way is to visit and order. Beyond that — share us with friends, follow on Instagram, sign up for catering, or reach out about partnerships.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>Do you deliver?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Local delivery is available for catering orders within the Santa Monica area. Daily retail items are pickup at the bakery.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>Do you offer gluten-free or vegan items?</span><span class="faq-toggle">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">A small selection — we'll always have at least one gluten-free pastry and one vegan option daily. Catering orders can be customized further.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <form class="form-card" id="contactForm" novalidate>
+        <h2 style="margin-bottom: 8px;">Get in touch</h2>
+        <p style="color: var(--muted); margin-bottom: 28px;">Questions, press inquiries, partnerships — send us a note.</p>
+
+        <div class="form-grid">
+          <div class="form-row full">
+            <label for="ct-topic">What's this about?</label>
+            <select id="ct-topic" name="topic">
+              <option value="">Select a topic…</option>
+              <option>General question</option>
+              <option>Catering</option>
+              <option>Careers</option>
+              <option>Press</option>
+              <option>Partnership</option>
+              <option>Support our mission</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="ct-name">Name</label>
+            <input id="ct-name" name="name" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="ct-email">Email</label>
+            <input id="ct-email" name="email" type="email" required />
+          </div>
+          <div class="form-row full">
+            <label for="ct-message">Message</label>
+            <textarea id="ct-message" name="message"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <p class="form-note">We typically reply within one business day.</p>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+
+        <div class="form-success" id="contactSuccess">Thank you — your message has been sent.</div>
+      </form>
+    </div>
+  </section>
+
+</section>
+
 </main>
 
 <!-- ===== FOOTER ===== -->
@@ -1234,17 +2566,21 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo">
-          <svg aria-hidden="true"><use href="#louma-logo"/></svg>
+          <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
         </div>
-        <p class="footer-tagline">Mediterranean-inspired bakery &amp; coffee bar in Santa Monica. Baked with purpose. Served with heart.</p>
+        <p class="footer-tagline">Named after someone who makes every room feel like home.</p>
+        <p class="footer-motto">Live Laugh Louma.</p>
       </div>
       <div class="footer-col">
-        <h4>Visit</h4>
+        <h4>Explore</h4>
         <ul>
-          <li><button data-page="home">Home</button></li>
-          <li><button data-page="about">About</button></li>
-          <li><button data-page="menu">Menu</button></li>
-          <li><button data-page="gallery">Gallery</button></li>
+          <li><button data-page="page-home">Home</button></li>
+          <li><button data-page="page-menu">Menu</button></li>
+          <li><button data-page="page-story">Our Story</button></li>
+          <li><button data-page="page-mission">Mission</button></li>
+          <li><button data-page="page-catering">Catering</button></li>
+          <li><button data-page="page-careers">Careers</button></li>
+          <li><button data-page="page-visit">Visit Us</button></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1254,6 +2590,12 @@
         <p style="margin-top:12px;"><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
       </div>
     </div>
+    <svg class="footer-doodle doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true">
+      <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z" style="--len:520"/>
+      <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+      <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+      <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
+    </svg>
     <div class="footer-bottom">
       <span>© <span id="year"></span> Louma Bakery. A project of The Louma Initiative.</span>
       <span>Baking with purpose.</span>
@@ -1264,68 +2606,57 @@
 <script>
 (function(){
   // ----- Page navigation -----
-  const pages = document.querySelectorAll('.page');
   const navLinks = document.querySelectorAll('.nav-link');
   const navLinksWrap = document.getElementById('navLinks');
 
-  function goTo(pageId) {
+  function scrollPastIntro(behavior) {
+    const intro = document.getElementById('intro-section');
+    const top = intro ? intro.offsetHeight : 0;
+    window.scrollTo({ top, left: 0, behavior: behavior || 'auto' });
+  }
+
+  function showPage(pageId) {
     const target = document.getElementById(pageId);
     if (!target) return;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    target.classList.add('active');
 
-    // Fade out current
-    pages.forEach(p => {
-      if (p.classList.contains('active') && p.id !== pageId) {
-        p.style.opacity = '0';
-        p.style.transform = 'translateY(8px)';
-      }
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.dataset.page === pageId);
     });
 
-    setTimeout(() => {
-      pages.forEach(p => p.classList.remove('active'));
-      target.classList.add('active');
-      // Trigger transition restart
-      requestAnimationFrame(() => {
-        target.style.opacity = '';
-        target.style.transform = '';
-      });
-
-      // Update nav active state
-      navLinks.forEach(l => {
-        l.classList.toggle('active', l.dataset.page === pageId);
-      });
-
-      // Update URL hash without jumping
-      if (history.replaceState) {
-        history.replaceState(null, '', '#' + pageId);
-      }
-
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Close mobile nav
-      navLinksWrap.classList.remove('open');
-    }, 180);
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + pageId);
+    }
+    // Land just past the intro so the nav sits at the top of the viewport
+    // — but don't fight the user if they're already looking at content.
+    scrollPastIntro('auto');
+    if (navLinksWrap) navLinksWrap.classList.remove('open');
   }
+  // Expose for inline / external use
+  window.showPage = showPage;
 
   // Bind any element with data-page
   document.addEventListener('click', function(e){
     const el = e.target.closest('[data-page]');
     if (!el) return;
     e.preventDefault();
-    goTo(el.dataset.page);
+    showPage(el.dataset.page);
   });
 
-  // Initial route from hash
-  const initial = (window.location.hash || '#home').slice(1);
-  if (document.getElementById(initial)) {
-    pages.forEach(p => p.classList.remove('active'));
-    document.getElementById(initial).classList.add('active');
-    navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initial));
+  // Initial route from hash (default page-home)
+  const initialHash = (window.location.hash || '#page-home').slice(1);
+  const initialId = document.getElementById(initialHash) ? initialHash : 'page-home';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const initialEl = document.getElementById(initialId);
+  if (initialEl) {
+    initialEl.classList.add('active');
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initialId));
   }
 
   window.addEventListener('hashchange', function(){
-    const id = (window.location.hash || '#home').slice(1);
-    if (document.getElementById(id)) goTo(id);
+    const id = (window.location.hash || '#page-home').slice(1);
+    if (document.getElementById(id)) showPage(id);
   });
 
   // ----- Mobile nav toggle -----
@@ -1347,6 +2678,134 @@
       });
     });
   });
+
+  // ----- Opening Updates CTA -----
+  const openingBtn = document.getElementById('openingUpdatesBtn');
+  if (openingBtn) {
+    openingBtn.addEventListener('click', function(){
+      showPage('page-home');
+      setTimeout(() => {
+        const target = document.getElementById('newsletter');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const input = target.querySelector('input[type="email"]');
+          if (input) setTimeout(() => input.focus({ preventScroll: true }), 600);
+        }
+      }, 260);
+    });
+  }
+
+  // ----- Forms (newsletter + catering + careers + contact) -----
+  function bindFormSuccess(formId, successId) {
+    const form = document.getElementById(formId);
+    const success = document.getElementById(successId);
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      if (success) success.classList.add('show');
+      form.reset();
+    });
+  }
+  // Newsletter — submits to Formspree via AJAX and swaps the form for the thank-you message.
+  (function bindNewsletter(){
+    const form = document.getElementById('newsletterForm');
+    const success = document.getElementById('newsletterSuccess');
+    const note = document.getElementById('newsletterNote');
+    const emailInput = document.getElementById('newsletterEmail');
+    const replyTo = document.getElementById('newsletterReplyTo');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      if (replyTo && emailInput) replyTo.value = emailInput.value;
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) throw new Error('Submission failed');
+        form.style.display = 'none';
+        if (note) note.style.display = 'none';
+        if (success) success.classList.add('show');
+      } catch (err) {
+        if (submitBtn) submitBtn.disabled = false;
+        alert('Sorry — something went wrong. Please try again.');
+      }
+    });
+  })();
+
+  bindFormSuccess('cateringForm', 'cateringSuccess');
+  bindFormSuccess('careersForm', 'careersSuccess');
+  bindFormSuccess('contactForm', 'contactSuccess');
+
+  // ----- FAQ accordion -----
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    const toggle = item.querySelector('.faq-toggle');
+    q.addEventListener('click', function(){
+      const isOpen = item.classList.toggle('open');
+      if (isOpen) {
+        a.style.maxHeight = a.scrollHeight + 'px';
+        toggle.textContent = '−';
+      } else {
+        a.style.maxHeight = '0px';
+        toggle.textContent = '+';
+      }
+    });
+  });
+
+  // ----- Intro hero — Enter button just smooth-scrolls past the intro.
+  // The intro stays in the document so scrolling back up always reveals it.
+  (function bindIntro(){
+    const btn = document.getElementById('enter-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      scrollPastIntro('smooth');
+    });
+  })();
+
+  // ----- Animated bread doodles -----
+  // Plays once on scroll-in, then replays from the start on every hover.
+  (function bindDoodleAnimations(){
+    const doodles = document.querySelectorAll('.doodle-animated');
+    if (!doodles.length) return;
+
+    function replay(el) {
+      el.classList.remove('in-view');
+      void el.offsetWidth; // force reflow so the animation restarts
+      el.classList.add('in-view');
+    }
+
+    doodles.forEach(d => {
+      d.addEventListener('mouseenter', function(){ replay(this); });
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      doodles.forEach(d => d.classList.add('in-view'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '0px 0px -40px 0px' });
+    doodles.forEach(d => io.observe(d));
+  })();
 
   // ----- Year in footer -----
   document.getElementById('year').textContent = new Date().getFullYear();
