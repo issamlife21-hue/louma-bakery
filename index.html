@@ -4,35 +4,22 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Louma Bakery</title>
-<meta name="description" content="Louma Bakery is a Mediterranean-inspired neighborhood bakery in Santa Monica. Croissants, breads, specialty coffee, and pastry boxes baked with purpose." />
+<meta name="description" content="Louma Bakery on Wilshire. European craft, Levantine soul, baked fresh every morning." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 <style>
   :root {
     --red: #ED2739;
-    --red-pop: #ED2739;
-    --red-heading: #1A1A1A;
-    --red-deep: #A10017;
-    --burgundy: #1A1A1A;
-    --butter: #FBF5D4;
-    --cream-warm: #FFFFFF;
-    --peach: #1A1A1A;
-    --tangerine: #1A1A1A;
-    --fairy: #FBF5D4;
-    --cream: #FFFFFF;
-    --cream-card: #FFFFFF;
-    --cream-line: #EEEEEE;
     --ink: #1A1A1A;
-    --body: #3A3A3A;
-    --muted: #6B6B6B;
-    --line: #EEEEEE;
+    --body: #4A4A4A;
+    --muted: #888888;
+    --quiet: #AAAAAA;
+    --line: #EBEBEB;
+    --soft-line: #F0F0F0;
+    --form-line: #D0D0D0;
+    --butter: #FBF5D4;
     --paper: #FFFFFF;
-    --dark: #1A1A1A;
-    --shadow-sm: none;
-    --shadow-md: none;
-    --radius: 0;
-    --radius-lg: 0;
     --ease: cubic-bezier(.2,.7,.2,1);
   }
 
@@ -40,252 +27,136 @@
   html, body { margin: 0; padding: 0; }
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: var(--paper);
-    color: var(--body);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.8;
     font-size: 15px;
     font-weight: 300;
+    color: var(--body);
+    background: var(--paper);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4 {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    margin: 0;
     color: var(--ink);
     line-height: 1.15;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.005em;
   }
-  h1 { font-size: clamp(40px, 6.4vw, 68px); line-height: 1.1; font-weight: 600; }
-  h2 { font-size: clamp(34px, 4.4vw, 52px); line-height: 1.15; font-weight: 600; }
-  h3 { font-size: 18px; line-height: 1.3; font-weight: 600; letter-spacing: 0; }
-  h4 { font-size: 14px; font-weight: 600; }
   p { margin: 0 0 1em; }
   a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
 
   .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ---------- INTRO HERO (fullscreen video / placeholder) ---------- */
-  .intro-hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    min-height: 540px;
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .intro-video,
-  .intro-placeholder,
-  .intro-images {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-  .intro-video { object-fit: cover; }
-  .intro-images { background-color: #E3D4A8; }
-  .intro-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-    will-change: opacity;
-  }
-  .intro-img.is-active { opacity: 1; }
-
-  .intro-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(15, 10, 8, 0.42);
-    z-index: 1;
-  }
-
-  .intro-content {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 24px 96px;
-    text-align: center;
-    color: var(--butter);
-  }
-  .intro-logo { display: block; width: 80px; height: 80px; margin-bottom: 32px; }
-  .intro-headline {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 600;
-    color: #fff;
-    font-size: clamp(38px, 5.4vw, 68px);
-    line-height: 1.1;
-    letter-spacing: -0.005em;
-    max-width: 760px;
-    margin: 0 0 48px;
-  }
-  .intro-meta {
-    color: #fff;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin: 0 0 32px;
-    font-family: 'Inter', sans-serif;
-  }
-  .intro-enter {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    border-radius: 0;
-    padding: 0 36px;
-    height: 48px;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background .25s var(--ease), color .25s var(--ease);
-  }
-  .intro-enter:hover {
-    background: #fff;
-    color: var(--ink);
-  }
-
-  .intro-scroll {
-    position: absolute;
-    z-index: 2;
-    left: 50%;
-    bottom: 36px;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 40px;
-    background: rgba(251, 245, 212, 0.5);
-    pointer-events: none;
-  }
-  .intro-scroll::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--butter);
-    transform: translate(-50%, 0);
-    animation: intro-scroll-dot 1.5s ease-in-out infinite;
-  }
-  @keyframes intro-scroll-dot {
-    0%   { transform: translate(-50%, 0);   opacity: 0; }
-    20%  { opacity: 1; }
-    80%  { opacity: 1; }
-    100% { transform: translate(-50%, 36px); opacity: 0; }
-  }
-
-  @media (max-width: 768px) {
-    .intro-logo { width: 56px; height: 56px; margin-bottom: 24px; }
-    .intro-headline { font-size: clamp(24px, 6vw, 36px); }
-    .intro-meta { display: none; }
+    padding: 0 32px;
   }
 
   /* ---------- NAV ---------- */
   .nav {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
     background: transparent;
     color: var(--ink);
     border-bottom: 1px solid transparent;
-    transition: background .35s var(--ease), border-color .35s var(--ease);
+    transition: background .2s ease, border-color .2s ease;
   }
-  .nav.is-scrolled {
+  .nav.on-dark { color: #fff; }
+  .nav.on-dark .nav-link,
+  .nav.on-dark .logo-svg,
+  .nav.on-dark .nav-toggle { color: #fff; }
+  .nav.is-scrolled,
+  .nav.no-hero {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-bottom-color: rgba(0,0,0,0.08);
+    border-bottom-color: rgba(0,0,0,0.06);
+    color: var(--ink);
   }
+  .nav.is-scrolled .nav-link,
+  .nav.no-hero .nav-link { color: var(--ink); }
   .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 60px;
-    gap: 56px;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
   }
-  .logo-link { display: inline-flex; align-items: center; margin-right: 64px; }
-  .logo-svg { display: block; height: 40px; width: 40px; }
-
+  .logo-link {
+    display: inline-flex;
+    align-items: center;
+  }
+  .logo-svg { display: block; height: 38px; width: 38px; }
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: 24px;
   }
   .nav-link {
+    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-weight: 400;
     color: var(--ink);
-    padding: 12px 18px;
-    border-radius: 0;
-    transition: opacity .25s var(--ease);
-    cursor: pointer;
-    background: transparent;
+    padding: 10px 14px;
     border: none;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 0.12em;
+    background: transparent;
+    cursor: pointer;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    opacity: 0.7;
+    transition: opacity .15s ease;
+    opacity: 0.85;
   }
-  .nav-link:hover { color: var(--ink); opacity: 1; }
-  .nav-link.active { color: var(--ink); opacity: 1; position: relative; }
-  .nav-link.active::after {
-    content: "";
-    position: absolute;
-    left: 14px;
-    right: 14px;
-    bottom: 4px;
-    height: 1px;
-    background: var(--ink);
-  }
-
+  .nav-link:hover,
+  .nav-link.active { opacity: 1; }
   .nav-cta {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: var(--red);
+    justify-content: center;
+    background: var(--ink);
     color: #fff;
-    padding: 0 20px;
-    height: 36px;
-    border-radius: 0;
-    font-weight: 400;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     border: none;
-    cursor: pointer;
-    transition: background .25s var(--ease);
+    height: 36px;
+    padding: 0 16px;
     font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease;
   }
-  .nav-cta:hover { background: #c91e2f; }
+  .nav-cta:hover { background: #2a2a2a; }
+  .nav.on-dark .nav-cta { background: var(--red); }
+  .nav.on-dark .nav-cta:hover { background: #c91e2f; }
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-toggle svg { width: 22px; height: 22px; }
 
-  .nav-toggle { display: none; background: transparent; border: none; color: var(--ink); cursor: pointer; padding: 8px; }
-  .nav-toggle svg { display: block; width: 26px; height: 26px; }
+  /* spacer to push page-headed pages below the fixed nav */
+  .nav-spacer { height: 60px; }
 
-  /* ---------- PAGE TRANSITIONS ---------- */
+  /* ---------- PAGE ---------- */
   .page {
     display: none;
     opacity: 0;
@@ -295,678 +166,279 @@
     display: block;
     opacity: 1;
   }
-
-  /* ---------- BUTTONS ---------- */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: 48px;
-    padding: 0 32px;
-    border-radius: 0;
-    font-weight: 400;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
-    font-family: 'Inter', sans-serif;
-  }
-  .btn-primary {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
-  .btn-primary:hover { background: #2a2a2a; border-color: #2a2a2a; }
-  .btn-ghost {
-    background: transparent;
-    color: var(--ink);
-    border-color: var(--ink);
-  }
-  .btn-ghost:hover { background: var(--ink); color: #fff; }
-  .btn-butter {
-    background: transparent;
-    color: var(--ink);
-    border-color: var(--ink);
-  }
-  .btn-butter:hover { background: var(--ink); color: #fff; }
-
-  /* ---------- HERO ---------- */
-  .hero {
-    padding: 200px 0 160px;
-    position: relative;
-    overflow: hidden;
-    background: var(--paper);
-  }
-  .hero-grid {
-    display: block;
-    max-width: 880px;
-    margin: 0 auto;
-    text-align: left;
-  }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: transparent;
-    color: var(--muted);
-    padding: 0;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    margin-bottom: 48px;
-    border: none;
-    font-family: 'Inter', sans-serif;
-  }
-  .pill-dot { display: none; }
-
-  .hero h1 { margin-bottom: 48px; }
-  .hero h1 .accent { color: var(--red); font-style: italic; font-weight: 600; }
-  .hero-sub {
-    font-size: 16px;
-    color: var(--body);
-    max-width: 540px;
-    margin: 0 0 56px;
-    line-height: 1.8;
-    font-weight: 300;
-  }
-  .hero-mission { display: none; }
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-
-  .hero-card { display: none; }
-  .hero-card-inner {
-    position: relative;
+  .page-heading {
     text-align: center;
-    padding: 40px;
+    padding: 120px 24px 64px;
   }
-  .hero-emoji {
-    font-size: clamp(4rem, 10vw, 7rem);
-    line-height: 1;
-    margin-bottom: 24px;
-    display: block;
-  }
-  .hero-card-tag {
-    color: var(--ink);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-family: 'Inter', sans-serif;
-  }
-  .hero-doodle {
-    position: absolute;
-    bottom: -20px;
-    right: -10px;
-    width: 220px;
-    opacity: 0.18;
-    pointer-events: none;
-    color: var(--red);
-  }
-  .doodle-float {
-    position: absolute;
-    pointer-events: none;
-    opacity: 0.15;
-    color: var(--red);
-  }
-  .doodle-float.heart-1 { top: 60px; left: 40px; width: 56px; height: 56px; }
-  .doodle-float.flower-1 { bottom: 40px; left: 32px; width: 64px; height: 64px; }
-  .doodle-float.star-1 { top: 24px; right: 32px; width: 48px; height: 48px; opacity: 0.22; }
-  .doodle-float.croissant-1 { bottom: 24px; right: 36px; width: 64px; height: 64px; opacity: 0.22; }
-  .mission-band .doodle-float { color: var(--butter); opacity: 0.2; }
-
-  /* ---------- SECTIONS ---------- */
-  .section { padding: 140px 0; position: relative; }
-  .section-head {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 32px;
-    margin-bottom: 48px;
-    flex-wrap: wrap;
-  }
-  .section-head h1, .section-head h2 { margin-top: 80px; margin-bottom: 0; }
-  .eyebrow {
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    font-family: 'Inter', sans-serif;
-  }
-  .section-sub { color: var(--ink); max-width: 480px; font-size: 1.05rem; line-height: 1.8; }
-
-  .doodle-bg {
-    position: absolute;
-    pointer-events: none;
-    opacity: 0.15;
-    color: var(--red);
-  }
-
-  /* ---------- SIGNATURE GRID ---------- */
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-  }
-  .card {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 40px 36px;
-    transition: transform .35s var(--ease), border-color .35s var(--ease);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-height: 220px;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    border-color: var(--red);
-  }
-  .card-icon {
-    width: 48px; height: 48px;
-    border-radius: 999px;
-    background: var(--butter);
-    display: inline-flex; align-items: center; justify-content: center;
-    color: var(--red);
-    border: 1.5px solid var(--red);
-  }
-  .card-icon svg { width: 22px; height: 22px; }
-  .card h3 { font-size: 1.3rem; color: var(--red-heading); }
-  .card p { color: var(--ink); font-size: 1rem; margin: 0; line-height: 1.75; }
-
-  /* ---------- MISSION BAND ---------- */
-  .mission-band {
-    background: var(--paper);
-    color: var(--body);
-    padding: 140px 24px;
-    text-align: center;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 880px;
-    position: relative;
-  }
-  .mission-band h2 {
-    color: var(--ink);
-    font-weight: 600;
-    font-style: normal;
-    max-width: 760px;
-    margin: 0 auto 32px;
-  }
-  .mission-band p {
-    max-width: 640px;
-    margin: 0 auto 48px;
-    color: var(--body);
-    font-size: 16px;
-    line-height: 1.8;
-  }
-  .mission-band-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: center; margin-top: 8px; }
-  .mission-band-italic { display: none; }
-  .mission-paypal-btn { display: none; }
-
-  /* ---------- ANIMATED DOODLE (bread, draws on enter) ---------- */
-  .doodle-divider {
-    display: block;
-    margin: 0 auto;
-    width: 200px;
-    height: 80px;
-    color: var(--red);
-  }
-  .doodle-divider path { stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-  .doodle-animated { cursor: pointer; }
-  .doodle-animated path {
-    stroke-dasharray: var(--len, 600);
-    stroke-dashoffset: var(--len, 600);
-  }
-  .doodle-animated.in-view path {
-    animation: doodle-draw 1s ease-in-out forwards;
-  }
-  .doodle-animated.in-view path:nth-child(1) { animation-duration: 1.5s; animation-delay: 0s; }
-  .doodle-animated.in-view path:nth-child(2) { animation-duration: 0.45s; animation-delay: 1.2s; }
-  .doodle-animated.in-view path:nth-child(3) { animation-duration: 0.45s; animation-delay: 1.65s; }
-  .doodle-animated.in-view path:nth-child(4) { animation-duration: 0.45s; animation-delay: 2.05s; }
-  @keyframes doodle-draw {
-    to { stroke-dashoffset: 0; }
-  }
-
-  /* ---------- LOCATION BAR ---------- */
-  .loc-bar {
-    background: var(--cream-warm);
-    border-top: 1px solid var(--cream-line);
-    border-bottom: 1px solid var(--cream-line);
-    padding: 64px 0;
-  }
-  .loc-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-  }
-  .loc-item .label {
-    color: var(--red);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .loc-item .value { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--red-heading); line-height: 1.4; }
-  .loc-item .value small { display: block; color: var(--ink); font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 500; margin-top: 6px; opacity: 0.85; }
-
-  /* ---------- ABOUT ---------- */
-  .about-split {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    min-height: 520px;
-  }
-  .about-left {
-    background: var(--cream-warm);
-    color: var(--ink);
-    padding: 120px 64px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-left: 4px solid var(--red);
-  }
-  .about-left .eyebrow { color: var(--red); }
-  .about-left h1 { color: var(--red-heading); }
-  .about-left p { color: var(--ink); font-size: 1.15rem; max-width: 460px; line-height: 1.85; }
-  .about-right {
-    background: var(--butter);
-    padding: 120px 64px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .about-right p { color: var(--ink); font-size: 1.08rem; max-width: 560px; line-height: 1.85; }
-  .about-right p + p { margin-top: 22px; }
-  .about-right strong { color: var(--red); font-weight: 700; }
-  .about-right h3 {
+  .page-heading h1 {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.05rem;
+    font-size: 48px;
     font-weight: 600;
-    color: var(--red);
-    margin: 0 0 10px;
-    font-style: italic;
-    letter-spacing: -0.01em;
+    line-height: 1.1;
   }
-  .about-right h3 + p { margin-top: 0; }
-  .about-right .about-block + .about-block { margin-top: 36px; }
-  .about-pullquote {
-    margin: 56px 0 0;
-    padding: 36px 0 0;
-    border-top: 2px solid var(--red);
-    max-width: 600px;
-  }
-  .about-pullquote blockquote {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 1.3rem;
-    line-height: 1.5;
-    color: var(--red-heading);
-    margin: 0;
-    text-align: center;
-  }
-  .about-pullquote cite {
-    display: block;
+  .page-heading .sub {
     margin-top: 18px;
-    font-style: normal;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--ink);
-    text-transform: uppercase;
-    text-align: center;
-  }
-  .about-paypal {
-    text-align: center;
-    margin: 36px 0 0;
-    max-width: 600px;
-  }
-  .about-paypal p {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #A10017;
-    opacity: 0.7;
-    margin: 0 0 12px;
-  }
-  .paypal-outline-pill {
-    background: transparent;
-    color: var(--red);
-    border: 1.5px solid var(--red);
-    border-radius: 999px;
-    padding: 10px 24px;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.25s var(--ease), color 0.25s var(--ease);
-  }
-  .paypal-outline-pill:hover { background: var(--red); color: var(--butter); }
-
-  .values-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    margin-top: 0;
-  }
-  .value-box {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 40px 36px;
-    transition: transform .35s var(--ease), border-color .35s var(--ease);
-  }
-  .value-box:hover { transform: translateY(-3px); border-color: var(--red); }
-  .value-box .card-icon { margin-bottom: 24px; }
-  .value-box h3 { margin-bottom: 12px; color: var(--red-heading); }
-  .value-box p { color: var(--ink); font-size: 1rem; margin: 0; line-height: 1.8; }
-
-  .quote-bar {
-    background: var(--cream-warm);
-    color: var(--ink);
-    text-align: center;
-    padding: 120px 24px;
-    border-top: 1px solid var(--cream-line);
-    border-bottom: 1px solid var(--cream-line);
-  }
-  .quote-bar blockquote {
-    margin: 0 auto;
-    max-width: 820px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-    line-height: 1.4;
-    color: var(--red-heading);
-  }
-  .quote-bar cite {
-    display: block;
-    margin-top: 22px;
-    font-style: normal;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--ink);
-    opacity: 0.7;
-    text-transform: uppercase;
-  }
-
-  .opening-note {
-    text-align: center;
-    padding: 80px 24px;
-    color: var(--ink);
-    font-size: 1.05rem;
-  }
-  .opening-note a { color: var(--red); font-weight: 700; }
-  .opening-note a:hover { text-decoration: underline; }
-
-  /* ---------- PAGE HEADER ---------- */
-  .page-header {
-    background: var(--butter);
-    color: var(--ink);
-    padding: 120px 0 72px;
-    border-bottom: 1px solid var(--cream-line);
-  }
-  .page-header h1 { color: var(--red-heading); max-width: 820px; }
-  .page-header p { color: var(--ink); margin-top: 24px; max-width: 580px; font-size: 1.12rem; line-height: 1.85; }
-  .page-header .eyebrow { color: var(--red); }
-
-  .tabs {
-    display: flex;
-    gap: 10px;
-    margin-top: 48px;
-    flex-wrap: wrap;
-  }
-  .tab {
-    padding: 12px 22px;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--ink);
-    border: 1.5px solid var(--cream-line);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
-    font-family: inherit;
-  }
-  .tab:hover { color: var(--red); border-color: var(--red); }
-  .tab.active {
-    background: var(--red-pop);
-    color: var(--butter);
-    border-color: var(--red-pop);
-  }
-
-  .menu-section { padding: 96px 0 120px; }
-  .menu-list {
-    display: none;
-    max-width: 820px;
-    margin: 0 auto;
-  }
-  .menu-list.active { display: block; }
-  .menu-item {
-    display: flex;
-    gap: 24px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--line);
-    align-items: baseline;
-  }
-  .menu-item:last-child { border-bottom: none; }
-  .menu-item-image { display: none; }
-  .menu-item-row {
-    display: contents;
-  }
-  .menu-item-main { flex: 1; min-width: 0; }
-  .menu-item-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    letter-spacing: 0;
-  }
-  .menu-item-desc {
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 300;
-    margin-top: 6px;
-    line-height: 1.6;
-  }
-  .menu-item-price {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 300;
-    color: var(--ink);
-    white-space: nowrap;
-    text-align: right;
+    color: var(--muted);
   }
-  .badge-signature {
+
+  /* ---------- HERO (homepage only) ---------- */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #2a201b;
+  }
+  /* REPLACE WITH OFFICIAL PHOTO */
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 10, 8, 0.40);
+    z-index: 1;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 880px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 68px;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 48px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-btn {
     display: inline-flex;
     align-items: center;
-    color: var(--muted);
-    font-size: 9px;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    height: 44px;
+    padding: 0 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
     font-weight: 400;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 0;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .hero-btn:hover { background: #fff; color: var(--ink); }
+
+  /* ---------- SECTION: ONE SENTENCE ---------- */
+  .section { padding: 140px 0; background: var(--paper); }
+  .section-tagline {
+    text-align: center;
+    padding: 140px 24px;
+  }
+  .section-tagline p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    color: #3A3A3A;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* ---------- SECTION: ALTERNATING BLOCKS ---------- */
+  .alt-block {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    min-height: 480px;
+    align-items: stretch;
+  }
+  .alt-block.reverse { grid-template-columns: 45% 55%; }
+  .alt-block.reverse .alt-block-image { order: 2; }
+  .alt-block.reverse .alt-block-text { order: 1; }
+  .alt-block-image {
+    background-size: cover;
+    background-position: center;
+    min-height: 480px;
+  }
+  .alt-block-text {
+    padding: 80px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--paper);
+  }
+  .alt-block-text h2 {
+    font-size: 26px;
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+  .alt-block-text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #4A4A4A;
+    line-height: 1.8;
+    margin: 0 0 28px;
+    max-width: 360px;
+  }
+  .alt-link {
+    align-self: flex-start;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
     background: transparent;
     border: none;
+    border-bottom: 1px solid var(--ink);
+    padding: 0 0 4px;
+    cursor: pointer;
+    transition: opacity .15s ease;
+  }
+  .alt-link:hover { opacity: 0.6; }
+
+  /* ---------- SECTION: PRODUCT CARDS ---------- */
+  .product-section { text-align: center; }
+  .product-section .container { padding: 0 32px; }
+  .small-label {
     font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--quiet);
+    margin-bottom: 48px;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+  .product-card { text-align: left; cursor: pointer; }
+  .product-card .product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  .product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover img { transform: scale(1.02); }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 20px 0 4px;
+  }
+  .product-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+  }
+  .text-link {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--ink);
+    padding: 0 0 4px;
+    cursor: pointer;
   }
 
-  /* ---------- GALLERY ---------- */
-  .gallery-grid {
+  /* ---------- SECTION: PHOTO GRID ---------- */
+  .photo-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 240px;
-    gap: 24px;
+    gap: 4px;
   }
-  .gallery-cell {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 32px;
-    text-align: center;
-    color: var(--ink);
-    transition: transform .35s var(--ease), border-color .35s var(--ease);
-    overflow: hidden;
+  .photo-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  /* ---------- SECTION: LOCATION ---------- */
+  .location-section { position: relative; padding: 140px 0; }
+  .location-inner {
     position: relative;
+    padding-left: 24px;
   }
-  .gallery-cell:hover { transform: translateY(-3px); border-color: var(--red); }
-  .gallery-cell .ghost-icon {
-    width: 44px; height: 44px;
-    color: var(--red);
-    opacity: 0.7;
-    margin-bottom: 16px;
-  }
-  .gallery-cell h3 { font-size: 1.18rem; color: var(--red-heading); margin-bottom: 8px; }
-  .gallery-cell .small { font-size: 0.9rem; color: var(--ink); font-weight: 500; }
-  .gallery-cell.span-2 { grid-column: span 2; }
-  .gallery-cell.row-2 { grid-row: span 2; }
-
-  .gallery-note {
-    text-align: center;
-    color: var(--ink);
-    margin-top: 56px;
-    font-size: 1rem;
-    font-style: italic;
-  }
-  .insta-cta {
-    background: var(--cream-warm);
-    color: var(--ink);
-    text-align: center;
-    padding: 96px 24px;
-    margin-top: 96px;
-    border-radius: 28px;
-    border: 1px solid var(--cream-line);
-  }
-  .insta-cta h2 { color: var(--red-heading); margin-bottom: 16px; }
-  .insta-cta p { color: var(--ink); margin-bottom: 32px; font-size: 1.08rem; line-height: 1.8; }
-
-  .storefront-band {
-    background: var(--butter);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 56px 48px;
-    margin-top: 56px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-  }
-  .storefront-band h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--red-heading); }
-  .storefront-band p { color: var(--ink); margin: 0; font-size: 1rem; }
-
-  /* ---------- FOOTER ---------- */
-  footer {
-    background: #1A1A1A;
-    color: #fff;
-    padding: 100px 0 32px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 64px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    align-items: start;
-  }
-  .footer-logo { display: inline-flex; }
-  .footer-logo svg { display: block; width: 56px; height: 56px; }
-  .footer-tagline {
-    color: rgba(255,255,255,0.85);
-    margin: 24px 0 0;
+  .big-num {
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
     font-weight: 300;
-    font-size: 18px;
-    line-height: 1.5;
-    max-width: 340px;
+    color: var(--line);
+    line-height: 1;
+    margin: 0;
   }
-  .footer-motto { display: none; }
-  .footer-col { padding-top: 8px; }
-  .footer-col h4 {
-    color: rgba(255,255,255,0.7);
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin: 0 0 20px;
+  .location-section .big-num { font-size: 80px; margin-bottom: 32px; }
+  .location-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
   }
-  .footer-col ul { list-style: none; padding: 0; margin: 0; }
-  .footer-col li { margin-bottom: 12px; }
-  .footer-col a, .footer-col button {
-    color: rgba(255,255,255,0.7);
+  .location-section p,
+  .location-section a {
     font-family: 'Inter', sans-serif;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 300;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color .25s var(--ease);
-    background: none; border: none; padding: 0; cursor: pointer;
+    color: var(--body);
+    margin: 0 0 6px;
   }
-  .footer-col a:hover, .footer-col button:hover { color: #fff; }
-  .footer-col p {
-    color: rgba(255,255,255,0.7);
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 0.06em;
-    margin: 0 0 8px;
-    text-transform: none;
+  .location-section a:hover { color: var(--ink); text-decoration: underline; }
+  .location-image {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    margin-top: 64px;
   }
-  .footer-doodle { display: none; }
-  .footer-bottom {
-    padding-top: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #666;
-    font-size: 10px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    text-align: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .footer-bottom > span { color: #666; }
 
-  /* ---------- NEWSLETTER ---------- */
-  .newsletter {
+  /* ---------- SECTION: NEWSLETTER ---------- */
+  .newsletter-band {
     background: var(--butter);
-    padding: 120px 0;
-    border-top: 1px solid var(--cream-line);
-  }
-  .newsletter-inner {
-    max-width: 720px;
-    margin: 0 auto;
+    padding: 120px 24px;
     text-align: center;
   }
-  .newsletter h2 { margin-bottom: 16px; }
-  .newsletter-inner > p:not(.newsletter-note) { color: var(--ink); font-size: 1.1rem; max-width: 560px; margin: 0 auto 32px; }
+  .newsletter-band h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 0 32px;
+  }
   .newsletter-form {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     max-width: 480px;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -974,557 +446,582 @@
   .newsletter-form input[type="email"] {
     flex: 1;
     min-width: 220px;
-    padding: 14px 22px;
-    border-radius: 999px;
-    border: 1.5px solid var(--cream-line);
-    background: var(--cream-card);
-    font-family: inherit;
-    font-size: 1rem;
+    height: 44px;
+    background: #fff;
+    border: 1px solid var(--form-line);
+    padding: 0 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
     color: var(--ink);
-    transition: border-color .25s var(--ease);
   }
   .newsletter-form input[type="email"]:focus {
     outline: none;
-    border-color: var(--red);
+    border-color: var(--ink);
   }
-  .newsletter-note {
-    max-width: 480px;
-    margin: 8px auto 0;
-    color: var(--muted);
-    font-size: 0.85rem;
-    text-align: center;
+  .newsletter-form button {
+    height: 44px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    padding: 0 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease;
   }
-  .newsletter-success {
+  .newsletter-form button:hover { background: #2a2a2a; }
+  .newsletter-thanks {
     display: none;
+    margin: 32px auto 0;
     max-width: 480px;
-    margin: 0 auto;
-    padding: 18px 28px;
-    background: var(--cream-warm);
-    border: 1.5px solid var(--red);
-    border-radius: 999px;
-    color: var(--red);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
   }
-  .newsletter-success.show { display: block; }
+  .newsletter-thanks.show { display: block; }
 
-  /* ---------- FORMS ---------- */
-  .form-card {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 56px 48px;
-    max-width: 760px;
-    margin: 0 auto;
+  /* ---------- STORY PAGE ---------- */
+  .story-section { padding: 56px 24px; max-width: 760px; margin: 0 auto; }
+  .story-section .small-label { margin-bottom: 16px; }
+  .story-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    line-height: 1.2;
   }
-  .form-grid {
+  .story-section p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #3A3A3A;
+    line-height: 1.85;
+    margin: 0 0 12px;
+  }
+  .story-full-image {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    margin: 56px 0;
+  }
+  .story-two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    gap: 64px;
+    max-width: 1100px;
+    margin: 56px auto;
+    padding: 0 24px;
+    align-items: center;
   }
-  .form-row { display: flex; flex-direction: column; gap: 8px; }
-  .form-row.full { grid-column: 1 / -1; }
-  .form-row label {
-    font-size: 11px;
+  .story-two-col img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  .founder-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    margin-bottom: 16px;
+  }
+  .founder-signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--ink);
+    margin-top: 16px;
+  }
+
+  /* ---------- MISSION PAGE ---------- */
+  .mission-statement {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 24px;
+    text-align: center;
+  }
+  .mission-statement p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #4A4A4A;
+    line-height: 1.9;
+  }
+  .mission-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 1100px;
+    margin: 96px auto;
+    padding: 0 24px;
+    align-items: center;
+  }
+  .mission-two-col img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  .mission-two-col p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #4A4A4A;
+    line-height: 1.85;
+    margin: 0 0 18px;
+  }
+  .mission-support {
+    background: var(--butter);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .mission-support h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+  .mission-support p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #666666;
+    margin: 0 0 28px;
+  }
+  .paypal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    height: 44px;
+    padding: 0 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--red);
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .paypal-btn:hover { background: #c91e2f; }
+
+  /* ---------- MENU PAGE ---------- */
+  .menu-section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 24px 140px;
+  }
+  .menu-cat-label {
+    margin-top: 60px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--quiet);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .menu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--soft-line);
+    gap: 24px;
+  }
+  .menu-row:last-of-type { border-bottom: 1px solid var(--soft-line); }
+  .menu-row-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .menu-row-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .menu-allergen {
+    margin-top: 56px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--quiet);
+    text-align: center;
+  }
+
+  /* ---------- CATERING PAGE ---------- */
+  .catering-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+    max-width: 1100px;
+    margin: 64px auto 96px;
+    padding: 0 24px;
+  }
+  .catering-block .small-label { margin-bottom: 16px; }
+  .catering-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+  .catering-block p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #4A4A4A;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .catering-image {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+  }
+  .catering-mailto-wrap { text-align: center; padding: 64px 24px; }
+  .btn-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    height: 48px;
+    padding: 0 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease;
+    text-decoration: none;
+  }
+  .btn-dark:hover { background: #2a2a2a; }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    height: 48px;
+    padding: 0 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+    text-decoration: none;
+  }
+  .btn-outline:hover { background: var(--ink); color: #fff; }
+
+  /* ---------- FORMS ---------- */
+  .form-block {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 140px;
+  }
+  .form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+  .form-row label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
   }
   .form-row input,
   .form-row select,
   .form-row textarea {
-    padding: 14px 16px;
-    border-radius: 14px;
-    border: 1px solid var(--cream-line);
-    background: var(--butter);
-    font-family: inherit;
-    font-size: 1rem;
+    width: 100%;
+    min-height: 44px;
+    background: #fff;
+    border: 1px solid var(--form-line);
+    padding: 12px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
     color: var(--ink);
-    transition: border-color .25s var(--ease);
   }
-  .form-row textarea { min-height: 130px; resize: vertical; line-height: 1.7; }
+  .form-row textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
   .form-row input:focus,
   .form-row select:focus,
   .form-row textarea:focus {
     outline: none;
-    border-color: var(--red);
+    border-color: var(--ink);
   }
-  .form-actions { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .form-note { color: var(--ink); opacity: 0.85; font-size: 0.92rem; max-width: 480px; line-height: 1.7; }
+  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-actions { margin-top: 28px; }
   .form-success {
-    margin-top: 28px;
-    padding: 16px 22px;
-    border-radius: 999px;
-    background: var(--butter);
-    color: var(--red);
-    font-weight: 600;
-    text-align: center;
-    border: 1.5px solid var(--red);
     display: none;
+    margin-top: 24px;
+    padding: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    text-align: center;
   }
   .form-success.show { display: block; }
 
-  /* ---------- MISSION PAGE ---------- */
-  .mission-hero {
-    background: var(--butter);
-    color: var(--ink);
-    padding: 140px 0 80px;
-    border-bottom: 1px solid var(--cream-line);
-  }
-  .mission-hero h1 { color: var(--red-heading); max-width: 820px; }
-  .mission-hero p { color: var(--ink); max-width: 660px; font-size: 1.18rem; margin-top: 28px; line-height: 1.85; }
-  .mission-hero .eyebrow { color: var(--red); }
-
-  .mission-blocks {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-    margin-top: 0;
-  }
-  .mission-block {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 44px 40px;
-    transition: border-color .25s var(--ease);
-  }
-  .mission-block:hover { border-color: var(--red); }
-  .mission-block h3 {
-    font-size: 1.4rem;
-    margin-bottom: 16px;
-    color: var(--red-heading);
-  }
-  .mission-block p { color: var(--ink); margin: 0; font-size: 1.05rem; line-height: 1.85; }
-
-  .mission-cta {
-    text-align: center;
-    margin-top: 80px;
-  }
-
-  /* ---------- IMPACT STATS (Mission page) ---------- */
-  .impact-stats {
-    background: var(--cream-warm);
-    padding: 120px 24px;
-    border-top: 1px solid var(--cream-line);
-    border-bottom: 1px solid var(--cream-line);
-  }
-  .impact-stats-grid {
-    max-width: 1100px;
+  /* ---------- VISIT PAGE ---------- */
+  .visit-block {
+    max-width: 880px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
-    text-align: center;
+    padding: 24px 24px 64px;
+    position: relative;
   }
-  .impact-stat-num {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 700;
-    color: var(--red-heading);
-    font-size: clamp(3.2rem, 6vw, 5rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    display: block;
-    margin-bottom: 16px;
+  .visit-block .big-num { font-size: 120px; margin-bottom: 24px; }
+  .visit-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
   }
-  .impact-stat-label {
-    color: var(--ink);
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 240px;
-    margin: 0 auto;
+  .visit-block p,
+  .visit-block a {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--body);
+    margin: 0 0 8px;
   }
-  .impact-stat-num.symbol { font-style: italic; }
-
-  /* ---------- CATERING ---------- */
-  .offer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+  .visit-block a { color: var(--body); }
+  .visit-block a:hover { color: var(--ink); text-decoration: underline; }
+  .visit-image {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+  }
+  .visit-map {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    margin-top: 64px;
     margin-bottom: 96px;
   }
-  .offer-card {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 40px 32px;
-    text-align: left;
-    transition: transform .35s var(--ease), border-color .35s var(--ease);
-  }
-  .offer-card:hover { transform: translateY(-3px); border-color: var(--red); }
-  .offer-emoji { font-size: 2.2rem; margin-bottom: 16px; display: block; }
-  .offer-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--red-heading); }
-  .offer-card p { color: var(--ink); font-size: 1rem; margin: 0; line-height: 1.75; }
 
-  /* ---------- CAREERS ---------- */
-  .pill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin: 48px 0 80px;
-  }
-  .pill-tag {
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: transparent;
-    border: 1.5px solid var(--red);
-    color: var(--red);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .roles-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 80px;
-  }
-  .role-card {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 40px 32px;
-    transition: transform .35s var(--ease), border-color .35s var(--ease);
-  }
-  .role-card:hover { transform: translateY(-3px); border-color: var(--red); }
-  .role-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--red-heading); }
-  .role-card p { color: var(--ink); font-size: 1rem; margin: 0; line-height: 1.75; }
-
-  .careers-intro {
-    max-width: 760px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .careers-intro p { color: var(--ink); font-size: 1.15rem; margin-top: 24px; line-height: 1.85; }
-
-  /* ---------- VISIT US ---------- */
-  .visit-hero {
-    text-align: center;
-    padding: 120px 0 32px;
-  }
-  .visit-address {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-top: 24px;
-    color: var(--red-heading);
-  }
-  .visit-address small { display: block; color: var(--ink); font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500; margin-top: 8px; }
-  .visit-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 24px;
-    background: transparent;
-    color: var(--red);
-    padding: 6px 16px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    border: 1.5px solid var(--red);
-  }
-
-  .map-wrap {
-    margin: 72px 0;
-    border-radius: 28px;
-    overflow: hidden;
-    border: 1px solid var(--cream-line);
-    aspect-ratio: 16 / 7;
-    background: var(--cream-warm);
-  }
-  .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
-
-  .contact-quick {
+  /* ---------- CAREERS PAGE ---------- */
+  .careers-two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 96px;
+    gap: 64px;
+    max-width: 1100px;
+    margin: 32px auto 64px;
+    padding: 0 24px;
+    align-items: center;
   }
-  .contact-quick-item {
-    background: var(--cream-warm);
-    border: 1px solid var(--cream-line);
-    border-radius: 28px;
-    padding: 32px 36px;
-    transition: border-color .25s var(--ease);
-  }
-  .contact-quick-item:hover { border-color: var(--red); }
-  .contact-quick-item .label {
-    color: var(--red);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .contact-quick-item .value { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--red-heading); }
-  .contact-quick-item a { color: var(--red-heading); transition: color .2s var(--ease); }
-  .contact-quick-item a:hover { color: var(--red); }
-
-  /* ---------- PRESS ---------- */
-  .press-section { padding: 120px 0; background: var(--butter); border-top: 1px solid var(--cream-line); border-bottom: 1px solid var(--cream-line); }
-  .press-list { max-width: 840px; margin: 48px auto 0; }
-  .press-item {
-    display: flex;
-    gap: 32px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--cream-line);
-    align-items: baseline;
-    flex-wrap: wrap;
-  }
-  .press-item:last-child { border-bottom: none; }
-  .press-meta {
-    flex: 0 0 220px;
-    color: var(--red);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    line-height: 1.7;
-  }
-  .press-quote {
-    flex: 1;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-
-  /* ---------- FAQ ---------- */
-  .faq-list { max-width: 840px; margin: 0 auto; }
-  .faq-item {
-    border-bottom: 1px solid var(--cream-line);
-  }
-  .faq-q {
+  .careers-two-col img {
     width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  .careers-two-col p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #4A4A4A;
+    line-height: 1.85;
+    margin: 0 0 16px;
+    max-width: 420px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #1A1A1A;
+    color: #888888;
+    padding: 96px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+  }
+  .footer-col h4 {
+    color: rgba(255,255,255,0.7);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 8px; }
+  .footer-col button,
+  .footer-col a {
+    color: #888888;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     background: transparent;
     border: none;
-    padding: 28px 0;
-    text-align: left;
+    padding: 0;
     cursor: pointer;
+    transition: color .15s ease;
+  }
+  .footer-col button:hover,
+  .footer-col a:hover { color: #fff; }
+  .footer-col p {
+    color: #888888;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    margin: 0 0 6px;
+    line-height: 1.7;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .footer-logo svg { display: block; width: 44px; height: 44px; }
+  .footer-tagline {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.18rem;
-    font-weight: 600;
-    color: var(--red-heading);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    transition: color .2s var(--ease);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    color: #888888;
+    margin-top: 18px;
+    max-width: 280px;
+    line-height: 1.5;
   }
-  .faq-q:hover { color: var(--red); }
-  .faq-toggle {
-    flex: 0 0 32px;
-    width: 32px; height: 32px;
-    border-radius: 999px;
-    background: transparent;
-    border: 1.5px solid var(--red);
-    display: inline-flex; align-items: center; justify-content: center;
-    color: var(--red);
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1;
-    transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
-  }
-  .faq-item.open .faq-toggle { background: var(--red-pop); color: var(--butter); transform: rotate(180deg); }
-  .faq-a {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .4s var(--ease);
-  }
-  .faq-a-inner {
-    padding: 0 0 28px;
-    color: var(--ink);
-    font-size: 1.02rem;
-    line-height: 1.85;
-    max-width: 720px;
+  .footer-bottom {
+    border-top: 1px solid #333333;
+    padding: 24px 32px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: #555555;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
   }
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 960px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
-    .about-split { grid-template-columns: 1fr; }
-    .about-left, .about-right { padding: 80px 40px; }
-    .about-left { border-left: none; border-top: 4px solid var(--red); }
+    .alt-block, .alt-block.reverse {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .alt-block.reverse .alt-block-image,
+    .alt-block.reverse .alt-block-text {
+      order: initial;
+    }
+    .alt-block-image { aspect-ratio: 16 / 10; min-height: 0; }
+    .alt-block-text { padding: 56px 32px; }
+    .product-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .photo-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-    .impact-stats-grid { gap: 32px; }
+    .catering-grid { grid-template-columns: 1fr; gap: 40px; }
+    .story-two-col,
+    .mission-two-col,
+    .careers-two-col {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
   }
-  @media (max-width: 768px) {
-    .nav-toggle { display: inline-flex; min-height: 44px; min-width: 44px; }
-    .nav-inner { gap: 16px; height: 60px; }
+  @media (max-width: 640px) {
+    .container { padding: 0 24px; }
+    .nav-inner { padding: 0 20px; gap: 12px; }
     .nav-links {
       position: fixed;
       top: 60px;
       left: 0;
       right: 0;
       bottom: 0;
-      width: 100%;
       height: calc(100vh - 60px);
       background: #1A1A1A;
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       justify-content: flex-start;
-      padding: 48px 32px;
+      padding: 56px 24px;
       gap: 0;
-      border: none;
+      margin: 0;
       display: none;
       z-index: 60;
     }
     .nav-links.open { display: flex; }
     .nav-link {
-      padding: 18px 0;
-      text-align: left;
-      min-height: 56px;
+      color: #fff !important;
+      opacity: 0.9;
       font-size: 14px;
-      letter-spacing: 0.16em;
-      color: #fff;
-      opacity: 0.85;
-      line-height: 1.6;
+      letter-spacing: 0.18em;
+      padding: 18px 0;
+      width: 100%;
+      text-align: center;
     }
-    .nav-link:hover, .nav-link.active { color: #fff; opacity: 1; }
-    .nav-link.active::after { display: none; }
-    .nav.is-scrolled { background: rgba(255,255,255,0.95); }
-    .nav-cta { padding: 0 18px; font-size: 11px; min-height: 36px; }
-    .btn { width: 100%; padding: 0 28px; min-height: 48px; }
-    .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
-    .hero-actions .btn { width: 100%; }
-    .grid-3, .values-grid, .loc-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
-    .gallery-cell.span-2 { grid-column: span 1; }
-    .gallery-cell.row-2 { grid-row: span 1; }
-    .storefront-band { grid-template-columns: 1fr; padding: 32px; }
+    .nav-link.active { opacity: 1; }
+    .nav-toggle { display: inline-flex; }
+    .nav-cta { padding: 0 14px; font-size: 11px; height: 36px; }
+
+    .hero h1 { font-size: 38px; line-height: 1.15; }
     .section { padding: 80px 0; }
-    .hero { padding: 100px 0 80px; }
-    .hero h1 { font-size: 36px; line-height: 1.1; }
-    .intro-headline { font-size: 36px; line-height: 1.15; }
-    .about-left, .about-right { padding: 80px 24px; }
-    .menu-item { flex-direction: row; gap: 16px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-    .footer-col { padding-top: 0; }
-    .form-grid { grid-template-columns: 1fr; }
-    .form-card { padding: 36px 24px; }
-    .form-row input, .form-row select, .form-row textarea { min-height: 44px; }
-    .offer-grid, .roles-grid { grid-template-columns: 1fr; }
-    .mission-blocks { grid-template-columns: 1fr; }
-    .contact-quick { grid-template-columns: 1fr; }
-    .press-meta { flex: 0 0 100%; }
-    .mission-band { padding: 80px 24px; margin: 0 auto; width: auto; }
-    .impact-stats { padding: 80px 24px; }
-    .impact-stats-grid { grid-template-columns: 1fr; gap: 56px; }
-    .section-head { margin-bottom: 32px; gap: 16px; }
+    .section-tagline { padding: 80px 24px; }
+    .section-tagline p { font-size: 19px; }
+    .alt-block-text { padding: 48px 24px; }
+    .product-grid { grid-template-columns: 1fr; gap: 32px; }
+    .photo-grid { grid-template-columns: 1fr 1fr; }
+    .location-section { padding: 80px 0; }
+    .location-section .big-num { font-size: 60px; }
+    .newsletter-band { padding: 80px 24px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 48px; }
+    .page-heading { padding: 96px 24px 48px; }
+    .page-heading h1 { font-size: 38px; }
+    .form-grid-2 { grid-template-columns: 1fr; }
+    .visit-block .big-num { font-size: 80px; }
+    .story-section { padding: 40px 24px; }
+    .story-full-image { margin: 32px 0; }
+    .catering-grid { margin: 48px auto 64px; gap: 32px; }
+    .mission-two-col { margin: 64px auto; }
+    .mission-support { padding: 64px 24px; }
+    .menu-section { padding: 0 24px 80px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ===== Reusable SVG logo (defined once, referenced via <use>) ===== -->
+<!-- ===== Reusable SVG logo ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <!-- Logo -->
     <symbol id="louma-logo" viewBox="0 0 200 200">
-      <rect x="3" y="3" width="194" height="194" rx="28" fill="#F5EDD6" stroke="#D4202E" stroke-width="3"/>
-      <text x="100" y="112"
-            text-anchor="middle"
-            dominant-baseline="alphabetic"
+      <rect x="3" y="3" width="194" height="194" rx="28" fill="#FBF5D4" stroke="#ED2739" stroke-width="3"/>
+      <text x="100" y="112" text-anchor="middle" dominant-baseline="alphabetic"
             font-family="Cormorant Garamond, Georgia, serif"
-            font-size="58" font-weight="900"
-            fill="#D4202E"
-            letter-spacing="-1">Louma</text>
-      <text x="100" y="138"
-            text-anchor="middle"
-            dominant-baseline="alphabetic"
+            font-size="58" font-weight="700"
+            fill="#ED2739" letter-spacing="-1">Louma</text>
+      <text x="100" y="138" text-anchor="middle" dominant-baseline="alphabetic"
             font-family="Inter, sans-serif"
-            font-size="13" font-weight="800"
-            fill="#D4202E"
-            letter-spacing="5">BAKERY</text>
-    </symbol>
-
-    <!-- Bread loaf doodle for section dividers -->
-    <symbol id="doodle-bread" viewBox="0 0 200 80">
-      <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z"/>
-        <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z"/>
-        <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z"/>
-        <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z"/>
-      </g>
-    </symbol>
-
-    <!-- Croissant curve -->
-    <symbol id="doodle-croissant" viewBox="0 0 60 60">
-      <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M10 38 Q14 14 38 12 Q52 14 50 28 Q44 36 30 36 Q22 36 18 32"/>
-        <path d="M22 28 Q28 22 36 22"/>
-        <path d="M28 36 Q32 30 38 28"/>
-      </g>
-    </symbol>
-
-    <!-- Heart -->
-    <symbol id="doodle-heart" viewBox="0 0 60 60">
-      <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-            d="M30 50 C8 36 8 18 18 14 C26 11 30 18 30 22 C30 18 34 11 42 14 C52 18 52 36 30 50 Z"/>
-    </symbol>
-
-    <!-- Five-petal flower -->
-    <symbol id="doodle-flower" viewBox="0 0 60 60">
-      <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="30" cy="30" r="6"/>
-        <ellipse cx="30" cy="12" rx="7" ry="9"/>
-        <ellipse cx="47" cy="24" rx="9" ry="7" transform="rotate(36 47 24)"/>
-        <ellipse cx="40" cy="46" rx="7" ry="9" transform="rotate(72 40 46)"/>
-        <ellipse cx="20" cy="46" rx="7" ry="9" transform="rotate(-72 20 46)"/>
-        <ellipse cx="13" cy="24" rx="9" ry="7" transform="rotate(-36 13 24)"/>
-      </g>
-    </symbol>
-
-    <!-- Star -->
-    <symbol id="doodle-star" viewBox="0 0 60 60">
-      <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-            d="M30 6 L36 24 L54 24 L40 35 L46 52 L30 41 L14 52 L20 35 L6 24 L24 24 Z"/>
+            font-size="13" font-weight="600"
+            fill="#ED2739" letter-spacing="5">BAKERY</text>
     </symbol>
   </defs>
 </svg>
 
-<!-- ===== INTRO HERO (fullscreen video / placeholder) ===== -->
-<section class="intro-hero" id="intro-section">
-  <!-- Replace this placeholder div with the <video> tag below when the real footage is ready:
-       <video autoplay muted loop playsinline id="louma-hero-video" class="intro-video">
-         <source src="louma-intro.mp4" type="video/mp4">
-       </video> -->
-  <div class="intro-images" id="intro-images" aria-hidden="true">
-    <img class="intro-img is-active" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80" alt="" loading="eager" fetchpriority="high" />
-    <img class="intro-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80" alt="" loading="lazy" />
-    <img class="intro-img" src="https://images.unsplash.com/photo-1534432182912-63863115e106?w=1600&q=80" alt="" loading="lazy" />
-    <img class="intro-img" src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1600&q=80" alt="" loading="lazy" />
-    <img class="intro-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=80" alt="" loading="lazy" />
-  </div>
-
-  <div class="intro-overlay" aria-hidden="true"></div>
-
-  <div class="intro-content">
-    <svg class="intro-logo" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
-    <h1 class="intro-headline">"Named after someone who makes every room feel like home."</h1>
-    <p class="intro-meta">Opening July 2025 · West LA</p>
-    <button class="intro-enter" id="enter-btn" type="button">Enter</button>
-  </div>
-
-  <div class="intro-scroll" aria-hidden="true"></div>
-</section>
-
 <!-- ===== NAV ===== -->
-<header class="nav" id="site-nav">
-  <div class="container nav-inner">
+<header class="nav on-dark" id="site-nav">
+  <div class="nav-inner">
     <a href="#page-home" class="logo-link" data-page="page-home" aria-label="Louma Bakery home">
       <svg class="logo-svg" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
     </a>
-
     <nav class="nav-links" id="navLinks">
-      <button class="nav-link active" data-page="page-home">Home</button>
       <button class="nav-link" data-page="page-menu">Menu</button>
       <button class="nav-link" data-page="page-story">Our Story</button>
       <button class="nav-link" data-page="page-mission">Mission</button>
@@ -1532,239 +1029,189 @@
       <button class="nav-link" data-page="page-careers">Careers</button>
       <button class="nav-link" data-page="page-visit">Visit Us</button>
     </nav>
-
-    <div style="display:flex;align-items:center;gap:8px;">
-      <button class="nav-cta" id="openingUpdatesBtn">Opening Updates</button>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </div>
+    <button class="nav-cta" data-page="page-menu">Order</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
 </header>
 
 <main>
 
 <!-- ============================================================
-     HOME
+     HOMEPAGE
 ============================================================ -->
 <section class="page active" id="page-home">
 
-  <div class="hero">
-    <div class="container hero-grid">
-      <span class="pill">Opening July 2025</span>
-      <h1>Flour-dusted <span class="accent">dreams</span>, baked fresh daily.</h1>
-      <p class="hero-sub">A West LA bakery rooted in European baking traditions with a Levantine twist.</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary" data-page="page-menu">View Menu</button>
-      </div>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="hero-image" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <h1>Flour-dusted dreams, baked fresh daily.</h1>
+      <button class="hero-btn" data-page="page-visit">Visit Us</button>
     </div>
-  </div>
+  </section>
 
-  <section class="section" style="padding-top: 0;">
+  <!-- SECTION 1 — ONE SENTENCE -->
+  <section class="section-tagline">
+    <p>European craft. Levantine soul. Baked fresh on Wilshire every morning.</p>
+  </section>
+
+  <!-- SECTION 2 — ALTERNATING BLOCKS -->
+  <!-- Block 1 -->
+  <section class="alt-block">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=900&q=80')"></div>
+    <div class="alt-block-text">
+      <h2>Baked every morning.</h2>
+      <p>Small batches, out of the oven by 8am.</p>
+      <button class="alt-link" data-page="page-menu">See the menu →</button>
+    </div>
+  </section>
+
+  <!-- Block 2 -->
+  <section class="alt-block reverse">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80')"></div>
+    <div class="alt-block-text">
+      <h2>The croissant.</h2>
+      <p>81 layers. Laminated by hand.</p>
+      <button class="alt-link" data-page="page-menu">See the menu →</button>
+    </div>
+  </section>
+
+  <!-- Block 3 -->
+  <section class="alt-block">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80')"></div>
+    <div class="alt-block-text">
+      <h2>The Louma Latte.</h2>
+      <p>Espresso, cardamom, orange blossom.</p>
+      <button class="alt-link" data-page="page-menu">See the menu →</button>
+    </div>
+  </section>
+
+  <!-- Block 4 -->
+  <section class="alt-block reverse">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1534432182912-63863115e106?w=900&q=80')"></div>
+    <div class="alt-block-text">
+      <h2>Sourdough.</h2>
+      <p>72-hour cold ferment. Open crumb. Deep crust.</p>
+      <button class="alt-link" data-page="page-menu">See the menu →</button>
+    </div>
+  </section>
+
+  <!-- Block 5 -->
+  <section class="alt-block">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80')"></div>
+    <div class="alt-block-text">
+      <h2>Pastry boxes.</h2>
+      <p>For offices, events, and people who know what they want.</p>
+      <button class="alt-link" data-page="page-catering">Catering →</button>
+    </div>
+  </section>
+
+  <!-- Block 6 -->
+  <section class="alt-block reverse">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=900&q=80')"></div>
+    <div class="alt-block-text">
+      <h2>3223 Wilshire Blvd.</h2>
+      <p>Opening July 2026.</p>
+      <button class="alt-link" data-page="page-visit">Get directions →</button>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — PRODUCT CARDS -->
+  <section class="section product-section">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Signature menu</div>
-          <h2>What we're known for.</h2>
+      <div class="small-label">From the menu</div>
+      <div class="product-grid">
+        <div class="product-card" role="button" tabindex="0" data-page="page-menu">
+          <div class="product-image">
+            <!-- REPLACE WITH OFFICIAL PHOTO -->
+            <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=600&q=80" alt="Butter croissant" loading="lazy" />
+          </div>
+          <div class="product-name">Butter Croissant</div>
+          <div class="product-price">$6</div>
+        </div>
+        <div class="product-card" role="button" tabindex="0" data-page="page-menu">
+          <div class="product-image">
+            <!-- REPLACE WITH OFFICIAL PHOTO -->
+            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Za'atar labneh croissant" loading="lazy" />
+          </div>
+          <div class="product-name">Zaatar Labneh Croissant</div>
+          <div class="product-price">$7</div>
+        </div>
+        <div class="product-card" role="button" tabindex="0" data-page="page-menu">
+          <div class="product-image">
+            <!-- REPLACE WITH OFFICIAL PHOTO -->
+            <img src="https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=600&q=80" alt="Country sourdough loaf" loading="lazy" />
+          </div>
+          <div class="product-name">Country Sourdough</div>
+          <div class="product-price">$9</div>
+        </div>
+        <div class="product-card" role="button" tabindex="0" data-page="page-menu">
+          <div class="product-image">
+            <!-- REPLACE WITH OFFICIAL PHOTO -->
+            <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80" alt="Louma latte" loading="lazy" />
+          </div>
+          <div class="product-name">Louma Latte</div>
+          <div class="product-price">$7</div>
         </div>
       </div>
-
-      <div class="grid-3">
-
-        <article class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14c2-2 5-2 7 0s5 2 7 0 4-2 4 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/><path d="M7 11c0-3 2-5 5-5s5 2 5 5"/></svg>
-          </div>
-          <h3>Butter Croissant</h3>
-          <p>Laminated 81 layers. The classic, done right.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c0-4 3-7 8-7s8 3 8 7-3 7-8 7-8-3-8-7z"/><path d="M9 11h6M9 14h4"/></svg>
-          </div>
-          <h3>Zaatar Labneh Croissant</h3>
-          <p>Tangy whipped labneh, wild za'atar, a finish of olive oil and sea salt.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 4c2 2 2 4 0 6M12 14c2 2 2 4 0 6M4 12c2-2 4-2 6 0M14 12c2-2 4-2 6 0"/></svg>
-          </div>
-          <h3>Pistachio Rose Croissant</h3>
-          <p>House pistachio cream, a whisper of rose, candied petals on top.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="6"/><path d="M6 11c2-2 4-2 6 0s4 2 6 0"/></svg>
-          </div>
-          <h3>Sourdough Loaf</h3>
-          <p>72-hour cold ferment. Open crumb, deep crust, naturally leavened.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><path d="M8 4v2M11 3v3M14 4v2"/></svg>
-          </div>
-          <h3>Specialty Coffee</h3>
-          <p>Single-origin espresso. Local roasters, careful extraction, oat available.</p>
-        </article>
-
-        <article class="card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M4 12h16M12 8v12M9 5l3-2 3 2"/></svg>
-          </div>
-          <h3>Pastry Gift Boxes</h3>
-          <p>Curated selections for guests, hosts, and offices. Made to share.</p>
-        </article>
-
-      </div>
+      <button class="text-link" data-page="page-menu">See full menu →</button>
     </div>
   </section>
 
-  <!-- Doodle divider -->
-  <div class="container" style="padding: 24px 24px 56px;">
-    <svg id="bread-svg" class="doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true">
-        <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z" style="--len:520"/>
-        <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-        <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-        <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-      </svg>
-  </div>
-
-  <!-- Mission band -->
-  <section class="mission-band">
-    <h2>More than a bakery.</h2>
-    <p>All profits go directly to The Louma Initiative, a 501(c)(3) nonprofit.</p>
-    <div class="mission-band-actions">
-      <button class="btn btn-ghost" data-page="page-mission">Read Our Mission</button>
-    </div>
-  </section>
-
-  <!-- Location bar -->
-  <section class="loc-bar">
-    <div class="container loc-grid">
-      <div class="loc-item">
-        <div class="label">Visit</div>
-        <div class="value">3223 Wilshire Blvd<small>Santa Monica, CA 90403</small></div>
-      </div>
-      <div class="loc-item">
-        <div class="label">Hours</div>
-        <div class="value">Mon–Fri · 7a–6p<small>Sat–Sun · 8a–4p</small></div>
-      </div>
-      <div class="loc-item">
-        <div class="label">Follow</div>
-        <div class="value">@loumabakery<small>For opening date &amp; daily bakes</small></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Newsletter -->
-  <section class="newsletter" id="newsletter">
-    <div class="container">
-      <div class="newsletter-inner">
-        <div class="eyebrow">Opening updates</div>
-        <h2>Be the first to know when we open.</h2>
-        <p>She's so excited to have you. Be the first to know when we open in July.</p>
-        <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="Welcome to the Louma community 🥐" />
-          <input type="hidden" name="_replyto" id="newsletterReplyTo" value="" />
-          <input type="email" name="email" id="newsletterEmail" placeholder="you@example.com" required aria-label="Email address" />
-          <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-        <div class="newsletter-success" id="newsletterSuccess">You're on the list. See you in July.</div>
-        <p class="newsletter-note" id="newsletterNote">No spam. Unsubscribe anytime.</p>
-      </div>
-    </div>
-  </section>
-
-</section>
-
-<!-- ============================================================
-     ABOUT
-============================================================ -->
-<section class="page" id="page-story">
-
-  <div class="about-split">
-    <div class="about-left">
-      <div class="eyebrow">Our story</div>
-      <h1>A bakery built around people.</h1>
-      <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist.</p>
-    </div>
-    <div class="about-right">
-      <div class="about-block">
-        <h3>A tribute.</h3>
-        <p>Louma Bakery is named after my sister and a tribute to the warmth of her presence. A friend once said, "Being around Louma is like pulling fresh cookies from the oven."</p>
-      </div>
-      <div class="about-block">
-        <h3>The kitchen.</h3>
-        <p>Our West LA kitchen is rooted in European baking traditions with a Levantine twist. Think organic seeded sourdough meets our house-made fattoush salad.</p>
-      </div>
-      <div class="about-block">
-        <h3>The purpose.</h3>
-        <p>All profits go directly to The Louma Initiative, a 501(c)(3) public charity supporting employment for people with learning and developmental differences.</p>
-      </div>
-      <div class="about-pullquote">
-        <blockquote>"Dedicated to my sister and her sweet tooth, Louma Bakery is a space to meet each other where we are and share in good food. She's so excited to have you."</blockquote>
-        <cite>Milla</cite>
-      </div>
-      <div class="about-paypal">
-        <p>Moved by the story? Help us grow.</p>
-        <form action="https://www.paypal.com/donate" method="post" target="_blank">
-          <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
-          <input type="hidden" name="currency_code" value="USD" />
-          <input type="hidden" name="item_name" value="Support The Louma Initiative" />
-          <button type="submit" class="paypal-outline-pill">Support via PayPal →</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
+  <!-- SECTION 4 — PHOTO GRID -->
   <section class="section">
-    <div class="container">
-      <div class="section-head" style="justify-content:flex-start;">
-        <div>
-          <div class="eyebrow">What we stand for</div>
-          <h2>Three things that guide us.</h2>
-        </div>
-      </div>
-      <div class="values-grid">
-        <div class="value-box">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3 1.5-5L5 8.5 10 8z"/></svg>
-          </div>
-          <h3>Artisan Craft</h3>
-          <p>Slow ferments, classical lamination, careful sourcing. The basics, done with patience.</p>
-        </div>
-        <div class="value-box">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10"/></svg>
-          </div>
-          <h3>Social Impact</h3>
-          <p>A nonprofit at our core. Inclusive employment, fair wages, and pathways to growth.</p>
-        </div>
-        <div class="value-box">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="11" r="2.5"/><path d="M3 20c.5-3 3-5 6-5s5.5 2 6 5"/><path d="M14 19c.5-2 2-3.5 4-3.5s3 1 3.5 2.5"/></svg>
-          </div>
-          <h3>Community First</h3>
-          <p>A neighborhood bakery before anything else. Familiar faces, regular orders, real welcome.</p>
-        </div>
-      </div>
+    <div class="photo-grid">
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&q=80" alt="" loading="lazy" />
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700&q=80" alt="" loading="lazy" />
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img src="https://images.unsplash.com/photo-1534432182912-63863115e106?w=700&q=80" alt="" loading="lazy" />
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=700&q=80" alt="" loading="lazy" />
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=700&q=80" alt="" loading="lazy" />
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=80" alt="" loading="lazy" />
     </div>
   </section>
 
-  <div class="quote-bar">
-    <blockquote>
-      "A great bakery is a place that gives back the warmth it takes in."
-      <cite>The Louma Team</cite>
-    </blockquote>
-  </div>
+  <!-- SECTION 5 — LOCATION -->
+  <section class="location-section">
+    <div class="container">
+      <div class="location-inner">
+        <div class="big-num">1</div>
+        <h2>Louma Bakery</h2>
+        <p><a href="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Los+Angeles,+CA+90010" target="_blank" rel="noopener">3223 Wilshire Blvd, Los Angeles, CA 90010</a></p>
+        <p>Monday to Saturday, 8am to 4pm</p>
+        <p><a href="tel:+13104642733">(310) 464-2733</a></p>
+      </div>
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img class="location-image" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80" alt="Louma Bakery storefront" loading="lazy" />
+    </div>
+  </section>
 
-  <div class="opening-note container">
-    <p>We're opening soon in Santa Monica. Follow <a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a> for the official opening date and a first look at the bakes.</p>
-  </div>
+  <!-- SECTION 6 — NEWSLETTER -->
+  <section class="newsletter-band" id="newsletter">
+    <h2>Opening July 2026.</h2>
+    <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Welcome to the Louma community" />
+      <input type="hidden" name="_replyto" id="newsletterReplyTo" value="" />
+      <input type="email" name="email" id="newsletterEmail" placeholder="Your email" required aria-label="Email address" />
+      <button type="submit">Subscribe</button>
+    </form>
+    <div class="newsletter-thanks" id="newsletterThanks">You're on the list. See you in July.</div>
+  </section>
 
 </section>
 
@@ -1772,910 +1219,347 @@
      MENU
 ============================================================ -->
 <section class="page" id="page-menu">
-
-  <div class="page-header">
-    <div class="container">
-      <div class="eyebrow">The menu</div>
-      <h1>Everything here looks soooo yummy.</h1>
-      <p>A short, focused menu that changes with the seasons. Signature items are marked. Prices are subject to change.</p>
-
-      <div class="tabs" role="tablist">
-        <button class="tab active" data-tab="pastries">Pastries</button>
-        <button class="tab" data-tab="breads">Breads</button>
-        <button class="tab" data-tab="coffee">Coffee &amp; Drinks</button>
-        <button class="tab" data-tab="food">Light Food</button>
-        <button class="tab" data-tab="boxes">Boxes &amp; Catering</button>
-      </div>
-    </div>
+  <div class="nav-spacer"></div>
+  <div class="page-heading">
+    <h1>Menu</h1>
+    <p class="sub">Baked fresh every morning. We sell out daily.</p>
   </div>
 
   <div class="menu-section">
-    <div class="container">
 
-      <!-- Pastries -->
-      <div class="menu-list active" id="tab-pastries">
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Butter croissant" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Butter Croissant <span class="badge-signature">Signature</span></div>
-              <div class="menu-item-desc">Laminated, baked dark, classic.</div>
-            </div>
-            <div class="menu-item-price">$5</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Almond Croissant</div>
-            <div class="menu-item-desc">Twice-baked with frangipane.</div>
-          </div>
-          <div class="menu-item-price">$6</div>
-        </div>
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Za'atar labneh croissant" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Zaatar Labneh Croissant <span class="badge-signature">Signature</span></div>
-              <div class="menu-item-desc">Whipped labneh, wild za'atar.</div>
-            </div>
-            <div class="menu-item-price">$7</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=600&q=80" alt="Pistachio rose croissant" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Pistachio Rose Croissant <span class="badge-signature">Signature</span></div>
-              <div class="menu-item-desc">House pistachio cream, candied petals.</div>
-            </div>
-            <div class="menu-item-price">$7</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&q=80" alt="Chocolate tahini cookie" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Chocolate Tahini Cookie</div>
-              <div class="menu-item-desc">Dark chocolate, sesame, flaky salt.</div>
-            </div>
-            <div class="menu-item-price">$4</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&q=80" alt="Orange blossom cake" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Orange Blossom Cake</div>
-              <div class="menu-item-desc">Olive oil cake, citrus syrup.</div>
-            </div>
-            <div class="menu-item-price">$7</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Seasonal Danish</div>
-            <div class="menu-item-desc">Seasonal market fruit.</div>
-          </div>
-          <div class="menu-item-price">$6</div>
-        </div>
-      </div>
+    <div class="menu-cat-label">Pastries</div>
+    <div class="menu-row"><div class="menu-row-name">Butter Croissant</div><div class="menu-row-price">$6</div></div>
+    <div class="menu-row"><div class="menu-row-name">Zaatar Labneh Croissant</div><div class="menu-row-price">$7</div></div>
+    <div class="menu-row"><div class="menu-row-name">Pistachio Rose Croissant</div><div class="menu-row-price">$7</div></div>
+    <div class="menu-row"><div class="menu-row-name">Chocolate Tahini Cookie</div><div class="menu-row-price">$5</div></div>
 
-      <!-- Breads -->
-      <div class="menu-list" id="tab-breads">
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=600&q=80" alt="Country sourdough loaf" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Sourdough <span class="badge-signature">Signature</span></div>
-              <div class="menu-item-desc">72-hour cold ferment.</div>
-            </div>
-            <div class="menu-item-price">$14</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Baguette</div>
-            <div class="menu-item-desc">Crisp shell, tender crumb.</div>
-          </div>
-          <div class="menu-item-price">$5</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Rye</div>
-            <div class="menu-item-desc">Caraway, whole rye, long ferment.</div>
-          </div>
-          <div class="menu-item-price">$12</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Specialty Loaf</div>
-            <div class="menu-item-desc">Rotating seasonal loaf.</div>
-          </div>
-          <div class="menu-item-price">$15</div>
-        </div>
-      </div>
+    <div class="menu-cat-label">Bread</div>
+    <div class="menu-row"><div class="menu-row-name">Country Sourdough half</div><div class="menu-row-price">$9</div></div>
+    <div class="menu-row"><div class="menu-row-name">Country Sourdough whole</div><div class="menu-row-price">$16</div></div>
+    <div class="menu-row"><div class="menu-row-name">Baguette</div><div class="menu-row-price">$5</div></div>
 
-      <!-- Coffee -->
-      <div class="menu-list" id="tab-coffee">
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Espresso</div>
-            <div class="menu-item-desc">Local roaster, single origin.</div>
-          </div>
-          <div class="menu-item-price">$4</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Cappuccino</div>
-            <div class="menu-item-desc">Espresso, steamed milk, microfoam.</div>
-          </div>
-          <div class="menu-item-price">$6</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Latte</div>
-            <div class="menu-item-desc">Whole, oat, or almond.</div>
-          </div>
-          <div class="menu-item-price">$6.50</div>
-        </div>
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" alt="Louma latte with cardamom and orange blossom" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Louma Latte <span class="badge-signature">Signature</span></div>
-              <div class="menu-item-desc">Cardamom, orange blossom, steamed milk.</div>
-            </div>
-            <div class="menu-item-price">$7.50</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Iced Coffee</div>
-            <div class="menu-item-desc">Slow-steeped overnight.</div>
-          </div>
-          <div class="menu-item-price">$6</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Matcha</div>
-            <div class="menu-item-desc">Ceremonial-grade, hot or iced.</div>
-          </div>
-          <div class="menu-item-price">$6.50</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Seasonal Tea</div>
-            <div class="menu-item-desc">Loose-leaf, rotating.</div>
-          </div>
-          <div class="menu-item-price">$5</div>
-        </div>
-      </div>
+    <div class="menu-cat-label">Toasts and Sandwiches</div>
+    <div class="menu-row"><div class="menu-row-name">Labneh Toast</div><div class="menu-row-price">$12</div></div>
+    <div class="menu-row"><div class="menu-row-name">Louma Breakfast Sandwich</div><div class="menu-row-price">$14</div></div>
 
-      <!-- Food -->
-      <div class="menu-list" id="tab-food">
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80" alt="Louma breakfast sandwich" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Breakfast Sandwich</div>
-              <div class="menu-item-desc">Scramble, gruyère, butter croissant.</div>
-            </div>
-            <div class="menu-item-price">$11</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Avocado Toast</div>
-            <div class="menu-item-desc">Sourdough, avocado, lemon, urfa chili.</div>
-          </div>
-          <div class="menu-item-price">$13</div>
-        </div>
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Labneh toast with za'atar" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Labneh Toast <span class="badge-signature">Signature</span></div>
-              <div class="menu-item-desc">Labneh, za'atar, cucumber, mint.</div>
-            </div>
-            <div class="menu-item-price">$12</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Seasonal Salad</div>
-            <div class="menu-item-desc">Market greens, citrus, nuts.</div>
-          </div>
-          <div class="menu-item-price">$14</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Tabbouleh</div>
-            <div class="menu-item-desc">Bulgur, parsley, mint, tomato.</div>
-          </div>
-          <div class="menu-item-price">$9</div>
-        </div>
-      </div>
+    <div class="menu-cat-label">Drinks</div>
+    <div class="menu-row"><div class="menu-row-name">Louma Latte</div><div class="menu-row-price">$7</div></div>
+    <div class="menu-row"><div class="menu-row-name">Espresso</div><div class="menu-row-price">$4</div></div>
+    <div class="menu-row"><div class="menu-row-name">Cappuccino</div><div class="menu-row-price">$6</div></div>
+    <div class="menu-row"><div class="menu-row-name">Matcha Latte</div><div class="menu-row-price">$7</div></div>
+    <div class="menu-row"><div class="menu-row-name">Iced Coffee</div><div class="menu-row-price">$6</div></div>
 
-      <!-- Boxes -->
-      <div class="menu-list" id="tab-boxes">
-        <div class="menu-item">
-          <img class="menu-item-image" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Pastry gift box" loading="lazy" />
-          <div class="menu-item-row">
-            <div class="menu-item-main">
-              <div class="menu-item-name">Pastry Box <span class="badge-signature">Signature</span></div>
-              <div class="menu-item-desc">Curated morning bakes.</div>
-            </div>
-            <div class="menu-item-price">from $28</div>
-          </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Breakfast Tray</div>
-            <div class="menu-item-desc">Pastries, sandwiches, fruit, coffee.</div>
-          </div>
-          <div class="menu-item-price">from $65</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Dessert Box</div>
-            <div class="menu-item-desc">Cookies, cake slices, sweets.</div>
-          </div>
-          <div class="menu-item-price">from $40</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Office Catering</div>
-            <div class="menu-item-desc">Built around your team.</div>
-          </div>
-          <div class="menu-item-price">custom</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-main">
-            <div class="menu-item-name">Event Order</div>
-            <div class="menu-item-desc">Weddings, showers, dinners.</div>
-          </div>
-          <div class="menu-item-price">custom</div>
-        </div>
-      </div>
+    <div class="menu-cat-label">Sweets</div>
+    <div class="menu-row"><div class="menu-row-name">Orange Blossom Cake</div><div class="menu-row-price">$8</div></div>
 
-    </div>
+    <div class="menu-cat-label">Boxes</div>
+    <div class="menu-row"><div class="menu-row-name">Pastry Gift Box 4pc</div><div class="menu-row-price">$28</div></div>
+    <div class="menu-row"><div class="menu-row-name">Pastry Gift Box 8pc</div><div class="menu-row-price">$52</div></div>
+    <div class="menu-row"><div class="menu-row-name">Custom catering</div><div class="menu-row-price">inquire</div></div>
+
+    <p class="menu-allergen">Please ask about allergens and dietary restrictions.</p>
   </div>
-
 </section>
 
 <!-- ============================================================
-     GALLERY
+     OUR STORY
 ============================================================ -->
-<section class="page" id="page-gallery">
+<section class="page" id="page-story">
+  <div class="nav-spacer"></div>
+  <div class="page-heading">
+    <h1>Our Story</h1>
+  </div>
 
-  <div class="page-header">
-    <div class="container">
-      <div class="eyebrow">A first look</div>
-      <h1>The bakery, in pictures.</h1>
-      <p>Photography is coming soon. For now, a glimpse of what to expect when our doors open.</p>
+  <div class="story-section">
+    <div class="small-label">How it started</div>
+    <h2>It started at home.</h2>
+    <p>I started baking out of my apartment kitchen, mostly for my sister Louma. Watching her settle into a Saturday morning routine, the timer, the smell of butter, the way she greeted the regulars who started showing up, is when I knew this had to be a real place.</p>
+  </div>
+
+  <!-- REPLACE WITH OFFICIAL PHOTO -->
+  <img class="story-full-image" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1400&q=80" alt="" loading="lazy" />
+
+  <div class="story-two-col">
+    <div>
+      <div class="small-label">The food</div>
+      <h2>European technique. Levantine flavor.</h2>
+      <p>81-layer croissants laminated by hand, sourdough cold-fermented for 72 hours, alongside zaatar, labneh, pistachio, and orange blossom.</p>
+    </div>
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=900&q=80" alt="Croissant on tray" loading="lazy" />
+  </div>
+
+  <div class="story-two-col">
+    <!-- REPLACE WITH FOUNDER PHOTO -->
+    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=80" alt="Milla, founder of Louma Bakery" loading="lazy" />
+    <div>
+      <div class="small-label">The founder</div>
+      <div class="founder-name">Milla Ghandour</div>
+      <p>I trained in Paris and Beirut, then came home to West LA to build a bakery worth my sister's name. Every loaf and every latte here is part of a place I always wanted her to walk into.</p>
+      <div class="founder-signature">Milla</div>
     </div>
   </div>
 
-  <section class="section">
-    <div class="container">
-
-      <div class="gallery-grid">
-        <div class="gallery-cell span-2 row-2">
-          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14c2-2 5-2 7 0s5 2 7 0 4-2 4 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/><path d="M7 11c0-3 2-5 5-5s5 2 5 5"/></svg>
-          <h3>Pastries</h3>
-          <span class="small">Daily croissants &amp; viennoiserie</span>
-        </div>
-        <div class="gallery-cell">
-          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/></svg>
-          <h3>Coffee Bar</h3>
-          <span class="small">Espresso &amp; pour-over</span>
-        </div>
-        <div class="gallery-cell">
-          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="6"/><path d="M6 11c2-2 4-2 6 0s4 2 6 0"/></svg>
-          <h3>Artisan Breads</h3>
-          <span class="small">Naturally leavened</span>
-        </div>
-        <div class="gallery-cell">
-          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6 6 .5-4.5 4.5L18 21l-6-3-6 3 1.5-7L3 9.5 9 9z"/></svg>
-          <h3>Mediterranean Flavors</h3>
-          <span class="small">Za'atar, rose, pistachio</span>
-        </div>
-        <div class="gallery-cell">
-          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M4 12h16M12 8v12M9 5l3-2 3 2"/></svg>
-          <h3>Gift Boxes</h3>
-          <span class="small">Curated for sharing</span>
-        </div>
-        <div class="gallery-cell span-2">
-          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-6 9 6v11"/><path d="M9 21v-7h6v7"/></svg>
-          <h3>Storefront</h3>
-          <span class="small">3223 Wilshire Blvd, Santa Monica, CA 90403</span>
-        </div>
-        <div class="gallery-cell">
-          <svg class="ghost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v4M12 16v4M4 12h4M16 12h4M6.3 6.3l2.8 2.8M14.9 14.9l2.8 2.8M6.3 17.7l2.8-2.8M14.9 9.1l2.8-2.8"/></svg>
-          <h3>Seasonal Sweets</h3>
-          <span class="small">What's bright right now</span>
-        </div>
-      </div>
-
-      <p class="gallery-note">Real photography is on the way. We are saving the camera roll for opening week.</p>
-
-      <h2 style="text-align:center; margin: 56px 0 8px; font-style: italic;">Live Laugh Louma</h2>
-      <svg class="doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true" style="margin-bottom: 16px;">
-        <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z" style="--len:520"/>
-        <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-        <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-        <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-      </svg>
-
-      <div class="insta-cta">
-        <h2>Follow along.</h2>
-        <p>The kitchen, the bakes, the build-out, the opening date. All on Instagram first.</p>
-        <a class="btn btn-butter" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          @loumabakery
-        </a>
-      </div>
-
-      <div class="storefront-band">
-        <div>
-          <div class="eyebrow">The Storefront</div>
-          <h3>3223 Wilshire Blvd</h3>
-          <p>Santa Monica, CA 90403. Opening soon.</p>
-        </div>
-        <div>
-          <p style="color: var(--ink); margin-bottom: 6px; font-weight: 600;">Hours (when we open)</p>
-          <p>Mon–Fri · 7am – 6pm</p>
-          <p>Sat &amp; Sun · 8am – 4pm</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
+  <div style="height: 80px;"></div>
 </section>
 
 <!-- ============================================================
      MISSION
 ============================================================ -->
 <section class="page" id="page-mission">
+  <div class="nav-spacer"></div>
+  <div class="page-heading">
+    <h1>Mission</h1>
+  </div>
 
-  <div class="mission-hero">
-    <div class="container">
-      <div class="eyebrow">Our mission</div>
-      <h1>Bread, pastry, and opportunity.</h1>
-      <p>Supportive training and employment for people with learning and developmental differences, in a professional bakery setting.</p>
+  <div class="mission-statement">
+    <p>The Louma Initiative trains and employs people with intellectual and developmental differences as bakers, baristas, and front-of-house teammates. They work the line in plain view, not in a separate program behind a door. Every dollar the bakery makes funds wages, training, and a real path to a career in food.</p>
+  </div>
+
+  <div class="mission-two-col">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <img src="https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=900&q=80" alt="" loading="lazy" />
+    <div>
+      <p>Each teammate trains alongside our head bakers and baristas. They learn lamination, espresso, customer service, and how to run a station from open to close.</p>
+      <p>We hire to keep. Full-time hours, real wages, benefits, and a job that gets harder and more interesting over time.</p>
     </div>
   </div>
 
-  <section class="section">
-    <div class="container">
-      <div class="mission-blocks">
-        <div class="mission-block">
-          <h3>Who we are</h3>
-          <p>All profits from the bakery go directly to The Louma Initiative, a 501(c)(3) public charity that fosters meaningful opportunities for people with intellectual and developmental differences.</p>
-        </div>
-        <div class="mission-block">
-          <h3>What we believe</h3>
-          <p>Everyone deserves an opportunity to grow, contribute, and cultivate their passion. This is real work, real craft, and real careers in a professional bakery setting built on patience and respect.</p>
-        </div>
-        <div class="mission-block">
-          <h3>How it works</h3>
-          <p>Every team member receives hands-on training and mentorship in our West LA kitchen. We are building careers alongside beautiful bread.</p>
-        </div>
-        <div class="mission-block">
-          <h3>How you help</h3>
-          <p>When you buy a pastry, a loaf, or a box, you are directly funding The Louma Initiative.</p>
-        </div>
-      </div>
-
-      <div class="mission-cta">
-        <button class="btn btn-primary" data-page="page-visit">Support Our Mission</button>
-      </div>
-    </div>
+  <section class="mission-support">
+    <h2>Support the mission.</h2>
+    <p>Every dollar funds wages, training, and careers.</p>
+    <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block;">
+      <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
+      <input type="hidden" name="currency_code" value="USD" />
+      <input type="hidden" name="item_name" value="Support The Louma Initiative" />
+      <button type="submit" class="paypal-btn">Donate</button>
+    </form>
   </section>
-
-  <section class="impact-stats">
-    <div class="impact-stats-grid">
-      <div class="impact-stat">
-        <span class="impact-stat-num">100%</span>
-        <p class="impact-stat-label">of our team trained in-house</p>
-      </div>
-      <div class="impact-stat">
-        <span class="impact-stat-num">July 2025</span>
-        <p class="impact-stat-label">opening in Santa Monica</p>
-      </div>
-      <div class="impact-stat">
-        <span class="impact-stat-num symbol">∞</span>
-        <p class="impact-stat-label">croissants to be made with purpose</p>
-      </div>
-    </div>
-  </section>
-
-  <section style="background: #F5EDD6; border-top: 3px solid #D4202E; padding: 70px 40px; text-align: center;">
-    <div style="max-width: 680px; margin: 0 auto;">
-      <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; color: #1A1A1A; font-size: 38px; font-weight: 400;">Every croissant tells a story.</h2>
-      <p style="color: #1A1A1A; font-size: 17px; line-height: 1.85; margin-top: 20px;">Behind every pastry is a team member building something real. When you donate, you help someone wake up with purpose.</p>
-      <p style="color: #9C7B6A; font-size: 14px; margin-top: 16px;">Every dollar funds training, fair wages, and the kind of daily dignity that comes from doing work you are proud of.</p>
-      <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block; margin-top: 32px;">
-        <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
-        <input type="hidden" name="currency_code" value="USD" />
-        <input type="hidden" name="item_name" value="Support The Louma Initiative" />
-        <button type="submit" style="
-          background: #ED2739;
-          color: #F5EDD6;
-          border: none;
-          border-radius: 999px;
-          padding: 16px 36px;
-          font-size: 15px;
-          font-weight: 700;
-          cursor: pointer;
-          letter-spacing: 0.03em;
-          transition: background 0.2s, transform 0.2s;
-        "
-        onmouseover="this.style.background='#A10017'; this.style.transform='translateY(-2px)'"
-        onmouseout="this.style.background='#ED2739'; this.style.transform='translateY(0)'"
-        >
-          Support the team behind the bread →
-        </button>
-      </form>
-      <p style="color: #9C7B6A; font-size: 12px; margin-top: 14px;">You will be redirected to PayPal. Louma Bakery is owned by The Louma Initiative, a registered nonprofit.</p>
-    </div>
-  </section>
-
 </section>
 
 <!-- ============================================================
      CATERING
 ============================================================ -->
 <section class="page" id="page-catering">
+  <div class="nav-spacer"></div>
+  <div class="page-heading">
+    <h1>Catering</h1>
+    <p class="sub">Pastry boxes, breakfast trays, and full event catering across the westside.</p>
+  </div>
 
-  <div class="page-header">
-    <div class="container">
-      <div class="eyebrow">Catering &amp; orders</div>
-      <h1>Bring Louma to your table.</h1>
-      <p>Pastry boxes, breakfast trays, and bakery orders for offices, events, gifting, and everyday hosting.</p>
+  <div class="catering-grid">
+    <div class="catering-block">
+      <div class="small-label">Gift and retail</div>
+      <h3>Boxes worth giving.</h3>
+      <p>Curated pastry selections for gifting, birthdays, and celebrations.</p>
+    </div>
+    <div class="catering-block">
+      <div class="small-label">Events and offices</div>
+      <h3>For your next gathering.</h3>
+      <p>Breakfast trays and pastry assortments for studios, agencies, and private events.</p>
+    </div>
+    <div class="catering-block">
+      <div class="small-label">Custom</div>
+      <h3>Tell us what you need.</h3>
+      <p>Send your date, headcount, and what you have in mind.</p>
     </div>
   </div>
 
-  <section class="section">
-    <div class="container">
+  <!-- REPLACE WITH OFFICIAL PHOTO -->
+  <img class="catering-image" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80" alt="Pastry box" loading="lazy" />
 
-      <div class="offer-grid">
-        <div class="offer-card">
-          <span class="offer-emoji" aria-hidden="true">🥐</span>
-          <h3>Pastry Boxes</h3>
-          <p>A curated mix of our morning bakes, perfect for hosting, gifting, or a Tuesday treat.</p>
-        </div>
-        <div class="offer-card">
-          <span class="offer-emoji" aria-hidden="true">🍳</span>
-          <h3>Breakfast Trays</h3>
-          <p>Pastries, mini sandwiches, fresh fruit, and optional coffee carafes for your morning meeting.</p>
-        </div>
-        <div class="offer-card">
-          <span class="offer-emoji" aria-hidden="true">🍰</span>
-          <h3>Dessert Boxes</h3>
-          <p>Cookies, cake slices, and seasonal sweets for dinners, showers, and afternoon spreads.</p>
-        </div>
-        <div class="offer-card">
-          <span class="offer-emoji" aria-hidden="true">🎉</span>
-          <h3>Office &amp; Event Catering</h3>
-          <p>Recurring office orders, weddings, and large events, built around your team and schedule.</p>
-        </div>
+  <div class="catering-mailto-wrap">
+    <a class="btn-dark" href="mailto:catering@loumabakery.com">catering@loumabakery.com</a>
+  </div>
+
+  <form class="form-block" id="cateringForm" novalidate>
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label for="cat-name">Name</label>
+        <input id="cat-name" name="name" type="text" required />
       </div>
-
-      <form class="form-card" id="cateringForm" novalidate>
-        <h2 style="margin-bottom: 8px;">Catering inquiry</h2>
-        <p style="color: var(--muted); margin-bottom: 28px;">Tell us a little about your order and we'll be in touch within one business day.</p>
-
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="cat-name">Name</label>
-            <input id="cat-name" name="name" type="text" required />
-          </div>
-          <div class="form-row">
-            <label for="cat-email">Email</label>
-            <input id="cat-email" name="email" type="email" required />
-          </div>
-          <div class="form-row">
-            <label for="cat-phone">Phone</label>
-            <input id="cat-phone" name="phone" type="tel" />
-          </div>
-          <div class="form-row">
-            <label for="cat-date">Event date</label>
-            <input id="cat-date" name="event_date" type="date" />
-          </div>
-          <div class="form-row">
-            <label for="cat-fulfillment">Pickup or delivery</label>
-            <select id="cat-fulfillment" name="fulfillment">
-              <option value="">Select…</option>
-              <option>Pickup</option>
-              <option>Delivery</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="cat-people">Number of people</label>
-            <input id="cat-people" name="people" type="number" min="1" />
-          </div>
-          <div class="form-row full">
-            <label for="cat-type">Type of order</label>
-            <select id="cat-type" name="order_type">
-              <option value="">Select…</option>
-              <option>Pastry Box</option>
-              <option>Breakfast Tray</option>
-              <option>Dessert Box</option>
-              <option>Office Catering</option>
-              <option>Event Order</option>
-              <option>Custom</option>
-            </select>
-          </div>
-          <div class="form-row full">
-            <label for="cat-message">Message</label>
-            <textarea id="cat-message" name="message" placeholder="Tell us about your event, dietary needs, or any specifics."></textarea>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <p class="form-note">Orders require 48 hours minimum notice. For large events and recurring office orders, please reach out directly.</p>
-          <button type="submit" class="btn btn-primary">Send Inquiry</button>
-        </div>
-
-        <div class="form-success" id="cateringSuccess">Thank you. Your inquiry has been received.</div>
-      </form>
-
+      <div class="form-row">
+        <label for="cat-email">Email</label>
+        <input id="cat-email" name="email" type="email" required />
+      </div>
+      <div class="form-row">
+        <label for="cat-date">Event date</label>
+        <input id="cat-date" name="event_date" type="date" />
+      </div>
+      <div class="form-row">
+        <label for="cat-people">Headcount</label>
+        <input id="cat-people" name="people" type="number" min="1" />
+      </div>
     </div>
-  </section>
-
+    <div class="form-row">
+      <label for="cat-message">What you have in mind</label>
+      <textarea id="cat-message" name="message"></textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn-dark">Send</button>
+    </div>
+    <div class="form-success" id="cateringSuccess">Thank you. Your inquiry has been received.</div>
+  </form>
 </section>
 
 <!-- ============================================================
      CAREERS
 ============================================================ -->
 <section class="page" id="page-careers">
+  <div class="nav-spacer"></div>
+  <div class="page-heading">
+    <h1>Careers</h1>
+    <p class="sub">Come bake with us.</p>
+  </div>
 
-  <div class="page-header">
-    <div class="container">
-      <div class="eyebrow">Careers at Louma</div>
-      <h1>Work built around craft, kindness, and growth.</h1>
+  <div class="careers-two-col">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80" alt="Inside the bakery" loading="lazy" />
+    <div>
+      <p>The work is early mornings, lamination, espresso, and standing on your feet. The people you meet are regulars who learn your name on the second visit.</p>
+      <p>We welcome teammates with learning and developmental differences and we hire to keep.</p>
     </div>
   </div>
 
-  <section class="section">
-    <div class="container">
-
-      <div class="careers-intro">
-        <p>A team as thoughtful as the bread, with a workplace built for people of every learning and developmental difference.</p>
-        <p style="font-family:'Inter',sans-serif; font-size:14px; color:#1A1A1A; font-style:italic; margin-top:24px;">Want to support our team before you even visit?</p>
-        <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block; margin-top:8px;">
-          <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
-          <input type="hidden" name="currency_code" value="USD" />
-          <input type="hidden" name="item_name" value="Support The Louma Initiative" />
-          <button type="submit" class="paypal-outline-pill">Donate via PayPal →</button>
-        </form>
+  <form class="form-block" id="careersForm" novalidate>
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label for="car-name">Name</label>
+        <input id="car-name" name="name" type="text" required />
       </div>
-
-      <div class="pill-tags">
-        <span class="pill-tag">Patience</span>
-        <span class="pill-tag">Respect</span>
-        <span class="pill-tag">Kindness</span>
-        <span class="pill-tag">Consistency</span>
-        <span class="pill-tag">Teamwork</span>
-        <span class="pill-tag">Craftsmanship</span>
-        <span class="pill-tag">Reliability</span>
+      <div class="form-row">
+        <label for="car-email">Email</label>
+        <input id="car-email" name="email" type="email" required />
       </div>
-
-      <div class="roles-grid">
-        <div class="role-card">
-          <h3>Head Baker</h3>
-          <p>Lead the bread program. Sourdough, viennoiserie, daily production and team mentorship.</p>
-        </div>
-        <div class="role-card">
-          <h3>Baker</h3>
-          <p>Mix, shape, and bake alongside the head baker. Mornings start early; the pace is steady.</p>
-        </div>
-        <div class="role-card">
-          <h3>Head Chef</h3>
-          <p>Run the kitchen and savory menu. Toasts, sandwiches, salads, and seasonal specials.</p>
-        </div>
-        <div class="role-card">
-          <h3>Barista</h3>
-          <p>Pull beautiful espresso, steam thoughtful milk, and welcome regulars by name.</p>
-        </div>
-        <div class="role-card">
-          <h3>General Manager</h3>
-          <p>Oversee operations, scheduling, and team development across the full bakery.</p>
-        </div>
-        <div class="role-card">
-          <h3>Front of House / Cashier</h3>
-          <p>The face of Louma. Warm welcomes, fast service, and genuine care for every guest.</p>
-        </div>
+      <div class="form-row">
+        <label for="car-phone">Phone</label>
+        <input id="car-phone" name="phone" type="tel" />
       </div>
-
-      <form class="form-card" id="careersForm" novalidate>
-        <h2 style="margin-bottom: 8px;">Apply to join us</h2>
-        <p style="color: var(--muted); margin-bottom: 28px;">Tell us a little about yourself. We read every application.</p>
-
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="car-name">Name</label>
-            <input id="car-name" name="name" type="text" required />
-          </div>
-          <div class="form-row">
-            <label for="car-email">Email</label>
-            <input id="car-email" name="email" type="email" required />
-          </div>
-          <div class="form-row">
-            <label for="car-phone">Phone</label>
-            <input id="car-phone" name="phone" type="tel" />
-          </div>
-          <div class="form-row">
-            <label for="car-role">Role applying for</label>
-            <select id="car-role" name="role">
-              <option value="">Select a role…</option>
-              <option>Head Baker</option>
-              <option>Baker</option>
-              <option>Head Chef</option>
-              <option>Barista</option>
-              <option>General Manager</option>
-              <option>Front of House / Cashier</option>
-            </select>
-          </div>
-          <div class="form-row full">
-            <label for="car-about">Tell us about yourself</label>
-            <textarea id="car-about" name="about" placeholder="Your experience, what draws you to Louma, anything you'd like us to know."></textarea>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <p class="form-note">We're an equal opportunity employer. Applicants with learning and developmental differences are strongly encouraged.</p>
-          <button type="submit" class="btn btn-primary">Submit Application</button>
-        </div>
-
-        <div class="form-success" id="careersSuccess">Thank you for applying. We will be in touch soon.</div>
-      </form>
-
+      <div class="form-row">
+        <label for="car-role">Role</label>
+        <select id="car-role" name="role">
+          <option value="">Select a role</option>
+          <option>Baker</option>
+          <option>Barista</option>
+          <option>Front of House</option>
+          <option>Pastry Chef</option>
+          <option>Other</option>
+        </select>
+      </div>
     </div>
-  </section>
-
+    <div class="form-row">
+      <label for="car-about">A few sentences about you</label>
+      <textarea id="car-about" name="about"></textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn-dark">Submit</button>
+    </div>
+    <div class="form-success" id="careersSuccess">Thank you for applying. We will be in touch soon.</div>
+  </form>
 </section>
 
 <!-- ============================================================
      VISIT US
 ============================================================ -->
 <section class="page" id="page-visit">
-
-  <div class="container visit-hero">
-    <div class="eyebrow">Visit us</div>
-    <h1>Find us on Wilshire.</h1>
-    <div class="visit-address">
-      3223 Wilshire Blvd
-      <small>Santa Monica, CA 90403</small>
-    </div>
-    <span class="visit-badge"><span class="pill-dot"></span> Opening soon</span>
-    <p style="color: var(--muted); margin-top: 24px;">Hours to be confirmed. Check <a href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="color: var(--ink); font-weight: 500;">@loumabakery</a> for the latest.</p>
+  <div class="nav-spacer"></div>
+  <div class="page-heading">
+    <h1>Visit Us</h1>
   </div>
 
-  <section class="section" style="padding-top: 32px; padding-bottom: 24px;">
-    <div class="container">
-      <div class="map-wrap">
-        <iframe
-          src="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Santa+Monica,+CA+90403&z=16&output=embed"
-          width="100%"
-          height="400"
-          style="border:0; border-radius:12px;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Map of 3223 Wilshire Blvd, Santa Monica, CA 90403"></iframe>
-      </div>
+  <div class="visit-block">
+    <div class="big-num">1</div>
+    <h2>Louma Bakery, Los Angeles</h2>
+    <p><a href="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Los+Angeles,+CA+90010" target="_blank" rel="noopener">3223 Wilshire Blvd, Los Angeles, CA 90010</a></p>
+    <p>Monday to Saturday, 8am to 4pm</p>
+    <p><a href="tel:+13104642733">(310) 464-2733</a></p>
+    <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+  </div>
 
-      <div class="contact-quick">
-        <div class="contact-quick-item">
-          <div class="label">Instagram</div>
-          <div class="value"><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></div>
-        </div>
-        <div class="contact-quick-item">
-          <div class="label">Web</div>
-          <div class="value"><a href="https://loumabakery.com" target="_blank" rel="noopener">loumabakery.com</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- REPLACE WITH OFFICIAL PHOTO -->
+  <img class="visit-image" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80" alt="Louma Bakery storefront" loading="lazy" />
 
-  <section class="press-section" style="background: var(--cream-card); border-top: 1px solid var(--cream-line); border-bottom: 1px solid var(--cream-line);">
-    <div class="container">
-      <div class="section-head" style="justify-content: center; text-align: center; flex-direction: column; align-items: center; margin-bottom: 12px;">
-        <div>
-          <div class="eyebrow">Press</div>
-          <h2>In the News</h2>
-        </div>
-      </div>
-      <div class="press-list">
-        <div class="press-item">
-          <div class="press-meta">Santa Monica Mirror<br/>February 2026</div>
-          <div class="press-quote">"Louma Bakery to open in Santa Monica with artisan breads and an inclusive employment mission."</div>
-        </div>
-        <div class="press-item">
-          <div class="press-meta">Hoodline<br/>February 2026</div>
-          <div class="press-quote">"Santa Monica's new bakery bets big on sourdough and second chances."</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head" style="justify-content: center; text-align: center; flex-direction: column; align-items: center;">
-        <div>
-          <div class="eyebrow">Frequently asked</div>
-          <h2>Good questions, short answers.</h2>
-        </div>
-      </div>
-
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>When are you opening?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">We're aiming for spring 2026 in Santa Monica. The official date will be announced first on @loumabakery and to our newsletter subscribers.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>Where are you located?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">3223 Wilshire Blvd, Santa Monica, CA 90403. On the corner with easy street access and nearby parking.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>Do you offer catering?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">Yes. Pastry boxes, breakfast trays, dessert boxes, and full office and event catering.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>Do you take custom orders?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">Absolutely. Use the catering form and choose "Custom".</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>Are you hiring?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">Yes. Bakers, baristas, front of house, and management roles are open. See the Careers page to apply.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>What is Louma's mission?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">Louma exists to create real employment for people with learning and developmental differences, alongside making genuinely excellent bread, pastry, and coffee.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>How can I support Louma?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">The most direct way is to visit and order. Beyond that, share us with friends, follow on Instagram, sign up for catering, or reach out about partnerships.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>Do you deliver?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">Local delivery is available for catering orders within the Santa Monica area. Daily retail items are pickup at the bakery.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span>Do you offer gluten-free or vegan items?</span><span class="faq-toggle">+</span></button>
-          <div class="faq-a"><div class="faq-a-inner">A small selection. We will always have at least one gluten-free pastry and one vegan option daily.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top: 0;">
-    <div class="container">
-      <form class="form-card" id="contactForm" novalidate>
-        <h2 style="margin-bottom: 8px;">Get in touch</h2>
-        <p style="color: var(--muted); margin-bottom: 28px;">Questions, press inquiries, partnerships. Send us a note.</p>
-
-        <div class="form-grid">
-          <div class="form-row full">
-            <label for="ct-topic">What's this about?</label>
-            <select id="ct-topic" name="topic">
-              <option value="">Select a topic…</option>
-              <option>General question</option>
-              <option>Catering</option>
-              <option>Careers</option>
-              <option>Press</option>
-              <option>Partnership</option>
-              <option>Support our mission</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="ct-name">Name</label>
-            <input id="ct-name" name="name" type="text" required />
-          </div>
-          <div class="form-row">
-            <label for="ct-email">Email</label>
-            <input id="ct-email" name="email" type="email" required />
-          </div>
-          <div class="form-row full">
-            <label for="ct-message">Message</label>
-            <textarea id="ct-message" name="message"></textarea>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <p class="form-note">We typically reply within one business day.</p>
-          <button type="submit" class="btn btn-primary">Send</button>
-        </div>
-
-        <div class="form-success" id="contactSuccess">Thank you. Your message has been sent.</div>
-      </form>
-    </div>
-  </section>
-
+  <iframe
+    class="visit-map"
+    src="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Los+Angeles,+CA+90010&z=16&output=embed"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Map of 3223 Wilshire Blvd, Los Angeles, CA 90010"></iframe>
 </section>
 
 </main>
 
 <!-- ===== FOOTER ===== -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">
-          <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
-        </div>
-        <p class="footer-tagline">Named after someone who makes every room feel like home.</p>
-        <p class="footer-motto">Live Laugh Louma.</p>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
       </div>
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <ul>
-          <li><button data-page="page-home">Home</button></li>
-          <li><button data-page="page-menu">Menu</button></li>
-          <li><button data-page="page-story">Our Story</button></li>
-          <li><button data-page="page-mission">Mission</button></li>
-          <li><button data-page="page-catering">Catering</button></li>
-          <li><button data-page="page-careers">Careers</button></li>
-          <li><button data-page="page-visit">Visit Us</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Find us</h4>
-        <p>3223 Wilshire Blvd</p>
-        <p>Santa Monica, CA 90403</p>
-        <p style="margin-top:12px;"><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
-      </div>
+      <p class="footer-tagline">Flour-dusted dreams, baked fresh daily.</p>
     </div>
-    <svg class="footer-doodle doodle-divider doodle-animated" viewBox="0 0 200 80" aria-hidden="true">
-      <path d="M20 50 Q20 18 60 18 L140 18 Q180 18 180 50 Q180 68 160 68 L40 68 Q20 68 20 50 Z" style="--len:520"/>
-      <path d="M62 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-      <path d="M100 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-      <path d="M138 32 c-6 0 -10 5 -10 10 c0 8 10 16 10 16 s10 -8 10 -16 c0 -5 -4 -10 -10 -10 z" style="--len:90"/>
-    </svg>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> Louma Bakery. A project of The Louma Initiative.</span>
-      <span>Baking with purpose.</span>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><button data-page="page-menu">Menu</button></li>
+        <li><button data-page="page-story">Our Story</button></li>
+        <li><button data-page="page-mission">Mission</button></li>
+        <li><button data-page="page-catering">Catering</button></li>
+        <li><button data-page="page-careers">Careers</button></li>
+        <li><button data-page="page-visit">Visit Us</button></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Find us</h4>
+      <p>3223 Wilshire Blvd</p>
+      <p>Los Angeles, CA 90010</p>
+      <p>Mon to Sat, 8am to 4pm</p>
+      <p style="margin-top:14px;"><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+      <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
     </div>
   </div>
+  <div class="footer-bottom">© <span id="year"></span> The Louma Initiative.</div>
 </footer>
 
 <script>
 (function(){
-  // ----- Page navigation -----
+  const pages = document.querySelectorAll('.page');
   const navLinks = document.querySelectorAll('.nav-link');
   const navLinksWrap = document.getElementById('navLinks');
-
-  function scrollPastIntro(behavior) {
-    const intro = document.getElementById('intro-section');
-    const top = intro ? intro.offsetHeight : 0;
-    window.scrollTo({ top, left: 0, behavior: behavior || 'auto' });
-  }
+  const nav = document.getElementById('site-nav');
 
   function showPage(pageId) {
     const target = document.getElementById(pageId);
     if (!target) return;
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    pages.forEach(p => p.classList.remove('active'));
     target.classList.add('active');
-
-    navLinks.forEach(l => {
-      l.classList.toggle('active', l.dataset.page === pageId);
-    });
-
-    if (history.replaceState) {
-      history.replaceState(null, '', '#' + pageId);
-    }
-    // Land just past the intro so the nav sits at the top of the viewport
-    // — but don't fight the user if they're already looking at content.
-    scrollPastIntro('auto');
-    if (navLinksWrap) navLinksWrap.classList.remove('open');
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
+    if (history.replaceState) history.replaceState(null, '', '#' + pageId);
+    window.scrollTo(0, 0);
+    navLinksWrap.classList.remove('open');
+    document.getElementById('navToggle').setAttribute('aria-label', 'Open menu');
+    updateNavMode();
   }
-  // Expose for inline / external use
   window.showPage = showPage;
 
-  // Bind any element with data-page
+  function updateNavMode(){
+    if (!nav) return;
+    const onHome = document.getElementById('page-home').classList.contains('active');
+    if (onHome && window.scrollY < window.innerHeight - 80) {
+      nav.classList.add('on-dark');
+      nav.classList.remove('no-hero', 'is-scrolled');
+    } else if (onHome) {
+      nav.classList.remove('on-dark');
+      nav.classList.add('is-scrolled');
+      nav.classList.remove('no-hero');
+    } else {
+      nav.classList.remove('on-dark');
+      nav.classList.add('no-hero');
+      if (window.scrollY > 8) nav.classList.add('is-scrolled');
+      else nav.classList.remove('is-scrolled');
+    }
+  }
+
   document.addEventListener('click', function(e){
     const el = e.target.closest('[data-page]');
     if (!el) return;
@@ -2683,59 +1567,64 @@
     showPage(el.dataset.page);
   });
 
-  // Initial route from hash (default page-home)
+  // Initial route
   const initialHash = (window.location.hash || '#page-home').slice(1);
   const initialId = document.getElementById(initialHash) ? initialHash : 'page-home';
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  pages.forEach(p => p.classList.remove('active'));
   const initialEl = document.getElementById(initialId);
   if (initialEl) {
     initialEl.classList.add('active');
     navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initialId));
   }
+  updateNavMode();
 
   window.addEventListener('hashchange', function(){
     const id = (window.location.hash || '#page-home').slice(1);
     if (document.getElementById(id)) showPage(id);
   });
 
-  // ----- Mobile nav toggle -----
+  // Mobile nav toggle
   const navToggle = document.getElementById('navToggle');
-  navToggle.addEventListener('click', function(){
-    navLinksWrap.classList.toggle('open');
-  });
-
-  // ----- Menu tabs -----
-  const tabs = document.querySelectorAll('.tab');
-  const menuLists = document.querySelectorAll('.menu-list');
-  tabs.forEach(t => {
-    t.addEventListener('click', function(){
-      tabs.forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      const target = 'tab-' + t.dataset.tab;
-      menuLists.forEach(ml => {
-        ml.classList.toggle('active', ml.id === target);
-      });
-    });
-  });
-
-  // ----- Opening Updates CTA -----
-  const openingBtn = document.getElementById('openingUpdatesBtn');
-  if (openingBtn) {
-    openingBtn.addEventListener('click', function(){
-      showPage('page-home');
-      setTimeout(() => {
-        const target = document.getElementById('newsletter');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          const input = target.querySelector('input[type="email"]');
-          if (input) setTimeout(() => input.focus({ preventScroll: true }), 600);
-        }
-      }, 260);
+  if (navToggle) {
+    navToggle.addEventListener('click', function(){
+      navLinksWrap.classList.toggle('open');
     });
   }
 
-  // ----- Forms (newsletter + catering + careers + contact) -----
-  function bindFormSuccess(formId, successId) {
+  // Nav scroll background
+  window.addEventListener('scroll', updateNavMode, { passive: true });
+
+  // Newsletter (Formspree)
+  (function bindNewsletter(){
+    const form = document.getElementById('newsletterForm');
+    const thanks = document.getElementById('newsletterThanks');
+    const replyTo = document.getElementById('newsletterReplyTo');
+    const emailInput = document.getElementById('newsletterEmail');
+    if (!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (replyTo && emailInput) replyTo.value = emailInput.value;
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!res.ok) throw new Error('Submission failed');
+        form.style.display = 'none';
+        if (thanks) thanks.classList.add('show');
+      } catch (err) {
+        if (btn) btn.disabled = false;
+        alert('Sorry, something went wrong. Please try again.');
+      }
+    });
+  })();
+
+  // Catering + Careers forms — show inline success message
+  function bindSimpleForm(formId, successId){
     const form = document.getElementById(formId);
     const success = document.getElementById(successId);
     if (!form) return;
@@ -2749,129 +1638,10 @@
       form.reset();
     });
   }
-  // Newsletter — submits to Formspree via AJAX and swaps the form for the thank-you message.
-  (function bindNewsletter(){
-    const form = document.getElementById('newsletterForm');
-    const success = document.getElementById('newsletterSuccess');
-    const note = document.getElementById('newsletterNote');
-    const emailInput = document.getElementById('newsletterEmail');
-    const replyTo = document.getElementById('newsletterReplyTo');
-    if (!form) return;
+  bindSimpleForm('cateringForm', 'cateringSuccess');
+  bindSimpleForm('careersForm', 'careersSuccess');
 
-    form.addEventListener('submit', async function(e){
-      e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-
-      if (replyTo && emailInput) replyTo.value = emailInput.value;
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      if (submitBtn) submitBtn.disabled = true;
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (!res.ok) throw new Error('Submission failed');
-        form.style.display = 'none';
-        if (note) note.style.display = 'none';
-        if (success) success.classList.add('show');
-      } catch (err) {
-        if (submitBtn) submitBtn.disabled = false;
-        alert('Sorry, something went wrong. Please try again.');
-      }
-    });
-  })();
-
-  bindFormSuccess('cateringForm', 'cateringSuccess');
-  bindFormSuccess('careersForm', 'careersSuccess');
-  bindFormSuccess('contactForm', 'contactSuccess');
-
-  // ----- FAQ accordion -----
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const q = item.querySelector('.faq-q');
-    const a = item.querySelector('.faq-a');
-    const toggle = item.querySelector('.faq-toggle');
-    q.addEventListener('click', function(){
-      const isOpen = item.classList.toggle('open');
-      if (isOpen) {
-        a.style.maxHeight = a.scrollHeight + 'px';
-        toggle.textContent = '−';
-      } else {
-        a.style.maxHeight = '0px';
-        toggle.textContent = '+';
-      }
-    });
-  });
-
-  // ----- Intro hero — Enter button just smooth-scrolls past the intro.
-  // The intro stays in the document so scrolling back up always reveals it.
-  (function bindIntro(){
-    const btn = document.getElementById('enter-btn');
-    if (btn) {
-      btn.addEventListener('click', function(){
-        scrollPastIntro('smooth');
-      });
-    }
-
-    // Auto-rotating image carousel — fade between images every 3.2s
-    const carousel = document.getElementById('intro-images');
-    if (!carousel) return;
-    const slides = carousel.querySelectorAll('.intro-img');
-    if (slides.length < 2) return;
-    let i = 0;
-    setInterval(function(){
-      slides[i].classList.remove('is-active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('is-active');
-    }, 3200);
-  })();
-
-  // ----- Animated bread doodles -----
-  // Plays once on scroll-in, then replays from the start on every hover.
-  (function bindDoodleAnimations(){
-    const doodles = document.querySelectorAll('.doodle-animated');
-    if (!doodles.length) return;
-
-    function replay(el) {
-      el.classList.remove('in-view');
-      void el.offsetWidth; // force reflow so the animation restarts
-      el.classList.add('in-view');
-    }
-
-    doodles.forEach(d => {
-      d.addEventListener('mouseenter', function(){ replay(this); });
-    });
-
-    if (!('IntersectionObserver' in window)) {
-      doodles.forEach(d => d.classList.add('in-view'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.35, rootMargin: '0px 0px -40px 0px' });
-    doodles.forEach(d => io.observe(d));
-  })();
-
-  // ----- Subtle nav scrolled background -----
-  (function bindNavScroll(){
-    const nav = document.getElementById('site-nav');
-    if (!nav) return;
-    function update(){
-      if (window.scrollY > 8) nav.classList.add('is-scrolled');
-      else nav.classList.remove('is-scrolled');
-    }
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-  })();
-
-  // ----- Year in footer -----
+  // Year in footer
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
