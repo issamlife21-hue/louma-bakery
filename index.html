@@ -388,6 +388,47 @@
     object-fit: cover;
   }
 
+  /* ---------- BAGUETTE DIVIDER ---------- */
+  .baguette-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 24px;
+  }
+  .baguette {
+    width: 280px;
+    height: auto;
+    color: #ED2739;
+    opacity: 0.18;
+    display: block;
+  }
+  .baguette path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .baguette path {
+    stroke-dasharray: var(--baguette-len, 1400);
+    stroke-dashoffset: var(--baguette-len, 1400);
+  }
+  .baguette.in-view path {
+    animation: baguette-draw 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  @keyframes baguette-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  .baguette-line {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #888888;
+    padding: 0 24px 80px;
+    margin: 0;
+  }
+
   /* ---------- SECTION: LOCATION ---------- */
   .location-section { position: relative; padding: 140px 0; }
   .location-inner {
@@ -982,6 +1023,9 @@
     .location-section { padding: 80px 0; }
     .location-section .big-num { font-size: 60px; }
     .newsletter-band { padding: 80px 24px; }
+    .baguette { width: 200px; }
+    .baguette-wrap { padding: 56px 24px; }
+    .baguette-line { padding: 0 24px 56px; }
     .footer-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 48px; }
     .page-heading { padding: 96px 24px 48px; }
     .page-heading h1 { font-size: 38px; }
@@ -1185,6 +1229,20 @@
       <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=80" alt="" loading="lazy" />
     </div>
   </section>
+
+  <!-- BAGUETTE DIVIDER -->
+  <div class="baguette-wrap">
+    <svg class="baguette" id="baguette-svg" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="baguette-grain" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="3" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.6" />
+        </filter>
+      </defs>
+      <path filter="url(#baguette-grain)" d="M22,52 Q24,42 45,34 Q78,27 128,29 T198,30 Q240,33 257,48 Q261,54 256,60 Q239,72 198,73 T128,72 Q70,71 35,66 Q22,60 22,52 M78,42 Q88,47 97,55 M122,36 Q132,43 143,52 M167,38 Q176,46 185,54"/>
+    </svg>
+  </div>
+  <p class="baguette-line">We built this place for the people serving you.</p>
 
   <!-- SECTION 5 — LOCATION -->
   <section class="location-section">
@@ -1640,6 +1698,36 @@
   }
   bindSimpleForm('cateringForm', 'cateringSuccess');
   bindSimpleForm('careersForm', 'careersSuccess');
+
+  // Baguette divider — draws every time it enters the viewport
+  (function bindBaguette(){
+    const svg = document.getElementById('baguette-svg');
+    if (!svg) return;
+    const path = svg.querySelector('path');
+    if (!path) return;
+    try {
+      const len = Math.ceil(path.getTotalLength());
+      svg.style.setProperty('--baguette-len', len);
+    } catch (_) {
+      svg.style.setProperty('--baguette-len', '1400');
+    }
+    if (!('IntersectionObserver' in window)) {
+      svg.classList.add('in-view');
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          svg.classList.remove('in-view');
+          void svg.getBoundingClientRect();
+          svg.classList.add('in-view');
+        } else {
+          svg.classList.remove('in-view');
+        }
+      });
+    }, { threshold: 0.35 });
+    io.observe(svg);
+  })();
 
   // Year in footer
   document.getElementById('year').textContent = new Date().getFullYear();
