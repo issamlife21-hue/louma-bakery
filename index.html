@@ -222,7 +222,7 @@
     font-weight: 600;
     font-size: 68px;
     line-height: 1.1;
-    color: #fff;
+    color: rgba(251, 245, 212, 0.9);
     margin: 0 0 48px;
     max-width: 760px;
     margin-left: auto;
@@ -326,7 +326,7 @@
     font-weight: 400;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--quiet);
+    color: rgba(237, 39, 57, 0.7);
     margin-bottom: 48px;
   }
   .product-grid {
@@ -423,8 +423,8 @@
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
-    font-weight: 300;
-    color: #888888;
+    font-weight: 400;
+    color: #4A4A4A;
     padding: 0 24px 80px;
     margin: 0;
   }
@@ -668,6 +668,15 @@
     color: var(--quiet);
     padding-bottom: 16px;
     border-bottom: 1px solid var(--line);
+  }
+  .menu-cat-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    color: #888888;
+    text-align: left;
+    margin: 16px 0 12px;
   }
   .menu-row {
     display: flex;
@@ -932,7 +941,25 @@
     text-transform: none;
     letter-spacing: normal;
   }
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
   .footer-logo svg { display: block; width: 44px; height: 44px; }
+  .footer-croissant {
+    width: 40px !important;
+    height: 30px !important;
+    color: #ED2739;
+    opacity: 0.20;
+  }
+  .footer-croissant path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
   .footer-tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -954,6 +981,15 @@
     font-size: 10px;
     font-weight: 300;
     letter-spacing: 0.08em;
+  }
+  .footer-bottom-tag {
+    margin-top: 8px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    color: #555555;
+    letter-spacing: normal;
   }
 
   /* ---------- RESPONSIVE ---------- */
@@ -1275,6 +1311,7 @@
   <div class="menu-section">
 
     <div class="menu-cat-label">Pastries</div>
+    <p class="menu-cat-intro">Zaatar, labneh, pistachio, rose water — the flavors that make us who we are.</p>
     <div class="menu-row"><div class="menu-row-name">Butter Croissant</div><div class="menu-row-price">$6</div></div>
     <div class="menu-row"><div class="menu-row-name">Zaatar Labneh Croissant</div><div class="menu-row-price">$7</div></div>
     <div class="menu-row"><div class="menu-row-name">Pistachio Rose Croissant</div><div class="menu-row-price">$7</div></div>
@@ -1542,6 +1579,9 @@
     <div class="footer-col">
       <div class="footer-logo">
         <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
+        <svg class="footer-croissant" viewBox="0 0 80 60" aria-hidden="true">
+          <path d="M10,42 Q14,18 38,12 Q60,10 70,22 Q74,36 60,44 Q44,50 22,44 M22,30 Q34,22 50,24 M30,40 Q42,36 56,34"/>
+        </svg>
       </div>
       <p class="footer-tagline">Flour-dusted dreams, baked fresh daily.</p>
     </div>
@@ -1565,7 +1605,10 @@
       <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
     </div>
   </div>
-  <div class="footer-bottom">© <span id="year"></span> The Louma Initiative.</div>
+  <div class="footer-bottom">
+    <div>© <span id="year"></span> The Louma Initiative.</div>
+    <div class="footer-bottom-tag">Flour-dusted dreams, baked fresh daily.</div>
+  </div>
 </footer>
 
 <script>
