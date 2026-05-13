@@ -446,7 +446,7 @@
     font-size: 15px;
     font-weight: 400;
     color: #4A4A4A;
-    padding: 0 24px 80px;
+    padding: 0 24px 0;
     margin: 0;
   }
 
@@ -862,40 +862,98 @@
   .form-success.show { display: block; }
 
   /* ---------- VISIT PAGE ---------- */
-  .visit-block {
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 24px 24px 64px;
+  .visit-hero {
     position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 360px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .visit-block .big-num { font-size: 120px; margin-bottom: 24px; }
-  .visit-block h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+  /* REPLACE WITH OFFICIAL PHOTO */
+  .visit-hero-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  .visit-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 10, 8, 0.35);
+    z-index: 1;
+  }
+  .visit-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    color: #fff;
+  }
+  .visit-hero-content h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 600;
-    margin-bottom: 24px;
+    font-size: 52px;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 20px;
   }
-  .visit-block p,
-  .visit-block a {
+  .visit-hero-address {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+  .visit-info {
+    background: #FBF5D4;
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .visit-info h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin: 0 0 24px;
+  }
+  .visit-info p {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 300;
-    color: var(--body);
-    margin: 0 0 8px;
+    color: #4A4A4A;
+    line-height: 2.2;
+    margin: 0;
   }
-  .visit-block a { color: var(--body); }
-  .visit-block a:hover { color: var(--ink); text-decoration: underline; }
-  .visit-image {
-    width: 100%;
-    aspect-ratio: 21 / 9;
-    object-fit: cover;
+  .visit-info p a {
+    color: #1A1A1A;
+    transition: opacity .15s ease;
   }
+  .visit-info p a:hover { opacity: 0.7; }
+  .visit-insta {
+    display: inline-block;
+    margin-top: 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    text-decoration: none;
+    transition: opacity .15s ease;
+  }
+  .visit-insta:hover { opacity: 0.7; }
   .visit-map {
     width: 100%;
     aspect-ratio: 16 / 9;
     border: none;
-    margin-top: 64px;
-    margin-bottom: 96px;
+    margin: 0 0 0;
+    display: block;
   }
 
   /* ---------- CAREERS PAGE ---------- */
@@ -927,27 +985,46 @@
   footer {
     background: #1A1A1A;
     color: #BBBBBB;
-    padding: 96px 0 32px;
+    padding: 80px 0 60px;
+  }
+  .footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .footer-rule {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .footer-rule hr {
+    border: none;
+    border-top: 1px solid #333333;
+    margin: 32px 0 48px;
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 64px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px 64px;
+    padding: 0 32px 48px;
   }
   .footer-col h4 {
-    color: rgba(255,255,255,0.7);
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
+    color: #FBF5D4;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
     font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    letter-spacing: normal;
+    text-transform: none;
     margin: 0 0 18px;
   }
   .footer-col ul { list-style: none; padding: 0; margin: 0; }
-  .footer-col li { margin-bottom: 8px; }
+  .footer-col li {
+    margin: 0;
+    line-height: 1;
+  }
   .footer-col button,
   .footer-col a {
     color: #BBBBBB;
@@ -958,8 +1035,9 @@
     text-transform: uppercase;
     background: transparent;
     border: none;
-    padding: 0;
+    padding: 10px 0;
     cursor: pointer;
+    display: inline-block;
     transition: color .15s ease;
   }
   .footer-col button:hover,
@@ -969,7 +1047,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 300;
-    margin: 0 0 6px;
+    margin: 0 0 10px;
     line-height: 1.7;
     text-transform: none;
     letter-spacing: normal;
@@ -997,10 +1075,10 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 16px;
     color: #FBF5D4;
-    margin-top: 18px;
-    max-width: 280px;
+    margin: 24px 0 32px;
+    max-width: 420px;
     line-height: 1.5;
   }
   .footer-bottom {
@@ -1096,12 +1174,14 @@
     .newsletter-band { padding: 80px 24px; }
     .baguette { width: 200px; }
     .baguette-wrap { padding: 56px 24px; }
-    .baguette-line { padding: 0 24px 56px; }
+    .baguette-line { padding: 0 24px 0; }
     .footer-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 48px; }
     .page-heading { padding: 96px 24px 48px; }
     .page-heading h1 { font-size: 38px; }
     .form-grid-2 { grid-template-columns: 1fr; }
-    .visit-block .big-num { font-size: 80px; }
+    .visit-hero { height: 50vh; min-height: 320px; }
+    .visit-hero-content h1 { font-size: 38px; }
+    .visit-info { padding: 56px 24px; }
     .story-section { padding: 40px 24px; }
     .story-full-image { margin: 32px 0; }
     .catering-grid { margin: 48px auto 64px; gap: 32px; }
@@ -1540,8 +1620,7 @@
     <!-- REPLACE WITH OFFICIAL PHOTO -->
     <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80" alt="Inside the bakery" loading="lazy" />
     <div>
-      <p>The work is early mornings, lamination, espresso, and standing on your feet. The people you meet are regulars who learn your name on the second visit.</p>
-      <p>We welcome teammates with learning and developmental differences and we hire to keep.</p>
+      <p>We are a small team and we take that seriously. Everyone here shows up, takes care of each other, and takes pride in what comes out of the oven. If that sounds like you, we would love to hear from you.</p>
     </div>
   </div>
 
@@ -1586,22 +1665,25 @@
      VISIT US
 ============================================================ -->
 <section class="page" id="page-visit">
-  <div class="nav-spacer"></div>
-  <div class="page-heading">
-    <h1>Visit Us</h1>
+  <!-- IMAGE HERO -->
+  <div class="visit-hero">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <div class="visit-hero-image" aria-hidden="true"></div>
+    <div class="visit-hero-overlay" aria-hidden="true"></div>
+    <div class="visit-hero-content">
+      <h1>Visit Us</h1>
+      <p class="visit-hero-address">3223 Wilshire Blvd, Los Angeles CA 90010</p>
+    </div>
   </div>
 
-  <div class="visit-block">
-    <div class="big-num">1</div>
+  <!-- BUTTER INFO BLOCK -->
+  <div class="visit-info">
     <h2>Louma Bakery, Los Angeles</h2>
     <p><a href="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Los+Angeles,+CA+90010" target="_blank" rel="noopener">3223 Wilshire Blvd, Los Angeles, CA 90010</a></p>
     <p>Monday to Saturday, 8am to 4pm</p>
-    <p><a href="tel:+13104642733">(310) 464-2733</a></p>
-    <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+    <p>(310) 464-2733</p>
+    <a class="visit-insta" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a>
   </div>
-
-  <!-- REPLACE WITH OFFICIAL PHOTO -->
-  <img class="visit-image" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80" alt="Louma Bakery storefront" loading="lazy" />
 
   <iframe
     class="visit-map"
@@ -1615,16 +1697,17 @@
 
 <!-- ===== FOOTER ===== -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <div class="footer-logo">
-        <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
-        <svg class="footer-croissant" viewBox="0 0 80 60" aria-hidden="true">
-          <path d="M10,42 Q14,18 38,12 Q60,10 70,22 Q74,36 60,44 Q44,50 22,44 M22,30 Q34,22 50,24 M30,40 Q42,36 56,34"/>
-        </svg>
-      </div>
-      <p class="footer-tagline">Flour-dusted dreams, baked fresh daily.</p>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg class="footer-croissant" viewBox="0 0 80 60" aria-hidden="true">
+        <path d="M10,42 Q14,18 38,12 Q60,10 70,22 Q74,36 60,44 Q44,50 22,44 M22,30 Q34,22 50,24 M30,40 Q42,36 56,34"/>
+      </svg>
     </div>
+    <p class="footer-tagline">Flour-dusted dreams, baked fresh daily.</p>
+  </div>
+  <div class="footer-rule"><hr /></div>
+  <div class="footer-grid">
     <div class="footer-col">
       <h4>Pages</h4>
       <ul>
@@ -1641,7 +1724,10 @@
       <p>3223 Wilshire Blvd</p>
       <p>Los Angeles, CA 90010</p>
       <p>Mon to Sat, 8am to 4pm</p>
-      <p style="margin-top:14px;"><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Stay in touch</h4>
+      <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
       <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
     </div>
   </div>
