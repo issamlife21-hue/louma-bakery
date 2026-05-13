@@ -167,6 +167,7 @@
     opacity: 1;
   }
   .page#page-menu, .page#page-story { background: #FBF5D4; }
+  body.bg-butter { background: #FBF5D4; }
   .page-heading {
     text-align: center;
     padding: 120px 24px 64px;
@@ -413,7 +414,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 80px 24px;
+    padding: 80px 24px 24px;
   }
   .baguette {
     width: 280px;
@@ -669,7 +670,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--red);
+    background: #1A1A1A;
     color: #fff;
     border: none;
     height: 44px;
@@ -680,9 +681,10 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     cursor: pointer;
+    border-radius: 0;
     transition: background .15s ease;
   }
-  .paypal-btn:hover { background: #c91e2f; }
+  .paypal-btn:hover { background: #2a2a2a; }
 
   /* ---------- MENU PAGE ---------- */
   .menu-section {
@@ -1020,11 +1022,20 @@
     text-transform: none;
     margin: 0 0 18px;
   }
-  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col ul {
+    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
   .footer-col li {
+    list-style: none;
+    list-style-type: none;
+    padding: 0;
     margin: 0;
     line-height: 1;
   }
+  .footer-col li::marker { content: ""; }
   .footer-col button,
   .footer-col a {
     color: #BBBBBB;
@@ -1098,8 +1109,8 @@
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 13px;
-    color: #555555;
+    font-size: 16px;
+    color: #FBF5D4;
     letter-spacing: normal;
   }
 
@@ -1173,7 +1184,7 @@
     .location-section .big-num { font-size: 60px; }
     .newsletter-band { padding: 80px 24px; }
     .baguette { width: 200px; }
-    .baguette-wrap { padding: 56px 24px; }
+    .baguette-wrap { padding: 56px 24px 16px; }
     .baguette-line { padding: 0 24px 0; }
     .footer-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 48px; }
     .page-heading { padding: 96px 24px 48px; }
@@ -1196,16 +1207,12 @@
 <!-- ===== Reusable SVG logo ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="louma-logo" viewBox="0 0 200 200">
-      <rect x="3" y="3" width="194" height="194" rx="28" fill="#FBF5D4" stroke="#ED2739" stroke-width="3"/>
-      <text x="100" y="112" text-anchor="middle" dominant-baseline="alphabetic"
-            font-family="Cormorant Garamond, Georgia, serif"
-            font-size="58" font-weight="700"
-            fill="#ED2739" letter-spacing="-1">Louma</text>
-      <text x="100" y="138" text-anchor="middle" dominant-baseline="alphabetic"
-            font-family="Inter, sans-serif"
-            font-size="13" font-weight="600"
-            fill="#ED2739" letter-spacing="5">BAKERY</text>
+    <symbol id="louma-logo" viewBox="0 0 100 100">
+      <rect x="3" y="3" width="94" height="94" rx="14" fill="#FBF5D4" stroke="#ED2739" stroke-width="2.5"/>
+      <text x="50" y="62" text-anchor="middle"
+            font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif"
+            font-size="38" font-weight="600" font-style="italic"
+            fill="#ED2739">Louma</text>
     </symbol>
   </defs>
 </svg>
@@ -1214,7 +1221,7 @@
 <header class="nav on-dark" id="site-nav">
   <div class="nav-inner">
     <a href="#page-home" class="logo-link" data-page="page-home" aria-label="Louma Bakery home">
-      <svg class="logo-svg" viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
     </a>
     <nav class="nav-links" id="navLinks">
       <button class="nav-link" data-page="page-menu">Menu</button>
@@ -1393,7 +1400,6 @@
   <section class="location-section">
     <div class="container">
       <div class="location-inner">
-        <div class="big-num">1</div>
         <h2>Louma Bakery</h2>
         <p><a href="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Los+Angeles,+CA+90010" target="_blank" rel="noopener">3223 Wilshire Blvd, Los Angeles, CA 90010</a></p>
         <p>Monday to Saturday, 8am to 4pm</p>
@@ -1573,7 +1579,7 @@
   <img class="catering-image" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80" alt="Pastry box" loading="lazy" />
 
   <div class="catering-mailto-wrap">
-    <a class="btn-dark" href="mailto:catering@loumabakery.com">catering@loumabakery.com</a>
+    <a class="btn-dark" href="mailto:catering@loumabakery.com">Send a request</a>
   </div>
 
   <form class="form-block" id="cateringForm" novalidate>
@@ -1672,7 +1678,6 @@
     <div class="visit-hero-overlay" aria-hidden="true"></div>
     <div class="visit-hero-content">
       <h1>Visit Us</h1>
-      <p class="visit-hero-address">3223 Wilshire Blvd, Los Angeles CA 90010</p>
     </div>
   </div>
 
@@ -1699,12 +1704,11 @@
 <footer>
   <div class="footer-top">
     <div class="footer-logo">
-      <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
       <svg class="footer-croissant" viewBox="0 0 80 60" aria-hidden="true">
         <path d="M10,42 Q14,18 38,12 Q60,10 70,22 Q74,36 60,44 Q44,50 22,44 M22,30 Q34,22 50,24 M30,40 Q42,36 56,34"/>
       </svg>
     </div>
-    <p class="footer-tagline">Flour-dusted dreams, baked fresh daily.</p>
   </div>
   <div class="footer-rule"><hr /></div>
   <div class="footer-grid">
@@ -1754,6 +1758,7 @@
     window.scrollTo(0, 0);
     navLinksWrap.classList.remove('open');
     document.getElementById('navToggle').setAttribute('aria-label', 'Open menu');
+    document.body.classList.toggle('bg-butter', pageId === 'page-menu' || pageId === 'page-story');
     updateNavMode();
   }
   window.showPage = showPage;
@@ -1792,6 +1797,7 @@
     initialEl.classList.add('active');
     navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === initialId));
   }
+  document.body.classList.toggle('bg-butter', initialId === 'page-menu' || initialId === 'page-story');
   updateNavMode();
 
   window.addEventListener('hashchange', function(){
