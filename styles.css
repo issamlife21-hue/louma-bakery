@@ -181,7 +181,7 @@ img { display: block; max-width: 100%; height: auto; }
 /* ---------- PAGE BACKGROUND ---------- */
 .page-heading {
   text-align: center;
-  padding: 120px 24px 64px;
+  padding: 88px 24px 48px;
 }
 .page-heading h1 {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -262,10 +262,10 @@ img { display: block; max-width: 100%; height: auto; }
 .hero-btn:hover { background: #fff; color: var(--ink); }
 
 /* ---------- SECTION: ONE SENTENCE ---------- */
-.section { padding: 140px 0; background: var(--paper); }
+.section { padding: 100px 0; background: var(--paper); }
 .section-tagline {
   text-align: center;
-  padding: 140px 24px;
+  padding: 96px 24px;
 }
 .section-tagline p {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -281,7 +281,7 @@ img { display: block; max-width: 100%; height: auto; }
 /* ---------- PULL QUOTE BLOCK ---------- */
 .pull-quote {
   background: var(--paper);
-  padding: 100px 24px;
+  padding: 72px 24px;
   text-align: center;
 }
 .pull-quote p {
@@ -299,7 +299,7 @@ img { display: block; max-width: 100%; height: auto; }
 .alt-block {
   display: grid;
   grid-template-columns: 55% 45%;
-  min-height: 480px;
+  min-height: 400px;
   align-items: stretch;
 }
 .alt-block.reverse { grid-template-columns: 45% 55%; }
@@ -308,10 +308,10 @@ img { display: block; max-width: 100%; height: auto; }
 .alt-block-image {
   background-size: cover;
   background-position: center;
-  min-height: 480px;
+  min-height: 400px;
 }
 .alt-block-text {
-  padding: 80px 72px;
+  padding: 64px 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -365,7 +365,7 @@ img { display: block; max-width: 100%; height: auto; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
-  margin-bottom: 56px;
+  margin-bottom: 40px;
 }
 .product-card { text-align: left; display: block; color: inherit; }
 .product-card .product-image {
@@ -425,7 +425,7 @@ img { display: block; max-width: 100%; height: auto; }
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px 24px 24px;
+  padding: 56px 24px 16px;
 }
 .baguette {
   width: 280px;
@@ -463,7 +463,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 /* ---------- SECTION: LOCATION ---------- */
-.location-section { position: relative; padding: 140px 0; }
+.location-section { position: relative; padding: 96px 0; }
 .location-inner {
   position: relative;
   padding-left: 24px;
@@ -487,20 +487,20 @@ img { display: block; max-width: 100%; height: auto; }
   width: 100%;
   aspect-ratio: 16 / 7;
   object-fit: cover;
-  margin-top: 64px;
+  margin-top: 48px;
 }
 
 /* ---------- SECTION: NEWSLETTER ---------- */
 .newsletter-band {
   background: var(--paper);
-  padding: 120px 24px;
+  padding: 88px 24px;
   text-align: center;
 }
 .newsletter-band h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 26px;
   font-weight: 600;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
 }
 .newsletter-form {
   display: flex;
@@ -552,7 +552,7 @@ img { display: block; max-width: 100%; height: auto; }
 .newsletter-thanks.show { display: block; }
 
 /* ---------- STORY PAGE ---------- */
-.story-section { padding: 56px 24px; max-width: 760px; margin: 0 auto; }
+.story-section { padding: 40px 24px; max-width: 760px; margin: 0 auto; }
 .story-section .small-label { margin-bottom: 16px; }
 .story-section h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -573,14 +573,14 @@ img { display: block; max-width: 100%; height: auto; }
   width: 100%;
   aspect-ratio: 21 / 9;
   object-fit: cover;
-  margin: 56px 0;
+  margin: 40px 0;
 }
 .story-two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   max-width: 1100px;
-  margin: 56px auto;
+  margin: 40px auto;
   padding: 0 24px;
   align-items: center;
 }
@@ -634,7 +634,7 @@ img { display: block; max-width: 100%; height: auto; }
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   max-width: 1100px;
-  margin: 96px auto;
+  margin: 64px auto;
   padding: 0 24px;
   align-items: center;
 }
@@ -653,7 +653,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .mission-support {
   background: var(--paper);
-  padding: 80px 24px;
+  padding: 64px 24px;
   text-align: center;
 }
 .mission-support h2 {
@@ -708,13 +708,13 @@ img { display: block; max-width: 100%; height: auto; }
   border-bottom: 1px solid currentColor;
 }
 .donate-note a:hover { opacity: 0.7; }
-.story-main { padding-bottom: 80px; }
+.story-main { padding-bottom: 56px; }
 
 /* ---------- 404 ---------- */
 .not-found {
   max-width: 560px;
   margin: 0 auto;
-  padding: 120px 24px 140px;
+  padding: 88px 24px 96px;
   text-align: center;
 }
 .not-found .small-label { margin-bottom: 24px; }
@@ -736,7 +736,7 @@ img { display: block; max-width: 100%; height: auto; }
 .menu-section {
   max-width: 720px;
   margin: 0 auto;
-  padding: 24px 24px 140px;
+  padding: 0 24px 96px;
 }
 .menu-cat-label {
   margin-top: 60px;
@@ -795,7 +795,7 @@ img { display: block; max-width: 100%; height: auto; }
   grid-template-columns: repeat(3, 1fr);
   gap: 56px;
   max-width: 1100px;
-  margin: 64px auto 96px;
+  margin: 48px auto 64px;
   padding: 0 24px;
 }
 .catering-block .small-label { margin-bottom: 16px; }
@@ -819,7 +819,7 @@ img { display: block; max-width: 100%; height: auto; }
   aspect-ratio: 21 / 9;
   object-fit: cover;
 }
-.catering-mailto-wrap { text-align: center; padding: 64px 24px; }
+.catering-mailto-wrap { text-align: center; padding: 40px 24px; }
 .btn-dark {
   display: inline-flex;
   align-items: center;
@@ -844,7 +844,7 @@ img { display: block; max-width: 100%; height: auto; }
 .form-block {
   max-width: 640px;
   margin: 0 auto;
-  padding: 64px 24px 140px;
+  padding: 48px 24px 96px;
 }
 .form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
 .form-row label {
@@ -942,7 +942,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .visit-info {
   background: var(--paper);
-  padding: 80px 24px;
+  padding: 64px 24px;
   text-align: center;
 }
 .visit-info h2 {
@@ -987,7 +987,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .visit-directions-wrap {
   text-align: center;
-  padding: 56px 24px 80px;
+  padding: 40px 24px 64px;
 }
 
 /* ---------- CAREERS PAGE ---------- */
@@ -996,7 +996,7 @@ img { display: block; max-width: 100%; height: auto; }
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   max-width: 1100px;
-  margin: 32px auto 64px;
+  margin: 24px auto 48px;
   padding: 0 24px;
   align-items: center;
 }
