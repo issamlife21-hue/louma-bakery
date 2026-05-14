@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Careers — Louma Bakery</title>
+<meta name="description" content="Come bake with us. Open roles at Louma Bakery in Los Angeles." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="louma-logo" viewBox="0 0 100 100">
+      <rect x="3" y="3" width="94" height="94" rx="14" fill="#FBF5D4" stroke="#ED2739" stroke-width="2.5"/>
+      <text x="50" y="62" text-anchor="middle"
+            font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif"
+            font-size="38" font-weight="600" font-style="italic"
+            fill="#ED2739">Louma</text>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav no-hero" id="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo-link" aria-label="Louma Bakery home">
+      <svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a class="nav-link" href="menu.html">Menu</a>
+      <a class="nav-link" href="story.html">Our Story</a>
+      <a class="nav-link" href="mission.html">Mission</a>
+      <a class="nav-link" href="catering.html">Catering</a>
+      <a class="nav-link" href="careers.html">Careers</a>
+      <a class="nav-link" href="visit.html">Visit Us</a>
+    </nav>
+    <a class="nav-cta" href="menu.html">Order</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="nav-spacer"></div>
+  <div class="page-heading">
+    <h1>Careers</h1>
+    <p class="sub">Come bake with us.</p>
+  </div>
+
+  <div class="careers-two-col">
+    <!-- REPLACE WITH OFFICIAL PHOTO -->
+    <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80" alt="Inside the bakery" loading="lazy" />
+    <div>
+      <p>We are a small team and we take that seriously. Everyone here shows up, takes care of each other, and takes pride in what comes out of the oven. If that sounds like you, we would love to hear from you.</p>
+    </div>
+  </div>
+
+  <form class="form-block" id="careersForm" novalidate>
+    <div class="form-grid-2">
+      <div class="form-row">
+        <label for="car-name">Name</label>
+        <input id="car-name" name="name" type="text" required />
+      </div>
+      <div class="form-row">
+        <label for="car-email">Email</label>
+        <input id="car-email" name="email" type="email" required />
+      </div>
+      <div class="form-row">
+        <label for="car-phone">Phone</label>
+        <input id="car-phone" name="phone" type="tel" />
+      </div>
+      <div class="form-row">
+        <label for="car-role">Role</label>
+        <select id="car-role" name="role">
+          <option value="">Select a role</option>
+          <option>Baker</option>
+          <option>Barista</option>
+          <option>Front of House</option>
+          <option>Pastry Chef</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="car-about">A few sentences about you</label>
+      <textarea id="car-about" name="about"></textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn-dark">Submit</button>
+    </div>
+    <div class="form-success" id="careersSuccess">Thank you for applying. We will be in touch soon.</div>
+  </form>
+</main>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg class="footer-croissant" viewBox="0 0 80 60" aria-hidden="true">
+        <path d="M10,42 Q14,18 38,12 Q60,10 70,22 Q74,36 60,44 Q44,50 22,44 M22,30 Q34,22 50,24 M30,40 Q42,36 56,34"/>
+      </svg>
+    </div>
+  </div>
+  <div class="footer-rule"><hr /></div>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="story.html">Our Story</a></li>
+        <li><a href="mission.html">Mission</a></li>
+        <li><a href="catering.html">Catering</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="visit.html">Visit Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Find us</h4>
+      <p>3223 Wilshire Blvd</p>
+      <p>Los Angeles, CA 90010</p>
+      <p>Mon to Sat, 8am to 4pm</p>
+    </div>
+    <div class="footer-col">
+      <h4>Stay in touch</h4>
+      <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+      <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="year"></span> The Louma Initiative.</div>
+    <div class="footer-bottom-tag">Flour-dusted dreams, baked fresh daily.</div>
+  </div>
+</footer>
+<script src="app.js" defer></script>
+</body>
+</html>
