@@ -5,12 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Careers — Louma Bakery</title>
 <meta name="description" content="Come bake with us. Open roles at Louma Bakery in Los Angeles." />
+<link rel="canonical" href="https://loumabakery.com/careers.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Louma Bakery" />
+<meta property="og:title" content="Careers — Louma Bakery" />
+<meta property="og:description" content="Come bake with us. Open roles at Louma Bakery in Los Angeles." />
+<meta property="og:url" content="https://loumabakery.com/careers.html" />
+<meta property="og:image" content="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1200&q=80&auto=format" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Careers — Louma Bakery" />
+<meta name="twitter:description" content="Come bake with us. Open roles at Louma Bakery in Los Angeles." />
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1200&q=80&auto=format" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -29,7 +44,7 @@
     <a href="index.html" class="logo-link" aria-label="Louma Bakery home">
       <svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
     </a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks" aria-label="Main">
       <a class="nav-link" href="menu.html">Menu</a>
       <a class="nav-link" href="story.html">Our Story</a>
       <a class="nav-link" href="mission.html">Mission</a>
@@ -39,12 +54,12 @@
     </nav>
     <a class="nav-cta" href="menu.html">Order</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="nav-spacer"></div>
   <div class="page-heading">
     <h1>Careers</h1>
@@ -53,13 +68,20 @@
 
   <div class="careers-two-col">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80" alt="Inside the bakery" loading="lazy" />
+    <img alt="Inside the bakery" loading="lazy" decoding="async"
+         src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format"
+         srcset="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=480&q=80&auto=format 480w,
+                 https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format 900w,
+                 https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1400&q=80&auto=format 1400w"
+         sizes="(max-width: 960px) 100vw, 50vw" />
     <div>
       <p>We are a small team and we take that seriously. Everyone here shows up, takes care of each other, and takes pride in what comes out of the oven. If that sounds like you, we would love to hear from you.</p>
     </div>
   </div>
 
-  <form class="form-block" id="careersForm" novalidate>
+  <form class="form-block" id="careersForm" data-formspree data-success="#careersSuccess" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+    <input type="hidden" name="_subject" value="Careers application — Louma Bakery" />
+    <input type="hidden" name="_replyto" value="" />
     <div class="form-grid-2">
       <div class="form-row">
         <label for="car-name">Name</label>
@@ -92,8 +114,8 @@
     <div class="form-actions">
       <button type="submit" class="btn-dark">Submit</button>
     </div>
-    <div class="form-success" id="careersSuccess">Thank you for applying. We will be in touch soon.</div>
   </form>
+  <div class="form-success" id="careersSuccess">Thank you for applying. We will be in touch soon.</div>
 </main>
 
 <footer>
@@ -128,6 +150,13 @@
       <h4>Stay in touch</h4>
       <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
       <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
+      <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Welcome to the Louma community" />
+        <input type="hidden" name="_replyto" value="" />
+        <input type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
+        <button type="submit">Join</button>
+      </form>
+      <div class="footer-newsletter-thanks" id="footerThanks">Thanks. You're on the list.</div>
     </div>
   </div>
   <div class="footer-bottom">

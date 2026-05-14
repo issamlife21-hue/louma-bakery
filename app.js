@@ -2,25 +2,30 @@
   const nav = document.getElementById('site-nav');
   const navLinksWrap = document.getElementById('navLinks');
   const navToggle = document.getElementById('navToggle');
-  const isHome = document.body.classList.contains('is-home');
+  const heroEl = document.querySelector('[data-nav-hero]');
 
-  // Active nav link from pathname
   (function markActive() {
     const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     document.querySelectorAll('.nav-link[href]').forEach((a) => {
       const href = (a.getAttribute('href') || '').toLowerCase();
-      if (href === path) a.classList.add('active');
+      if (href === path) {
+        a.classList.add('active');
+        a.setAttribute('aria-current', 'page');
+      }
     });
   })();
 
   function updateNavMode() {
     if (!nav) return;
-    if (isHome && window.scrollY < window.innerHeight - 80) {
-      nav.classList.add('on-dark');
-      nav.classList.remove('no-hero', 'is-scrolled');
-    } else if (isHome) {
-      nav.classList.remove('on-dark', 'no-hero');
-      nav.classList.add('is-scrolled');
+    if (heroEl) {
+      const heroBottom = heroEl.getBoundingClientRect().bottom;
+      if (heroBottom > 80) {
+        nav.classList.add('on-dark');
+        nav.classList.remove('no-hero', 'is-scrolled');
+      } else {
+        nav.classList.remove('on-dark', 'no-hero');
+        nav.classList.add('is-scrolled');
+      }
     } else {
       nav.classList.remove('on-dark');
       nav.classList.add('no-hero');
@@ -30,20 +35,54 @@
   }
   updateNavMode();
   window.addEventListener('scroll', updateNavMode, { passive: true });
+  window.addEventListener('resize', updateNavMode, { passive: true });
 
   if (navToggle && navLinksWrap) {
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-controls', 'navLinks');
+
+    function openMenu() {
+      navLinksWrap.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Close menu');
+      const firstLink = navLinksWrap.querySelector('.nav-link');
+      if (firstLink) firstLink.focus();
+    }
+    function closeMenu(returnFocus) {
+      navLinksWrap.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
+      if (returnFocus) navToggle.focus();
+    }
     navToggle.addEventListener('click', function () {
-      const open = navLinksWrap.classList.toggle('open');
-      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (navLinksWrap.classList.contains('open')) closeMenu(true);
+      else openMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (navLinksWrap.classList.contains('open')) closeMenu(true);
+    });
+    navLinksWrap.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || !navLinksWrap.classList.contains('open')) return;
+      const focusables = navLinksWrap.querySelectorAll('.nav-link');
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
   }
 
-  (function bindNewsletter() {
-    const form = document.getElementById('newsletterForm');
-    if (!form) return;
-    const thanks = document.getElementById('newsletterThanks');
-    const replyTo = document.getElementById('newsletterReplyTo');
-    const emailInput = document.getElementById('newsletterEmail');
+  function bindFormspreeForm(form) {
+    const successSel = form.dataset.success;
+    const thanks = successSel ? document.querySelector(successSel) : null;
+    const replyTo = form.querySelector('input[name="_replyto"]');
+    const emailInput = form.querySelector('input[type="email"][name="email"]');
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -64,24 +103,8 @@
         alert('Sorry, something went wrong. Please try again.');
       }
     });
-  })();
-
-  function bindSimpleForm(formId, successId) {
-    const form = document.getElementById(formId);
-    if (!form) return;
-    const success = document.getElementById(successId);
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      if (success) success.classList.add('show');
-      form.reset();
-    });
   }
-  bindSimpleForm('cateringForm', 'cateringSuccess');
-  bindSimpleForm('careersForm', 'careersSuccess');
+  document.querySelectorAll('form[data-formspree]').forEach(bindFormspreeForm);
 
   (function bindBaguette() {
     const svg = document.getElementById('baguette-svg');

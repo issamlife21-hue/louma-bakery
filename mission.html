@@ -5,12 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mission — Louma Bakery</title>
 <meta name="description" content="The Louma Initiative trains and employs people with intellectual and developmental differences as bakers, baristas, and front-of-house teammates." />
+<link rel="canonical" href="https://loumabakery.com/mission.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Louma Bakery" />
+<meta property="og:title" content="Mission — Louma Bakery" />
+<meta property="og:description" content="The Louma Initiative trains and employs people with intellectual and developmental differences as bakers, baristas, and front-of-house teammates." />
+<meta property="og:url" content="https://loumabakery.com/mission.html" />
+<meta property="og:image" content="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mission — Louma Bakery" />
+<meta name="twitter:description" content="The Louma Initiative trains and employs people with intellectual and developmental differences." />
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -29,7 +44,7 @@
     <a href="index.html" class="logo-link" aria-label="Louma Bakery home">
       <svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
     </a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks" aria-label="Main">
       <a class="nav-link" href="menu.html">Menu</a>
       <a class="nav-link" href="story.html">Our Story</a>
       <a class="nav-link" href="mission.html">Mission</a>
@@ -39,12 +54,12 @@
     </nav>
     <a class="nav-cta" href="menu.html">Order</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="nav-spacer"></div>
   <div class="page-heading">
     <h1>Mission</h1>
@@ -56,7 +71,12 @@
 
   <div class="mission-two-col">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <img src="https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=900&q=80" alt="" loading="lazy" />
+    <img alt="" loading="lazy" decoding="async"
+         src="https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=900&q=80&auto=format"
+         srcset="https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=480&q=80&auto=format 480w,
+                 https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=900&q=80&auto=format 900w,
+                 https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=1400&q=80&auto=format 1400w"
+         sizes="(max-width: 960px) 100vw, 50vw" />
     <div>
       <p>Each teammate trains alongside our head bakers and baristas. They learn lamination, espresso, customer service, and how to run a station from open to close.</p>
       <p>We hire to keep. Full-time hours, real wages, benefits, and a job that gets harder and more interesting over time.</p>
@@ -66,12 +86,14 @@
   <section class="mission-support">
     <h2>Support the mission.</h2>
     <p>Every dollar funds wages, training, and careers.</p>
-    <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block;">
+    <!-- TODO: replace business value with real PayPal business email before going live -->
+    <form class="paypal-form" action="https://www.paypal.com/donate" method="post" target="_blank">
       <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
       <input type="hidden" name="currency_code" value="USD" />
       <input type="hidden" name="item_name" value="Support The Louma Initiative" />
-      <button type="submit" class="paypal-btn">Donate</button>
+      <button type="submit" class="paypal-btn" disabled aria-disabled="true">Donate</button>
     </form>
+    <p class="donate-note">Donations launch with the bakery in July 2026. <a href="index.html#newsletter">Sign up</a> to be notified when it goes live.</p>
   </section>
 </main>
 
@@ -107,6 +129,13 @@
       <h4>Stay in touch</h4>
       <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
       <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
+      <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Welcome to the Louma community" />
+        <input type="hidden" name="_replyto" value="" />
+        <input type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
+        <button type="submit">Join</button>
+      </form>
+      <div class="footer-newsletter-thanks" id="footerThanks">Thanks. You're on the list.</div>
     </div>
   </div>
   <div class="footer-bottom">
