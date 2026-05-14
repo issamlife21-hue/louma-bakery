@@ -179,7 +179,6 @@ img { display: block; max-width: 100%; height: auto; }
 .nav-spacer { height: 60px; }
 
 /* ---------- PAGE BACKGROUND ---------- */
-body.bg-butter { background: var(--butter); }
 .page-heading {
   text-align: center;
   padding: 120px 24px 64px;
@@ -281,7 +280,7 @@ body.bg-butter { background: var(--butter); }
 
 /* ---------- PULL QUOTE BLOCK ---------- */
 .pull-quote {
-  background: var(--butter);
+  background: var(--paper);
   padding: 100px 24px;
   text-align: center;
 }
@@ -318,7 +317,6 @@ body.bg-butter { background: var(--butter); }
   justify-content: center;
   background: var(--paper);
 }
-.alt-block.text-warm .alt-block-text { background: var(--butter); }
 .alt-block-text h2 {
   font-size: 34px;
   font-weight: 600;
@@ -494,7 +492,7 @@ body.bg-butter { background: var(--butter); }
 
 /* ---------- SECTION: NEWSLETTER ---------- */
 .newsletter-band {
-  background: var(--butter);
+  background: var(--paper);
   padding: 120px 24px;
   text-align: center;
 }
@@ -654,7 +652,7 @@ body.bg-butter { background: var(--butter); }
   margin: 0 0 18px;
 }
 .mission-support {
-  background: var(--butter);
+  background: var(--paper);
   padding: 80px 24px;
   text-align: center;
 }
@@ -943,7 +941,7 @@ body.bg-butter { background: var(--butter); }
   margin: 0;
 }
 .visit-info {
-  background: var(--butter);
+  background: var(--paper);
   padding: 80px 24px;
   text-align: center;
 }
