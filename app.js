@@ -106,65 +106,49 @@
   }
   document.querySelectorAll('form[data-formspree]').forEach(bindFormspreeForm);
 
-  (function bindFooterLoaf() {
-    const loaves = document.querySelectorAll('.footer-loaf');
-    if (!loaves.length) return;
-    loaves.forEach((svg) => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Generic draw-on-view animator for SVGs that draw their stroke as they
+  // scroll into view. Pass `replay: true` to redraw every time the element
+  // re-enters the viewport (baguette behavior); otherwise it fires once.
+  function setupDrawOnView(selector, opts) {
+    const els = document.querySelectorAll(selector);
+    if (!els.length) return;
+    const { varName, fallback = '700', threshold = 0.4, replay = false } = opts || {};
+    els.forEach((svg) => {
       const path = svg.querySelector('path');
       if (!path) return;
       try {
-        const len = Math.ceil(path.getTotalLength());
-        svg.style.setProperty('--loaf-len', len);
+        svg.style.setProperty(varName, Math.ceil(path.getTotalLength()));
       } catch (_) {
-        svg.style.setProperty('--loaf-len', '700');
+        svg.style.setProperty(varName, fallback);
       }
     });
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce || !('IntersectionObserver' in window)) {
-      loaves.forEach((svg) => svg.classList.add('in-view'));
+    if ((!replay && reduceMotion) || !('IntersectionObserver' in window)) {
+      els.forEach((svg) => svg.classList.add('in-view'));
       return;
     }
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          io.unobserve(entry.target);
+          if (replay) {
+            entry.target.classList.remove('in-view');
+            void entry.target.getBoundingClientRect();
+            entry.target.classList.add('in-view');
+          } else {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        } else if (replay) {
+          entry.target.classList.remove('in-view');
         }
       });
-    }, { threshold: 0.4 });
-    loaves.forEach((svg) => io.observe(svg));
-  })();
+    }, { threshold });
+    els.forEach((svg) => io.observe(svg));
+  }
 
-  (function bindBaguette() {
-    const svg = document.getElementById('baguette-svg');
-    if (!svg) return;
-    const path = svg.querySelector('path');
-    if (!path) return;
-    try {
-      const len = Math.ceil(path.getTotalLength());
-      svg.style.setProperty('--baguette-len', len);
-    } catch (_) {
-      svg.style.setProperty('--baguette-len', '1400');
-    }
-    if (!('IntersectionObserver' in window)) {
-      svg.classList.add('in-view');
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          svg.classList.remove('in-view');
-          void svg.getBoundingClientRect();
-          svg.classList.add('in-view');
-        } else {
-          svg.classList.remove('in-view');
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(svg);
-  })();
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setupDrawOnView('.footer-loaf', { varName: '--loaf-len' });
+  setupDrawOnView('#baguette-svg', { varName: '--baguette-len', fallback: '1400', threshold: 0.35, replay: true });
 
   (function bindParallax() {
     if (reduceMotion) return;
@@ -242,33 +226,7 @@
     else media.appendChild(video);
   })();
 
-  (function bindWheatSprig() {
-    const sprigs = document.querySelectorAll('.ornament-wheat.draw');
-    if (!sprigs.length) return;
-    sprigs.forEach((svg) => {
-      const path = svg.querySelector('path');
-      if (!path) return;
-      try {
-        const len = Math.ceil(path.getTotalLength());
-        svg.style.setProperty('--wheat-len', len);
-      } catch (_) {
-        svg.style.setProperty('--wheat-len', '600');
-      }
-    });
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      sprigs.forEach((svg) => svg.classList.add('in-view'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.4 });
-    sprigs.forEach((svg) => io.observe(svg));
-  })();
+  setupDrawOnView('.ornament-wheat.draw', { varName: '--wheat-len', fallback: '600' });
 
   (function bindMobileActions() {
     const bar = document.querySelector('.mobile-actions');
