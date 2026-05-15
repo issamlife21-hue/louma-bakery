@@ -106,10 +106,8 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <div class="nav-cta-wrap">
-      <a class="nav-cta" href="menu.html">Order</a>
-      <span class="nav-cta-note">Opening Jul 2026</span>
-    </div>
+    <!-- TODO: replace href with Louma's Uber Eats URL -->
+    <a class="nav-cta" href="https://www.ubereats.com/" target="_blank" rel="noopener">Order</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -118,7 +116,8 @@
 
 <main id="main">
 
-  <section class="hero" data-nav-hero>
+  <!-- TODO: set data-hero-video to the bakery's hero video URL (e.g. "images/hero-home.mp4") to swap the still for a looping video -->
+  <section class="hero" data-nav-hero data-hero-video="">
     <div class="hero-media">
       <!-- REPLACE WITH OFFICIAL PHOTO -->
       <img class="hero-image" alt="Freshly baked bread and pastries at Louma Bakery"
@@ -129,11 +128,6 @@
                    https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=2400&q=80&auto=format 2400w"
            sizes="100vw"
            decoding="async" fetchpriority="high" />
-      <!-- To swap in a hero video later, replace the <img> above with:
-        <video class="hero-video" autoplay muted loop playsinline poster="images/hero-home.jpg">
-          <source src="images/hero-home.mp4" type="video/mp4">
-        </video>
-      -->
     </div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-inner">
@@ -149,7 +143,8 @@
         <svg class="ornament-star" viewBox="0 0 40 40"><use href="#ornament-star"/></svg>
       </span>
       <p class="editorial-line">European craft. Levantine soul. Baked by hand, served with pride.</p>
-      <p class="editorial-sub">A neighborhood bakery on Wilshire — and a workforce-development initiative training the next generation of bakers in Los Angeles.</p>
+      <p class="editorial-ritual">Flour by five. Espresso by seven. Doors open at eight.</p>
+      <p class="editorial-sub">A neighborhood bakery on Wilshire — built around craft, dignity, and meaningful work for the people who bake it.</p>
     </div>
   </section>
 
@@ -159,7 +154,7 @@
     <div class="alt-block-text reveal">
       <span class="eyebrow">The morning bake</span>
       <h2>Out of the oven by eight.</h2>
-      <p>Small batches, every morning. We sell out by the afternoon — that's how we know it's still fresh.</p>
+      <p>The oven goes on before sunrise. By eight, the windows are warm, the espresso's pulling, and the first loaves come out of the steam. We sell out most days — that's how we know it's still fresh.</p>
       <a class="alt-link" href="menu.html">See the menu</a>
     </div>
   </section>
@@ -188,7 +183,9 @@
 
   <section class="product-section">
     <div class="container">
-      <svg class="ornament-wheat product-ornament reveal" viewBox="0 0 40 80" aria-hidden="true"><use href="#ornament-wheat"/></svg>
+      <svg class="ornament-wheat product-ornament reveal draw" viewBox="0 0 40 80" aria-hidden="true">
+        <path d="M20 78 V14 M20 16 L11 22 M20 16 L29 22 M20 24 L11 30 M20 24 L29 30 M20 32 L11 38 M20 32 L29 38 M20 40 L11 46 M20 40 L29 46 M20 48 L11 54 M20 48 L29 54"/>
+      </svg>
       <span class="eyebrow">From the menu</span>
       <h2>A few of our favorites.</h2>
       <div class="product-grid">
@@ -344,6 +341,11 @@
     <div class="footer-bottom-tag">Flour-dusted dreams, baked fresh daily.</div>
   </div>
 </footer>
+<div class="mobile-actions" role="region" aria-label="Quick actions">
+  <!-- TODO: replace href with Louma's Uber Eats URL -->
+  <a class="mobile-actions-cta primary" href="https://www.ubereats.com/" target="_blank" rel="noopener">Order on Uber Eats</a>
+  <a class="mobile-actions-cta secondary" href="catering.html">Catering</a>
+</div>
 <script src="app.js" defer></script>
 </body>
 </html>

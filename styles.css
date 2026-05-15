@@ -432,8 +432,17 @@ img { display: block; max-width: 100%; height: auto; }
   line-height: 1.45;
   margin: 0;
 }
+.editorial-ritual {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.7vw, 22px);
+  color: var(--clay);
+  margin: var(--s-3) 0;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
 .editorial-sub {
-  margin-top: var(--s-4);
+  margin-top: var(--s-3);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -1571,11 +1580,13 @@ footer {
   }
   html { scroll-behavior: auto; }
   .baguette path,
-  .footer-loaf path {
+  .footer-loaf path,
+  .ornament-wheat.draw path {
     stroke-dashoffset: 0;
   }
   .baguette.in-view path,
-  .footer-loaf.in-view path {
+  .footer-loaf.in-view path,
+  .ornament-wheat.draw.in-view path {
     animation: none;
   }
 }
@@ -1650,7 +1661,7 @@ footer {
 }
 
 @media (max-width: 640px) {
-  :root { --s-7: 88px; --s-6: 64px; --s-5: 48px; }
+  :root { --s-7: 76px; --s-6: 56px; --s-5: 40px; }
   .container { padding: 0 24px; }
   .nav-inner { padding: 0 20px; gap: 12px; height: 60px; }
   .nav-spacer { height: 60px; }
@@ -1780,4 +1791,99 @@ footer {
     transform: none !important;
     transition: none !important;
   }
+}
+
+/* ---------- WHEAT SPRIG DRAW-ON ---------- */
+.ornament-wheat.draw path {
+  stroke-dasharray: var(--wheat-len, 600);
+  stroke-dashoffset: var(--wheat-len, 600);
+}
+.ornament-wheat.draw.in-view path {
+  animation: wheat-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes wheat-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- MENU NOTE (linen rhythm break) ---------- */
+.menu-note {
+  background: var(--linen);
+  padding: var(--s-5) 24px;
+  text-align: center;
+  margin: var(--s-5) 0;
+}
+.menu-note p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--burgundy);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* ---------- HERO VIDEO (when JS swaps it in via data-hero-video) ---------- */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ---------- MOBILE STICKY ACTION BAR ---------- */
+.mobile-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: none;
+  gap: 10px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(250, 245, 234, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(110, 31, 42, 0.1);
+  transform: translateY(110%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mobile-actions.is-visible { transform: translateY(0); }
+.mobile-actions-cta {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-radius: var(--r-pill);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+.mobile-actions-cta.primary {
+  background: var(--burgundy);
+  color: #fff;
+}
+.mobile-actions-cta.primary:active,
+.mobile-actions-cta.primary:hover {
+  background: var(--ink);
+}
+.mobile-actions-cta.secondary {
+  background: transparent;
+  border: 1px solid var(--burgundy);
+  color: var(--burgundy);
+}
+.mobile-actions-cta.secondary:active,
+.mobile-actions-cta.secondary:hover {
+  background: var(--burgundy);
+  color: #fff;
+}
+@media (max-width: 768px) {
+  .mobile-actions { display: flex; }
+  footer { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
 }

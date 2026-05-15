@@ -56,10 +56,8 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <div class="nav-cta-wrap">
-      <a class="nav-cta" href="menu.html">Order</a>
-      <span class="nav-cta-note">Opening Jul 2026</span>
-    </div>
+    <!-- TODO: replace href with Louma's Uber Eats URL -->
+    <a class="nav-cta" href="https://www.ubereats.com/" target="_blank" rel="noopener">Order</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -69,16 +67,16 @@
 <main id="main">
   <div class="nav-spacer"></div>
   <div class="page-heading">
-    <span class="eyebrow">Why we exist</span>
+    <span class="eyebrow">What we believe</span>
     <h1>Mission</h1>
-    <p class="sub">A bakery, and a workforce-development initiative.</p>
+    <p class="sub">Craft, dignity, and a real path to a career in food.</p>
   </div>
 
   <div class="mission-statement reveal">
     <span class="ornament-flank" aria-hidden="true">
       <svg class="ornament-star" viewBox="0 0 40 40"><use href="#ornament-star"/></svg>
     </span>
-    <p>The Louma Initiative trains and employs people with intellectual and developmental differences as bakers, baristas, and front-of-house teammates. They work the line in plain view, not in a separate program behind a door. Every dollar the bakery makes funds wages, training, and a real path to a career in food.</p>
+    <p>Louma is a bakery built around the people who make it. They train on the line, work in plain view of every customer, and get paid like the professionals they're becoming. Many of our teammates have intellectual or developmental differences — and the bakery exists, in part, to prove what that looks like done right.</p>
   </div>
 
   <div class="mission-two-col reveal">
@@ -100,14 +98,9 @@
     <span class="eyebrow">Give</span>
     <h2>Support the mission.</h2>
     <p>Every dollar becomes hours of paid training, a longer shift on the line, a teammate one step closer to a career in food. We won't ask twice — but if this matters to you, it matters here.</p>
-    <!-- TODO: replace business value with real PayPal business email before going live -->
-    <form class="paypal-form" action="https://www.paypal.com/donate" method="post" target="_blank">
-      <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL_HERE" />
-      <input type="hidden" name="currency_code" value="USD" />
-      <input type="hidden" name="item_name" value="Support The Louma Initiative" />
-      <button type="submit" class="paypal-btn" disabled aria-disabled="true">Donate</button>
-    </form>
-    <p class="donate-note">Donations launch with the bakery in July 2026. <a href="index.html#newsletter">Sign up</a> to be notified when it goes live.</p>
+    <!-- TODO: replace href with Louma's PayPal donation URL -->
+    <a class="paypal-btn" href="https://www.paypal.com/donate" target="_blank" rel="noopener">Donate</a>
+    <p class="donate-note">Every gift goes straight to wages and training. Thank you for showing up for the people behind the counter.</p>
     </div>
   </section>
 </main>
@@ -158,6 +151,11 @@
     <div class="footer-bottom-tag">Flour-dusted dreams, baked fresh daily.</div>
   </div>
 </footer>
+<div class="mobile-actions" role="region" aria-label="Quick actions">
+  <!-- TODO: replace href with Louma's Uber Eats URL -->
+  <a class="mobile-actions-cta primary" href="https://www.ubereats.com/" target="_blank" rel="noopener">Order on Uber Eats</a>
+  <a class="mobile-actions-cta secondary" href="catering.html">Catering</a>
+</div>
 <script src="app.js" defer></script>
 </body>
 </html>

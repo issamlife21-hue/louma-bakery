@@ -217,6 +217,76 @@
     els.forEach((el) => io.observe(el));
   })();
 
+  (function bindHeroVideo() {
+    const hero = document.querySelector('.hero[data-hero-video]');
+    if (!hero) return;
+    const src = hero.dataset.heroVideo;
+    if (!src) return;
+    const media = hero.querySelector('.hero-media');
+    if (!media) return;
+    const img = media.querySelector('.hero-image');
+    const poster = img ? (img.currentSrc || img.src || '') : '';
+    const video = document.createElement('video');
+    video.className = 'hero-video';
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    if (poster) video.poster = poster;
+    const source = document.createElement('source');
+    source.src = src;
+    source.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+    video.appendChild(source);
+    if (img) img.replaceWith(video);
+    else media.appendChild(video);
+  })();
+
+  (function bindWheatSprig() {
+    const sprigs = document.querySelectorAll('.ornament-wheat.draw');
+    if (!sprigs.length) return;
+    sprigs.forEach((svg) => {
+      const path = svg.querySelector('path');
+      if (!path) return;
+      try {
+        const len = Math.ceil(path.getTotalLength());
+        svg.style.setProperty('--wheat-len', len);
+      } catch (_) {
+        svg.style.setProperty('--wheat-len', '600');
+      }
+    });
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      sprigs.forEach((svg) => svg.classList.add('in-view'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    sprigs.forEach((svg) => io.observe(svg));
+  })();
+
+  (function bindMobileActions() {
+    const bar = document.querySelector('.mobile-actions');
+    if (!bar) return;
+    let visible = false;
+    function check() {
+      const trigger = Math.min(window.innerHeight * 0.6, 520);
+      const shouldShow = window.scrollY > trigger;
+      if (shouldShow !== visible) {
+        bar.classList.toggle('is-visible', shouldShow);
+        visible = shouldShow;
+      }
+    }
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check, { passive: true });
+    check();
+  })();
+
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
