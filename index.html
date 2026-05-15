@@ -119,15 +119,22 @@
 <main id="main">
 
   <section class="hero" data-nav-hero>
-    <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <img class="hero-image" alt="Freshly baked bread and pastries at Louma Bakery"
-         src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format"
-         srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=640&q=80&auto=format 640w,
-                 https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format 1200w,
-                 https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format 1600w,
-                 https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=2400&q=80&auto=format 2400w"
-         sizes="100vw"
-         decoding="async" fetchpriority="high" />
+    <div class="hero-media">
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <img class="hero-image" alt="Freshly baked bread and pastries at Louma Bakery"
+           src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format"
+           srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=640&q=80&auto=format 640w,
+                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format 1200w,
+                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format 1600w,
+                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=2400&q=80&auto=format 2400w"
+           sizes="100vw"
+           decoding="async" fetchpriority="high" />
+      <!-- To swap in a hero video later, replace the <img> above with:
+        <video class="hero-video" autoplay muted loop playsinline poster="images/hero-home.jpg">
+          <source src="images/hero-home.mp4" type="video/mp4">
+        </video>
+      -->
+    </div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-inner">
       <span class="eyebrow">Wilshire · Opening July 2026</span>
@@ -137,7 +144,7 @@
   </section>
 
   <section class="editorial">
-    <div class="editorial-inner">
+    <div class="editorial-inner reveal">
       <span class="ornament-flank" aria-hidden="true">
         <svg class="ornament-star" viewBox="0 0 40 40"><use href="#ornament-star"/></svg>
       </span>
@@ -148,8 +155,8 @@
 
   <section class="alt-block surface-linen">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format')"></div>
-    <div class="alt-block-text">
+    <div class="alt-block-image" data-parallax="0.12" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format')"></div>
+    <div class="alt-block-text reveal">
       <span class="eyebrow">The morning bake</span>
       <h2>Out of the oven by eight.</h2>
       <p>Small batches, every morning. We sell out by the afternoon — that's how we know it's still fresh.</p>
@@ -159,8 +166,8 @@
 
   <section class="alt-block reverse">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1200&q=80&auto=format')"></div>
-    <div class="alt-block-text">
+    <div class="alt-block-image" data-parallax="0.12" style="background-image:url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1200&q=80&auto=format')"></div>
+    <div class="alt-block-text reveal">
       <span class="eyebrow">The signature</span>
       <h2>Eighty-one layers of butter.</h2>
       <p>Laminated by hand over three days. Crisp at the edges, tender at the center, golden through.</p>
@@ -170,8 +177,8 @@
 
   <section class="alt-block surface-linen">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format')"></div>
-    <div class="alt-block-text">
+    <div class="alt-block-image" data-parallax="0.12" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format')"></div>
+    <div class="alt-block-text reveal">
       <span class="eyebrow">For your table</span>
       <h2>Pastry boxes &amp; catering.</h2>
       <p>For offices, gatherings, weddings — and quiet weekday mornings that deserve more than usual.</p>
@@ -188,7 +195,7 @@
       <span class="eyebrow">From the menu</span>
       <h2>A few of our favorites.</h2>
       <div class="product-grid">
-        <a class="product-card" href="menu.html">
+        <a class="product-card reveal" style="--reveal-i:0" href="menu.html">
           <div class="product-image">
             <!-- REPLACE WITH OFFICIAL PHOTO -->
             <img alt="Butter croissant" loading="lazy" decoding="async"
@@ -201,7 +208,7 @@
           <div class="product-name">Butter Croissant</div>
           <div class="product-price">$6</div>
         </a>
-        <a class="product-card" href="menu.html">
+        <a class="product-card reveal" style="--reveal-i:1" href="menu.html">
           <div class="product-image">
             <!-- REPLACE WITH OFFICIAL PHOTO -->
             <img alt="Za'atar labneh croissant" loading="lazy" decoding="async"
@@ -214,7 +221,7 @@
           <div class="product-name">Zaatar Labneh Croissant</div>
           <div class="product-price">$7</div>
         </a>
-        <a class="product-card" href="menu.html">
+        <a class="product-card reveal" style="--reveal-i:2" href="menu.html">
           <div class="product-image">
             <!-- REPLACE WITH OFFICIAL PHOTO -->
             <img alt="Country sourdough loaf" loading="lazy" decoding="async"
@@ -227,7 +234,7 @@
           <div class="product-name">Country Sourdough</div>
           <div class="product-price">$9</div>
         </a>
-        <a class="product-card" href="menu.html">
+        <a class="product-card reveal" style="--reveal-i:3" href="menu.html">
           <div class="product-image">
             <!-- REPLACE WITH OFFICIAL PHOTO -->
             <img alt="Louma latte" loading="lazy" decoding="async"
@@ -247,7 +254,7 @@
 
   <section class="visit-stay" id="newsletter">
     <div class="visit-stay-inner">
-      <div class="visit-stay-block">
+      <div class="visit-stay-block reveal">
         <span class="eyebrow">Find us</span>
         <h2>Louma Bakery</h2>
         <p><a href="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Santa+Monica,+CA+90403" target="_blank" rel="noopener">3223 Wilshire Blvd, Santa Monica, CA 90403</a></p>
@@ -255,7 +262,7 @@
         <p><a href="tel:+13104642733">(310) 464-2733</a></p>
         <p class="visit-stay-tag">Opening July 2026.</p>
       </div>
-      <div class="visit-stay-block">
+      <div class="visit-stay-block reveal" style="--reveal-i:1">
         <span class="eyebrow">Stay in touch</span>
         <h2>Be first through the door.</h2>
         <p>A short note when we open, and the occasional letter from the bakery.</p>
@@ -267,13 +274,15 @@
         </form>
         <div class="newsletter-thanks" id="newsletterThanks">You're on the list. See you in July.</div>
       </div>
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img class="visit-stay-image" alt="Louma Bakery storefront" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=80&auto=format 800w,
-                   https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format 1200w,
-                   https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1600&q=80&auto=format 1600w"
-           sizes="100vw" />
+      <div class="visit-stay-media">
+        <!-- REPLACE WITH OFFICIAL PHOTO -->
+        <img class="visit-stay-image" data-parallax="0.15" alt="Louma Bakery storefront" loading="lazy" decoding="async"
+             src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80&auto=format"
+             srcset="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=80&auto=format 800w,
+                     https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format 1200w,
+                     https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1600&q=80&auto=format 1600w"
+             sizes="100vw" />
+      </div>
     </div>
   </section>
 
