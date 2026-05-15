@@ -36,6 +36,10 @@
             font-size="38" font-weight="600" font-style="italic"
             fill="#ED2739">Louma</text>
     </symbol>
+    <symbol id="ornament-star" viewBox="0 0 40 40">
+      <path d="M20 4 L36 20 L20 36 L4 20 Z
+               M8 8 L32 8 L32 32 L8 32 Z"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -52,7 +56,10 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <a class="nav-cta" href="menu.html">Order</a>
+    <div class="nav-cta-wrap">
+      <a class="nav-cta" href="menu.html">Order</a>
+      <span class="nav-cta-note">Opening Jul 2026</span>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -62,10 +69,15 @@
 <main id="main">
   <div class="nav-spacer"></div>
   <div class="page-heading">
+    <span class="eyebrow">Why we exist</span>
     <h1>Mission</h1>
+    <p class="sub">A bakery, and a workforce-development initiative.</p>
   </div>
 
   <div class="mission-statement">
+    <span class="ornament-flank" aria-hidden="true">
+      <svg class="ornament-star" viewBox="0 0 40 40"><use href="#ornament-star"/></svg>
+    </span>
     <p>The Louma Initiative trains and employs people with intellectual and developmental differences as bakers, baristas, and front-of-house teammates. They work the line in plain view, not in a separate program behind a door. Every dollar the bakery makes funds wages, training, and a real path to a career in food.</p>
   </div>
 
@@ -84,6 +96,7 @@
   </div>
 
   <section class="mission-support">
+    <span class="eyebrow">Give</span>
     <h2>Support the mission.</h2>
     <p>Every dollar funds wages, training, and careers.</p>
     <!-- TODO: replace business value with real PayPal business email before going live -->

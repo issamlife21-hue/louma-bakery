@@ -78,6 +78,18 @@
             font-size="38" font-weight="600" font-style="italic"
             fill="#ED2739">Louma</text>
     </symbol>
+    <symbol id="ornament-wheat" viewBox="0 0 40 80">
+      <path d="M20 78 V14
+               M20 16 L11 22 M20 16 L29 22
+               M20 24 L11 30 M20 24 L29 30
+               M20 32 L11 38 M20 32 L29 38
+               M20 40 L11 46 M20 40 L29 46
+               M20 48 L11 54 M20 48 L29 54"/>
+    </symbol>
+    <symbol id="ornament-star" viewBox="0 0 40 40">
+      <path d="M20 4 L36 20 L20 36 L4 20 Z
+               M8 8 L32 8 L32 32 L8 32 Z"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -94,7 +106,10 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <a class="nav-cta" href="menu.html">Order</a>
+    <div class="nav-cta-wrap">
+      <a class="nav-cta" href="menu.html">Order</a>
+      <span class="nav-cta-note">Opening Jul 2026</span>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -105,7 +120,7 @@
 
   <section class="hero" data-nav-hero>
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <img class="hero-image" alt=""
+    <img class="hero-image" alt="Freshly baked bread and pastries at Louma Bakery"
          src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format"
          srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=640&q=80&auto=format 640w,
                  https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format 1200w,
@@ -115,72 +130,63 @@
          decoding="async" fetchpriority="high" />
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-inner">
+      <span class="eyebrow">Wilshire · Opening July 2026</span>
       <h1>Flour-dusted dreams, baked fresh daily.</h1>
       <a class="hero-btn" href="visit.html">Visit Us</a>
     </div>
   </section>
 
-  <section class="section-tagline">
-    <p>European craft. Levantine soul. Baked fresh on Wilshire every morning.</p>
-  </section>
-
-  <section class="pull-quote">
-    <p>Baked by hand. Served with pride.</p>
-  </section>
-
-  <section class="alt-block">
-    <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=900&q=80&auto=format')"></div>
-    <div class="alt-block-text">
-      <h2>Baked every morning.</h2>
-      <p>Small batches, out of the oven by 8am.</p>
-      <a class="alt-link" href="menu.html">See the menu →</a>
+  <section class="editorial">
+    <div class="editorial-inner">
+      <span class="ornament-flank" aria-hidden="true">
+        <svg class="ornament-star" viewBox="0 0 40 40"><use href="#ornament-star"/></svg>
+      </span>
+      <p class="editorial-line">European craft. Levantine soul. Baked by hand, served with pride.</p>
+      <p class="editorial-sub">A neighborhood bakery on Wilshire — and a workforce-development initiative training the next generation of bakers in Los Angeles.</p>
     </div>
   </section>
 
-  <section class="alt-block reverse text-warm">
+  <section class="alt-block surface-linen">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format')"></div>
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format')"></div>
     <div class="alt-block-text">
-      <h2>The croissant.</h2>
-      <p>81 layers. Laminated by hand.</p>
-      <a class="alt-link" href="menu.html">See the menu →</a>
+      <span class="eyebrow">The morning bake</span>
+      <h2>Out of the oven by eight.</h2>
+      <p>Small batches, every morning. We sell out by the afternoon — that's how we know it's still fresh.</p>
+      <a class="alt-link" href="menu.html">See the menu</a>
     </div>
   </section>
 
-  <section class="alt-block">
+  <section class="alt-block reverse">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&auto=format')"></div>
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1200&q=80&auto=format')"></div>
     <div class="alt-block-text">
-      <h2>The Louma Latte.</h2>
-      <p>Espresso, cardamom, orange blossom.</p>
-      <a class="alt-link" href="menu.html">See the menu →</a>
+      <span class="eyebrow">The signature</span>
+      <h2>Eighty-one layers of butter.</h2>
+      <p>Laminated by hand over three days. Crisp at the edges, tender at the center, golden through.</p>
+      <a class="alt-link" href="menu.html">See the menu</a>
     </div>
   </section>
 
-  <section class="alt-block reverse text-warm">
+  <section class="alt-block surface-linen">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format')"></div>
+    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format')"></div>
     <div class="alt-block-text">
-      <h2>Pastry boxes.</h2>
-      <p>For offices, events, and people who know what they want.</p>
-      <a class="alt-link" href="catering.html">Catering →</a>
+      <span class="eyebrow">For your table</span>
+      <h2>Pastry boxes &amp; catering.</h2>
+      <p>For offices, gatherings, weddings — and quiet weekday mornings that deserve more than usual.</p>
+      <a class="alt-link" href="catering.html">Talk catering</a>
     </div>
   </section>
 
-  <section class="alt-block">
-    <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image" style="background-image:url('https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=900&q=80&auto=format')"></div>
-    <div class="alt-block-text">
-      <h2>3223 Wilshire Blvd.</h2>
-      <p>Opening July 2026.</p>
-      <a class="alt-link" href="visit.html">Get directions →</a>
-    </div>
-  </section>
+  <div class="ornament-wrap">
+    <svg class="ornament-wheat" viewBox="0 0 40 80" aria-hidden="true"><use href="#ornament-wheat"/></svg>
+  </div>
 
-  <section class="section product-section">
+  <section class="product-section">
     <div class="container">
-      <div class="small-label">From the menu</div>
+      <span class="eyebrow">From the menu</span>
+      <h2>A few of our favorites.</h2>
       <div class="product-grid">
         <a class="product-card" href="menu.html">
           <div class="product-image">
@@ -190,7 +196,7 @@
                  srcset="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=320&q=80&auto=format 320w,
                          https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=600&q=80&auto=format 600w,
                          https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 960px) 50vw, 25vw" />
+                 sizes="(max-width: 1024px) 50vw, 25vw" />
           </div>
           <div class="product-name">Butter Croissant</div>
           <div class="product-price">$6</div>
@@ -203,7 +209,7 @@
                  srcset="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=320&q=80&auto=format 320w,
                          https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80&auto=format 600w,
                          https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 960px) 50vw, 25vw" />
+                 sizes="(max-width: 1024px) 50vw, 25vw" />
           </div>
           <div class="product-name">Zaatar Labneh Croissant</div>
           <div class="product-price">$7</div>
@@ -216,7 +222,7 @@
                  srcset="https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=320&q=80&auto=format 320w,
                          https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=600&q=80&auto=format 600w,
                          https://images.unsplash.com/photo-1585478259715-876acc5be8eb?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 960px) 50vw, 25vw" />
+                 sizes="(max-width: 1024px) 50vw, 25vw" />
           </div>
           <div class="product-name">Country Sourdough</div>
           <div class="product-price">$9</div>
@@ -229,60 +235,45 @@
                  srcset="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=320&q=80&auto=format 320w,
                          https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format 600w,
                          https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 960px) 50vw, 25vw" />
+                 sizes="(max-width: 1024px) 50vw, 25vw" />
           </div>
           <div class="product-name">Louma Latte</div>
           <div class="product-price">$7</div>
         </a>
       </div>
-      <a class="text-link" href="menu.html">See full menu →</a>
+      <a class="text-link" href="menu.html">See the full menu</a>
     </div>
   </section>
 
-  <section class="section">
-    <div class="photo-grid">
+  <section class="visit-stay" id="newsletter">
+    <div class="visit-stay-inner">
+      <div class="visit-stay-block">
+        <span class="eyebrow">Find us</span>
+        <h2>Louma Bakery</h2>
+        <p><a href="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Los+Angeles,+CA+90010" target="_blank" rel="noopener">3223 Wilshire Blvd, Los Angeles, CA 90010</a></p>
+        <p>Monday to Saturday · 8am to 4pm</p>
+        <p><a href="tel:+13104642733">(310) 464-2733</a></p>
+        <p class="visit-stay-tag">Opening July 2026.</p>
+      </div>
+      <div class="visit-stay-block">
+        <span class="eyebrow">Stay in touch</span>
+        <h2>Be first through the door.</h2>
+        <p>A short note when we open, and the occasional letter from the bakery.</p>
+        <form class="newsletter-form" id="newsletterForm" data-formspree data-success="#newsletterThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Welcome to the Louma community" />
+          <input type="hidden" name="_replyto" value="" />
+          <input type="email" name="email" id="newsletterEmail" placeholder="Your email" required aria-label="Email address" />
+          <button type="submit">Subscribe</button>
+        </form>
+        <div class="newsletter-thanks" id="newsletterThanks">You're on the list. See you in July.</div>
+      </div>
       <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img alt="" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80&auto=format 400w,
-                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&q=80&auto=format 700w,
-                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1000&q=80&auto=format 1000w"
-           sizes="(max-width: 960px) 50vw, 33vw" />
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img alt="" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80&auto=format 400w,
-                   https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700&q=80&auto=format 700w,
-                   https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1000&q=80&auto=format 1000w"
-           sizes="(max-width: 960px) 50vw, 33vw" />
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img alt="" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1534432182912-63863115e106?w=700&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1534432182912-63863115e106?w=400&q=80&auto=format 400w,
-                   https://images.unsplash.com/photo-1534432182912-63863115e106?w=700&q=80&auto=format 700w,
-                   https://images.unsplash.com/photo-1534432182912-63863115e106?w=1000&q=80&auto=format 1000w"
-           sizes="(max-width: 960px) 50vw, 33vw" />
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img alt="" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=700&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80&auto=format 400w,
-                   https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=700&q=80&auto=format 700w,
-                   https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1000&q=80&auto=format 1000w"
-           sizes="(max-width: 960px) 50vw, 33vw" />
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img alt="" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=700&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=400&q=80&auto=format 400w,
-                   https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=700&q=80&auto=format 700w,
-                   https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=1000&q=80&auto=format 1000w"
-           sizes="(max-width: 960px) 50vw, 33vw" />
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img alt="" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80&auto=format 400w,
-                   https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=80&auto=format 700w,
-                   https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1000&q=80&auto=format 1000w"
-           sizes="(max-width: 960px) 50vw, 33vw" />
+      <img class="visit-stay-image" alt="Louma Bakery storefront" loading="lazy" decoding="async"
+           src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80&auto=format"
+           srcset="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=80&auto=format 800w,
+                   https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format 1200w,
+                   https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1600&q=80&auto=format 1600w"
+           sizes="100vw" />
     </div>
   </section>
 
@@ -298,35 +289,6 @@
     </svg>
   </div>
   <p class="baguette-line">We built this place for the people serving you.</p>
-
-  <section class="location-section">
-    <div class="container">
-      <div class="location-inner">
-        <h2>Louma Bakery</h2>
-        <p><a href="https://www.google.com/maps?q=3223+Wilshire+Blvd,+Los+Angeles,+CA+90010" target="_blank" rel="noopener">3223 Wilshire Blvd, Los Angeles, CA 90010</a></p>
-        <p>Monday to Saturday, 8am to 4pm</p>
-        <p><a href="tel:+13104642733">(310) 464-2733</a></p>
-      </div>
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img class="location-image" alt="Louma Bakery storefront" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=80&auto=format 800w,
-                   https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format 1200w,
-                   https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1600&q=80&auto=format 1600w"
-           sizes="100vw" />
-    </div>
-  </section>
-
-  <section class="newsletter-band" id="newsletter">
-    <h2>Opening July 2026.</h2>
-    <form class="newsletter-form" id="newsletterForm" data-formspree data-success="#newsletterThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
-      <input type="hidden" name="_subject" value="Welcome to the Louma community" />
-      <input type="hidden" name="_replyto" value="" />
-      <input type="email" name="email" id="newsletterEmail" placeholder="Your email" required aria-label="Email address" />
-      <button type="submit">Subscribe</button>
-    </form>
-    <div class="newsletter-thanks" id="newsletterThanks">You're on the list. See you in July.</div>
-  </section>
 
 </main>
 

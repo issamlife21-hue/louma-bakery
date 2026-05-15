@@ -36,6 +36,14 @@
             font-size="38" font-weight="600" font-style="italic"
             fill="#ED2739">Louma</text>
     </symbol>
+    <symbol id="ornament-wheat" viewBox="0 0 40 80">
+      <path d="M20 78 V14
+               M20 16 L11 22 M20 16 L29 22
+               M20 24 L11 30 M20 24 L29 30
+               M20 32 L11 38 M20 32 L29 38
+               M20 40 L11 46 M20 40 L29 46
+               M20 48 L11 54 M20 48 L29 54"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -52,7 +60,10 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <a class="nav-cta" href="menu.html">Order</a>
+    <div class="nav-cta-wrap">
+      <a class="nav-cta" href="menu.html">Order</a>
+      <span class="nav-cta-note">Opening Jul 2026</span>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -62,7 +73,9 @@
 <main id="main" class="story-main">
   <div class="nav-spacer"></div>
   <div class="page-heading">
+    <span class="eyebrow">Behind Louma</span>
     <h1>Our Story</h1>
+    <p class="sub">A neighborhood bakery, five years in the making.</p>
   </div>
 
   <div class="story-section">
@@ -92,6 +105,10 @@
                  https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=900&q=80&auto=format 900w,
                  https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=1400&q=80&auto=format 1400w"
          sizes="(max-width: 960px) 100vw, 50vw" />
+  </div>
+
+  <div class="ornament-wrap">
+    <svg class="ornament-wheat" viewBox="0 0 40 80" aria-hidden="true"><use href="#ornament-wheat"/></svg>
   </div>
 
   <div class="story-two-col">
