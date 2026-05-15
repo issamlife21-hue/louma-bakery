@@ -466,17 +466,6 @@ img { display: block; max-width: 100%; height: auto; }
   flex-direction: column;
   justify-content: center;
   background: inherit;
-  position: relative;
-  z-index: 1;
-}
-.alt-block-image { position: relative; z-index: 2; }
-@media (min-width: 961px) {
-  .alt-block:not(.reverse) .alt-block-image {
-    margin-right: clamp(-14px, -1vw, -8px);
-  }
-  .alt-block.reverse .alt-block-image {
-    margin-left: clamp(-14px, -1vw, -8px);
-  }
 }
 .alt-block-text .eyebrow { margin-bottom: var(--s-3); }
 .alt-block-text h2 {
@@ -1639,6 +1628,16 @@ footer {
   transition-delay: calc(var(--reveal-i, 0) * 90ms);
 }
 
+/* Opacity-only fade-in for elements whose transform is used for parallax/scale */
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity;
+}
+.fade-in.is-revealed {
+  opacity: 1;
+}
+
 @keyframes hero-fade-up {
   from { opacity: 0; transform: translate3d(0, 18px, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -1677,6 +1676,11 @@ footer {
   .reveal.is-revealed {
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
+  }
+  .fade-in,
+  .fade-in.is-revealed {
+    opacity: 1 !important;
     transition: none !important;
   }
 }

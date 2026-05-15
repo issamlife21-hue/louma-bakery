@@ -147,7 +147,7 @@
     els.forEach((svg) => io.observe(svg));
   }
 
-  setupDrawOnView('.footer-loaf', { varName: '--loaf-len' });
+  setupDrawOnView('.footer-loaf', { varName: '--loaf-len', replay: true });
   setupDrawOnView('#baguette-svg', { varName: '--baguette-len', fallback: '1400', threshold: 0.35, replay: true });
 
   (function bindParallax() {
@@ -184,7 +184,7 @@
   })();
 
   (function bindReveal() {
-    const els = document.querySelectorAll('.reveal');
+    const els = document.querySelectorAll('.reveal, .fade-in');
     if (!els.length) return;
     if (reduceMotion || !('IntersectionObserver' in window)) {
       els.forEach((el) => el.classList.add('is-revealed'));
@@ -194,7 +194,8 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
-          io.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('is-revealed');
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
@@ -226,7 +227,7 @@
     else media.appendChild(video);
   })();
 
-  setupDrawOnView('.ornament-wheat.draw', { varName: '--wheat-len', fallback: '600' });
+  setupDrawOnView('.ornament-wheat.draw', { varName: '--wheat-len', fallback: '600', replay: true });
 
   (function bindMobileActions() {
     const bar = document.querySelector('.mobile-actions');
