@@ -456,6 +456,7 @@ img { display: block; max-width: 100%; height: auto; }
   background-size: cover;
   background-position: center;
   min-height: clamp(440px, 62vh, 680px);
+  overflow: hidden;
   transform: translate3d(0, var(--py, 0px), 0) scale(1.14);
   transform-origin: center;
   will-change: transform;

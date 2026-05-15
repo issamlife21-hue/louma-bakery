@@ -141,6 +141,19 @@
     </div>
   </section>
 
+  <div class="baguette-wrap">
+    <svg class="baguette" id="baguette-svg" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="baguette-grain" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="3" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.6" />
+        </filter>
+      </defs>
+      <path filter="url(#baguette-grain)" d="M22,52 Q24,42 45,34 Q78,27 128,29 T198,30 Q240,33 257,48 Q261,54 256,60 Q239,72 198,73 T128,72 Q70,71 35,66 Q22,60 22,52 M78,42 Q88,47 97,55 M122,36 Q132,43 143,52 M167,38 Q176,46 185,54 M210,40 Q218,46 226,53"/>
+    </svg>
+  </div>
+  <p class="baguette-line">We built this place for the people serving you.</p>
+
   <section class="alt-block surface-linen">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
     <div class="alt-block-image fade-in" data-parallax="0.12" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format')"></div>
@@ -272,19 +285,6 @@
       </div>
     </div>
   </section>
-
-  <div class="baguette-wrap">
-    <svg class="baguette" id="baguette-svg" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <filter id="baguette-grain" x="-5%" y="-5%" width="110%" height="110%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="3" result="noise"/>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.6" />
-        </filter>
-      </defs>
-      <path filter="url(#baguette-grain)" d="M22,52 Q24,42 45,34 Q78,27 128,29 T198,30 Q240,33 257,48 Q261,54 256,60 Q239,72 198,73 T128,72 Q70,71 35,66 Q22,60 22,52 M78,42 Q88,47 97,55 M122,36 Q132,43 143,52 M167,38 Q176,46 185,54 M210,40 Q218,46 226,53"/>
-    </svg>
-  </div>
-  <p class="baguette-line">We built this place for the people serving you.</p>
 
 </main>
 
