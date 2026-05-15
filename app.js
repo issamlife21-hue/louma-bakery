@@ -106,6 +106,35 @@
   }
   document.querySelectorAll('form[data-formspree]').forEach(bindFormspreeForm);
 
+  (function bindFooterLoaf() {
+    const loaves = document.querySelectorAll('.footer-loaf');
+    if (!loaves.length) return;
+    loaves.forEach((svg) => {
+      const path = svg.querySelector('path');
+      if (!path) return;
+      try {
+        const len = Math.ceil(path.getTotalLength());
+        svg.style.setProperty('--loaf-len', len);
+      } catch (_) {
+        svg.style.setProperty('--loaf-len', '700');
+      }
+    });
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      loaves.forEach((svg) => svg.classList.add('in-view'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    loaves.forEach((svg) => io.observe(svg));
+  })();
+
   (function bindBaguette() {
     const svg = document.getElementById('baguette-svg');
     if (!svg) return;

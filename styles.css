@@ -530,8 +530,13 @@ img { display: block; max-width: 100%; height: auto; }
 .alt-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
 
 /* ---------- PRODUCT CARDS ---------- */
-.product-section { text-align: center; padding: var(--s-7) 0; background: var(--linen); }
+.product-section { text-align: center; padding: var(--s-6) 0 var(--s-7); background: var(--linen); }
 .product-section .container { padding: 0 36px; }
+.product-ornament {
+  margin: 0 auto var(--s-3);
+  width: 48px;
+  opacity: 0.6;
+}
 .product-section .eyebrow { margin-bottom: var(--s-2); }
 .product-section h2 {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -620,14 +625,14 @@ img { display: block; max-width: 100%; height: auto; }
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--s-6) 24px var(--s-3);
+  padding: var(--s-3) 24px var(--s-3);
   background: inherit;
 }
 .baguette {
-  width: 260px;
+  width: 340px;
   height: auto;
   color: var(--clay);
-  opacity: 0.42;
+  opacity: 0.6;
   display: block;
 }
 .baguette path {
@@ -1441,18 +1446,26 @@ footer {
   gap: 18px;
 }
 .footer-logo svg { display: block; width: 48px; height: 48px; }
-.footer-croissant {
-  width: 44px !important;
-  height: 34px !important;
+.footer-loaf {
+  width: 48px !important;
+  height: 36px !important;
   color: var(--butter);
   opacity: 0.85;
 }
-.footer-croissant path {
+.footer-loaf path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.8;
+  stroke-width: 2.6;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-dasharray: var(--loaf-len, 700);
+  stroke-dashoffset: var(--loaf-len, 700);
+}
+.footer-loaf.in-view path {
+  animation: loaf-draw 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes loaf-draw {
+  to { stroke-dashoffset: 0; }
 }
 .footer-bottom {
   border-top: 1px solid #3A2F25;
@@ -1486,10 +1499,12 @@ footer {
     transition-duration: 0.001ms !important;
   }
   html { scroll-behavior: auto; }
-  .baguette path {
+  .baguette path,
+  .footer-loaf path {
     stroke-dashoffset: 0;
   }
-  .baguette.in-view path {
+  .baguette.in-view path,
+  .footer-loaf.in-view path {
     animation: none;
   }
 }
@@ -1592,8 +1607,8 @@ footer {
   .visit-stay-inner { padding: 0 24px; }
   .newsletter-band { padding: var(--s-6) 24px; }
   .newsletter-band h2 { font-size: 30px; }
-  .baguette { width: 200px; }
-  .baguette-wrap { padding: var(--s-5) 24px var(--s-2); }
+  .baguette { width: 240px; }
+  .baguette-wrap { padding: var(--s-3) 24px var(--s-2); }
   .baguette-line { padding: 0 24px var(--s-5); font-size: 15px; }
   .footer-grid { grid-template-columns: 1fr; gap: var(--s-4); padding: 0 24px var(--s-4); }
   .footer-top { padding: 0 24px; }
