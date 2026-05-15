@@ -1408,15 +1408,15 @@ footer {
 }
 .footer-logo svg { display: block; width: 48px; height: 48px; }
 .footer-croissant {
-  width: 42px !important;
-  height: 32px !important;
-  color: var(--red);
-  opacity: 0.22;
+  width: 44px !important;
+  height: 34px !important;
+  color: var(--butter);
+  opacity: 0.85;
 }
 .footer-croissant path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.5;
+  stroke-width: 2.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
