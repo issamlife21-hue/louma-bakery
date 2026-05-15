@@ -6,7 +6,7 @@
 
   (function markActive() {
     const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    document.querySelectorAll('.nav-link[href]').forEach((a) => {
+    document.querySelectorAll('.nav-link[href], .footer-col a[href]').forEach((a) => {
       const href = (a.getAttribute('href') || '').toLowerCase();
       if (href === path) {
         a.classList.add('active');
