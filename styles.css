@@ -1549,6 +1549,11 @@ footer {
   .nav-toggle { display: inline-flex; }
   /* Hide the top nav Order button on mobile — sticky bottom bar carries it */
   .nav-cta { display: none; }
+  /* Sticky action bar: always visible on mobile, no scroll-triggered slide-in */
+  .mobile-actions { transform: translateY(0); }
+  /* Alt-block images: skip the opacity fade on mobile so they're always
+     rendered regardless of the scroll observer */
+  .alt-block-image.fade-in { opacity: 1; transition: none; }
 }
 
 @media (max-width: 640px) {
