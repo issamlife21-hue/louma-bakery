@@ -23,7 +23,6 @@
    COMPONENTS
      baguette      animated divider
      footer        dark band + columns + newsletter
-     mobile-actions sticky bottom bar (mobile only)
    FORMS          inputs, selects, textareas, buttons
    MOTION         reveal, hero ken-burns + fade-up, draw-on
    RESPONSIVE     1024 / 960 / 768 / 640 breakpoints
@@ -1493,7 +1492,7 @@ footer {
   .alt-block.reverse .alt-block-text {
     order: initial;
   }
-  .alt-block-image { aspect-ratio: 16 / 10; min-height: 0; }
+  .alt-block-image { aspect-ratio: 16 / 10; min-height: 56vw; }
   .alt-block-text { padding: var(--s-6) var(--s-5); }
   .alt-block-text h2 { font-size: 36px; }
 }
@@ -1547,8 +1546,8 @@ footer {
   }
   .nav-link.active { opacity: 1; }
   .nav-toggle { display: inline-flex; }
-  /* Hide the top nav Order button on mobile — sticky bottom bar carries it */
-  .nav-cta { display: none; }
+  /* On mobile, push the Order pill to the right next to the hamburger */
+  .nav-cta { margin-left: auto; }
   /* Alt-block images: skip the opacity fade on mobile so they're always
      rendered regardless of the scroll observer */
   .alt-block-image.fade-in { opacity: 1; transition: none; }
@@ -1609,7 +1608,7 @@ footer {
   .ornament-wrap { padding: var(--s-5) 24px var(--s-4); }
   .alt-block-image {
     aspect-ratio: 4 / 5;
-    min-height: 0;
+    min-height: 80vw;
     transform: translate3d(0, var(--py, 0px), 0) scale(1.08);
   }
   .alt-block-image,
@@ -1732,58 +1731,3 @@ footer {
   object-position: center;
 }
 
-/* ---------- MOBILE STICKY ACTION BAR ---------- */
-.mobile-actions {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 40;
-  display: none;
-  gap: 10px;
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(250, 245, 234, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(110, 31, 42, 0.1);
-  transform: translateY(110%);
-  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.mobile-actions.is-visible { transform: translateY(0); }
-.mobile-actions-cta {
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  border-radius: var(--r-pill);
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background .2s ease, color .2s ease;
-}
-.mobile-actions-cta.primary {
-  background: var(--burgundy);
-  color: #fff;
-}
-.mobile-actions-cta.primary:active,
-.mobile-actions-cta.primary:hover {
-  background: var(--ink);
-}
-.mobile-actions-cta.secondary {
-  background: transparent;
-  border: 1px solid var(--burgundy);
-  color: var(--burgundy);
-}
-.mobile-actions-cta.secondary:active,
-.mobile-actions-cta.secondary:hover {
-  background: var(--burgundy);
-  color: #fff;
-}
-@media (max-width: 768px) {
-  .mobile-actions { display: flex; transform: translateY(0); }
-  footer { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
-}

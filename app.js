@@ -229,23 +229,6 @@
 
   setupDrawOnView('.ornament-wheat.draw', { varName: '--wheat-len', fallback: '600', replay: true });
 
-  (function bindMobileActions() {
-    const bar = document.querySelector('.mobile-actions');
-    if (!bar) return;
-    let visible = false;
-    function check() {
-      const trigger = Math.min(window.innerHeight * 0.6, 520);
-      const shouldShow = window.scrollY > trigger;
-      if (shouldShow !== visible) {
-        bar.classList.toggle('is-visible', shouldShow);
-        visible = shouldShow;
-      }
-    }
-    window.addEventListener('scroll', check, { passive: true });
-    window.addEventListener('resize', check, { passive: true });
-    check();
-  })();
-
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
