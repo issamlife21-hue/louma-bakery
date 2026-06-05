@@ -28,30 +28,53 @@
    RESPONSIVE     1024 / 960 / 768 / 640 breakpoints
    ============================================================ */
 :root {
-  /* Brand reds */
+  /* ── Brand reds ─────────────────────────────── */
   --red: #ED2739;
   --burgundy: #6E1F2A;
   --clay: #B8533F;
+  --amber-warm: #C8853A;
 
-  /* Ink and body */
+  /* ── Ink and body text ──────────────────────── */
   --ink: #2A1F18;
   --ink-hover: #3A2F25;
   --body: #4A3D34;
   --muted: #7A6E62;
-  --quiet: #8F8478;
+  --smoke: rgba(42, 31, 24, 0.80);
 
-  /* Surfaces */
-  --cream: #FAF5EA;
-  --linen: #F1E9D8;
-  --paper: var(--cream);
+  /* ── Surface scale (warm, no pure white) ────── */
+  --surface-0: #FAF5EA;   /* page base */
+  --surface-1: #F5EDD8;   /* parchment */
+  --surface-2: #EFE2C4;   /* toast */
+  --surface-3: #E8D4AA;   /* dark linen band */
   --butter: #FBF5D4;
+  --parchment: var(--surface-1);
+  --toast: var(--surface-2);
 
-  /* Lines */
-  --line: #E2D8C4;
-  --soft-line: #ECE3D0;
-  --form-line: #D6CDBE;
+  /* Legacy surface aliases — keep older rules working
+     while new layouts adopt --surface-N directly. */
+  --cream: var(--surface-0);
+  --linen: var(--surface-1);
+  --paper: var(--surface-0);
 
-  /* Spacing scale */
+  /* ── Glass / overlay surfaces ───────────────── */
+  --glass-light: rgba(251, 245, 234, 0.72);
+  --glass-dark: rgba(42, 31, 24, 0.68);
+  --glass-border-light: rgba(255, 255, 255, 0.35);
+  --glass-border-dark: rgba(255, 255, 255, 0.08);
+  --grain-opacity: 0.038;
+
+  /* ── Borders ────────────────────────────────── */
+  --border-warm: rgba(42, 31, 24, 0.10);
+  --border-medium: rgba(42, 31, 24, 0.18);
+  --border-strong: rgba(42, 31, 24, 0.28);
+
+  /* Legacy line aliases */
+  --line: var(--border-medium);
+  --soft-line: var(--border-warm);
+  --form-line: var(--border-medium);
+
+  /* ── Spacing scale ──────────────────────────── */
+  --s-0: 4px;
   --s-1: 8px;
   --s-2: 16px;
   --s-3: 24px;
@@ -59,22 +82,51 @@
   --s-5: 64px;
   --s-6: 96px;
   --s-7: 144px;
+  --s-8: 200px;
+  --space-section: clamp(80px, 10vw, 160px);
+  --space-content: clamp(40px, 5vw, 80px);
+  --space-tight:   clamp(16px, 2vw, 32px);
 
-  /* Radii (Oat-inspired soft rounded language) */
+  /* ── Radii ──────────────────────────────────── */
   --r-pill: 999px;
   --r-card: 14px;
   --r-input: 10px;
 
-  /* Soft elevation */
+  /* ── Containers ─────────────────────────────── */
+  --container-full:   1440px;
+  --container-wide:   1280px;
+  --container-text:    820px;
+  --container-form:    640px;
+  --container-narrow:  520px;
+
+  /* ── Shadows ────────────────────────────────── */
   --shadow-soft: 0 10px 30px -18px rgba(46, 31, 24, 0.22);
   --shadow-lift: 0 18px 44px -22px rgba(46, 31, 24, 0.32);
   --shadow-btn-hover: 0 12px 26px -12px rgba(110, 31, 42, 0.45);
+  --shadow-card:
+    0 2px 4px rgba(110, 31, 42, 0.04),
+    0 8px 16px rgba(42, 31, 24, 0.08),
+    0 24px 48px rgba(42, 31, 24, 0.10);
+  --shadow-lifted:
+    0 4px 8px rgba(110, 31, 42, 0.06),
+    0 16px 32px rgba(42, 31, 24, 0.12),
+    0 40px 80px rgba(42, 31, 24, 0.14);
+  --shadow-hero: 0 60px 120px -30px rgba(42, 31, 24, 0.50);
 
-  /* Type stacks */
+  /* ── Type stacks ────────────────────────────── */
   --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sc:      'Cormorant SC', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
 
-  /* Footer palette (dark surface) */
+  /* ── Fluid type scale (for new Phase 2+ layouts) ─ */
+  --t-hero:    clamp(72px, 11vw, 160px);
+  --t-section: clamp(48px,  6vw,  96px);
+  --t-h2:      clamp(32px,  4vw,  56px);
+  --t-h3:      clamp(22px, 2.4vw, 32px);
+  --t-quote:   clamp(24px,  3vw,  38px);
+
+  /* ── Footer palette (dark surface) ──────────── */
   --footer-text: #C4B8A8;
   --footer-line: #3A2F25;
   --footer-input-line: #4A3D33;
@@ -89,8 +141,9 @@ html {
 }
 
 :focus-visible {
-  outline: 2px solid var(--red);
-  outline-offset: 3px;
+  outline: 2px solid var(--burgundy);
+  outline-offset: 4px;
+  border-radius: 3px;
 }
 input:focus-visible,
 select:focus-visible,
@@ -122,10 +175,25 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: var(--body);
-  background: var(--cream);
+  background: var(--surface-0);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- GRAIN OVERLAY (global tactile texture) ---------- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: var(--grain-opacity, 0.038);
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+@media (prefers-reduced-motion: reduce) {
+  body::after { /* keep texture static — already non-animated */ }
 }
 
 h1, h2, h3, h4 {
@@ -162,6 +230,116 @@ img { display: block; max-width: 100%; height: auto; }
   text-transform: uppercase;
   color: var(--clay);
   margin: 0 0 var(--s-3);
+}
+
+/* ---------- BUTTON SYSTEM (component primitives) ----------
+   Base + variants for use by future layouts. Existing
+   buttons (.nav-cta, .hero-btn, .paypal-btn, .btn-dark,
+   .newsletter-form button, footer-newsletter button) are
+   left untouched in Phase 1 and will adopt these in later phases.
+*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 40px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  color: currentColor;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    color      280ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform  280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background: var(--burgundy);
+  color: var(--butter);
+  border-color: var(--burgundy);
+}
+.btn-primary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--surface-0);
+}
+
+.btn-ghost-light {
+  background: transparent;
+  color: var(--surface-0);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.btn-ghost-light:hover {
+  background: var(--surface-0);
+  color: var(--ink);
+  border-color: var(--surface-0);
+}
+
+@media (max-width: 640px) {
+  .btn { height: 48px; padding: 0 32px; }
+}
+
+/* ---------- CARD (component primitive) ----------
+   Warm-shadowed card surface. Used by future product/
+   pricing/inquiry layouts. Not retrofitted into the
+   existing .product-card in Phase 1 — that markup is
+   scheduled for a full rebuild in Phase 2.
+*/
+.card {
+  background: var(--surface-0);
+  border: 1px solid var(--border-warm);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition:
+    box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform  400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover {
+  box-shadow: var(--shadow-lifted);
+  transform: translateY(-3px);
+}
+.card-body { padding: clamp(20px, 2.4vw, 32px); }
+
+/* ---------- GLASS UTILITY ---------- */
+.glass {
+  background: var(--glass-light);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--glass-border-light);
+  box-shadow:
+    0 8px 32px rgba(42, 31, 24, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.glass-dark {
+  background: var(--glass-dark);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--glass-border-dark);
+  color: var(--butter);
 }
 
 /* ---------- ORNAMENTS ---------- */
@@ -205,10 +383,11 @@ img { display: block; max-width: 100%; height: auto; }
 .nav.on-dark .nav-toggle { color: #fff; }
 .nav.is-scrolled,
 .nav.no-hero {
-  background: rgba(250, 245, 234, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom-color: rgba(110, 31, 42, 0.08);
+  background: var(--glass-light);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom-color: var(--glass-border-light);
+  box-shadow: 0 1px 0 var(--border-warm), 0 8px 24px rgba(42, 31, 24, 0.04);
   color: var(--ink);
 }
 .nav.is-scrolled .nav-link,
