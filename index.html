@@ -113,7 +113,7 @@
 <main id="main">
 
   <!-- TODO: set data-hero-video to the bakery's hero video URL (e.g. "images/hero-home.mp4") to swap the still for a looping video -->
-  <section class="hero" data-nav-hero data-hero-video="">
+  <section class="hero hero--glass" data-nav-hero data-hero-video="">
     <div class="hero-media">
       <!-- REPLACE WITH OFFICIAL PHOTO -->
       <img class="hero-image" alt="Freshly baked bread and pastries at Louma Bakery"
@@ -126,10 +126,38 @@
            decoding="async" fetchpriority="high" />
     </div>
     <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <span class="eyebrow">Wilshire · Opening July 2026</span>
-      <h1>Flour-dusted dreams, baked fresh daily.</h1>
-      <a class="hero-btn" href="visit.html">Visit Us</a>
+    <div class="hero-grid">
+      <article class="hero-panel glass">
+        <span class="eyebrow">Wilshire · Opening July 2026</span>
+        <h1>Flour-dusted dreams,<br />baked fresh daily.</h1>
+        <p class="hero-panel-sub">European craft, Levantine soul — a small bakery on a quiet corner of Wilshire.</p>
+        <div class="hero-panel-actions">
+          <a class="btn btn-primary" href="visit.html">Visit Us</a>
+          <a class="btn btn-ghost" href="menu.html">See the Menu</a>
+        </div>
+        <div class="hero-panel-meta">
+          <span>3223 Wilshire Blvd</span>
+          <span aria-hidden="true">·</span>
+          <span>Santa Monica</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TODO: set data-countdown-target to the bakery's actual opening moment (ISO 8601 with offset),
+       e.g. data-countdown-target="2026-07-01T08:00:00-07:00". Default is a July 2026 placeholder. -->
+  <section class="countdown" data-countdown-target="2026-07-01T08:00:00-07:00" aria-label="Countdown to opening">
+    <div class="countdown-inner">
+      <div class="countdown-label">
+        <span class="eyebrow">Doors open in</span>
+        <p class="countdown-tag">Until the first loaf leaves the oven on Wilshire.</p>
+      </div>
+      <ol class="countdown-cells" role="list">
+        <li class="countdown-cell"><span class="countdown-num" data-countdown-days>—</span><span class="countdown-unit">Days</span></li>
+        <li class="countdown-cell"><span class="countdown-num" data-countdown-hours>—</span><span class="countdown-unit">Hours</span></li>
+        <li class="countdown-cell"><span class="countdown-num" data-countdown-minutes>—</span><span class="countdown-unit">Minutes</span></li>
+        <li class="countdown-cell"><span class="countdown-num" data-countdown-seconds>—</span><span class="countdown-unit">Seconds</span></li>
+      </ol>
     </div>
   </section>
 
@@ -154,36 +182,77 @@
   </div>
   <p class="baguette-line">We built this place for the people serving you.</p>
 
-  <section class="alt-block surface-linen">
+  <!-- Block 1: full-bleed image with glass text card overlapping bottom-left -->
+  <section class="alt-block alt-overlay surface-linen">
     <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image fade-in" data-parallax="0.12" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format')"></div>
-    <div class="alt-block-text reveal">
+    <div class="alt-overlay-media fade-in" data-parallax="0.10">
+      <img alt="A baker pulling sourdough from the oven before sunrise" loading="lazy" decoding="async"
+           src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80&auto=format"
+           srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80&auto=format 800w,
+                   https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format 1200w,
+                   https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80&auto=format 1600w"
+           sizes="100vw" />
+    </div>
+    <div class="alt-overlay-veil" aria-hidden="true"></div>
+    <article class="alt-overlay-card glass reveal">
       <span class="eyebrow">The morning bake</span>
       <h2>Out of the oven by eight.</h2>
       <p>The oven goes on before sunrise. By eight, the windows are warm, the espresso's pulling, and the first loaves come out of the steam. We sell out most days — that's how we know it's still fresh.</p>
       <a class="alt-link" href="menu.html">See the menu</a>
+    </article>
+  </section>
+
+  <!-- Block 2: stat-led editorial — giant "81" numeral instead of a 50/50 split -->
+  <section class="alt-block alt-stat">
+    <div class="alt-stat-inner">
+      <div class="alt-stat-figure reveal">
+        <span class="alt-stat-num" aria-hidden="true">81</span>
+        <span class="alt-stat-caption">layers, hand-laminated</span>
+      </div>
+      <div class="alt-stat-rule" aria-hidden="true"></div>
+      <div class="alt-stat-text reveal" style="--reveal-i:1">
+        <span class="eyebrow">The signature</span>
+        <h2>Eighty-one layers of butter.</h2>
+        <p>Laminated by hand over three days. Crisp at the edges, tender at the centre, golden through. We count every fold.</p>
+        <a class="alt-link" href="menu.html">See the menu</a>
+      </div>
+      <!-- REPLACE WITH OFFICIAL PHOTO -->
+      <figure class="alt-stat-inset reveal" style="--reveal-i:2">
+        <img alt="Cross-section of a croissant showing its honeycomb interior" loading="lazy" decoding="async"
+             src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format"
+             srcset="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&q=80&auto=format 600w,
+                     https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format 900w"
+             sizes="(max-width: 768px) 80vw, 360px" />
+      </figure>
     </div>
   </section>
 
-  <section class="alt-block reverse">
-    <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image fade-in" data-parallax="0.12" style="background-image:url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1200&q=80&auto=format')"></div>
-    <div class="alt-block-text reveal">
-      <span class="eyebrow">The signature</span>
-      <h2>Eighty-one layers of butter.</h2>
-      <p>Laminated by hand over three days. Crisp at the edges, tender at the center, golden through.</p>
-      <a class="alt-link" href="menu.html">See the menu</a>
-    </div>
-  </section>
-
-  <section class="alt-block surface-linen">
-    <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <div class="alt-block-image fade-in" data-parallax="0.12" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format')"></div>
-    <div class="alt-block-text reveal">
-      <span class="eyebrow">For your table</span>
-      <h2>Pastry boxes &amp; catering.</h2>
-      <p>For offices, gatherings, weddings — and quiet weekday mornings that deserve more than usual.</p>
-      <a class="alt-link" href="catering.html">Talk catering</a>
+  <!-- Block 3: staggered image duo + text -->
+  <section class="alt-block alt-duo surface-linen">
+    <div class="alt-duo-inner">
+      <div class="alt-duo-text reveal">
+        <span class="eyebrow">For your table</span>
+        <h2>Pastry boxes &amp; catering.</h2>
+        <p>For offices, gatherings, weddings — and quiet weekday mornings that deserve more than usual. Built around your hour, baked to land warm.</p>
+        <a class="alt-link" href="catering.html">Talk catering</a>
+      </div>
+      <div class="alt-duo-stack">
+        <!-- REPLACE WITH OFFICIAL PHOTOS -->
+        <figure class="alt-duo-image alt-duo-image--tall fade-in" data-parallax="0.08">
+          <img alt="A box of mixed pastries packed for catering" loading="lazy" decoding="async"
+               src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&auto=format"
+               srcset="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format 600w,
+                       https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&auto=format 1000w"
+               sizes="(max-width: 768px) 90vw, 360px" />
+        </figure>
+        <figure class="alt-duo-image alt-duo-image--short fade-in" data-parallax="0.14">
+          <img alt="Coffee and pastries on a table set for guests" loading="lazy" decoding="async"
+               src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format"
+               srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format 600w,
+                       https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format 1000w"
+               sizes="(max-width: 768px) 80vw, 300px" />
+        </figure>
+      </div>
     </div>
   </section>
 
