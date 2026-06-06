@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#2A1F18" />
 <title>Lost your way? — Louma Bakery</title>
 <meta name="description" content="Page not found." />
 <meta name="robots" content="noindex" />
@@ -12,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="page-transition">
 
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -31,7 +32,7 @@
 <header class="nav no-hero" id="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="logo-link" aria-label="Louma Bakery home">
-      <svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg class="logo-svg" viewBox="0 0 100 100" role="img" aria-label="Louma Bakery"><title>Louma Bakery</title><use href="#louma-logo"/></svg>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a class="nav-link" href="menu.html">Menu</a>
@@ -41,8 +42,7 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <!-- TODO: replace href with Louma's Uber Eats URL -->
-    <a class="nav-cta" href="https://www.ubereats.com/" target="_blank" rel="noopener">Order</a>
+    <a class="nav-cta" href="https://www.ubereats.com/store/louma-bakery" target="_blank" rel="noopener" aria-label="Order on Uber Eats (placeholder until live URL is confirmed)">Order</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -62,8 +62,8 @@
 <footer>
   <div class="footer-top">
     <div class="footer-logo">
-      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
-      <svg class="footer-loaf" viewBox="0 0 80 60" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Louma Bakery"><title>Louma Bakery</title><use href="#louma-logo"/></svg>
+      <svg class="footer-loaf" viewBox="0 0 80 60" role="img" aria-label="A loaf — Louma mark"><title>Louma loaf</title>
         <path d="M10,40 C10,22 24,12 40,12 C56,12 70,22 70,40 C70,50 56,52 40,52 C24,52 10,50 10,40 Z M22,26 L30,20 M36,24 L44,18 M50,22 L58,16"/>
       </svg>
     </div>
@@ -86,6 +86,8 @@
       <p>3223 Wilshire Blvd</p>
       <p>Santa Monica, CA 90403</p>
       <p>Mon to Sat, 8am to 4pm</p>
+      <p><a href="tel:+13104642733">(310) 464-2733</a></p>
+      <p class="footer-opening">Opening July 2026</p>
     </div>
     <div class="footer-col">
       <h4>Stay in touch</h4>
@@ -94,10 +96,11 @@
       <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Welcome to the Louma community" />
         <input type="hidden" name="_replyto" value="" />
-        <input type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
+        <label for="footerEmail404" class="sr-only">Email for updates</label>
+        <input id="footerEmail404" type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
         <button type="submit">Join</button>
       </form>
-      <div class="footer-newsletter-thanks" id="footerThanks">Thanks. You're on the list.</div>
+      <div class="footer-newsletter-thanks" id="footerThanks" role="status" aria-live="polite">Thanks. You're on the list.</div>
     </div>
   </div>
   <div class="footer-bottom">

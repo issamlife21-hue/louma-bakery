@@ -1,0 +1,88 @@
+/* ============================================================
+   _utilities.css — container, surfaces, eyebrow, glass, sr-only,
+   ornaments primitives, scroll progress bar
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 3vw, 36px);
+}
+
+.surface-cream { background: var(--cream); }
+.surface-linen { background: var(--linen); }
+
+.eyebrow,
+.small-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin: 0 0 var(--s-3);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--red);
+  width: 0%;
+  z-index: 1000;
+  pointer-events: none;
+  transition: width 60ms linear;
+}
+
+.glass {
+  background: var(--glass-light);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--glass-border-light);
+  box-shadow:
+    0 8px 32px rgba(42, 31, 24, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.glass-dark {
+  background: var(--glass-dark);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--glass-border-dark);
+  color: var(--butter);
+}
+
+.ornament-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--s-6) 24px var(--s-5);
+  background: inherit;
+}
+.ornament-wheat {
+  width: 64px;
+  height: auto;
+  color: var(--clay);
+  opacity: 0.55;
+  display: block;
+}
+.ornament-wheat path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

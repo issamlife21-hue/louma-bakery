@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#2A1F18" />
 <title>Careers — Louma Bakery</title>
 <meta name="description" content="Come bake with us. Open roles at Louma Bakery in Los Angeles." />
 <link rel="canonical" href="https://loumabakery.com/careers.html" />
@@ -21,11 +22,30 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+:root{--ink:#2A1F18;--body:#4A3D34;--surface-0:#FAF5EA;--burgundy:#6E1F2A;--butter:#FBF5D4}
+*{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:'DM Sans',system-ui,sans-serif;background:var(--surface-0);color:var(--body);line-height:1.7}
+.skip-link{position:absolute;top:8px;left:8px;transform:translateY(-200%);background:var(--ink);color:#fff;padding:10px 16px;z-index:100}.skip-link:focus{transform:translateY(0)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;color:var(--ink)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1280px;margin:0 auto;padding:0 36px}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:#ED2739;width:0%;z-index:1000;pointer-events:none;transition:width 60ms linear}
+</style>
 <link rel="stylesheet" href="styles.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://loumabakery.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://loumabakery.com/careers.html" }
+  ]
+}
+</script>
 </head>
-<body>
+<body class="page-transition">
 
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -42,7 +62,7 @@
 <header class="nav no-hero" id="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="logo-link" aria-label="Louma Bakery home">
-      <svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg class="logo-svg" viewBox="0 0 100 100" role="img" aria-label="Louma Bakery"><title>Louma Bakery</title><use href="#louma-logo"/></svg>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a class="nav-link" href="menu.html">Menu</a>
@@ -52,8 +72,7 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <!-- TODO: replace href with Louma's Uber Eats URL -->
-    <a class="nav-cta" href="https://www.ubereats.com/" target="_blank" rel="noopener">Order</a>
+    <a class="nav-cta" href="https://www.ubereats.com/store/louma-bakery" target="_blank" rel="noopener" aria-label="Order on Uber Eats (placeholder until live URL is confirmed)">Order</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -65,68 +84,151 @@
   <div class="page-heading">
     <span class="eyebrow">Join us</span>
     <h1>Careers</h1>
-    <p class="sub">Come bake with us.</p>
+    <p class="sub">Come bake with us — full-time hours, real wages, a job that gets harder and more interesting over time.</p>
   </div>
 
-  <div class="careers-two-col reveal">
-    <!-- REPLACE WITH OFFICIAL PHOTO -->
-    <img alt="Inside the bakery" loading="lazy" decoding="async"
-         src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format"
-         srcset="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=480&q=80&auto=format 480w,
-                 https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format 900w,
-                 https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=1400&q=80&auto=format 1400w"
-         sizes="(max-width: 960px) 100vw, 50vw" />
-    <div>
-      <p>We are a small team and we take that seriously. Everyone here shows up, takes care of each other, and takes pride in what comes out of the oven. If that sounds like you, we would love to hear from you.</p>
+  <section class="careers-values" aria-label="What working at Louma is like">
+    <div class="careers-values-inner">
+      <article class="value-card reveal" style="--reveal-i:0">
+        <div class="value-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26 L16 6 L28 26 Z"/><path d="M10 22 L22 22"/></svg>
+        </div>
+        <h3>Craft, every shift</h3>
+        <p>Lamination, espresso, sourdough — you learn from people who've trained in Paris, Beirut, and the best kitchens in LA.</p>
+      </article>
+      <article class="value-card reveal" style="--reveal-i:1">
+        <div class="value-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="12" r="5"/><path d="M6 28 C6 21 11 18 16 18 C21 18 26 21 26 28"/></svg>
+        </div>
+        <h3>Dignity, on payday</h3>
+        <p>Above LA living wage, paid from your first shift. Tips top it up — they don't make it up.</p>
+      </article>
+      <article class="value-card reveal" style="--reveal-i:2">
+        <div class="value-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="22" height="18" rx="2"/><path d="M5 14 L27 14 M10 6 L10 10 M22 6 L22 10"/></svg>
+        </div>
+        <h3>Hours that add up</h3>
+        <p>40 a week, year-round. Predictable schedules. A real paycheck that builds into a real career.</p>
+      </article>
+      <article class="value-card reveal" style="--reveal-i:3">
+        <div class="value-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 L20 12 L28 13 L22 19 L24 27 L16 23 L8 27 L10 19 L4 13 L12 12 Z"/></svg>
+        </div>
+        <h3>A team that shows up</h3>
+        <p>Small crew, no hierarchy theatre. Everyone here takes pride in what comes out of the oven and looks out for each other.</p>
+      </article>
     </div>
-  </div>
+  </section>
+
+  <section class="careers-roles" aria-label="Open roles">
+    <div class="careers-roles-inner">
+      <div class="careers-roles-head">
+        <span class="eyebrow">Now hiring</span>
+        <h2>Open roles</h2>
+        <p>We're staffing up for our July 2026 opening. If your role isn't listed and you think you'd fit, write to us anyway.</p>
+      </div>
+      <ul class="role-list">
+        <li class="role-row reveal" style="--reveal-i:0">
+          <div class="role-meta">
+            <h3>Lead Baker</h3>
+            <span class="role-tags">Full-time · Mornings · Wilshire</span>
+          </div>
+          <p class="role-blurb">Owns the bread program — sourdough, baguette, country loaves. Three years of pro bench experience.</p>
+          <a class="role-apply" href="#careersForm">Apply <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="role-row reveal" style="--reveal-i:1">
+          <div class="role-meta">
+            <h3>Pastry Chef</h3>
+            <span class="role-tags">Full-time · Early mornings · Wilshire</span>
+          </div>
+          <p class="role-blurb">Laminates our 81-layer croissant program and develops Levantine pastry specials with the founder.</p>
+          <a class="role-apply" href="#careersForm">Apply <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="role-row reveal" style="--reveal-i:2">
+          <div class="role-meta">
+            <h3>Barista</h3>
+            <span class="role-tags">Full or part-time · AM shifts · Wilshire</span>
+          </div>
+          <p class="role-blurb">Pulls espresso, runs the bar, greets regulars like neighbors. Latte art a plus, warmth required.</p>
+          <a class="role-apply" href="#careersForm">Apply <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="role-row reveal" style="--reveal-i:3">
+          <div class="role-meta">
+            <h3>Front of House</h3>
+            <span class="role-tags">Full or part-time · AM shifts · Wilshire</span>
+          </div>
+          <p class="role-blurb">Runs the counter, packs orders, and is the face people remember when they think of Louma.</p>
+          <a class="role-apply" href="#careersForm">Apply <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="role-row reveal" style="--reveal-i:4">
+          <div class="role-meta">
+            <h3>Training Track (Louma Initiative)</h3>
+            <span class="role-tags">Full-time · Paid from day one · Wilshire</span>
+          </div>
+          <p class="role-blurb">A paid training path for teammates with intellectual or developmental differences — bake, barista, or front of house.</p>
+          <a class="role-apply" href="#careersForm">Apply <span aria-hidden="true">→</span></a>
+        </li>
+      </ul>
+    </div>
+  </section>
 
   <section class="careers-band-linen">
-  <form class="form-block" id="careersForm" data-formspree data-success="#careersSuccess" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
-    <input type="hidden" name="_subject" value="Careers application — Louma Bakery" />
-    <input type="hidden" name="_replyto" value="" />
-    <div class="form-grid-2">
-      <div class="form-row">
-        <label for="car-name">Name</label>
-        <input id="car-name" name="name" type="text" required />
-      </div>
-      <div class="form-row">
-        <label for="car-email">Email</label>
-        <input id="car-email" name="email" type="email" required />
-      </div>
-      <div class="form-row">
-        <label for="car-phone">Phone</label>
-        <input id="car-phone" name="phone" type="tel" />
-      </div>
-      <div class="form-row">
-        <label for="car-role">Role</label>
-        <select id="car-role" name="role">
-          <option value="">Select a role</option>
-          <option>Baker</option>
-          <option>Barista</option>
-          <option>Front of House</option>
-          <option>Pastry Chef</option>
-          <option>Other</option>
-        </select>
-      </div>
+    <div class="careers-form-head">
+      <span class="eyebrow">Apply</span>
+      <h2>Send us a note.</h2>
+      <p>A few sentences about you is enough to start. We read every one.</p>
     </div>
-    <div class="form-row">
-      <label for="car-about">A few sentences about you</label>
-      <textarea id="car-about" name="about"></textarea>
-    </div>
-    <div class="form-actions">
-      <button type="submit" class="btn-dark">Submit</button>
-    </div>
-  </form>
-  <div class="form-success" id="careersSuccess">Thank you for applying. We will be in touch soon.</div>
+    <form class="form-block" id="careersForm" data-formspree data-success="#careersSuccess" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Careers application — Louma Bakery" />
+      <input type="hidden" name="_replyto" value="" />
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label for="car-name">Name</label>
+          <input id="car-name" name="name" type="text" required aria-describedby="car-name-help" />
+          <small id="car-name-help" class="form-help">First and last is fine.</small>
+        </div>
+        <div class="form-row">
+          <label for="car-email">Email</label>
+          <input id="car-email" name="email" type="email" required aria-describedby="car-email-help" />
+          <small id="car-email-help" class="form-help">We'll reply within a week.</small>
+        </div>
+        <div class="form-row">
+          <label for="car-phone">Phone</label>
+          <input id="car-phone" name="phone" type="tel" aria-describedby="car-phone-help" />
+          <small id="car-phone-help" class="form-help">Optional — texts welcome.</small>
+        </div>
+        <div class="form-row">
+          <label for="car-role">Role</label>
+          <select id="car-role" name="role" aria-describedby="car-role-help">
+            <option value="">Select a role</option>
+            <option>Lead Baker</option>
+            <option>Pastry Chef</option>
+            <option>Barista</option>
+            <option>Front of House</option>
+            <option>Training Track (Louma Initiative)</option>
+            <option>Other</option>
+          </select>
+          <small id="car-role-help" class="form-help">Not sure? Pick the closest fit.</small>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="car-about">A few sentences about you</label>
+        <textarea id="car-about" name="about" aria-describedby="car-about-help"></textarea>
+        <small id="car-about-help" class="form-help">Where you've worked, what you bake at home — anything.</small>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-dark">Submit application</button>
+      </div>
+    </form>
+    <div class="form-success" id="careersSuccess" role="status" aria-live="polite">Thank you for applying. We will be in touch soon.</div>
   </section>
 </main>
 
 <footer>
   <div class="footer-top">
     <div class="footer-logo">
-      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
-      <svg class="footer-loaf" viewBox="0 0 80 60" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Louma Bakery"><title>Louma Bakery</title><use href="#louma-logo"/></svg>
+      <svg class="footer-loaf" viewBox="0 0 80 60" role="img" aria-label="A loaf — Louma mark"><title>Louma loaf</title>
         <path d="M10,40 C10,22 24,12 40,12 C56,12 70,22 70,40 C70,50 56,52 40,52 C24,52 10,50 10,40 Z M22,26 L30,20 M36,24 L44,18 M50,22 L58,16"/>
       </svg>
     </div>
@@ -149,6 +251,8 @@
       <p>3223 Wilshire Blvd</p>
       <p>Santa Monica, CA 90403</p>
       <p>Mon to Sat, 8am to 4pm</p>
+      <p><a href="tel:+13104642733">(310) 464-2733</a></p>
+      <p class="footer-opening">Opening July 2026</p>
     </div>
     <div class="footer-col">
       <h4>Stay in touch</h4>
@@ -157,10 +261,11 @@
       <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Welcome to the Louma community" />
         <input type="hidden" name="_replyto" value="" />
-        <input type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
+        <label for="footerEmailCareers" class="sr-only">Email for updates</label>
+        <input id="footerEmailCareers" type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
         <button type="submit">Join</button>
       </form>
-      <div class="footer-newsletter-thanks" id="footerThanks">Thanks. You're on the list.</div>
+      <div class="footer-newsletter-thanks" id="footerThanks" role="status" aria-live="polite">Thanks. You're on the list.</div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -168,6 +273,7 @@
     <div class="footer-bottom-tag">Flour-dusted dreams, baked fresh daily.</div>
   </div>
 </footer>
+<div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
 <script src="app.js" defer></script>
 </body>
 </html>

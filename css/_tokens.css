@@ -1,0 +1,104 @@
+/* ============================================================
+   _tokens.css — design tokens (colors, type, spacing, shadows)
+   Imported first by styles.css. No selectors beyond :root.
+   ============================================================ */
+:root {
+  /* ── Brand reds ─────────────────────────────── */
+  --red: #ED2739;
+  --burgundy: #6E1F2A;
+  --clay: #B8533F;
+  --amber-warm: #C8853A;
+
+  /* ── Ink and body text ──────────────────────── */
+  --ink: #2A1F18;
+  --ink-hover: #3A2F25;
+  --body: #4A3D34;
+  --muted: #7A6E62;
+  --smoke: rgba(42, 31, 24, 0.80);
+
+  /* ── Surface scale ──────────────────────────── */
+  --surface-0: #FAF5EA;
+  --surface-1: #F5EDD8;
+  --surface-2: #EFE2C4;
+  --surface-3: #E8D4AA;
+  --butter: #FBF5D4;
+  --parchment: var(--surface-1);
+  --toast: var(--surface-2);
+  --cream: var(--surface-0);
+  --linen: var(--surface-1);
+  --paper: var(--surface-0);
+
+  /* ── Glass / overlay surfaces ───────────────── */
+  --glass-light: rgba(251, 245, 234, 0.72);
+  --glass-dark: rgba(42, 31, 24, 0.68);
+  --glass-border-light: rgba(255, 255, 255, 0.35);
+  --glass-border-dark: rgba(255, 255, 255, 0.08);
+  --grain-opacity: 0.038;
+
+  /* ── Borders ────────────────────────────────── */
+  --border-warm: rgba(42, 31, 24, 0.10);
+  --border-medium: rgba(42, 31, 24, 0.18);
+  --border-strong: rgba(42, 31, 24, 0.28);
+  --line: var(--border-medium);
+  --soft-line: var(--border-warm);
+  --form-line: var(--border-medium);
+
+  /* ── Spacing scale ──────────────────────────── */
+  --s-0: 4px;
+  --s-1: 8px;
+  --s-2: 16px;
+  --s-3: 24px;
+  --s-4: 40px;
+  --s-5: 64px;
+  --s-6: 96px;
+  --s-7: 144px;
+  --s-8: 200px;
+  --space-section: clamp(80px, 10vw, 160px);
+  --space-content: clamp(40px, 5vw, 80px);
+  --space-tight:   clamp(16px, 2vw, 32px);
+
+  /* ── Radii ──────────────────────────────────── */
+  --r-pill: 999px;
+  --r-card: 14px;
+  --r-input: 10px;
+
+  /* ── Containers ─────────────────────────────── */
+  --container-full:   1440px;
+  --container-wide:   1280px;
+  --container-text:    820px;
+  --container-form:    640px;
+  --container-narrow:  520px;
+
+  /* ── Shadows ────────────────────────────────── */
+  --shadow-soft: 0 10px 30px -18px rgba(46, 31, 24, 0.22);
+  --shadow-lift: 0 18px 44px -22px rgba(46, 31, 24, 0.32);
+  --shadow-btn-hover: 0 12px 26px -12px rgba(110, 31, 42, 0.45);
+  --shadow-card:
+    0 2px 4px rgba(110, 31, 42, 0.04),
+    0 8px 16px rgba(42, 31, 24, 0.08),
+    0 24px 48px rgba(42, 31, 24, 0.10);
+  --shadow-lifted:
+    0 4px 8px rgba(110, 31, 42, 0.06),
+    0 16px 32px rgba(42, 31, 24, 0.12),
+    0 40px 80px rgba(42, 31, 24, 0.14);
+  --shadow-hero: 0 60px 120px -30px rgba(42, 31, 24, 0.50);
+
+  /* ── Type stacks ────────────────────────────── */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sc:      'Cormorant SC', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+
+  /* ── Fluid type scale ───────────────────────── */
+  --t-hero:    clamp(72px, 11vw, 160px);
+  --t-section: clamp(48px,  6vw,  96px);
+  --t-h2:      clamp(32px,  4vw,  56px);
+  --t-h3:      clamp(22px, 2.4vw, 32px);
+  --t-quote:   clamp(24px,  3vw,  38px);
+
+  /* ── Footer palette (dark surface) ──────────── */
+  --footer-text: #C4B8A8;
+  --footer-line: #3A2F25;
+  --footer-input-line: #4A3D33;
+  --footer-meta: #8A7D70;
+}

@@ -1,0 +1,262 @@
+/* ============================================================
+   _animations.css — reveal, fade-in, scroll-linked draw,
+                     ornament draws, typewriter, page transitions,
+                     image clip wipes, blur-to-sharp, motion prefs
+   ============================================================ */
+
+/* ---------- REVEAL + FADE-IN ---------- */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.reveal[style*="--reveal-i"] {
+  transition-delay: calc(var(--reveal-i, 0) * 90ms);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity;
+}
+.fade-in.is-revealed { opacity: 1; }
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* ---------- PAGE TRANSITION CROSSFADE ---------- */
+.page-transition {
+  opacity: 0;
+  animation: page-fade-in 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.page-transition.is-leaving {
+  animation: page-fade-out 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes page-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ---------- SCROLL-LINKED SVG DRAWS ----------
+   .scroll-driven paths consume --draw-progress (0..1) set by JS from scroll
+   position. Reversible — runs back as user scrolls up. */
+.scroll-draw path,
+.baguette.scroll-driven path,
+.footer-loaf.scroll-driven path,
+.ornament-wheat.scroll-driven path,
+.ornament-steam.scroll-driven path,
+.ornament-croissant.scroll-driven path {
+  stroke-dasharray: var(--draw-len, 1400);
+  stroke-dashoffset: calc(var(--draw-len, 1400) * (1 - var(--draw-progress, 0)));
+  transition: none;
+}
+
+/* ---------- FOOTER LOAF (legacy in-view animation) ---------- */
+.footer-loaf path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--loaf-len, 700);
+  stroke-dashoffset: var(--loaf-len, 700);
+}
+.footer-loaf.in-view path {
+  animation: loaf-draw 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes loaf-draw {
+  to { stroke-dashoffset: 0; }
+}
+.footer-logo:hover .footer-loaf.in-view path {
+  animation: loaf-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ---------- WHEAT SPRIG DRAW-ON ---------- */
+.ornament-wheat.draw path {
+  stroke-dasharray: var(--wheat-len, 600);
+  stroke-dashoffset: var(--wheat-len, 600);
+}
+.ornament-wheat.draw.in-view path {
+  animation: wheat-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes wheat-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- STEAM ORNAMENT (menu page) ---------- */
+.ornament-steam {
+  width: 56px;
+  height: auto;
+  margin: 0 auto var(--s-3);
+  color: var(--clay);
+  opacity: 0.6;
+  display: block;
+}
+.ornament-steam path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--steam-len, 400);
+  stroke-dashoffset: var(--steam-len, 400);
+}
+.ornament-steam.in-view path {
+  animation: steam-draw 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes steam-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- CROISSANT ORNAMENT (story page) ---------- */
+.ornament-croissant {
+  width: 72px;
+  height: auto;
+  margin: 0 auto var(--s-3);
+  color: var(--clay);
+  opacity: 0.6;
+  display: block;
+}
+.ornament-croissant path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--croissant-len, 600);
+  stroke-dashoffset: var(--croissant-len, 600);
+}
+.ornament-croissant.in-view path {
+  animation: croissant-draw 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes croissant-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- VISIT HERO CONTENT FADE-UP ---------- */
+.visit-hero-content > .eyebrow,
+.visit-hero-content > h1,
+.visit-hero-content > .visit-hero-tag {
+  opacity: 0;
+  animation: hero-fade-up 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.visit-hero-content > .eyebrow { animation-delay: 0.25s; }
+.visit-hero-content > h1 { animation-delay: 0.5s; }
+.visit-hero-content > .visit-hero-tag { animation-delay: 0.8s; }
+
+/* ---------- TYPEWRITER (editorial) ---------- */
+.editorial-line.typewriter {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+.editorial-line.typewriter .tw-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  background: var(--clay);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: tw-blink 0.9s steps(1, end) infinite;
+}
+@keyframes tw-blink { 50% { opacity: 0; } }
+
+/* ---------- IMAGE REVEAL — clip wipe on alt-block images ---------- */
+.alt-overlay-media,
+.alt-duo-image {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.alt-overlay-media.is-revealed,
+.alt-duo-image.is-revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---------- IMAGE REVEAL — blur-to-sharp on product cards ---------- */
+.product-card .product-image img {
+  filter: blur(8px);
+  transform: scale(1.04);
+  transition: filter 900ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.product-card.is-revealed .product-image img {
+  filter: blur(0);
+  transform: scale(1);
+}
+.product-arrow {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  color: var(--burgundy);
+}
+.product-card:hover .product-arrow {
+  transform: translateX(6px);
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .baguette path,
+  .footer-loaf path,
+  .ornament-wheat.draw path,
+  .ornament-steam path,
+  .ornament-croissant path {
+    stroke-dashoffset: 0;
+  }
+  .baguette.in-view path,
+  .footer-loaf.in-view path,
+  .ornament-wheat.draw.in-view path,
+  .ornament-steam.in-view path,
+  .ornament-croissant.in-view path {
+    animation: none;
+  }
+  .hero-image,
+  .alt-overlay-media,
+  .alt-duo-image,
+  .visit-stay-image,
+  .visit-hero-image,
+  .catering-hero-image {
+    animation: none !important;
+    transform: none !important;
+  }
+  .alt-overlay-media,
+  .alt-duo-image { clip-path: none !important; }
+  .product-card .product-image img {
+    filter: none !important;
+    transform: none !important;
+  }
+  .story-fullshot { background-attachment: scroll; }
+  .visit-hero-content > * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .reveal,
+  .reveal.is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .fade-in,
+  .fade-in.is-revealed {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

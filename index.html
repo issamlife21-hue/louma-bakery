@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#2A1F18" />
 <script>
   (function () {
     var hash = (location.hash || '').slice(1);
@@ -34,8 +35,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format" fetchpriority="high" />
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format&fm=webp" fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/cormorantgaramond/v16/co3WmX5slCNuHLi8bLeY9MK7whWMhyjornFLsS6V7w.woff2" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+/* Critical CSS — nav + hero body base, inlined to avoid render-blocking on FCP */
+:root{--ink:#2A1F18;--body:#4A3D34;--surface-0:#FAF5EA;--burgundy:#6E1F2A;--butter:#FBF5D4;--red:#ED2739;--glass-light:rgba(251,245,234,0.72);--border-warm:rgba(42,31,24,0.10)}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--surface-0);color:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased}
+.skip-link{position:absolute;top:8px;left:8px;transform:translateY(-200%);background:var(--ink);color:#fff;padding:10px 16px;z-index:100;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase}.skip-link:focus{transform:translateY(0)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;color:var(--ink);border-bottom:1px solid transparent;transition:background .2s ease,border-color .2s ease;background:transparent}
+.nav.on-dark{color:#fff}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px;max-width:1280px;margin:0 auto;padding:0 36px}
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background-color:#2a201b}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--red);width:0%;z-index:1000;pointer-events:none;transition:width 60ms linear}
+</style>
 <link rel="stylesheet" href="styles.css" />
 <script type="application/ld+json">
 {
@@ -65,9 +79,10 @@
 }
 </script>
 </head>
-<body class="is-home">
+<body class="is-home page-transition">
 
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -92,7 +107,7 @@
 <header class="nav on-dark" id="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="logo-link" aria-label="Louma Bakery home">
-      <svg class="logo-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
+      <svg class="logo-svg" viewBox="0 0 100 100" role="img" aria-label="Louma Bakery"><title>Louma Bakery</title><use href="#louma-logo"/></svg>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Main">
       <a class="nav-link" href="menu.html">Menu</a>
@@ -102,8 +117,7 @@
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="visit.html">Visit Us</a>
     </nav>
-    <!-- TODO: replace href with Louma's Uber Eats URL -->
-    <a class="nav-cta" href="https://www.ubereats.com/" target="_blank" rel="noopener">Order</a>
+    <a class="nav-cta" href="https://www.ubereats.com/store/louma-bakery" target="_blank" rel="noopener" aria-label="Order on Uber Eats (placeholder until live URL is confirmed)">Order</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -112,24 +126,32 @@
 
 <main id="main">
 
-  <!-- TODO: set data-hero-video to the bakery's hero video URL (e.g. "images/hero-home.mp4") to swap the still for a looping video -->
   <section class="hero hero--glass" data-nav-hero data-hero-video="">
     <div class="hero-media">
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
-      <img class="hero-image" alt="Freshly baked bread and pastries at Louma Bakery"
-           src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=640&q=80&auto=format 640w,
-                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format 1200w,
-                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format 1600w,
-                   https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=2400&q=80&auto=format 2400w"
-           sizes="100vw"
-           decoding="async" fetchpriority="high" />
+      <picture>
+        <source type="image/webp" srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=640&q=80&auto=format&fm=webp 640w,
+                                          https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format&fm=webp 1200w,
+                                          https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format&fm=webp 1600w,
+                                          https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=2400&q=80&auto=format&fm=webp 2400w" sizes="100vw" />
+        <img class="hero-image" alt="Freshly baked bread and pastries at Louma Bakery"
+             width="2400" height="1600"
+             src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format"
+             srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=640&q=80&auto=format 640w,
+                     https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=80&auto=format 1200w,
+                     https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80&auto=format 1600w,
+                     https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=2400&q=80&auto=format 2400w"
+             sizes="100vw"
+             decoding="async" fetchpriority="high" />
+      </picture>
     </div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-grid">
       <article class="hero-panel glass">
         <span class="eyebrow">Wilshire · Opening July 2026</span>
-        <h1>Flour-dusted dreams,<br />baked fresh daily.</h1>
+        <h1 class="hero-headline">
+          <span class="line"><span style="--line-i:0">Flour-dusted dreams,</span></span>
+          <span class="line"><span style="--line-i:1">baked fresh daily.</span></span>
+        </h1>
         <p class="hero-panel-sub">European craft, Levantine soul — a small bakery on a quiet corner of Wilshire.</p>
         <div class="hero-panel-actions">
           <a class="btn btn-primary" href="visit.html">Visit Us</a>
@@ -144,8 +166,6 @@
     </div>
   </section>
 
-  <!-- TODO: set data-countdown-target to the bakery's actual opening moment (ISO 8601 with offset),
-       e.g. data-countdown-target="2026-07-01T08:00:00-07:00". Default is a July 2026 placeholder. -->
   <section class="countdown" data-countdown-target="2026-07-01T08:00:00-07:00" aria-label="Countdown to opening">
     <div class="countdown-inner">
       <div class="countdown-label">
@@ -163,14 +183,15 @@
 
   <section class="editorial">
     <div class="editorial-inner reveal">
-      <p class="editorial-line">European craft. Levantine soul. Baked by hand, served with pride.</p>
+      <p class="editorial-line typewriter" data-typewriter="European craft. Levantine soul. Baked by hand, served with pride."></p>
       <p class="editorial-ritual">Flour by five. Espresso by seven. Doors open at eight.</p>
       <p class="editorial-sub">A neighborhood bakery on Wilshire — built around craft, dignity, and meaningful work for the people who bake it.</p>
     </div>
   </section>
 
   <div class="baguette-wrap">
-    <svg class="baguette" id="baguette-svg" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg class="baguette scroll-driven" id="baguette-svg" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decorative baguette divider">
+      <title>Baguette divider</title>
       <defs>
         <filter id="baguette-grain" x="-5%" y="-5%" width="110%" height="110%">
           <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" seed="3" result="noise"/>
@@ -182,16 +203,20 @@
   </div>
   <p class="baguette-line">We built this place for the people serving you.</p>
 
-  <!-- Block 1: full-bleed image with glass text card overlapping bottom-left -->
   <section class="alt-block alt-overlay surface-linen">
-    <!-- REPLACE WITH OFFICIAL PHOTO -->
     <div class="alt-overlay-media fade-in" data-parallax="0.10">
-      <img alt="A baker pulling sourdough from the oven before sunrise" loading="lazy" decoding="async"
-           src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80&auto=format"
-           srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80&auto=format 800w,
-                   https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format 1200w,
-                   https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80&auto=format 1600w"
-           sizes="100vw" />
+      <picture>
+        <source type="image/webp" srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80&auto=format&fm=webp 800w,
+                                          https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format&fm=webp 1200w,
+                                          https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80&auto=format&fm=webp 1600w" sizes="100vw" />
+        <img alt="A baker pulling sourdough from the oven before sunrise" loading="lazy" decoding="async"
+             width="1600" height="1067"
+             src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80&auto=format"
+             srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80&auto=format 800w,
+                     https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&q=80&auto=format 1200w,
+                     https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80&auto=format 1600w"
+             sizes="100vw" />
+      </picture>
     </div>
     <div class="alt-overlay-veil" aria-hidden="true"></div>
     <article class="alt-overlay-card glass reveal">
@@ -202,7 +227,6 @@
     </article>
   </section>
 
-  <!-- Block 2: stat-led editorial — giant "81" numeral instead of a 50/50 split -->
   <section class="alt-block alt-stat">
     <div class="alt-stat-inner">
       <div class="alt-stat-figure reveal">
@@ -216,18 +240,21 @@
         <p>Laminated by hand over three days. Crisp at the edges, tender at the centre, golden through. We count every fold.</p>
         <a class="alt-link" href="menu.html">See the menu</a>
       </div>
-      <!-- REPLACE WITH OFFICIAL PHOTO -->
       <figure class="alt-stat-inset reveal" style="--reveal-i:2">
-        <img alt="Cross-section of a croissant showing its honeycomb interior" loading="lazy" decoding="async"
-             src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&q=80&auto=format 600w,
-                     https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format 900w"
-             sizes="(max-width: 768px) 80vw, 360px" />
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&q=80&auto=format&fm=webp 600w,
+                                            https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format&fm=webp 900w" sizes="(max-width: 768px) 80vw, 360px" />
+          <img alt="Cross-section of a croissant showing its honeycomb interior" loading="lazy" decoding="async"
+               width="900" height="1200"
+               src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format"
+               srcset="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&q=80&auto=format 600w,
+                       https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=900&q=80&auto=format 900w"
+               sizes="(max-width: 768px) 80vw, 360px" />
+        </picture>
       </figure>
     </div>
   </section>
 
-  <!-- Block 3: staggered image duo + text -->
   <section class="alt-block alt-duo surface-linen">
     <div class="alt-duo-inner">
       <div class="alt-duo-text reveal">
@@ -237,20 +264,29 @@
         <a class="alt-link" href="catering.html">Talk catering</a>
       </div>
       <div class="alt-duo-stack">
-        <!-- REPLACE WITH OFFICIAL PHOTOS -->
         <figure class="alt-duo-image alt-duo-image--tall fade-in" data-parallax="0.08">
-          <img alt="A box of mixed pastries packed for catering" loading="lazy" decoding="async"
-               src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&auto=format"
-               srcset="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format 600w,
-                       https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&auto=format 1000w"
-               sizes="(max-width: 768px) 90vw, 360px" />
+          <picture>
+            <source type="image/webp" srcset="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fm=webp 600w,
+                                              https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&auto=format&fm=webp 1000w" sizes="(max-width: 768px) 90vw, 360px" />
+            <img alt="A box of mixed pastries packed for catering" loading="lazy" decoding="async"
+                 width="1000" height="1333"
+                 src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&auto=format"
+                 srcset="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format 600w,
+                         https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&auto=format 1000w"
+                 sizes="(max-width: 768px) 90vw, 360px" />
+          </picture>
         </figure>
         <figure class="alt-duo-image alt-duo-image--short fade-in" data-parallax="0.14">
-          <img alt="Coffee and pastries on a table set for guests" loading="lazy" decoding="async"
-               src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format"
-               srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format 600w,
-                       https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format 1000w"
-               sizes="(max-width: 768px) 80vw, 300px" />
+          <picture>
+            <source type="image/webp" srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format&fm=webp 600w,
+                                              https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format&fm=webp 1000w" sizes="(max-width: 768px) 80vw, 300px" />
+            <img alt="Coffee and pastries on a table set for guests" loading="lazy" decoding="async"
+                 width="1000" height="800"
+                 src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format"
+                 srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format 600w,
+                         https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format 1000w"
+                 sizes="(max-width: 768px) 80vw, 300px" />
+          </picture>
         </figure>
       </div>
     </div>
@@ -258,7 +294,8 @@
 
   <section class="product-section">
     <div class="container">
-      <svg class="ornament-wheat product-ornament reveal draw" viewBox="0 0 40 80" aria-hidden="true">
+      <svg class="ornament-wheat product-ornament reveal scroll-driven" viewBox="0 0 40 80" role="img" aria-label="Wheat sprig ornament">
+        <title>Wheat sprig</title>
         <path d="M20 78 V14 M20 16 L11 22 M20 16 L29 22 M20 24 L11 30 M20 24 L29 30 M20 32 L11 38 M20 32 L29 38 M20 40 L11 46 M20 40 L29 46 M20 48 L11 54 M20 48 L29 54"/>
       </svg>
       <span class="eyebrow">From the menu</span>
@@ -266,54 +303,74 @@
       <div class="product-grid">
         <a class="product-card reveal" style="--reveal-i:0" href="menu.html">
           <div class="product-image">
-            <!-- REPLACE WITH OFFICIAL PHOTO -->
-            <img alt="Butter croissant" loading="lazy" decoding="async"
-                 src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=600&q=80&auto=format"
-                 srcset="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=320&q=80&auto=format 320w,
-                         https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=600&q=80&auto=format 600w,
-                         https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 1024px) 50vw, 25vw" />
+            <picture>
+              <source type="image/webp" srcset="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=320&q=80&auto=format&fm=webp 320w,
+                                                https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=600&q=80&auto=format&fm=webp 600w,
+                                                https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=900&q=80&auto=format&fm=webp 900w" sizes="(max-width: 1024px) 50vw, 25vw" />
+              <img alt="Butter croissant" loading="lazy" decoding="async"
+                   width="600" height="750"
+                   src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=600&q=80&auto=format"
+                   srcset="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=320&q=80&auto=format 320w,
+                           https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=600&q=80&auto=format 600w,
+                           https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=900&q=80&auto=format 900w"
+                   sizes="(max-width: 1024px) 50vw, 25vw" />
+            </picture>
           </div>
-          <div class="product-name">Butter Croissant</div>
+          <div class="product-name">Butter Croissant <span class="product-arrow" aria-hidden="true">→</span></div>
           <div class="product-price">$6</div>
         </a>
         <a class="product-card reveal" style="--reveal-i:1" href="menu.html">
           <div class="product-image">
-            <!-- REPLACE WITH OFFICIAL PHOTO -->
-            <img alt="Za'atar labneh croissant" loading="lazy" decoding="async"
-                 src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80&auto=format"
-                 srcset="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=320&q=80&auto=format 320w,
-                         https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80&auto=format 600w,
-                         https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 1024px) 50vw, 25vw" />
+            <picture>
+              <source type="image/webp" srcset="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=320&q=80&auto=format&fm=webp 320w,
+                                                https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80&auto=format&fm=webp 600w,
+                                                https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80&auto=format&fm=webp 900w" sizes="(max-width: 1024px) 50vw, 25vw" />
+              <img alt="Za'atar labneh croissant" loading="lazy" decoding="async"
+                   width="600" height="750"
+                   src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80&auto=format"
+                   srcset="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=320&q=80&auto=format 320w,
+                           https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80&auto=format 600w,
+                           https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80&auto=format 900w"
+                   sizes="(max-width: 1024px) 50vw, 25vw" />
+            </picture>
           </div>
-          <div class="product-name">Zaatar Labneh Croissant</div>
+          <div class="product-name">Zaatar Labneh Croissant <span class="product-arrow" aria-hidden="true">→</span></div>
           <div class="product-price">$7</div>
         </a>
         <a class="product-card reveal" style="--reveal-i:2" href="menu.html">
           <div class="product-image">
-            <!-- REPLACE WITH OFFICIAL PHOTO -->
-            <img alt="Country sourdough loaf" loading="lazy" decoding="async"
-                 src="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=600&q=80&auto=format"
-                 srcset="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=320&q=80&auto=format 320w,
-                         https://images.unsplash.com/photo-1568471173242-461f0a730452?w=600&q=80&auto=format 600w,
-                         https://images.unsplash.com/photo-1568471173242-461f0a730452?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 1024px) 50vw, 25vw" />
+            <picture>
+              <source type="image/webp" srcset="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=320&q=80&auto=format&fm=webp 320w,
+                                                https://images.unsplash.com/photo-1568471173242-461f0a730452?w=600&q=80&auto=format&fm=webp 600w,
+                                                https://images.unsplash.com/photo-1568471173242-461f0a730452?w=900&q=80&auto=format&fm=webp 900w" sizes="(max-width: 1024px) 50vw, 25vw" />
+              <img alt="Country sourdough loaf" loading="lazy" decoding="async"
+                   width="600" height="750"
+                   src="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=600&q=80&auto=format"
+                   srcset="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=320&q=80&auto=format 320w,
+                           https://images.unsplash.com/photo-1568471173242-461f0a730452?w=600&q=80&auto=format 600w,
+                           https://images.unsplash.com/photo-1568471173242-461f0a730452?w=900&q=80&auto=format 900w"
+                   sizes="(max-width: 1024px) 50vw, 25vw" />
+            </picture>
           </div>
-          <div class="product-name">Country Sourdough</div>
+          <div class="product-name">Country Sourdough <span class="product-arrow" aria-hidden="true">→</span></div>
           <div class="product-price">$9</div>
         </a>
         <a class="product-card reveal" style="--reveal-i:3" href="menu.html">
           <div class="product-image">
-            <!-- REPLACE WITH OFFICIAL PHOTO -->
-            <img alt="Louma latte" loading="lazy" decoding="async"
-                 src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format"
-                 srcset="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=320&q=80&auto=format 320w,
-                         https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format 600w,
-                         https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=900&q=80&auto=format 900w"
-                 sizes="(max-width: 1024px) 50vw, 25vw" />
+            <picture>
+              <source type="image/webp" srcset="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=320&q=80&auto=format&fm=webp 320w,
+                                                https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format&fm=webp 600w,
+                                                https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=900&q=80&auto=format&fm=webp 900w" sizes="(max-width: 1024px) 50vw, 25vw" />
+              <img alt="Louma latte" loading="lazy" decoding="async"
+                   width="600" height="750"
+                   src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format"
+                   srcset="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=320&q=80&auto=format 320w,
+                           https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format 600w,
+                           https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=900&q=80&auto=format 900w"
+                   sizes="(max-width: 1024px) 50vw, 25vw" />
+            </picture>
           </div>
-          <div class="product-name">Louma Latte</div>
+          <div class="product-name">Louma Latte <span class="product-arrow" aria-hidden="true">→</span></div>
           <div class="product-price">$7</div>
         </a>
       </div>
@@ -338,19 +395,26 @@
         <form class="newsletter-form" id="newsletterForm" data-formspree data-success="#newsletterThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
           <input type="hidden" name="_subject" value="Welcome to the Louma community" />
           <input type="hidden" name="_replyto" value="" />
-          <input type="email" name="email" id="newsletterEmail" placeholder="Your email" required aria-label="Email address" />
+          <label for="newsletterEmail" class="sr-only">Email address</label>
+          <input type="email" name="email" id="newsletterEmail" placeholder="Your email" required aria-label="Email address" aria-describedby="newsletter-help" />
           <button type="submit">Subscribe</button>
         </form>
-        <div class="newsletter-thanks" id="newsletterThanks">You're on the list. See you in July.</div>
+        <small id="newsletter-help" class="sr-only">One short note when we open.</small>
+        <div class="newsletter-thanks" id="newsletterThanks" role="status" aria-live="polite">You're on the list. See you in July.</div>
       </div>
       <div class="visit-stay-media">
-        <!-- REPLACE WITH OFFICIAL PHOTO -->
-        <img class="visit-stay-image" data-parallax="0.15" alt="Louma Bakery storefront" loading="lazy" decoding="async"
-             src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=80&auto=format 800w,
-                     https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format 1200w,
-                     https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" />
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=80&auto=format&fm=webp 800w,
+                                            https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format&fm=webp 1200w,
+                                            https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1600&q=80&auto=format&fm=webp 1600w" sizes="100vw" />
+          <img class="visit-stay-image" data-parallax="0.15" alt="Louma Bakery storefront on Wilshire" loading="lazy" decoding="async"
+               width="1600" height="900"
+               src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1400&q=80&auto=format"
+               srcset="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=80&auto=format 800w,
+                       https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&q=80&auto=format 1200w,
+                       https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1600&q=80&auto=format 1600w"
+               sizes="100vw" />
+        </picture>
       </div>
     </div>
   </section>
@@ -360,8 +424,8 @@
 <footer>
   <div class="footer-top">
     <div class="footer-logo">
-      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#louma-logo"/></svg>
-      <svg class="footer-loaf" viewBox="0 0 80 60" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Louma Bakery"><title>Louma Bakery</title><use href="#louma-logo"/></svg>
+      <svg class="footer-loaf scroll-driven" viewBox="0 0 80 60" role="img" aria-label="A loaf — Louma mark"><title>Louma loaf</title>
         <path d="M10,40 C10,22 24,12 40,12 C56,12 70,22 70,40 C70,50 56,52 40,52 C24,52 10,50 10,40 Z M22,26 L30,20 M36,24 L44,18 M50,22 L58,16"/>
       </svg>
     </div>
@@ -384,6 +448,8 @@
       <p>3223 Wilshire Blvd</p>
       <p>Santa Monica, CA 90403</p>
       <p>Mon to Sat, 8am to 4pm</p>
+      <p><a href="tel:+13104642733">(310) 464-2733</a></p>
+      <p class="footer-opening">Opening July 2026</p>
     </div>
     <div class="footer-col">
       <h4>Stay in touch</h4>
@@ -392,10 +458,11 @@
       <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Welcome to the Louma community" />
         <input type="hidden" name="_replyto" value="" />
-        <input type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
+        <label for="footerEmailHome" class="sr-only">Email for updates</label>
+        <input id="footerEmailHome" type="email" name="email" placeholder="Email for updates" required aria-label="Email for updates" />
         <button type="submit">Join</button>
       </form>
-      <div class="footer-newsletter-thanks" id="footerThanks">Thanks. You're on the list.</div>
+      <div class="footer-newsletter-thanks" id="footerThanks" role="status" aria-live="polite">Thanks. You're on the list.</div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -403,6 +470,7 @@
     <div class="footer-bottom-tag">Flour-dusted dreams, baked fresh daily.</div>
   </div>
 </footer>
+<div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
 <script src="app.js" defer></script>
 </body>
 </html>

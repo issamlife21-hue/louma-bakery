@@ -1,0 +1,176 @@
+/* ============================================================
+   _footer.css — dark band, columns, newsletter, footer-loaf,
+                  footer-opening note
+   ============================================================ */
+footer {
+  background: var(--ink);
+  color: var(--footer-text);
+  padding: var(--s-6) 0 var(--s-5);
+}
+.footer-top {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+.footer-rule {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+.footer-rule hr {
+  border: none;
+  border-top: 1px solid var(--footer-line);
+  margin: var(--s-4) 0 var(--s-5);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--s-6);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 36px var(--s-5);
+}
+.footer-col h4 {
+  color: var(--butter);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  margin: 0 0 var(--s-3);
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-col li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+.footer-col li::marker { content: ""; }
+.footer-col button,
+.footer-col a {
+  color: var(--footer-text);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  padding: 10px 0;
+  cursor: pointer;
+  display: inline-block;
+  transition: color .15s ease;
+}
+.footer-col button:hover,
+.footer-col a:hover { color: var(--butter); }
+.footer-col a.active { color: var(--butter); opacity: 0.9; }
+.footer-col p {
+  color: var(--footer-text);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0 0 10px;
+  line-height: 1.7;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.footer-opening {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--amber-warm);
+  margin-top: var(--s-2) !important;
+  letter-spacing: 0.02em;
+}
+
+.footer-newsletter {
+  display: flex;
+  gap: 6px;
+  margin-top: var(--s-2);
+  flex-wrap: wrap;
+}
+.footer-newsletter input[type="email"] {
+  flex: 1;
+  min-width: 140px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--footer-input-line);
+  padding: 0 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: #fff;
+  border-radius: var(--r-pill);
+}
+.footer-newsletter input[type="email"]::placeholder { color: var(--footer-meta); }
+.footer-newsletter input[type="email"]:focus {
+  outline: none;
+  border-color: var(--butter);
+}
+.footer-newsletter button {
+  height: 40px;
+  padding: 0 18px;
+  background: var(--butter);
+  color: var(--ink);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: var(--r-pill);
+  transition: background .18s ease, transform .18s ease;
+}
+.footer-newsletter button:hover { background: #fff; transform: translateY(-1px); }
+.footer-newsletter-thanks {
+  display: none;
+  margin-top: var(--s-2);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--butter);
+}
+.footer-newsletter-thanks.show { display: block; }
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+.footer-logo svg { display: block; width: 48px; height: 48px; }
+.footer-loaf {
+  width: 48px !important;
+  height: 36px !important;
+  color: var(--butter);
+  opacity: 0.85;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--footer-line);
+  padding: var(--s-3) 36px 0;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--footer-meta);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+.footer-bottom-tag {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--butter);
+  letter-spacing: 0;
+}
