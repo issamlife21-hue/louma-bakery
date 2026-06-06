@@ -44,8 +44,16 @@
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-controls', 'navLinks');
 
+    // Backdrop element so taps outside the panel close it.
+    const navBackdrop = document.createElement('div');
+    navBackdrop.className = 'nav-backdrop';
+    navBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(navBackdrop);
+
     function openMenu() {
       navLinksWrap.classList.add('open');
+      navBackdrop.classList.add('open');
+      document.body.classList.add('nav-open');
       navToggle.setAttribute('aria-expanded', 'true');
       navToggle.setAttribute('aria-label', 'Close menu');
       const firstLink = navLinksWrap.querySelector('.nav-link');
@@ -53,6 +61,8 @@
     }
     function closeMenu(returnFocus) {
       navLinksWrap.classList.remove('open');
+      navBackdrop.classList.remove('open');
+      document.body.classList.remove('nav-open');
       navToggle.setAttribute('aria-expanded', 'false');
       navToggle.setAttribute('aria-label', 'Open menu');
       if (returnFocus) navToggle.focus();
@@ -60,6 +70,11 @@
     navToggle.addEventListener('click', function () {
       if (navLinksWrap.classList.contains('open')) closeMenu(true);
       else openMenu();
+    });
+    navBackdrop.addEventListener('click', function () { closeMenu(true); });
+    // Close after tapping a link (mobile expectation).
+    navLinksWrap.addEventListener('click', function (e) {
+      if (e.target.closest('.nav-link')) closeMenu(false);
     });
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;

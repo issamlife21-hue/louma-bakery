@@ -5,6 +5,7 @@
 .hero {
   position: relative;
   height: 100vh;
+  height: 100svh;
   min-height: 640px;
   overflow: hidden;
   background-color: #2a201b;

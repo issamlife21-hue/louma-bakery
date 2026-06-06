@@ -27,6 +27,8 @@ import { animate, scroll, inView, stagger } from "https://cdn.jsdelivr.net/npm/m
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const isTouchDevice = isCoarsePointer || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+const isMobileViewport = window.matchMedia('(max-width: 767px)').matches;
 
 /* ───── PRELOADER: one-shot per session ───── */
 (function bindPreloader() {
@@ -102,7 +104,7 @@ document.querySelectorAll(
     }, { amount: 0.1 });
   }
   // Hover lift via Motion spring (no CSS hover transform — see _components.css).
-  if (!reduceMotion && !isCoarsePointer) {
+  if (!reduceMotion && !isCoarsePointer && !isTouchDevice) {
     cards.forEach((card) => {
       card.addEventListener('mouseenter', () => {
         animate(card, { y: -8 }, { type: 'spring', stiffness: 280, damping: 18 });
@@ -117,7 +119,7 @@ document.querySelectorAll(
 /* ───── MAGNETIC PULL on primary CTAs ─────
    Pulls the button toward the cursor with spring physics. Disabled on
    touch and reduced-motion. */
-if (!reduceMotion && !isCoarsePointer) {
+if (!reduceMotion && !isCoarsePointer && !isTouchDevice) {
   document.querySelectorAll('.btn-primary, .btn-donate, .nav-cta, .btn-dark').forEach((btn) => {
     btn.addEventListener('mousemove', (e) => {
       const rect = btn.getBoundingClientRect();
@@ -257,6 +259,7 @@ inView('.typewriter[data-typewriter]', (entry) => {
          viewport-center pattern cleanly) ───── */
 (function bindParallax() {
   if (reduceMotion) return;
+  if (isMobileViewport) return;             // off on phones — fights momentum scroll
   const els = document.querySelectorAll('[data-parallax]');
   if (!els.length) return;
   const factors = new WeakMap();
@@ -284,7 +287,7 @@ inView('.typewriter[data-typewriter]', (entry) => {
 })();
 
 /* ───── 3D TILT on cards (perspective set in CSS on parent) ───── */
-if (!reduceMotion && !isCoarsePointer) {
+if (!reduceMotion && !isCoarsePointer && !isTouchDevice && !isMobileViewport) {
   const tiltSelectors = '.tier-card, .value-card, .info-card, .product-card, .tilt-3d';
   document.querySelectorAll(tiltSelectors).forEach((card) => {
     let raf = 0;
@@ -308,7 +311,7 @@ if (!reduceMotion && !isCoarsePointer) {
 }
 
 /* ───── IMAGE TILT PARALLAX — gentle on .alt-overlay / hero images ───── */
-if (!reduceMotion && !isCoarsePointer) {
+if (!reduceMotion && !isCoarsePointer && !isTouchDevice && !isMobileViewport) {
   document.querySelectorAll('.alt-overlay-media, .hero-media, .visit-stay-media, .catering-hero')
     .forEach((host) => {
       const img = host.querySelector('img');
@@ -329,7 +332,7 @@ if (!reduceMotion && !isCoarsePointer) {
 
 /* ───── FLOUR-DUST CURSOR — sparse particle trail ───── */
 (function bindFlourDust() {
-  if (reduceMotion || isCoarsePointer) return;
+  if (reduceMotion || isCoarsePointer || isTouchDevice || isMobileViewport) return;
   let lastSpawn = 0;
   document.addEventListener('mousemove', (e) => {
     const now = performance.now();

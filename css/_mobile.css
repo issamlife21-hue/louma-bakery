@@ -1,0 +1,934 @@
+/* ============================================================
+   _mobile.css — phone-first overrides (max-width: 480px).
+   ------------------------------------------------------------
+   This file is the source of truth for how Louma renders on
+   every phone from 320px to 480px. All sizes are fluid using
+   clamp() with svw as the middle value — never hardcoded for
+   one device. Applied last so it overrides any earlier
+   breakpoints. The 768px and 640px breakpoints in
+   _responsive.css still cover tablet/small-desktop sizes.
+   ============================================================ */
+
+/* ---------- ROOT — global safety on phones ---------- */
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+  body { font-size: clamp(15px, 4svw, 17px); line-height: 1.7; }
+  :root {
+    --grain-opacity: 0.025;
+  }
+  /* Lighter blur on mobile for perf. */
+  .glass,
+  .nav.is-scrolled,
+  .nav.no-hero,
+  .menu-pills {
+    backdrop-filter: blur(8px) saturate(1.2);
+    -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  }
+  .glass-dark,
+  .testimonial-card,
+  .toast {
+    backdrop-filter: blur(8px) saturate(1.1);
+    -webkit-backdrop-filter: blur(8px) saturate(1.1);
+  }
+
+  /* Hide LOUMA ghost wordmark on phones. */
+  .louma-bg-text { display: none; }
+
+  /* Ornaments hidden below 480 (loaf, wheat, steam, croissant). */
+  .ornament-wheat,
+  .ornament-steam,
+  .ornament-croissant,
+  .footer-loaf { display: none; }
+
+  /* Disable per-element CSS parallax/scale transforms on mobile. */
+  .alt-overlay-media,
+  .alt-duo-image,
+  .visit-stay-image,
+  .visit-hero-image,
+  .catering-hero-image,
+  .hero-image {
+    transform: none !important;
+    animation: none !important;
+  }
+  /* Clip wipe disabled — feels laggy on phones. */
+  .alt-overlay-media,
+  .alt-duo-image { clip-path: none !important; }
+  .product-card .product-image img { filter: none; transform: none; }
+
+  /* Disable the variable font breathing on mobile. */
+  .weight-breath { animation: none; font-variation-settings: "wght" 500; }
+
+  /* Scroll-snap fights native momentum on phones — disable. */
+  .scroll-snap-blocks { scroll-snap-type: none; }
+  .scroll-snap-blocks > .alt-block { scroll-snap-align: none; }
+
+  /* Container default padding. */
+  .container { padding: 0 clamp(20px, 5svw, 32px); }
+}
+
+/* ============================================================
+   NAVIGATION (mobile)
+   ============================================================ */
+@media (max-width: 480px) {
+  .nav { padding-top: max(0px, env(safe-area-inset-top)); }
+  .nav-inner {
+    height: 60px;
+    padding: 0 clamp(16px, 4svw, 24px);
+    gap: 10px;
+  }
+  .nav-spacer { height: 60px; }
+
+  .logo-svg { height: 36px; width: 36px; }
+  /* Hide nothing for wordmark — logo is the icon mark only;
+     the "Louma wordmark" doesn't exist as a separate element in markup,
+     so this rule is a no-op safety net for any future addition. */
+  @media (max-width: 379px) {
+    .logo-wordmark { display: none; }
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+  }
+  .nav-toggle svg { width: 22px; height: 22px; }
+
+  /* Order CTA: pill, 44px height, visible next to hamburger. */
+  .nav-cta {
+    height: 44px;
+    padding: 0 16px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    margin-left: auto;
+    margin-right: 4px;
+  }
+
+  /* Slide panel: from RIGHT, cream background, grain texture inherited. */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: min(320px, 90vw);
+    height: 100svh;
+    background: var(--surface-0);
+    border-top: none;
+    border-left: 1px solid var(--border-warm);
+    box-shadow: -24px 0 48px -16px rgba(42, 31, 24, 0.28);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: max(72px, calc(env(safe-area-inset-top) + 60px))
+             clamp(20px, 5svw, 28px)
+             max(32px, env(safe-area-inset-bottom));
+    gap: 0;
+    margin: 0;
+    transform: translateX(100%);
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 70;
+    visibility: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links.open {
+    display: flex;
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  /* Real backdrop element injected by nav.js — tap-to-close + scroll lock. */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(42, 31, 24, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease;
+    z-index: 65;
+  }
+  .nav-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  body.nav-open { overflow: hidden; touch-action: none; }
+
+  .nav-link {
+    color: var(--ink) !important;
+    opacity: 0.9;
+    font-family: var(--font-display);
+    font-size: clamp(22px, 6svw, 28px);
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: 14px 20px;
+    min-height: 48px;
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+  }
+  .nav-link::after { display: none; }
+  .nav-link.active,
+  .nav-link[aria-current="page"] {
+    opacity: 1;
+    font-weight: 500;
+    color: var(--burgundy) !important;
+    border-left-color: var(--burgundy);
+  }
+  .nav-link.active::before,
+  .nav-link[aria-current="page"]::before {
+    content: "";
+    position: static;
+    width: 6px;
+    height: 6px;
+    margin: 0 10px 0 0;
+    background: var(--burgundy);
+    border-radius: 50%;
+    display: inline-block;
+    transform: none;
+    animation: none;
+    opacity: 1;
+  }
+
+  /* Close affordance: rendered as a small ✕ inside the panel top-right.
+     Pure visual — the hamburger button stays at z above the panel
+     (raised by .nav-open) and remains the actual tap target for closing. */
+  .nav-links.open::after {
+    content: "";
+    position: absolute;
+    top: max(16px, env(safe-area-inset-top));
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    background:
+      linear-gradient(45deg, transparent 46%, var(--ink) 46%, var(--ink) 54%, transparent 54%),
+      linear-gradient(-45deg, transparent 46%, var(--ink) 46%, var(--ink) 54%, transparent 54%);
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* When panel is open, raise the hamburger so it sits over the panel
+     and acts as the close button (44×44 tap target, top-right). */
+  body.nav-open .nav-toggle {
+    position: fixed;
+    top: max(8px, env(safe-area-inset-top));
+    right: 8px;
+    z-index: 80;
+    color: var(--ink);
+  }
+  body.nav-open .nav.on-dark .nav-toggle { color: var(--ink); }
+
+  /* On dark hero, the hamburger needs contrast. */
+  .nav.on-dark .nav-toggle { color: #fff; }
+}
+
+/* ============================================================
+   HERO — bottom-pinned glass bar
+   ============================================================ */
+@media (max-width: 480px) {
+  .hero {
+    height: 100svh;
+    min-height: 0;
+  }
+  /* Dark overlay: directional — stronger at bottom, lighter at top. */
+  .hero-overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(20, 12, 8, 0.20) 0%,
+        rgba(20, 12, 8, 0.35) 55%,
+        rgba(20, 12, 8, 0.70) 100%);
+  }
+  .hero-grid {
+    padding: 0;
+    align-items: end;
+    height: 100%;
+  }
+  .hero-panel {
+    width: 100%;
+    max-width: 100%;
+    max-height: 45svh;
+    overflow: hidden;
+    border-radius: 0;
+    padding: clamp(20px, 5svw, 28px);
+    padding-bottom: max(clamp(20px, 5svw, 28px), env(safe-area-inset-bottom));
+    transform: none;
+    animation: none;
+    /* Re-tint glass for legibility at the bottom edge. */
+    background: rgba(251, 245, 234, 0.86);
+    border-top: 1px solid var(--glass-border-light);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+  .hero-panel .eyebrow {
+    margin-bottom: 10px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+  .hero-panel h1,
+  .hero-panel .hero-headline {
+    font-size: clamp(32px, 8svw, 52px);
+    line-height: 1.04;
+    margin: 0 0 14px;
+  }
+  /* Hide italic subline and meta row on mobile per master pass. */
+  .hero-panel-sub,
+  .hero-panel-meta { display: none; }
+  .hero-panel-actions {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+  }
+  /* Show only the primary CTA, full-width. */
+  .hero-panel-actions .btn { flex: 1 1 100%; min-height: 52px; }
+  .hero-panel-actions .btn-ghost { display: none; }
+}
+
+/* ============================================================
+   TYPOGRAPHY (mobile fluid clamp())
+   ============================================================ */
+@media (max-width: 480px) {
+  /* Section H2 fluid. */
+  .alt-overlay-card h2,
+  .alt-stat-text h2,
+  .alt-duo-text h2,
+  .product-section h2,
+  .newsletter-band h2,
+  .visit-info h2,
+  .visit-stay-block h2,
+  .insta-grid-head h2,
+  .ingredient-slider-head h2,
+  .careers-roles-head h2,
+  .careers-form-head h2,
+  .catering-inquiry-aside h2,
+  .mission-support h2,
+  .story-section h2,
+  .catering-intro h2 {
+    font-size: clamp(26px, 7svw, 40px);
+    line-height: 1.1;
+  }
+
+  /* Interior page H1. */
+  .page-heading h1,
+  .visit-hero-content h1,
+  .visit-hero--tall .visit-hero-content h1,
+  .catering-hero-content h1,
+  .not-found h1 {
+    font-size: clamp(32px, 9svw, 52px);
+    line-height: 1.06;
+  }
+  .page-heading .sub,
+  .visit-hero-tag,
+  .catering-hero-tag {
+    font-size: clamp(15px, 4svw, 18px);
+    line-height: 1.55;
+  }
+
+  /* Body text minimums. */
+  .story-section p,
+  .mission-two-col p,
+  .careers-two-col p,
+  .info-card p,
+  .value-card p,
+  .stat-card p,
+  .visit-info p,
+  .visit-stay-block p,
+  .visit-stay-block a,
+  .role-blurb,
+  .editorial-sub {
+    font-size: clamp(15px, 4svw, 17px);
+    line-height: 1.7;
+  }
+
+  /* Italic display body fluid. */
+  .alt-overlay-card p,
+  .alt-stat-text p,
+  .alt-duo-text p,
+  .catering-inquiry-aside p,
+  .careers-roles-head p,
+  .careers-form-head p,
+  .editorial-line,
+  .mission-statement p,
+  .insta-grid-head p,
+  .ingredient-slider-head p,
+  .catering-intro p,
+  .mission-support p,
+  .menu-cat-intro,
+  .editorial-ritual,
+  .countdown-tag,
+  .baguette-line {
+    font-size: clamp(16px, 4.4svw, 20px);
+    line-height: 1.55;
+  }
+
+  /* Menu names. */
+  .menu-row-name { font-size: clamp(18px, 5svw, 22px); }
+  .menu-cat-label { font-size: clamp(22px, 6svw, 28px); }
+  .menu-cat-num { font-size: 11px; }
+
+  /* Countdown numbers fluid. */
+  .countdown-num { font-size: clamp(28px, 9svw, 52px); }
+  .countdown-unit { font-size: 10px; letter-spacing: 0.2em; }
+
+  /* Pull-quote and testimonial. */
+  .testimonial-quote p,
+  .founder-quote p {
+    font-size: clamp(18px, 5svw, 26px);
+    line-height: 1.4;
+  }
+  .testimonial-quote-mark { font-size: clamp(100px, 24svw, 160px); top: -16px; }
+
+  /* Eyebrows: keep 10px, don't shrink further. */
+  .eyebrow,
+  .small-label { font-size: 10px; letter-spacing: 0.2em; }
+
+  /* Hero alt-stat giant numeral. */
+  .alt-stat-num { font-size: clamp(110px, 32svw, 200px); }
+
+  /* Mission stat numbers. */
+  .stat-card-num { font-size: clamp(48px, 14svw, 80px); }
+  .stat-card-num--word { font-size: clamp(32px, 9svw, 48px); }
+  .stat-card h3 { font-size: clamp(18px, 5svw, 22px); }
+
+  /* Ingredient slider name. */
+  .ingredient-name { font-size: clamp(36px, 10svw, 56px); }
+
+  /* Founder. */
+  .founder-name { font-size: clamp(20px, 5.5svw, 26px); }
+  .founder-signature { font-size: clamp(20px, 5.5svw, 24px); }
+}
+
+/* ============================================================
+   LAYOUT — section padding, no overflow, grids
+   ============================================================ */
+@media (max-width: 480px) {
+  /* Universal section padding. */
+  .editorial,
+  .newsletter-band,
+  .visit-info,
+  .mission-support,
+  .insta-grid,
+  .ingredient-slider,
+  .testimonial-band,
+  .catering-tiers,
+  .catering-inquiry,
+  .careers-values,
+  .careers-roles,
+  .visit-info-3col,
+  .mission-stats,
+  .alt-stat,
+  .alt-duo,
+  .product-section,
+  .visit-stay {
+    padding-top: clamp(48px, 8svw, 96px);
+    padding-bottom: clamp(48px, 8svw, 96px);
+    padding-left: clamp(20px, 5svw, 32px);
+    padding-right: clamp(20px, 5svw, 32px);
+  }
+  /* Containers inside sections — neutralize inner padding to avoid doubling. */
+  .visit-stay-inner,
+  .product-section .container,
+  .footer-grid,
+  .footer-top,
+  .footer-rule,
+  .footer-bottom { padding-left: 0; padding-right: 0; }
+  .visit-stay-inner,
+  .product-section .container { padding-left: 0; padding-right: 0; }
+
+  /* Hero panel respects safe area at bottom; section first below hero sits flush. */
+
+  /* Product grid: 2 columns, 1 column on tiny screens via minmax(0,1fr). */
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
+    gap: 16px;
+  }
+
+  /* Product cards: 3/4 aspect on mobile. */
+  .product-card .product-image { aspect-ratio: 3 / 4; }
+  .product-card .product-name { font-size: clamp(16px, 4.6svw, 20px); }
+  .product-card .product-price { font-size: 12px; }
+
+  /* Alt-blocks: single column, image on top, text below. */
+  .alt-overlay { padding: 0; }
+  .alt-overlay-media {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    transform: none;
+  }
+  .alt-overlay-media picture,
+  .alt-overlay-media picture > *,
+  .alt-overlay-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .alt-overlay-card {
+    position: static;
+    width: auto;
+    margin: -40px clamp(20px, 5svw, 28px) clamp(28px, 8svw, 48px);
+    padding: clamp(24px, 6svw, 32px);
+    border-radius: 14px;
+    box-shadow: var(--shadow-card);
+  }
+  .alt-overlay-veil { display: none; }
+
+  .alt-stat-inner { grid-template-columns: 1fr; text-align: left; gap: clamp(24px, 6svw, 40px); }
+  .alt-stat-rule { display: none; }
+  .alt-stat-inset {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 4 / 3;
+    justify-self: stretch;
+  }
+
+  .alt-duo-inner { grid-template-columns: 1fr; gap: clamp(24px, 6svw, 40px); }
+  .alt-duo-stack {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    min-height: 0;
+    gap: clamp(12px, 4svw, 20px);
+  }
+  .alt-duo-image--tall,
+  .alt-duo-image--short {
+    grid-column: 1;
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+    align-self: auto;
+    margin: 0;
+  }
+
+  /* Catering grid: 1 column. */
+  .catering-grid,
+  .catering-tiers-inner,
+  .catering-inquiry-inner,
+  .visit-info-3col-inner,
+  .careers-values-inner,
+  .mission-stats-inner,
+  .story-two-col,
+  .mission-two-col,
+  .careers-two-col,
+  .founder-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 5svw, 32px);
+  }
+  .catering-inquiry-aside { position: static; top: auto; }
+
+  /* Form grids: 1 column. */
+  .form-grid-2 { grid-template-columns: 1fr; gap: 14px; }
+  .form-block { padding: clamp(32px, 8svw, 48px) clamp(20px, 5svw, 28px) clamp(48px, 10svw, 80px); }
+
+  /* Editorial. */
+  .editorial { text-align: center; }
+
+  /* Visit stay block stacked. */
+  .visit-stay-inner {
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 6svw, 36px);
+  }
+  .visit-stay-media {
+    margin-top: clamp(16px, 4svw, 24px);
+    aspect-ratio: 4 / 3;
+    grid-column: 1 / -1;
+  }
+}
+
+/* ============================================================
+   TOUCH TARGETS — every tappable ≥44px
+   ============================================================ */
+@media (max-width: 480px) {
+  /* Form inputs: 52px min, 16px font (prevents iOS auto-zoom). */
+  .form-row input,
+  .form-row select,
+  .form-row textarea,
+  .newsletter-form input[type="email"],
+  .footer-newsletter input[type="email"] {
+    min-height: 52px;
+    height: 52px;
+    font-size: 16px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .form-row textarea {
+    height: auto;
+    min-height: 140px;
+  }
+  .newsletter-form input[type="email"] { height: 52px; }
+  .newsletter-form button,
+  .footer-newsletter button,
+  .form-actions .btn,
+  .btn,
+  .btn-dark {
+    min-height: 52px;
+    height: 52px;
+  }
+
+  /* All primary CTAs full-width below 480 (except inside nav). */
+  main .btn,
+  main .btn-dark { width: 100%; }
+  /* but allow side-by-side button pairs to keep their layout */
+  .hero-panel-actions .btn { width: auto; }
+
+  /* Newsletter form: stack input + button vertically. */
+  .newsletter-form,
+  .footer-newsletter {
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+  .newsletter-form input[type="email"],
+  .newsletter-form button,
+  .footer-newsletter input[type="email"],
+  .footer-newsletter button { width: 100%; min-width: 0; }
+
+  /* Menu rows: 56px min tap area, full-width. */
+  .menu-row {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 12px;
+    padding: 16px 0;
+    min-height: 56px;
+    align-items: center;
+  }
+  .menu-row-leader { display: none; }
+  .menu-row-price { font-size: 14px; }
+
+  /* Footer links: 44px min, adequate spacing. */
+  .footer-col li { margin: 0; }
+  .footer-col button,
+  .footer-col a {
+    min-height: 44px;
+    padding: 12px 0;
+    width: 100%;
+  }
+
+  /* Menu pills 44px tall, scroll horizontal natively. */
+  .menu-pills { top: 60px; }
+  .menu-pills-inner { padding: 12px clamp(20px, 5svw, 24px); }
+  .menu-pill {
+    height: 44px;
+    padding: 0 18px;
+    font-size: 11px;
+  }
+  .menu-cat { scroll-margin-top: 116px; }
+}
+
+/* ============================================================
+   COUNTDOWN — stacked label + 2×2 grid
+   ============================================================ */
+@media (max-width: 480px) {
+  .countdown { border-top: 1px solid var(--border-warm); }
+  .countdown-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    text-align: left;
+    padding: clamp(24px, 6svw, 32px) clamp(20px, 5svw, 28px);
+  }
+  .countdown-cells {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 10px;
+  }
+  .countdown-cell { padding: 12px 8px 10px; }
+}
+
+/* ============================================================
+   MARQUEE — replace with a single static centered line
+   ============================================================ */
+@media (max-width: 480px) {
+  .marquee {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding: 12px clamp(20px, 5svw, 28px);
+  }
+  .marquee-track {
+    animation: none !important;
+    gap: 0;
+    padding: 0;
+    justify-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  /* Show only the first item, hide all aria-hidden duplicates + everything after. */
+  .marquee-item { display: none; }
+  .marquee-item:first-child { display: inline-flex; }
+  .marquee-item:first-child::after { display: none; }
+}
+
+/* ============================================================
+   BAGUETTE + EDITORIAL/RITUAL spacing
+   ============================================================ */
+@media (max-width: 480px) {
+  .baguette { width: min(220px, 60vw); }
+  .baguette-wrap { padding: 16px clamp(20px, 5svw, 28px) 8px; }
+  .baguette-line { padding: 0 clamp(20px, 5svw, 28px) clamp(40px, 8svw, 64px); }
+  .editorial { padding-top: clamp(56px, 10svw, 96px); padding-bottom: clamp(56px, 10svw, 96px); }
+}
+
+/* ============================================================
+   FOOTER (mobile)
+   ============================================================ */
+@media (max-width: 480px) {
+  footer {
+    padding-top: clamp(48px, 8svw, 80px);
+    padding-bottom: max(clamp(32px, 6svw, 48px), env(safe-area-inset-bottom));
+  }
+  .footer-top { padding: 0 clamp(20px, 5svw, 28px); }
+  .footer-rule { padding: 0 clamp(20px, 5svw, 28px); }
+  .footer-rule hr { margin: clamp(24px, 6svw, 32px) 0; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 6svw, 36px);
+    padding: 0 clamp(20px, 5svw, 28px) clamp(24px, 6svw, 32px);
+  }
+  /* Thin warm divider between footer sections. */
+  .footer-col + .footer-col {
+    padding-top: clamp(20px, 5svw, 28px);
+    border-top: 1px solid var(--footer-line);
+  }
+  .footer-col h4 { font-size: 18px; margin-bottom: 12px; }
+  .footer-col p { font-size: 13px; line-height: 1.7; }
+  .footer-bottom {
+    padding: clamp(20px, 5svw, 28px) clamp(20px, 5svw, 28px) 0;
+    font-size: 11px;
+  }
+  .footer-bottom-tag { font-size: clamp(15px, 4svw, 17px); }
+}
+
+/* ============================================================
+   PAGE-SPECIFIC — story / mission / menu / catering / careers / visit
+   ============================================================ */
+@media (max-width: 480px) {
+  /* PAGE HEADING */
+  .page-heading {
+    padding: clamp(64px, 12svw, 112px) clamp(20px, 5svw, 28px) clamp(40px, 8svw, 64px);
+  }
+
+  /* STORY */
+  .story-section {
+    padding: clamp(40px, 8svw, 72px) clamp(20px, 5svw, 28px);
+  }
+  .story-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .story-fullshot {
+    height: 70svh;
+    min-height: 420px;
+    background-attachment: scroll !important;
+    margin: clamp(32px, 6svw, 48px) 0;
+  }
+  .story-fullshot-caption { padding: clamp(24px, 6svw, 32px) clamp(20px, 5svw, 28px); }
+  .story-fullshot-caption p { font-size: clamp(16px, 4.6svw, 22px); }
+  .story-two-col img { aspect-ratio: 4 / 3; }
+  .founder-portrait { aspect-ratio: 4 / 5; }
+  .founder-quote { padding-left: 16px; }
+  .story-section--founder { padding: clamp(48px, 8svw, 80px) clamp(20px, 5svw, 28px); }
+
+  /* MISSION */
+  .mission-statement {
+    padding: clamp(24px, 6svw, 32px) clamp(20px, 5svw, 28px) clamp(40px, 8svw, 56px);
+  }
+  .mission-two-col {
+    margin: clamp(40px, 8svw, 64px) auto;
+    padding: 0 clamp(20px, 5svw, 28px);
+  }
+  .mission-two-col img { aspect-ratio: 4 / 3; }
+  .stat-card { padding: clamp(24px, 6svw, 32px); }
+
+  /* MENU */
+  .menu-section {
+    max-width: none;
+    margin: 0;
+    padding: 0 clamp(20px, 5svw, 28px);
+  }
+  .menu-section + .menu-section { padding-top: clamp(32px, 6svw, 48px); }
+  .menu-note {
+    margin: clamp(32px, 6svw, 48px) clamp(20px, 5svw, 28px);
+    padding: clamp(24px, 6svw, 32px) clamp(20px, 5svw, 28px);
+  }
+
+  /* CATERING */
+  .catering-hero {
+    height: 60svh;
+    min-height: 380px;
+  }
+  .catering-hero-content {
+    padding: clamp(28px, 7svw, 48px) clamp(20px, 5svw, 28px);
+  }
+  .tier-card { padding: clamp(24px, 6svw, 32px); }
+  .floating-panel { padding: clamp(24px, 6svw, 32px); }
+
+  /* CAREERS */
+  .careers-roles-inner { padding: 0; }
+  .careers-form-head { padding: 0 clamp(20px, 5svw, 28px); }
+  .role-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px 0;
+  }
+  .role-apply { justify-self: start; }
+  .careers-band-linen { padding-bottom: clamp(56px, 10svw, 96px); }
+
+  /* VISIT */
+  .visit-hero {
+    height: 56svh;
+    min-height: 380px;
+  }
+  .visit-hero--tall {
+    height: 68svh;
+    min-height: 460px;
+  }
+  .visit-hero-content { padding: 0 clamp(20px, 5svw, 28px); }
+  .visit-info { padding: clamp(48px, 8svw, 80px) clamp(20px, 5svw, 28px); }
+  .visit-countdown .countdown-inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .info-card { padding: clamp(24px, 6svw, 32px); }
+  .value-card { padding: clamp(24px, 6svw, 32px); }
+  .visit-map { aspect-ratio: 4 / 3; }
+
+  /* 404 */
+  .not-found {
+    padding: clamp(72px, 12svw, 112px) clamp(20px, 5svw, 28px);
+  }
+}
+
+/* ============================================================
+   FILM STRIP — native CSS scroll-snap on mobile
+   ============================================================ */
+@media (max-width: 480px) {
+  .film-strip { padding: clamp(48px, 8svw, 72px) 0; }
+  .film-track {
+    padding-left: clamp(20px, 5svw, 28px);
+    padding-right: clamp(20px, 5svw, 28px);
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .film-frame {
+    flex: 0 0 70vw;
+    scroll-snap-align: start;
+  }
+}
+
+/* ============================================================
+   INSTA GRID — 2 columns minmax(0,1fr) preserving rotation
+   ============================================================ */
+@media (max-width: 480px) {
+  .insta-grid-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  /* Keep gentle rotation per spec (only zero-out at <340px for legibility) */
+  .insta-tile { transform: rotate(var(--rot, 0deg)); }
+  @media (max-width: 340px) {
+    .insta-tile { transform: none; }
+  }
+}
+
+/* ============================================================
+   INGREDIENT SLIDER — full-width, native touch scroll
+   ============================================================ */
+@media (max-width: 480px) {
+  .ingredient-track {
+    padding: 8px clamp(20px, 5svw, 28px) 24px;
+    gap: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ingredient-card {
+    flex: 0 0 88vw;
+    padding: clamp(24px, 6svw, 32px);
+  }
+}
+
+/* ============================================================
+   TESTIMONIAL — full-width, normal flow on mobile
+   ============================================================ */
+@media (max-width: 480px) {
+  .testimonial-band {
+    padding: clamp(56px, 10svw, 96px) clamp(20px, 5svw, 28px);
+  }
+  .testimonial-card {
+    padding: clamp(32px, 7svw, 48px) clamp(24px, 6svw, 36px);
+    border-radius: 14px;
+  }
+}
+
+/* ============================================================
+   PRELOADER — center & scale at all sizes
+   ============================================================ */
+@media (max-width: 480px) {
+  .preloader-mark {
+    width: clamp(96px, 28svw, 132px);
+    height: clamp(96px, 28svw, 132px);
+  }
+}
+
+/* ============================================================
+   SAFE AREAS — fixed/sticky elements
+   ============================================================ */
+@media (max-width: 480px) {
+  .toast-host {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: min(420px, calc(100% - clamp(24px, 6svw, 36px)));
+  }
+  .menu-pills {
+    top: 60px;
+    padding-top: 0;
+  }
+}
+
+/* ============================================================
+   PERFORMANCE — only animate transform/opacity, kill the rest
+   ============================================================ */
+@media (max-width: 480px) {
+  .hero-image { animation: none !important; }
+  .hero-panel { animation: none !important; }
+  .hero-headline .line > span {
+    transform: none !important;
+    animation: none !important;
+  }
+  .product-card,
+  .tier-card,
+  .value-card,
+  .info-card,
+  .stat-card {
+    transition: none;
+  }
+  .product-card:hover,
+  .tier-card:hover,
+  .value-card:hover,
+  .info-card:hover,
+  .stat-card:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   3D TILT / FLOUR DUST kill on touch
+   ============================================================ */
+@media (hover: none) {
+  .product-card,
+  .tier-card,
+  .value-card,
+  .info-card,
+  .stat-card,
+  .tilt-3d {
+    transform: none !important;
+  }
+  .flour-dust { display: none !important; }
+}

@@ -32,6 +32,7 @@
 @import url("css/_animations.css");
 @import url("css/_footer.css");
 @import url("css/_responsive.css");
+@import url("css/_mobile.css");
 
 /* Hero video swapped in by JS via data-hero-video. */
 .hero-video {
