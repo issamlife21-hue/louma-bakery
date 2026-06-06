@@ -18,6 +18,8 @@
 (function () {
   'use strict';
   const PARTIALS = [
+    { src: 'data/content.js' },          // sets window.LOUMA_CONFIG (must be first)
+    { src: 'js/render.js' },             // hydrates [data-bind] from CONFIG
     { src: 'js/nav.js' },
     { src: 'js/animations.js', module: true },
     { src: 'js/countdown.js' },

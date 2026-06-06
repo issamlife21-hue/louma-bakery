@@ -283,6 +283,129 @@ inView('.typewriter[data-typewriter]', (entry) => {
   update();
 })();
 
+/* ───── 3D TILT on cards (perspective set in CSS on parent) ───── */
+if (!reduceMotion && !isCoarsePointer) {
+  const tiltSelectors = '.tier-card, .value-card, .info-card, .product-card, .tilt-3d';
+  document.querySelectorAll(tiltSelectors).forEach((card) => {
+    let raf = 0;
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5..0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        // Spring-ish via Motion — light damping so it stays responsive.
+        animate(card, { rotateY: x * 7, rotateX: -y * 7 },
+          { type: 'spring', stiffness: 220, damping: 18 });
+      });
+    });
+    card.addEventListener('mouseleave', () => {
+      animate(card, { rotateY: 0, rotateX: 0 },
+        { type: 'spring', stiffness: 180, damping: 16 });
+    });
+  });
+}
+
+/* ───── IMAGE TILT PARALLAX — gentle on .alt-overlay / hero images ───── */
+if (!reduceMotion && !isCoarsePointer) {
+  document.querySelectorAll('.alt-overlay-media, .hero-media, .visit-stay-media, .catering-hero')
+    .forEach((host) => {
+      const img = host.querySelector('img');
+      if (!img) return;
+      host.addEventListener('mousemove', (e) => {
+        const rect = host.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        animate(img, { x: x * 14, y: y * 10 },
+          { type: 'spring', stiffness: 80, damping: 20 });
+      });
+      host.addEventListener('mouseleave', () => {
+        animate(img, { x: 0, y: 0 },
+          { type: 'spring', stiffness: 80, damping: 20 });
+      });
+    });
+}
+
+/* ───── FLOUR-DUST CURSOR — sparse particle trail ───── */
+(function bindFlourDust() {
+  if (reduceMotion || isCoarsePointer) return;
+  let lastSpawn = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = performance.now();
+    if (now - lastSpawn < 36) return;    // throttle ~28 spawns/sec
+    lastSpawn = now;
+    const dust = document.createElement('div');
+    dust.className = 'flour-dust';
+    dust.style.left = e.clientX + 'px';
+    dust.style.top = e.clientY + 'px';
+    dust.style.setProperty('--dx', ((Math.random() - 0.5) * 24).toFixed(1) + 'px');
+    dust.style.width = (3 + Math.random() * 5).toFixed(1) + 'px';
+    dust.style.height = dust.style.width;
+    document.body.appendChild(dust);
+    setTimeout(() => dust.remove(), 900);
+  });
+})();
+
+/* ───── INGREDIENT SLIDER — sync dots with active card on scroll ───── */
+(function bindIngredientSlider() {
+  const track = document.querySelector('.ingredient-track');
+  if (!track) return;
+  const cards = track.querySelectorAll('.ingredient-card');
+  const dotsHost = document.querySelector('.ingredient-dots');
+  if (!cards.length || !dotsHost) return;
+
+  // Build dots
+  dotsHost.innerHTML = '';
+  cards.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'ingredient-dot';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', `Scroll to ingredient ${i + 1}`);
+    if (i === 0) btn.classList.add('is-active');
+    btn.addEventListener('click', () => {
+      cards[i].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline: 'start', block: 'nearest' });
+    });
+    dotsHost.appendChild(btn);
+  });
+  const dots = dotsHost.querySelectorAll('.ingredient-dot');
+
+  // Sync active dot when a card crosses 40% from track's left edge.
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting && e.intersectionRatio > 0.55) {
+        const idx = [...cards].indexOf(e.target);
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      }
+    });
+  }, { root: track, threshold: [0.55, 0.9] });
+  cards.forEach((c) => io.observe(c));
+})();
+
+/* ───── STORY SCROLLYTELLING — chapter rail active state ───── */
+(function bindStoryRail() {
+  const chapters = document.querySelectorAll('.story-chapter');
+  const sections = document.querySelectorAll('main .story-section, main .story-section--founder');
+  if (!chapters.length || !sections.length) return;
+  chapters.forEach((c, i) => {
+    c.addEventListener('click', () => {
+      const target = sections[i];
+      if (target) target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const idx = [...sections].indexOf(e.target);
+        chapters.forEach((c, i) => c.classList.toggle('is-active', i === idx));
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach((s) => io.observe(s));
+})();
+
 /* ───── FOOTER YEAR ───── */
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();

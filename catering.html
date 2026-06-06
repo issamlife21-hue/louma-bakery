@@ -259,16 +259,16 @@
     </div>
     <div class="footer-col">
       <h4>Find us</h4>
-      <p>3223 Wilshire Blvd</p>
-      <p>Santa Monica, CA 90403</p>
-      <p>Mon to Sat, 8am to 4pm</p>
-      <p><a href="tel:+13104642733">(310) 464-2733</a></p>
-      <p class="footer-opening">Opening July 2026</p>
+      <p data-bind="bakery.address.street">3223 Wilshire Blvd</p>
+      <p><span data-bind="bakery.address.city">Santa Monica</span>, <span data-bind="bakery.address.state">CA</span> <span data-bind="bakery.address.zip">90403</span></p>
+      <p data-bind="bakery.hours.short">Mon to Sat, 8am to 4pm</p>
+      <p><a data-bind="bakery.phone" data-bind-href="bakery.phoneTel" href="tel:+13104642733">(310) 464-2733</a></p>
+      <p class="footer-opening" data-bind="bakery.openingNote">Opening July 2026</p>
     </div>
     <div class="footer-col">
       <h4>Stay in touch</h4>
-      <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
-      <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
+      <p><a data-bind="social.instagramHandle" data-bind-href="social.instagramHref" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+      <p><a data-bind="bakery.email" data-bind-href="bakery.emailHref" href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
       <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Welcome to the Louma community" />
         <input type="hidden" name="_replyto" value="" />

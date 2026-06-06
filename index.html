@@ -165,7 +165,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
       <article class="hero-panel glass">
         <span class="eyebrow">Wilshire · Opening July 2026</span>
         <h1 class="hero-headline">
-          <span class="line"><span style="--line-i:0">Flour-dusted dreams,</span></span>
+          <span class="line"><span style="--line-i:0">Flour-dusted <span class="weight-breath">dreams</span>,</span></span>
           <span class="line"><span style="--line-i:1">baked fresh daily.</span></span>
         </h1>
         <p class="hero-panel-sub">European craft, Levantine soul — a small bakery on a quiet corner of Wilshire.</p>
@@ -219,6 +219,32 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
   </div>
   <p class="baguette-line">We built this place for the people serving you.</p>
 
+  <!-- Marquee ticker: rendered from CONFIG.marquee at runtime; static fallback below -->
+  <div class="marquee" aria-label="What's happening at the bakery">
+    <ol class="marquee-track" data-list="marquee" role="list">
+      <template>
+        <li class="marquee-item" data-list-item>{{.}}</li>
+      </template>
+      <li class="marquee-item">Fresh bread by eight</li>
+      <li class="marquee-item">81-layer croissants</li>
+      <li class="marquee-item">Levantine pastries</li>
+      <li class="marquee-item">Espresso pulled by seven</li>
+      <li class="marquee-item">Flour by five</li>
+      <li class="marquee-item">Open Mon–Sat</li>
+      <li class="marquee-item">Opening July 2026 on Wilshire</li>
+      <!-- duplicate row for seamless loop -->
+      <li class="marquee-item" aria-hidden="true">Fresh bread by eight</li>
+      <li class="marquee-item" aria-hidden="true">81-layer croissants</li>
+      <li class="marquee-item" aria-hidden="true">Levantine pastries</li>
+      <li class="marquee-item" aria-hidden="true">Espresso pulled by seven</li>
+      <li class="marquee-item" aria-hidden="true">Flour by five</li>
+      <li class="marquee-item" aria-hidden="true">Open Mon–Sat</li>
+      <li class="marquee-item" aria-hidden="true">Opening July 2026 on Wilshire</li>
+    </ol>
+  </div>
+
+  <div class="scroll-snap-blocks">
+
   <section class="alt-block alt-overlay surface-linen">
     <div class="alt-overlay-media fade-in" data-parallax="0.10">
       <picture>
@@ -243,7 +269,8 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
     </article>
   </section>
 
-  <section class="alt-block alt-stat">
+  <section class="alt-block alt-stat louma-bg">
+    <span class="louma-bg-text" aria-hidden="true">Louma</span>
     <div class="alt-stat-inner">
       <div class="alt-stat-figure reveal">
         <span class="alt-stat-num" aria-hidden="true">81</span>
@@ -271,7 +298,7 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
     </div>
   </section>
 
-  <section class="alt-block alt-duo surface-linen">
+  <section class="alt-block alt-duo surface-linen scroll-snap-end">
     <div class="alt-duo-inner">
       <div class="alt-duo-text reveal">
         <span class="eyebrow">For your table</span>
@@ -307,6 +334,8 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
       </div>
     </div>
   </section>
+
+  </div><!-- /.scroll-snap-blocks -->
 
   <section class="product-section">
     <div class="container">
@@ -394,6 +423,12 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
     </div>
   </section>
 
+  <div class="section-divider to-ink" aria-hidden="true">
+    <svg viewBox="0 0 1440 64" preserveAspectRatio="none">
+      <path d="M0,32 C240,0 480,64 720,32 C960,0 1200,64 1440,32 L1440,64 L0,64 Z"/>
+    </svg>
+  </div>
+
   <section class="testimonial-band" aria-label="What people are saying">
     <article class="testimonial-card reveal">
       <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
@@ -406,6 +441,59 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
       </footer>
     </article>
   </section>
+
+  <section class="film-strip" aria-label="A look around the bakery">
+    <div class="film-strip-head reveal">
+      <span class="eyebrow">A walk through</span>
+      <h2>The room, the bake, the regulars.</h2>
+    </div>
+    <div class="film-track" data-list="filmStrip">
+      <template>
+        <figure class="film-frame" data-list-item>
+          <picture>
+            <source type="image/webp" srcset="https://images.unsplash.com/{{photo}}?w=600&q=80&auto=format&fm=webp" />
+            <img alt="{{alt}}" loading="lazy" decoding="async" width="600" height="800"
+                 src="https://images.unsplash.com/{{photo}}?w=600&q=80&auto=format" />
+          </picture>
+        </figure>
+      </template>
+      <!-- Static fallback frames in case CONFIG fails to load -->
+      <figure class="film-frame">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80&auto=format&fm=webp" />
+          <img alt="Pastries arranged on the morning counter" loading="lazy" decoding="async" width="600" height="800"
+               src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80&auto=format" />
+        </picture>
+      </figure>
+      <figure class="film-frame">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80&auto=format&fm=webp" />
+          <img alt="A baker pulls sourdough from the oven" loading="lazy" decoding="async" width="600" height="800"
+               src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80&auto=format" />
+        </picture>
+      </figure>
+      <figure class="film-frame">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format&fm=webp" />
+          <img alt="A latte poured with rosetta art" loading="lazy" decoding="async" width="600" height="800"
+               src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80&auto=format" />
+        </picture>
+      </figure>
+      <figure class="film-frame">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=600&q=80&auto=format&fm=webp" />
+          <img alt="A country sourdough loaf" loading="lazy" decoding="async" width="600" height="800"
+               src="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=600&q=80&auto=format" />
+        </picture>
+      </figure>
+    </div>
+  </section>
+
+  <div class="section-divider to-linen" aria-hidden="true">
+    <svg viewBox="0 0 1440 64" preserveAspectRatio="none">
+      <path d="M0,32 C240,64 480,0 720,32 C960,64 1200,0 1440,32 L1440,64 L0,64 Z"/>
+    </svg>
+  </div>
 
   <section class="insta-grid" aria-label="From the bakery, on Instagram">
     <div class="insta-grid-head reveal">
@@ -527,16 +615,16 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
     </div>
     <div class="footer-col">
       <h4>Find us</h4>
-      <p>3223 Wilshire Blvd</p>
-      <p>Santa Monica, CA 90403</p>
-      <p>Mon to Sat, 8am to 4pm</p>
-      <p><a href="tel:+13104642733">(310) 464-2733</a></p>
-      <p class="footer-opening">Opening July 2026</p>
+      <p data-bind="bakery.address.street">3223 Wilshire Blvd</p>
+      <p><span data-bind="bakery.address.city">Santa Monica</span>, <span data-bind="bakery.address.state">CA</span> <span data-bind="bakery.address.zip">90403</span></p>
+      <p data-bind="bakery.hours.short">Mon to Sat, 8am to 4pm</p>
+      <p><a data-bind="bakery.phone" data-bind-href="bakery.phoneTel" href="tel:+13104642733">(310) 464-2733</a></p>
+      <p class="footer-opening" data-bind="bakery.openingNote">Opening July 2026</p>
     </div>
     <div class="footer-col">
       <h4>Stay in touch</h4>
-      <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
-      <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
+      <p><a data-bind="social.instagramHandle" data-bind-href="social.instagramHref" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+      <p><a data-bind="bakery.email" data-bind-href="bakery.emailHref" href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
       <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Welcome to the Louma community" />
         <input type="hidden" name="_replyto" value="" />

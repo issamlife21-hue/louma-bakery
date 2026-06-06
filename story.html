@@ -103,6 +103,18 @@
   </div>
 </header>
 
+<nav class="story-chapter-rail" aria-label="Story chapters">
+  <button type="button" class="story-chapter is-active" aria-label="Jump to chapter 1 — How it started">
+    <span class="story-chapter-label">01 · How it started</span>
+  </button>
+  <button type="button" class="story-chapter" aria-label="Jump to chapter 2 — The food">
+    <span class="story-chapter-label">02 · The food</span>
+  </button>
+  <button type="button" class="story-chapter" aria-label="Jump to chapter 3 — The founder">
+    <span class="story-chapter-label">03 · The founder</span>
+  </button>
+</nav>
+
 <main id="main" class="story-main">
   <div class="nav-spacer"></div>
   <div class="page-heading">
@@ -190,6 +202,45 @@
       </div>
     </article>
   </section>
+
+  <section class="ingredient-slider" aria-label="What goes into the bake">
+    <div class="ingredient-slider-head reveal">
+      <span class="eyebrow">What goes in</span>
+      <h2>Four things, in this order.</h2>
+      <p>Slide through what makes a Louma loaf a Louma loaf.</p>
+    </div>
+    <div class="ingredient-track" data-list="ingredients" role="list">
+      <template>
+        <article class="ingredient-card" data-list-item role="listitem">
+          <span class="ingredient-eyebrow">{{eyebrow}}</span>
+          <h3 class="ingredient-name">{{name}}</h3>
+          <p class="ingredient-body">{{body}}</p>
+        </article>
+      </template>
+      <!-- Static fallback cards in case CONFIG fails to load -->
+      <article class="ingredient-card" role="listitem">
+        <span class="ingredient-eyebrow">01 · Foundation</span>
+        <h3 class="ingredient-name">Flour</h3>
+        <p class="ingredient-body">Stone-milled, high-protein, single-origin where we can. The flour is the bread — everything else just makes it interesting.</p>
+      </article>
+      <article class="ingredient-card" role="listitem">
+        <span class="ingredient-eyebrow">02 · Lamination</span>
+        <h3 class="ingredient-name">Butter</h3>
+        <p class="ingredient-body">European-style, 84% fat, cold from the walk-in. Folded into 81 layers by hand over three days.</p>
+      </article>
+      <article class="ingredient-card" role="listitem">
+        <span class="ingredient-eyebrow">03 · Time</span>
+        <h3 class="ingredient-name">Starter</h3>
+        <p class="ingredient-body">A wild yeast culture we feed every morning. Cold-fermented 72 hours. The sour is gentle; the crumb is open; the crust shatters.</p>
+      </article>
+      <article class="ingredient-card" role="listitem">
+        <span class="ingredient-eyebrow">04 · Soul</span>
+        <h3 class="ingredient-name">Za'atar</h3>
+        <p class="ingredient-body">Wild-gathered Lebanese hyssop, sumac, sesame, salt. Spooned warm into pockets of labneh and folded inside the croissant.</p>
+      </article>
+    </div>
+    <div class="ingredient-dots" aria-label="Ingredient navigation"></div>
+  </section>
 </main>
 
 <footer>
@@ -216,16 +267,16 @@
     </div>
     <div class="footer-col">
       <h4>Find us</h4>
-      <p>3223 Wilshire Blvd</p>
-      <p>Santa Monica, CA 90403</p>
-      <p>Mon to Sat, 8am to 4pm</p>
-      <p><a href="tel:+13104642733">(310) 464-2733</a></p>
-      <p class="footer-opening">Opening July 2026</p>
+      <p data-bind="bakery.address.street">3223 Wilshire Blvd</p>
+      <p><span data-bind="bakery.address.city">Santa Monica</span>, <span data-bind="bakery.address.state">CA</span> <span data-bind="bakery.address.zip">90403</span></p>
+      <p data-bind="bakery.hours.short">Mon to Sat, 8am to 4pm</p>
+      <p><a data-bind="bakery.phone" data-bind-href="bakery.phoneTel" href="tel:+13104642733">(310) 464-2733</a></p>
+      <p class="footer-opening" data-bind="bakery.openingNote">Opening July 2026</p>
     </div>
     <div class="footer-col">
       <h4>Stay in touch</h4>
-      <p><a href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
-      <p><a href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
+      <p><a data-bind="social.instagramHandle" data-bind-href="social.instagramHref" href="https://instagram.com/loumabakery" target="_blank" rel="noopener">@loumabakery</a></p>
+      <p><a data-bind="bakery.email" data-bind-href="bakery.emailHref" href="mailto:hello@loumabakery.com">hello@loumabakery.com</a></p>
       <form class="footer-newsletter" data-formspree data-success="#footerThanks" action="https://formspree.io/f/xjglwnzr" method="POST" novalidate>
         <input type="hidden" name="_subject" value="Welcome to the Louma community" />
         <input type="hidden" name="_replyto" value="" />
