@@ -59,7 +59,7 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" class="menu-main">
   <div class="nav-spacer"></div>
   <div class="page-heading">
     <span class="eyebrow">From the bakery</span>
@@ -67,19 +67,40 @@
     <p class="sub">Baked fresh every morning. We sell out daily.</p>
   </div>
 
+  <nav class="menu-pills" id="menuPills" aria-label="Menu categories">
+    <div class="menu-pills-inner">
+      <a class="menu-pill" href="#cat-pastries">Pastries</a>
+      <a class="menu-pill" href="#cat-bread">Bread</a>
+      <a class="menu-pill" href="#cat-toasts">Toasts</a>
+      <a class="menu-pill" href="#cat-drinks">Drinks</a>
+      <a class="menu-pill" href="#cat-sweets">Sweets</a>
+      <a class="menu-pill" href="#cat-boxes">Boxes</a>
+    </div>
+  </nav>
+
   <div class="menu-section">
 
-    <div class="menu-cat-label">Pastries</div>
-    <p class="menu-cat-intro">Zaatar, labneh, pistachio, rose water — the flavors that make us who we are.</p>
-    <div class="menu-row"><div class="menu-row-name">Butter Croissant</div><div class="menu-row-price">$6</div></div>
-    <div class="menu-row"><div class="menu-row-name">Zaatar Labneh Croissant</div><div class="menu-row-price">$7</div></div>
-    <div class="menu-row"><div class="menu-row-name">Pistachio Rose Croissant</div><div class="menu-row-price">$7</div></div>
-    <div class="menu-row"><div class="menu-row-name">Chocolate Tahini Cookie</div><div class="menu-row-price">$5</div></div>
+    <section class="menu-cat" id="cat-pastries">
+      <header class="menu-cat-head">
+        <span class="menu-cat-num" aria-hidden="true">01</span>
+        <h2 class="menu-cat-label">Pastries</h2>
+      </header>
+      <p class="menu-cat-intro">Zaatar, labneh, pistachio, rose water — the flavors that make us who we are.</p>
+      <div class="menu-row"><span class="menu-row-name">Butter Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$6</span></div>
+      <div class="menu-row"><span class="menu-row-name">Zaatar Labneh Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
+      <div class="menu-row"><span class="menu-row-name">Pistachio Rose Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
+      <div class="menu-row"><span class="menu-row-name">Chocolate Tahini Cookie</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$5</span></div>
+    </section>
 
-    <div class="menu-cat-label">Bread</div>
-    <div class="menu-row"><div class="menu-row-name">Country Sourdough half</div><div class="menu-row-price">$9</div></div>
-    <div class="menu-row"><div class="menu-row-name">Country Sourdough whole</div><div class="menu-row-price">$16</div></div>
-    <div class="menu-row"><div class="menu-row-name">Baguette</div><div class="menu-row-price">$5</div></div>
+    <section class="menu-cat" id="cat-bread">
+      <header class="menu-cat-head">
+        <span class="menu-cat-num" aria-hidden="true">02</span>
+        <h2 class="menu-cat-label">Bread</h2>
+      </header>
+      <div class="menu-row"><span class="menu-row-name">Country Sourdough half</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$9</span></div>
+      <div class="menu-row"><span class="menu-row-name">Country Sourdough whole</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$16</span></div>
+      <div class="menu-row"><span class="menu-row-name">Baguette</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$5</span></div>
+    </section>
   </div>
 
   <aside class="menu-note">
@@ -87,24 +108,44 @@
   </aside>
 
   <div class="menu-section">
-    <div class="menu-cat-label">Toasts and Sandwiches</div>
-    <div class="menu-row"><div class="menu-row-name">Labneh Toast</div><div class="menu-row-price">$12</div></div>
-    <div class="menu-row"><div class="menu-row-name">Louma Breakfast Sandwich</div><div class="menu-row-price">$14</div></div>
+    <section class="menu-cat" id="cat-toasts">
+      <header class="menu-cat-head">
+        <span class="menu-cat-num" aria-hidden="true">03</span>
+        <h2 class="menu-cat-label">Toasts &amp; Sandwiches</h2>
+      </header>
+      <div class="menu-row"><span class="menu-row-name">Labneh Toast</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$12</span></div>
+      <div class="menu-row"><span class="menu-row-name">Louma Breakfast Sandwich</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$14</span></div>
+    </section>
 
-    <div class="menu-cat-label">Drinks</div>
-    <div class="menu-row"><div class="menu-row-name">Louma Latte</div><div class="menu-row-price">$7</div></div>
-    <div class="menu-row"><div class="menu-row-name">Espresso</div><div class="menu-row-price">$4</div></div>
-    <div class="menu-row"><div class="menu-row-name">Cappuccino</div><div class="menu-row-price">$6</div></div>
-    <div class="menu-row"><div class="menu-row-name">Matcha Latte</div><div class="menu-row-price">$7</div></div>
-    <div class="menu-row"><div class="menu-row-name">Iced Coffee</div><div class="menu-row-price">$6</div></div>
+    <section class="menu-cat" id="cat-drinks">
+      <header class="menu-cat-head">
+        <span class="menu-cat-num" aria-hidden="true">04</span>
+        <h2 class="menu-cat-label">Drinks</h2>
+      </header>
+      <div class="menu-row"><span class="menu-row-name">Louma Latte</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
+      <div class="menu-row"><span class="menu-row-name">Espresso</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$4</span></div>
+      <div class="menu-row"><span class="menu-row-name">Cappuccino</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$6</span></div>
+      <div class="menu-row"><span class="menu-row-name">Matcha Latte</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
+      <div class="menu-row"><span class="menu-row-name">Iced Coffee</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$6</span></div>
+    </section>
 
-    <div class="menu-cat-label">Sweets</div>
-    <div class="menu-row"><div class="menu-row-name">Orange Blossom Cake</div><div class="menu-row-price">$8</div></div>
+    <section class="menu-cat" id="cat-sweets">
+      <header class="menu-cat-head">
+        <span class="menu-cat-num" aria-hidden="true">05</span>
+        <h2 class="menu-cat-label">Sweets</h2>
+      </header>
+      <div class="menu-row"><span class="menu-row-name">Orange Blossom Cake</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$8</span></div>
+    </section>
 
-    <div class="menu-cat-label">Boxes</div>
-    <div class="menu-row"><div class="menu-row-name">Pastry Gift Box 4pc</div><div class="menu-row-price">$28</div></div>
-    <div class="menu-row"><div class="menu-row-name">Pastry Gift Box 8pc</div><div class="menu-row-price">$52</div></div>
-    <div class="menu-row"><div class="menu-row-name">Custom catering</div><div class="menu-row-price">inquire</div></div>
+    <section class="menu-cat" id="cat-boxes">
+      <header class="menu-cat-head">
+        <span class="menu-cat-num" aria-hidden="true">06</span>
+        <h2 class="menu-cat-label">Boxes</h2>
+      </header>
+      <div class="menu-row"><span class="menu-row-name">Pastry Gift Box 4pc</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$28</span></div>
+      <div class="menu-row"><span class="menu-row-name">Pastry Gift Box 8pc</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$52</span></div>
+      <div class="menu-row"><span class="menu-row-name">Custom catering</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">inquire</span></div>
+    </section>
 
   </div>
 </main>

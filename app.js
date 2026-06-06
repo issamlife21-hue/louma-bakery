@@ -229,6 +229,32 @@
 
   setupDrawOnView('.ornament-wheat.draw', { varName: '--wheat-len', fallback: '600', replay: true });
 
+  (function bindMenuPills() {
+    const pills = document.querySelectorAll('.menu-pill');
+    if (!pills.length || !('IntersectionObserver' in window)) return;
+    const pillByHash = new Map();
+    pills.forEach((p) => pillByHash.set(p.getAttribute('href'), p));
+    const targets = [...pills]
+      .map((p) => document.querySelector(p.getAttribute('href')))
+      .filter(Boolean);
+    if (!targets.length) return;
+    const setActive = (id) => {
+      pills.forEach((p) => {
+        p.classList.toggle('is-active', p.getAttribute('href') === '#' + id);
+      });
+    };
+    const io = new IntersectionObserver((entries) => {
+      // Pick the entry closest to the trigger line (top-third of viewport).
+      const visible = entries.filter((e) => e.isIntersecting);
+      if (!visible.length) return;
+      visible.sort((a, b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top);
+      setActive(visible[0].target.id);
+    }, { rootMargin: '-140px 0px -55% 0px', threshold: 0 });
+    targets.forEach((t) => io.observe(t));
+    // Initial highlight on first category.
+    setActive(targets[0].id);
+  })();
+
   (function bindCountdown() {
     const section = document.querySelector('.countdown[data-countdown-target]');
     if (!section) return;
