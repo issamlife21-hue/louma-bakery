@@ -227,40 +227,50 @@
 }
 .form-success.show { display: block; }
 
-/* ---------- TOAST SYSTEM ---------- */
+/* ---------- TOAST SYSTEM (slides up from bottom, glass-dark) ---------- */
 .toast-host {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1200;
   display: flex;
   flex-direction: column;
   gap: 10px;
   pointer-events: none;
+  align-items: center;
+  width: min(420px, calc(100% - 32px));
 }
 .toast {
-  background: var(--ink);
+  background: var(--glass-dark);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--glass-border-dark);
   color: var(--butter);
-  padding: 14px 20px;
-  border-radius: var(--r-card);
+  padding: 16px 22px;
+  border-radius: 14px;
   font-family: var(--font-body);
   font-size: 14px;
-  box-shadow: var(--shadow-lifted);
-  max-width: 340px;
-  transform: translateX(120%);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.32),
+    0 2px 6px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  width: 100%;
+  transform: translateY(140%);
   opacity: 0;
-  animation: toast-in 380ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: toast-up 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   pointer-events: auto;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
 }
-.toast.is-leaving { animation: toast-out 280ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.toast.is-leaving { animation: toast-down 280ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 .toast-icon {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
   color: var(--amber-warm);
+  margin-top: 4px;
 }
 .toast-msg {
   font-family: var(--font-display);
@@ -269,16 +279,174 @@
   color: var(--butter);
   line-height: 1.4;
 }
-@keyframes toast-in {
-  from { transform: translateX(120%); opacity: 0; }
-  to   { transform: translateX(0); opacity: 1; }
+@keyframes toast-up {
+  from { transform: translateY(140%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
-@keyframes toast-out {
-  to   { transform: translateX(120%); opacity: 0; }
+@keyframes toast-down {
+  to { transform: translateY(140%); opacity: 0; }
 }
 @media (max-width: 640px) {
-  .toast-host { right: 12px; left: 12px; bottom: 12px; }
-  .toast { max-width: none; }
+  .toast-host { bottom: 16px; width: calc(100% - 24px); }
+}
+
+/* ---------- PRELOADER (one-shot per session) ---------- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: preloader-out 420ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 1.6s;
+}
+.preloader.is-skip { display: none; }
+.preloader-mark {
+  width: 132px;
+  height: 132px;
+  display: block;
+}
+.preloader-mark .ring {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2.5;
+  stroke-dasharray: 388;
+  stroke-dashoffset: 388;
+  animation: preloader-ring 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.preloader-mark .wordmark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 38px;
+  fill: var(--butter);
+  opacity: 0;
+  animation: preloader-text 600ms ease-out forwards;
+  animation-delay: 0.85s;
+}
+@keyframes preloader-ring { to { stroke-dashoffset: 0; } }
+@keyframes preloader-text { to { opacity: 1; } }
+@keyframes preloader-out {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader { display: none; }
+}
+
+/* ---------- TESTIMONIAL CARD (glass-dark, burgundy quote mark) ---------- */
+.testimonial-band {
+  padding: clamp(72px, 9vw, 140px) clamp(24px, 5vw, 72px);
+  background: var(--ink);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.testimonial-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(184, 83, 63, 0.20) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(110, 31, 42, 0.16) 0%, transparent 55%);
+  pointer-events: none;
+}
+.testimonial-card {
+  position: relative;
+  max-width: 760px;
+  width: 100%;
+  padding: clamp(40px, 5vw, 72px) clamp(32px, 4vw, 56px);
+  background: var(--glass-dark);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--glass-border-dark);
+  border-radius: 18px;
+  color: var(--butter);
+  box-shadow: 0 40px 80px -32px rgba(0, 0, 0, 0.55);
+}
+.testimonial-quote-mark {
+  position: absolute;
+  top: -32px;
+  left: clamp(20px, 3vw, 36px);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(140px, 16vw, 220px);
+  line-height: 0.78;
+  color: var(--burgundy);
+  user-select: none;
+  pointer-events: none;
+}
+.testimonial-quote {
+  margin: 0 0 var(--s-4);
+  padding: 0;
+}
+.testimonial-quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.42;
+  color: var(--butter);
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.testimonial-attribution {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: var(--s-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.testimonial-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--butter);
+}
+.testimonial-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(196, 184, 168, 0.72);
+}
+
+/* ---------- FLOATING MENU PHOTO CURSOR ---------- */
+.menu-photo-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 240px;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0;
+  transition: opacity 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+.menu-photo-cursor.is-visible { opacity: 1; }
+.menu-photo-cursor img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow:
+    0 24px 48px rgba(42, 31, 24, 0.32),
+    0 6px 12px rgba(42, 31, 24, 0.18);
+}
+@media (max-width: 768px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .menu-photo-cursor { display: none; }
+}
+.menu-row[data-menu-photo] {
+  cursor: default;
+  transition: color 200ms ease, padding-left 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.menu-row[data-menu-photo]:hover .menu-row-name {
+  color: var(--burgundy);
 }
 
 /* ---------- TIER CARDS (catering) ---------- */
@@ -622,3 +790,76 @@
   transition: color .15s ease, border-color .15s ease;
 }
 .text-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* ============================================================
+   UX AUDIT — visible focus states on every interactive element
+   ============================================================ */
+
+/* Buttons: keep CSS hover lift removed when Motion is driving (CSS would
+   conflict with the spring transform). Replace with shadow-only hover. */
+.btn:hover { transform: none; }
+.btn:active { transform: none; }
+.btn:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 4px;
+}
+.btn-ghost-light:focus-visible { outline-color: var(--butter); }
+.btn-dark:hover { transform: none; }
+.btn-dark:focus-visible {
+  outline: 2px solid var(--butter);
+  outline-offset: 4px;
+}
+.newsletter-form button:hover { transform: none; }
+.newsletter-form button:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
+/* Product cards: Motion drives the y-translate, no CSS hover transform. */
+.product-card:hover { transform: none; }
+.product-card:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 6px;
+  border-radius: var(--r-card);
+}
+
+/* Tier cards and value/info cards — focus rings around the whole card. */
+.tier-card:focus-within,
+.value-card:focus-within,
+.info-card:focus-within {
+  box-shadow: var(--shadow-lifted), 0 0 0 2px var(--burgundy);
+}
+.tier-cta:focus-visible,
+.info-link:focus-visible,
+.role-apply:focus-visible,
+.alt-link:focus-visible,
+.text-link:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+/* Logo link focus state — visible ring around the louma mark. */
+.logo-link:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+.nav.on-dark .logo-link:focus-visible {
+  outline-color: var(--butter);
+}
+
+/* Mobile menu toggle: 44px tap target already, just add focus ring. */
+.nav-toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Skip link is already visible on focus — bump min-height so it reaches
+   44px when tabbed to. */
+.skip-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}

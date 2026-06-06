@@ -1,0 +1,23 @@
+{
+  "name": "loumabakery",
+  "version": "1.0.0",
+  "description": "Website for Louma Bakery — a Mediterranean-inspired neighborhood bakery in Santa Monica.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/issamlife21-hue/louma-bakery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/issamlife21-hue/louma-bakery/issues"
+  },
+  "homepage": "https://github.com/issamlife21-hue/louma-bakery#readme",
+  "dependencies": {
+    "motion": "^12.40.0"
+  }
+}

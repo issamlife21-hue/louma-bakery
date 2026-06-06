@@ -43,6 +43,22 @@
 </head>
 <body class="page-transition">
 
+<script>
+  // Set the preloader-skip flag before the preloader paints so it can be
+  // hidden via CSS instantly on subsequent in-session navigations.
+  try {
+    if (sessionStorage.getItem('loumaSeen') === '1') {
+      document.documentElement.dataset.preloaderSkip = '1';
+    }
+  } catch (_) { /* sessionStorage may be unavailable */ }
+</script>
+<div class="preloader" id="preloader" aria-hidden="true" role="status" aria-label="Loading Louma Bakery">
+  <svg class="preloader-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <rect class="ring" x="3" y="3" width="94" height="94" rx="14"/>
+    <text class="wordmark" x="50" y="62" text-anchor="middle">Louma</text>
+  </svg>
+</div>
+
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -111,9 +127,9 @@
         <h2 class="menu-cat-label">Pastries</h2>
       </header>
       <p class="menu-cat-intro">Zaatar, labneh, pistachio, rose water — the flavors that make us who we are.</p>
-      <div class="menu-row"><span class="menu-row-name">Butter Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$6</span></div>
-      <div class="menu-row"><span class="menu-row-name">Zaatar Labneh Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
-      <div class="menu-row"><span class="menu-row-name">Pistachio Rose Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
+      <div class="menu-row" data-menu-photo="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=400&q=80&auto=format" data-menu-name="Butter croissant"><span class="menu-row-name">Butter Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$6</span></div>
+      <div class="menu-row" data-menu-photo="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80&auto=format" data-menu-name="Za'atar labneh croissant"><span class="menu-row-name">Zaatar Labneh Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
+      <div class="menu-row" data-menu-photo="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80&auto=format" data-menu-name="Pistachio rose croissant"><span class="menu-row-name">Pistachio Rose Croissant</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
       <div class="menu-row"><span class="menu-row-name">Chocolate Tahini Cookie</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$5</span></div>
     </section>
 
@@ -123,8 +139,8 @@
         <h2 class="menu-cat-label">Bread</h2>
       </header>
       <div class="menu-row"><span class="menu-row-name">Country Sourdough half</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$9</span></div>
-      <div class="menu-row"><span class="menu-row-name">Country Sourdough whole</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$16</span></div>
-      <div class="menu-row"><span class="menu-row-name">Baguette</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$5</span></div>
+      <div class="menu-row" data-menu-photo="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=400&q=80&auto=format" data-menu-name="Country sourdough whole"><span class="menu-row-name">Country Sourdough whole</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$16</span></div>
+      <div class="menu-row" data-menu-photo="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80&auto=format" data-menu-name="Baguette"><span class="menu-row-name">Baguette</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$5</span></div>
     </section>
   </div>
 
@@ -147,7 +163,7 @@
         <span class="menu-cat-num" aria-hidden="true">04</span>
         <h2 class="menu-cat-label">Drinks</h2>
       </header>
-      <div class="menu-row"><span class="menu-row-name">Louma Latte</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
+      <div class="menu-row" data-menu-photo="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400&q=80&auto=format" data-menu-name="Louma latte"><span class="menu-row-name">Louma Latte</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
       <div class="menu-row"><span class="menu-row-name">Espresso</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$4</span></div>
       <div class="menu-row"><span class="menu-row-name">Cappuccino</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$6</span></div>
       <div class="menu-row"><span class="menu-row-name">Matcha Latte</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$7</span></div>
@@ -168,7 +184,7 @@
         <h2 class="menu-cat-label">Boxes</h2>
       </header>
       <div class="menu-row"><span class="menu-row-name">Pastry Gift Box 4pc</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$28</span></div>
-      <div class="menu-row"><span class="menu-row-name">Pastry Gift Box 8pc</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$52</span></div>
+      <div class="menu-row" data-menu-photo="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80&auto=format" data-menu-name="8-piece pastry gift box"><span class="menu-row-name">Pastry Gift Box 8pc</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">$52</span></div>
       <div class="menu-row"><span class="menu-row-name">Custom catering</span><span class="menu-row-leader" aria-hidden="true"></span><span class="menu-row-price">inquire</span></div>
     </section>
 
@@ -224,6 +240,9 @@
     <div class="footer-bottom-tag">Flour-dusted dreams, baked fresh daily.</div>
   </div>
 </footer>
+<div class="menu-photo-cursor" id="menuPhotoCursor" aria-hidden="true">
+  <img alt="" width="240" height="240" />
+</div>
 <div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
 <script src="app.js" defer></script>
 </body>

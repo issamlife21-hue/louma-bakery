@@ -62,13 +62,23 @@ footer {
   text-transform: uppercase;
   background: transparent;
   border: none;
-  padding: 10px 0;
+  padding: 14px 0;          /* 44px min target with 11px line-height + 16px line-height-padding */
+  min-height: 44px;
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   transition: color .15s ease;
 }
 .footer-col button:hover,
-.footer-col a:hover { color: var(--butter); }
+.footer-col a:hover,
+.footer-col button:focus-visible,
+.footer-col a:focus-visible { color: var(--butter); }
+.footer-col a:focus-visible,
+.footer-col button:focus-visible {
+  outline: 2px solid var(--butter);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
 .footer-col a.active { color: var(--butter); opacity: 0.9; }
 .footer-col p {
   color: var(--footer-text);
@@ -115,7 +125,7 @@ footer {
   border-color: var(--butter);
 }
 .footer-newsletter button {
-  height: 40px;
+  height: 44px;             /* 44px tap target */
   padding: 0 18px;
   background: var(--butter);
   color: var(--ink);
@@ -127,9 +137,14 @@ footer {
   text-transform: uppercase;
   cursor: pointer;
   border-radius: var(--r-pill);
-  transition: background .18s ease, transform .18s ease;
+  transition: background .18s ease;
 }
-.footer-newsletter button:hover { background: #fff; transform: translateY(-1px); }
+.footer-newsletter button:hover { background: #fff; }
+.footer-newsletter button:focus-visible {
+  outline: 2px solid var(--butter);
+  outline-offset: 3px;
+}
+.footer-newsletter input[type="email"] { height: 44px; }
 .footer-newsletter-thanks {
   display: none;
   margin-top: var(--s-2);

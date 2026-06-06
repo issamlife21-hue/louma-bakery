@@ -1,0 +1,13 @@
+# Dependencies are declared in package.json but loaded at runtime from
+# the jsdelivr CDN — we have no build step, so node_modules is local-only.
+node_modules/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local server output
+*.pid

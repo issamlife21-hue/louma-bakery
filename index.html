@@ -81,6 +81,22 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
 </head>
 <body class="is-home page-transition">
 
+<script>
+  // Set the preloader-skip flag before the preloader paints so it can be
+  // hidden via CSS instantly on subsequent in-session navigations.
+  try {
+    if (sessionStorage.getItem('loumaSeen') === '1') {
+      document.documentElement.dataset.preloaderSkip = '1';
+    }
+  } catch (_) { /* sessionStorage may be unavailable */ }
+</script>
+<div class="preloader" id="preloader" aria-hidden="true" role="status" aria-label="Loading Louma Bakery">
+  <svg class="preloader-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <rect class="ring" x="3" y="3" width="94" height="94" rx="14"/>
+    <text class="wordmark" x="50" y="62" text-anchor="middle">Louma</text>
+  </svg>
+</div>
+
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -375,6 +391,72 @@ body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:var(--s
         </a>
       </div>
       <a class="text-link" href="menu.html">See the full menu</a>
+    </div>
+  </section>
+
+  <section class="testimonial-band" aria-label="What people are saying">
+    <article class="testimonial-card reveal">
+      <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="testimonial-quote">
+        <p>The 81-layer croissant alone is worth the drive — and the za'atar labneh one made me text three people from the sidewalk.</p>
+      </blockquote>
+      <footer class="testimonial-attribution">
+        <span class="testimonial-name">Sara H.</span>
+        <span class="testimonial-meta">Eater LA · advance review (placeholder — to be replaced with a real press quote at launch)</span>
+      </footer>
+    </article>
+  </section>
+
+  <section class="insta-grid" aria-label="From the bakery, on Instagram">
+    <div class="insta-grid-head reveal">
+      <span class="eyebrow">@loumabakery</span>
+      <h2>From the bakery.</h2>
+      <p>The morning bake, the regulars, the things we couldn't fit on the menu.</p>
+      <a class="insta-handle" href="https://instagram.com/loumabakery" target="_blank" rel="noopener" aria-label="Follow @loumabakery on Instagram">Follow on Instagram</a>
+    </div>
+    <div class="insta-grid-inner">
+      <a class="insta-tile" href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="--rot:-1.6deg" aria-label="Instagram post: morning croissants">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80&auto=format&fm=webp" />
+          <img alt="Tray of croissants from the morning bake" loading="lazy" decoding="async" width="400" height="400"
+               src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80&auto=format" />
+        </picture>
+      </a>
+      <a class="insta-tile" href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="--rot:1.2deg" aria-label="Instagram post: sourdough crumb">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80&auto=format&fm=webp" />
+          <img alt="Cross-section of a sourdough loaf" loading="lazy" decoding="async" width="400" height="400"
+               src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80&auto=format" />
+        </picture>
+      </a>
+      <a class="insta-tile" href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="--rot:-0.8deg" aria-label="Instagram post: latte art">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400&q=80&auto=format&fm=webp" />
+          <img alt="Latte with rosetta latte art" loading="lazy" decoding="async" width="400" height="400"
+               src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400&q=80&auto=format" />
+        </picture>
+      </a>
+      <a class="insta-tile" href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="--rot:1.8deg" aria-label="Instagram post: pastry box">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80&auto=format&fm=webp" />
+          <img alt="A boxed pastry assortment ready for catering" loading="lazy" decoding="async" width="400" height="400"
+               src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80&auto=format" />
+        </picture>
+      </a>
+      <a class="insta-tile" href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="--rot:-1.4deg" aria-label="Instagram post: za'atar croissant">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80&auto=format&fm=webp" />
+          <img alt="Za'atar labneh croissant" loading="lazy" decoding="async" width="400" height="400"
+               src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80&auto=format" />
+        </picture>
+      </a>
+      <a class="insta-tile" href="https://instagram.com/loumabakery" target="_blank" rel="noopener" style="--rot:0.8deg" aria-label="Instagram post: country sourdough loaf">
+        <picture>
+          <source type="image/webp" srcset="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=400&q=80&auto=format&fm=webp" />
+          <img alt="Country sourdough loaf on a wooden board" loading="lazy" decoding="async" width="400" height="400"
+               src="https://images.unsplash.com/photo-1568471173242-461f0a730452?w=400&q=80&auto=format" />
+        </picture>
+      </a>
     </div>
   </section>
 

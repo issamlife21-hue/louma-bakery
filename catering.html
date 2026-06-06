@@ -48,6 +48,22 @@
 </head>
 <body class="page-transition">
 
+<script>
+  // Set the preloader-skip flag before the preloader paints so it can be
+  // hidden via CSS instantly on subsequent in-session navigations.
+  try {
+    if (sessionStorage.getItem('loumaSeen') === '1') {
+      document.documentElement.dataset.preloaderSkip = '1';
+    }
+  } catch (_) { /* sessionStorage may be unavailable */ }
+</script>
+<div class="preloader" id="preloader" aria-hidden="true" role="status" aria-label="Loading Louma Bakery">
+  <svg class="preloader-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <rect class="ring" x="3" y="3" width="94" height="94" rx="14"/>
+    <text class="wordmark" x="50" y="62" text-anchor="middle">Louma</text>
+  </svg>
+</div>
+
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 

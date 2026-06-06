@@ -3,23 +3,26 @@
    loaded in dependency order:
 
      js/nav.js          nav active state, scroll mode, mobile menu, scroll-spy
-     js/animations.js   reveal, parallax, scroll-linked SVG draw, typewriter,
-                        scroll progress bar, page transitions
-     js/countdown.js    opening countdown ticker
-     js/forms.js        Formspree submit + toast notifications
-     js/video.js        hero video swap on data-hero-video
+                        (classic script)
+     js/animations.js   Motion-powered reveal/scroll/animate/stagger;
+                        loaded as ES module so it can `import` from
+                        https://cdn.jsdelivr.net/npm/motion@latest/+esm
+     js/countdown.js    opening countdown ticker (classic script)
+     js/forms.js        Formspree submit + toast notifications (classic script)
+     js/video.js        hero video swap on data-hero-video (classic script)
 
-   Each partial is loaded as a deferred script, preserving the order of
-   appearance. They share no module exports — they each install behavior
-   directly on the DOM and are safe to load independently. */
+   Each partial installs behavior directly on the DOM and shares no
+   module exports — they're safe to load independently. The animations
+   module is loaded with type=module; the rest are classic scripts forced
+   into ordered execution via async=false. */
 (function () {
   'use strict';
   const PARTIALS = [
-    'js/nav.js',
-    'js/animations.js',
-    'js/countdown.js',
-    'js/forms.js',
-    'js/video.js'
+    { src: 'js/nav.js' },
+    { src: 'js/animations.js', module: true },
+    { src: 'js/countdown.js' },
+    { src: 'js/forms.js' },
+    { src: 'js/video.js' }
   ];
   // Resolve relative to the current document so the bakery works under
   // both root deployment and a sub-path on GitHub Pages.
@@ -27,13 +30,18 @@
     const path = location.pathname.replace(/[^\/]*$/, '');
     return path.endsWith('/') ? path : path + '/';
   })();
-  PARTIALS.forEach(function (src) {
+  PARTIALS.forEach(function (p) {
     const s = document.createElement('script');
-    s.src = base + src;
-    // Dynamically-created scripts are async by default. Force ordered,
-    // sequential execution so partials run nav -> animations -> ... in order.
-    s.async = false;
-    s.defer = true;
+    s.src = base + p.src;
+    if (p.module) {
+      // Module scripts defer by default and have their own ordering;
+      // they can `import` from the Motion ESM bundle on jsdelivr.
+      s.type = 'module';
+    } else {
+      // Classic scripts: force ordered, sequential execution.
+      s.async = false;
+      s.defer = true;
+    }
     document.head.appendChild(s);
   });
 })();

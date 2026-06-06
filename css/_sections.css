@@ -4,11 +4,16 @@
      visit-stay, newsletter
    ============================================================ */
 
-/* ---------- COUNTDOWN STRIP ---------- */
+/* ---------- COUNTDOWN STRIP ----------
+   Elegant tabular numerals on cream tiles, set in DM Mono so the digits
+   line up cell-to-cell; sits on the linen band. */
 .countdown {
-  background: var(--surface-2);
+  background: var(--surface-1);
   border-top: 1px solid var(--border-warm);
   border-bottom: 1px solid var(--border-warm);
+}
+.countdown-cell {
+  font-variant-numeric: tabular-nums lining-nums;
 }
 .countdown-inner {
   display: grid;
@@ -52,12 +57,12 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 .countdown-num {
-  font-family: var(--font-display);
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-weight: 400;
   font-size: clamp(34px, 4.4vw, 56px);
   line-height: 1;
   color: var(--ink);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums lining-nums;
   letter-spacing: -0.01em;
 }
 .countdown-unit {
@@ -514,3 +519,93 @@
   color: var(--burgundy);
 }
 .newsletter-thanks.show { display: block; }
+
+/* ---------- INSTAGRAM PLACEHOLDER GRID ----------
+   Six tiles, varying ±2deg rotation; straightens + lifts on hover.
+   On mobile collapses to a 2-column grid with no rotation. */
+.insta-grid {
+  padding: clamp(72px, 9vw, 120px) clamp(24px, 5vw, 72px);
+  background: var(--surface-1);
+}
+.insta-grid-head {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto var(--s-5);
+}
+.insta-grid-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 500;
+  color: var(--ink);
+  margin: var(--s-2) 0 var(--s-3);
+  line-height: 1.1;
+}
+.insta-grid-head p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--body);
+  line-height: 1.55;
+  margin: 0;
+}
+.insta-grid-head a.insta-handle {
+  display: inline-block;
+  margin-top: var(--s-3);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  border-bottom: 1px solid var(--burgundy);
+  padding: 0 0 6px;
+  transition: color .2s ease, border-color .2s ease;
+}
+.insta-grid-head a.insta-handle:hover { color: var(--ink); border-color: var(--ink); }
+.insta-grid-inner {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(12px, 1.8vw, 24px);
+  max-width: var(--container-wide);
+  margin: 0 auto;
+}
+.insta-tile {
+  display: block;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+  transform: rotate(var(--rot, 0deg));
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.insta-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.insta-tile:hover,
+.insta-tile:focus-visible {
+  transform: rotate(0deg) scale(1.04);
+  box-shadow: var(--shadow-lift);
+}
+.insta-tile:hover img { transform: scale(1.06); }
+.insta-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(20, 12, 8, 0.45) 100%);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+.insta-tile:hover::after { opacity: 1; }
+@media (max-width: 960px) {
+  .insta-grid-inner { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .insta-grid-inner { grid-template-columns: repeat(2, 1fr); }
+  .insta-tile { transform: rotate(0deg); }
+}

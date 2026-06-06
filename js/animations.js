@@ -1,238 +1,288 @@
-/* js/animations.js — reveal, parallax, scroll-linked SVG draw,
-   typewriter, scroll progress bar, page transitions, menu pill spy. */
-(function () {
-  'use strict';
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* js/animations.js — Motion-powered animations.
+ *
+ * Loaded as an ES module by app.js (script type="module"). Imports
+ * animate / scroll / inView / stagger from Motion via the bundler-free
+ * jsdelivr ESM mirror (matches the package the project installed with
+ * `npm install motion`, but resolved over CDN so we keep our no-build setup).
+ *
+ * Behavior owned by this file:
+ *   - reveal + fade-in via inView (replaces old IntersectionObserver code)
+ *   - scroll-linked SVG stroke draw for baguette, footer loaf,
+ *     wheat ornament, croissant ornament, steam ornament (reversible)
+ *   - scroll progress bar at top of viewport
+ *   - product card entrance stagger + spring hover lift
+ *   - magnetic pull on primary buttons
+ *   - footer link stagger on first entry
+ *   - mobile nav: stagger nav links in when panel opens
+ *   - page transition crossfade (fade-out on internal link click)
+ *   - typewriter on .editorial-line.typewriter
+ *   - menu pill scroll-spy via inView
+ *   - floating menu photo cursor on menu rows with data-menu-photo
+ *   - preloader removal after one-shot 1.6s animation (sessionStorage-gated)
+ *   - parallax via custom RAF (Motion's scroll() doesn't fit this pattern)
+ *   - footer year stamp
+ *
+ * All effects honor prefers-reduced-motion. */
+import { animate, scroll, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
 
-  /* Scroll progress bar (2px line at top of viewport). */
-  (function bindScrollProgress() {
-    const bar = document.getElementById('scrollProgress');
-    if (!bar) return;
-    let ticking = false;
-    function update() {
-      const doc = document.documentElement;
-      const max = Math.max(1, doc.scrollHeight - doc.clientHeight);
-      const pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
-      bar.style.width = pct.toFixed(2) + '%';
-      ticking = false;
-    }
-    function onScroll() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
-  })();
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
-  /* Page transition crossfade — intercepts internal same-origin clicks. */
-  (function bindPageTransitions() {
-    if (reduceMotion) return;
-    const body = document.body;
-    if (!body.classList.contains('page-transition')) return;
-    document.addEventListener('click', function (e) {
-      const a = e.target.closest('a[href]');
-      if (!a) return;
-      const href = a.getAttribute('href') || '';
-      if (a.target === '_blank' || a.hasAttribute('download')) return;
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-      if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-      let url;
-      try { url = new URL(href, location.href); } catch (_) { return; }
-      if (url.origin !== location.origin) return;
-      if (url.pathname === location.pathname && url.search === location.search) return;
-      if (!/\.html?$/.test(url.pathname) && url.pathname !== '/') return;
-      e.preventDefault();
-      body.classList.add('is-leaving');
-      setTimeout(function () { location.href = url.href; }, 280);
-    });
-    window.addEventListener('pageshow', function (e) {
-      if (e.persisted) body.classList.remove('is-leaving');
-    });
-  })();
-
-  /* Fire-once / replay draw on view (for legacy ornaments + bake/loaf). */
-  function setupDrawOnView(selector, opts) {
-    const els = document.querySelectorAll(selector);
-    if (!els.length) return;
-    const { varName, fallback = '700', threshold = 0.4, replay = false } = opts || {};
-    els.forEach((svg) => {
-      const path = svg.querySelector('path');
-      if (!path) return;
-      try { svg.style.setProperty(varName, Math.ceil(path.getTotalLength())); }
-      catch (_) { svg.style.setProperty(varName, fallback); }
-    });
-    if ((!replay && reduceMotion) || !('IntersectionObserver' in window)) {
-      els.forEach((svg) => svg.classList.add('in-view'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (replay) {
-            entry.target.classList.remove('in-view');
-            void entry.target.getBoundingClientRect();
-            entry.target.classList.add('in-view');
-          } else {
-            entry.target.classList.add('in-view');
-            io.unobserve(entry.target);
-          }
-        } else if (replay) {
-          entry.target.classList.remove('in-view');
-        }
-      });
-    }, { threshold });
-    els.forEach((svg) => io.observe(svg));
+/* ───── PRELOADER: one-shot per session ───── */
+(function bindPreloader() {
+  const preloader = document.getElementById('preloader');
+  if (!preloader) return;
+  const shouldSkip =
+    sessionStorage.getItem('loumaSeen') === '1' ||
+    document.documentElement.dataset.preloaderSkip === '1' ||
+    reduceMotion;
+  if (shouldSkip) {
+    preloader.classList.add('is-skip');
+    preloader.remove();
+    return;
   }
-
-  /* Scroll-linked draw: --draw-progress 0..1 maps to dashoffset, reversible. */
-  (function bindScrollDraw() {
-    const els = document.querySelectorAll('.scroll-driven');
-    if (!els.length) return;
-    if (reduceMotion) {
-      els.forEach((el) => el.style.setProperty('--draw-progress', '1'));
-      return;
-    }
-    const lens = new WeakMap();
-    els.forEach((el) => {
-      const path = el.querySelector('path');
-      if (!path) return;
-      let len = 700;
-      try { len = Math.ceil(path.getTotalLength()); } catch (_) {}
-      lens.set(el, len);
-      el.style.setProperty('--draw-len', len);
-      el.style.setProperty('--draw-progress', '0');
-    });
-    let ticking = false;
-    function update() {
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      els.forEach((el) => {
-        const len = lens.get(el);
-        if (!len) return;
-        const rect = el.getBoundingClientRect();
-        const start = vh * 0.95;
-        const end = vh * 0.30;
-        const center = rect.top + rect.height / 2;
-        const t = (start - center) / (start - end);
-        const p = Math.max(0, Math.min(1, t));
-        el.style.setProperty('--draw-progress', p.toFixed(3));
-      });
-      ticking = false;
-    }
-    function onScroll() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
-  })();
-
-  setupDrawOnView('.footer-loaf:not(.scroll-driven)', { varName: '--loaf-len', replay: true });
-  setupDrawOnView('#baguette-svg:not(.scroll-driven)', { varName: '--baguette-len', fallback: '1400', threshold: 0.35, replay: true });
-  setupDrawOnView('.ornament-wheat.draw:not(.scroll-driven)', { varName: '--wheat-len', fallback: '600', replay: true });
-  setupDrawOnView('.ornament-steam:not(.scroll-driven)', { varName: '--steam-len', fallback: '400', threshold: 0.3 });
-  setupDrawOnView('.ornament-croissant:not(.scroll-driven)', { varName: '--croissant-len', fallback: '600', threshold: 0.3 });
-
-  /* Parallax: y-translate based on viewport center distance. */
-  (function bindParallax() {
-    if (reduceMotion) return;
-    const els = document.querySelectorAll('[data-parallax]');
-    if (!els.length) return;
-    const factors = new WeakMap();
-    els.forEach((el) => {
-      const f = parseFloat(el.dataset.parallax);
-      factors.set(el, isNaN(f) ? 0.12 : f);
-    });
-    let ticking = false;
-    const vh = () => window.innerHeight || document.documentElement.clientHeight;
-    function update() {
-      const center = vh() / 2;
-      els.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.bottom < -200 || rect.top > vh() + 200) return;
-        const elCenter = rect.top + rect.height / 2;
-        const offset = (center - elCenter) * factors.get(el);
-        el.style.setProperty('--py', offset.toFixed(1) + 'px');
-      });
-      ticking = false;
-    }
-    function onScroll() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
-  })();
-
-  /* Reveal + fade-in on view. */
-  (function bindReveal() {
-    const els = document.querySelectorAll('.reveal, .fade-in');
-    if (!els.length) return;
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      els.forEach((el) => el.classList.add('is-revealed'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('is-revealed');
-        else entry.target.classList.remove('is-revealed');
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-    els.forEach((el) => io.observe(el));
-  })();
-
-  /* Typewriter (editorial main line). */
-  (function bindTypewriter() {
-    const els = document.querySelectorAll('.typewriter[data-typewriter]');
-    if (!els.length) return;
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      els.forEach((el) => { el.textContent = el.dataset.typewriter; });
-      return;
-    }
-    function type(el) {
-      const text = el.dataset.typewriter || '';
-      el.textContent = '';
-      const cursor = document.createElement('span');
-      cursor.className = 'tw-cursor';
-      cursor.setAttribute('aria-hidden', 'true');
-      el.appendChild(cursor);
-      let i = 0;
-      const step = () => {
-        if (i >= text.length) return;
-        cursor.before(text.charAt(i));
-        i++;
-        setTimeout(step, 32 + Math.random() * 28);
-      };
-      step();
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          type(e.target);
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.6 });
-    els.forEach((el) => io.observe(el));
-  })();
-
-  /* Menu pill nav scroll-spy (tighter trigger band than global scroll-spy). */
-  (function bindMenuPills() {
-    const pills = document.querySelectorAll('.menu-pill');
-    if (!pills.length || !('IntersectionObserver' in window)) return;
-    const targets = [...pills]
-      .map((p) => document.querySelector(p.getAttribute('href')))
-      .filter(Boolean);
-    if (!targets.length) return;
-    const setActive = (id) => {
-      pills.forEach((p) => {
-        p.classList.toggle('is-active', p.getAttribute('href') === '#' + id);
-      });
-    };
-    const io = new IntersectionObserver((entries) => {
-      const visible = entries.filter((e) => e.isIntersecting);
-      if (!visible.length) return;
-      visible.sort((a, b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top);
-      setActive(visible[0].target.id);
-    }, { rootMargin: '-140px 0px -55% 0px', threshold: 0 });
-    targets.forEach((t) => io.observe(t));
-    setActive(targets[0].id);
-  })();
-
-  /* Footer year. */
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  sessionStorage.setItem('loumaSeen', '1');
+  // The preloader CSS animation fades out at ~2s. Remove it after.
+  setTimeout(() => {
+    if (preloader.parentNode) preloader.remove();
+  }, 2200);
 })();
+
+/* ───── SCROLL PROGRESS BAR (Motion scroll callback) ───── */
+(function bindScrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  scroll((progress) => {
+    bar.style.width = (progress * 100).toFixed(2) + '%';
+  });
+})();
+
+/* ───── REVEAL + FADE-IN via Motion inView ───── */
+inView('.reveal, .fade-in', (entry) => {
+  entry.target.classList.add('is-revealed');
+}, { amount: 0.15 });
+
+/* ───── SCROLL-LINKED SVG STROKE DRAWS ─────
+   Each path's strokeDashoffset is tied to scroll progress of its parent
+   SVG, so the line draws as the element scrolls into view and reverses
+   on scroll up. */
+function bindScrollDraw(svg) {
+  const path = svg.querySelector('path');
+  if (!path) return;
+  let len = 700;
+  try { len = Math.ceil(path.getTotalLength()); } catch (_) { /* keep fallback */ }
+  path.style.strokeDasharray = len;
+  if (reduceMotion) {
+    path.style.strokeDashoffset = 0;
+    return;
+  }
+  // Start drawing when element top hits 92% of viewport height,
+  // finish when its bottom hits 30%. Matches the prior vanilla feel.
+  scroll(
+    animate(path, { strokeDashoffset: [len, 0] }, { ease: 'linear' }),
+    { target: svg, offset: ['start 0.92', 'end 0.30'] }
+  );
+}
+document.querySelectorAll(
+  '#baguette-svg, .footer-loaf, .ornament-wheat, .ornament-croissant, .ornament-steam'
+).forEach(bindScrollDraw);
+
+/* ───── PRODUCT CARDS — entrance stagger + spring hover lift ───── */
+(function bindProductCards() {
+  const cards = document.querySelectorAll('.product-card');
+  if (!cards.length) return;
+  // Entrance stagger (only if not reduced motion).
+  if (!reduceMotion) {
+    inView(cards[0].parentElement, () => {
+      animate(
+        cards,
+        { y: [32, 0], opacity: [0, 1] },
+        { delay: stagger(0.08), type: 'spring', stiffness: 90, damping: 18 }
+      );
+    }, { amount: 0.1 });
+  }
+  // Hover lift via Motion spring (no CSS hover transform — see _components.css).
+  if (!reduceMotion && !isCoarsePointer) {
+    cards.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        animate(card, { y: -8 }, { type: 'spring', stiffness: 280, damping: 18 });
+      });
+      card.addEventListener('mouseleave', () => {
+        animate(card, { y: 0 }, { type: 'spring', stiffness: 280, damping: 18 });
+      });
+    });
+  }
+})();
+
+/* ───── MAGNETIC PULL on primary CTAs ─────
+   Pulls the button toward the cursor with spring physics. Disabled on
+   touch and reduced-motion. */
+if (!reduceMotion && !isCoarsePointer) {
+  document.querySelectorAll('.btn-primary, .btn-donate, .nav-cta, .btn-dark').forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      animate(btn, { x: x * 0.18, y: y * 0.18 }, { type: 'spring', stiffness: 220, damping: 14 });
+    });
+    btn.addEventListener('mouseleave', () => {
+      animate(btn, { x: 0, y: 0 }, { type: 'spring', stiffness: 220, damping: 14 });
+    });
+  });
+}
+
+/* ───── FOOTER LINK STAGGER on first entry ───── */
+if (!reduceMotion) {
+  const footer = document.querySelector('footer');
+  const footerLinks = document.querySelectorAll('footer .footer-col a');
+  if (footer && footerLinks.length) {
+    inView(footer, () => {
+      animate(
+        footerLinks,
+        { y: [12, 0], opacity: [0, 1] },
+        { delay: stagger(0.03), duration: 0.55 }
+      );
+    }, { amount: 0.1 });
+  }
+}
+
+/* ───── MOBILE NAV — stagger nav links in when panel opens ───── */
+(function bindMobileNavStagger() {
+  if (reduceMotion) return;
+  const navLinksWrap = document.getElementById('navLinks');
+  if (!navLinksWrap) return;
+  const obs = new MutationObserver(() => {
+    if (navLinksWrap.classList.contains('open')) {
+      const links = navLinksWrap.querySelectorAll('.nav-link');
+      animate(
+        links,
+        { y: [24, 0], opacity: [0, 1] },
+        { delay: stagger(0.06), type: 'spring', stiffness: 110, damping: 18 }
+      );
+    }
+  });
+  obs.observe(navLinksWrap, { attributes: true, attributeFilter: ['class'] });
+})();
+
+/* ───── PAGE TRANSITION CROSSFADE (Motion-driven fade-out) ───── */
+(function bindPageTransitions() {
+  if (reduceMotion) return;
+  const body = document.body;
+  if (!body.classList.contains('page-transition')) return;
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (a.target === '_blank' || a.hasAttribute('download')) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+    let url;
+    try { url = new URL(href, location.href); } catch (_) { return; }
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.search === location.search) return;
+    if (!/\.html?$/.test(url.pathname) && url.pathname !== '/') return;
+    e.preventDefault();
+    const out = animate(body, { opacity: [1, 0] }, { duration: 0.28, ease: 'ease-in' });
+    out.finished.then(() => { location.href = url.href; });
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) body.classList.remove('is-leaving');
+  });
+})();
+
+/* ───── TYPEWRITER on .editorial-line.typewriter ───── */
+inView('.typewriter[data-typewriter]', (entry) => {
+  const el = entry.target;
+  if (reduceMotion) { el.textContent = el.dataset.typewriter; return; }
+  const text = el.dataset.typewriter || '';
+  el.textContent = '';
+  const cursor = document.createElement('span');
+  cursor.className = 'tw-cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+  el.appendChild(cursor);
+  let i = 0;
+  const step = () => {
+    if (i >= text.length) return;
+    cursor.before(text.charAt(i));
+    i++;
+    setTimeout(step, 32 + Math.random() * 28);
+  };
+  step();
+}, { amount: 0.6 });
+
+/* ───── MENU PILL SCROLL-SPY via Motion inView ───── */
+(function bindMenuPills() {
+  const pills = document.querySelectorAll('.menu-pill');
+  if (!pills.length) return;
+  const targets = [...pills]
+    .map((p) => document.querySelector(p.getAttribute('href')))
+    .filter(Boolean);
+  if (!targets.length) return;
+  const setActive = (id) => {
+    pills.forEach((p) => p.classList.toggle('is-active', p.getAttribute('href') === '#' + id));
+  };
+  targets.forEach((t) => {
+    inView(t, () => { setActive(t.id); }, { margin: '-140px 0px -55% 0px' });
+  });
+  setActive(targets[0].id);
+})();
+
+/* ───── FLOATING MENU PHOTO CURSOR ───── */
+(function bindMenuPhotoCursor() {
+  const cursor = document.getElementById('menuPhotoCursor');
+  if (!cursor) return;
+  const rows = document.querySelectorAll('.menu-row[data-menu-photo]');
+  if (!rows.length || isCoarsePointer || reduceMotion) { cursor.remove(); return; }
+  const img = cursor.querySelector('img');
+  function moveTo(e) {
+    cursor.style.transform = `translate(${e.clientX + 28}px, ${e.clientY - 120}px)`;
+  }
+  rows.forEach((row) => {
+    row.addEventListener('mouseenter', (e) => {
+      if (img) {
+        img.src = row.dataset.menuPhoto;
+        img.alt = row.dataset.menuName || '';
+      }
+      cursor.classList.add('is-visible');
+      moveTo(e);
+    });
+    row.addEventListener('mousemove', moveTo);
+    row.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-visible');
+    });
+  });
+})();
+
+/* ───── PARALLAX (vanilla — Motion's scroll doesn't fit the per-element
+         viewport-center pattern cleanly) ───── */
+(function bindParallax() {
+  if (reduceMotion) return;
+  const els = document.querySelectorAll('[data-parallax]');
+  if (!els.length) return;
+  const factors = new WeakMap();
+  els.forEach((el) => {
+    const f = parseFloat(el.dataset.parallax);
+    factors.set(el, isNaN(f) ? 0.12 : f);
+  });
+  let ticking = false;
+  const vh = () => window.innerHeight || document.documentElement.clientHeight;
+  function update() {
+    const center = vh() / 2;
+    els.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < -200 || rect.top > vh() + 200) return;
+      const elCenter = rect.top + rect.height / 2;
+      const offset = (center - elCenter) * factors.get(el);
+      el.style.setProperty('--py', offset.toFixed(1) + 'px');
+    });
+    ticking = false;
+  }
+  function onScroll() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+})();
+
+/* ───── FOOTER YEAR ───── */
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
