@@ -310,9 +310,19 @@
   .catering-inquiry-aside h2,
   .mission-support h2,
   .story-section h2,
-  .catering-intro h2 {
+  .catering-intro h2,
+  .catering-process-head h2 {
     font-size: clamp(26px, 7svw, 40px);
     line-height: 1.1;
+  }
+  .catering-process-step h3,
+  .mission-pillar h3 {
+    font-size: clamp(20px, 5.5svw, 24px);
+  }
+  .not-found-links li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 16px 4px;
   }
 
   /* Interior page H1. */
@@ -418,11 +428,13 @@
   .ingredient-slider,
   .testimonial-band,
   .catering-tiers,
+  .catering-process,
   .catering-inquiry,
   .careers-values,
   .careers-roles,
   .visit-info-3col,
   .mission-stats,
+  .mission-pillars,
   .alt-stat,
   .alt-duo,
   .product-section,
@@ -516,6 +528,8 @@
   .visit-info-3col-inner,
   .careers-values-inner,
   .mission-stats-inner,
+  .mission-pillars-grid,
+  .catering-process-steps,
   .story-two-col,
   .mission-two-col,
   .careers-two-col,

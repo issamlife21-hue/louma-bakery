@@ -1217,14 +1217,12 @@
   filter: saturate(1) contrast(1);
 }
 
-/* ---------- SCROLL-SNAP CONTAINER for alt-blocks ---------- */
-.scroll-snap-blocks {
-  scroll-snap-type: y proximity;
-}
-.scroll-snap-blocks > .alt-block {
-  scroll-snap-align: start;
-  scroll-margin-top: 68px;
-}
+/* ---------- SCROLL-SNAP CONTAINER for alt-blocks ----------
+   Disabled — it fought native momentum scrolling and felt sticky.
+   Kept as a no-op so the wrapper element doesn't need to be removed
+   from the markup. */
+.scroll-snap-blocks { scroll-snap-type: none; }
+.scroll-snap-blocks > .alt-block { scroll-snap-align: none; scroll-margin-top: 68px; }
 
 /* ---------- STORY SCROLLYTELLING — sticky chapter rail ---------- */
 .story-chapter-rail {

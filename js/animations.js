@@ -50,14 +50,7 @@ const isMobileViewport = window.matchMedia('(max-width: 767px)').matches;
   }, 2200);
 })();
 
-/* ───── SCROLL PROGRESS BAR (Motion scroll callback) ───── */
-(function bindScrollProgress() {
-  const bar = document.getElementById('scrollProgress');
-  if (!bar) return;
-  scroll((progress) => {
-    bar.style.width = (progress * 100).toFixed(2) + '%';
-  });
-})();
+/* Scroll progress bar removed — felt noisy. */
 
 /* ───── REVEAL + FADE-IN via Motion inView ───── */
 inView('.reveal, .fade-in', (entry) => {
@@ -184,7 +177,7 @@ if (!reduceMotion) {
     if (url.pathname === location.pathname && url.search === location.search) return;
     if (!/\.html?$/.test(url.pathname) && url.pathname !== '/') return;
     e.preventDefault();
-    const out = animate(body, { opacity: [1, 0] }, { duration: 0.28, ease: 'ease-in' });
+    const out = animate(body, { opacity: [1, 0] }, { duration: 0.18, ease: 'ease-in' });
     out.finished.then(() => { location.href = url.href; });
   });
   window.addEventListener('pageshow', (e) => {

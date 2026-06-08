@@ -32,7 +32,6 @@
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;color:#fff;border-bottom:1px solid transparent;transition:background .2s,border-color .2s}
 .nav.on-dark{color:#fff}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px;max-width:1280px;margin:0 auto;padding:0 36px}
-.scroll-progress{position:fixed;top:0;left:0;height:2px;background:#ED2739;width:0%;z-index:1000;pointer-events:none;transition:width 60ms linear}
 </style>
 <link rel="stylesheet" href="styles.css" />
 <script type="application/ld+json">
@@ -65,7 +64,6 @@
 </div>
 
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -119,6 +117,33 @@
       <span class="eyebrow">For your table</span>
       <h1>Catering</h1>
       <p class="catering-hero-tag">Pastry boxes, breakfast trays, and full-event catering — built around your hour, baked to land warm.</p>
+    </div>
+  </section>
+
+  <section class="catering-process" aria-label="How catering works">
+    <div class="catering-process-inner">
+      <div class="catering-process-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>Tell us, taste it, set the table.</h2>
+        <p>Three steps from inquiry to a warm tray on your counter — we keep it simple so you can stay focused on the hour you're hosting.</p>
+      </div>
+      <ol class="catering-process-steps">
+        <li class="catering-process-step reveal" style="--reveal-i:0">
+          <span class="catering-process-num" aria-hidden="true">01</span>
+          <h3>Send us a note</h3>
+          <p>A few sentences about your headcount, date, and what you're imagining — the form below is enough to start.</p>
+        </li>
+        <li class="catering-process-step reveal" style="--reveal-i:1">
+          <span class="catering-process-num" aria-hidden="true">02</span>
+          <h3>We shape a menu</h3>
+          <p>We reply within a business day with options, lead times, and a quote that fits the hour you're feeding.</p>
+        </li>
+        <li class="catering-process-step reveal" style="--reveal-i:2">
+          <span class="catering-process-num" aria-hidden="true">03</span>
+          <h3>Baked to land warm</h3>
+          <p>Trays come out of the oven the morning of, delivered in your window, set up if you'd like the help.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
